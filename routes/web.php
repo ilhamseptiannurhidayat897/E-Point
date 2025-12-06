@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GoodPointController;
+use App\Http\Controllers\GoodPointTypeController;
+use App\Http\Controllers\ViolationController;
+use App\Http\Controllers\ViolationTypeController;
+use App\Http\Controllers\StudentController;
 
 Route::get('/', function () {
     return view('welcome');
