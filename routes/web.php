@@ -10,7 +10,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('index');
 });
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::resource('students', StudentController::class);
