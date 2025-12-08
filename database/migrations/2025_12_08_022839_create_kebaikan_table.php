@@ -9,13 +9,13 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('kebaikan', function (Blueprint $table) {
             $table->id();
-            $table->string('username')->unique();
-            $table->string('password');
-            $table->enum('role', ['guru', 'petugas', 'siswa']);
+            $table->string('code')->unique(); 
+            $table->string('nama_kebaikan');
+            $table->integer('poin'); 
             $table->timestamps();
         });
     }

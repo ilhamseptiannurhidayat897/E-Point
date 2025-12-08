@@ -11,22 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('violation_types', function (Blueprint $table) {
+        Schema::create('pelanggaran', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique();
-            $table->string('name');
-            $table->integer('points'); // poin pelanggaran sesuai proposal
-            $table->text('description')->nullable();
+            $table->string('nama_pelanggaran');
+            $table->integer('poin'); 
             $table->timestamps();
         });
-    }
-
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('violation_types');
     }
 };
