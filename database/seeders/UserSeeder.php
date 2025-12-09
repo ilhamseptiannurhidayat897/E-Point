@@ -3,38 +3,44 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        // Petugas
-        User::create([
-            'name' => 'Admin Petugas',
-            'email' => 'petugas@smkn1kawali.sch.id',
-            'password' => Hash::make('password123'),
-            'role' => 'petugas',
-            'id_petugas' => 'PTG001',
-        ]);
+        // User Petugas
+        User::firstOrCreate(
+            ['nis' => '1001'], // Atribut untuk dicari
+            [
+                'name' => 'Admin Petugas',
+                'email' => 'petugas@smkn1kawali.sch.id',
+                'password' => Hash::make('password'),
+                'role' => 'petugas',
+            ]
+        );
 
-        // Guru
-        User::create([
-            'name' => 'Guru Pembimbing',
-            'email' => 'guru@smkn1kawali.sch.id',
-            'password' => Hash::make('password123'),
-            'role' => 'guru',
-            'nip' => '198501012010011001',
-        ]);
+        // User Guru
+        User::firstOrCreate(
+            ['nis' => '2001'], // Atribut untuk dicari
+            [
+                'name' => 'Guru Pembimbing',
+                'email' => 'guru@smkn1kawali.sch.id',
+                'password' => Hash::make('password'),
+                'role' => 'guru',
+            ]
+        );
 
-        // Siswa
-        User::create([
-            'name' => 'Ahmad Siswa',
-            'email' => 'siswa@smkn1kawali.sch.id',
-            'password' => Hash::make('password123'),
-            'role' => 'siswa',
-            'nis' => '2024001',
-        ]);
+        // User Siswa
+        User::firstOrCreate(
+            ['nis' => '3001'], // Atribut untuk dicari
+            [
+                'name' => 'Siswa Contoh',
+                'email' => 'siswa@smkn1kawali.sch.id',
+                'password' => Hash::make('password'),
+                'role' => 'siswa',
+            ]
+        );
     }
 }

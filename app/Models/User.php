@@ -11,13 +11,11 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $fillable = [
+        'nis',
         'name',
         'email',
         'password',
         'role',
-        'nis',
-        'nip',
-        'id_petugas',
     ];
 
     protected $hidden = [
@@ -25,27 +23,8 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
-
-    // Helper methods untuk mengecek role
-    public function isPetugas()
-    {
-        return $this->role === 'petugas';
-    }
-
-    public function isGuru()
-    {
-        return $this->role === 'guru';
-    }
-
-    public function isSiswa()
-    {
-        return $this->role === 'siswa';
-    }
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
 }

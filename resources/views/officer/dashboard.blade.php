@@ -73,7 +73,7 @@
 
             <div class="flex items-center space-x-3 pb-6 border-b border-purple-800">
                 <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-accent to-yellow-400 flex items-center justify-center">
-                    <img src="smkn1kawali.jpg" alt="logo SMKN 1 Kawali">
+                    <img src="{{asset('logo/smkn1kawali.jpg')}}" alt="logo SMKN 1 Kawali">
                 </div>
                 <div>
                     <h2 class="text-xl font-bold">E-Point</h2>

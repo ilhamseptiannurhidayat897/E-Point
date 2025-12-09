@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -16,36 +16,36 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        // Validasi input
-        $request->validate([
-            'nis' => ['required', 'string'],
-            'password' => ['required'],
+        $credentials = $request->validate([
+            'nis' => 'required|string',
+            'password' => 'required|string',
         ]);
 
-        // Cari user berdasarkan NIS, NIP, atau ID Petugas
-        $user = User::where('nis', $request->nis)
-                    ->orWhere('nip', $request->nis)
-                    ->orWhere('id_petugas', $request->nis)
-                    ->first();
-
-        // Jika user ditemukan dan password cocok
-        if ($user && Auth::attempt(['email' => $user->email, 'password' => $request->password])) {
+        // Coba login dengan field 'nis' sebagai username
+        if (Auth::attempt(['nis' => $credentials['nis'], 'password' => $credentials['password']], $request->filled('remember'))) {
             $request->session()->regenerate();
             
+            $user = Auth::user();
+            
             // Redirect berdasarkan role
-            if ($user->role === 'petugas') {
-                return redirect()->intended('/petugas/dashboard');
-            } elseif ($user->role === 'guru') {
-                return redirect()->intended('/guru/dashboard');
-            } elseif ($user->role === 'siswa') {
-                return redirect()->intended('/siswa/dashboard');
+            switch($user->role) {
+                case 'petugas':
+                    return redirect()->intended(route('dashboard'));
+                case 'guru':
+                    return redirect()->intended(route('dashboard.guru'));
+                case 'siswa':
+                    return redirect()->intended(route('dashboard.siswa'));
+                default:
+                    Auth::logout();
+                    return back()->withErrors([
+                        'nis' => 'Role tidak dikenali.',
+                    ]);
             }
         }
 
-        // Jika gagal login
         return back()->withErrors([
-            'nis' => 'NIS/NIP/ID Petugas atau password salah.',
-        ])->onlyInput('nis');
+            'nis' => 'NIS atau password salah.',
+        ])->withInput($request->only('nis', 'remember'));
     }
 
     public function logout(Request $request)
@@ -54,6 +54,6 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         
-        return redirect('/login');
+        return redirect('/');
     }
 }

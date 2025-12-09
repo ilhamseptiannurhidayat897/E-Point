@@ -3,84 +3,58 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    public function index()
+    /**
+     * Menampilkan dashboard untuk role Petugas/Admin.
+     * Dashboard ini berisi statistik keseluruhan sistem.
+     */
+    public function petugas()
     {
-        // gunakan nilai nyata bila model tersedia, kalau tidak fallback ke angka dummy
-        $jumlahSiswa = 0;
-        $jumlahGuru = 0;
-        $jumlahJurusan = 0;
-        $jumlahKelas = 0;
-        $jumlahPelanggaranJenis = 0;
-        $jumlahKebaikanJenis = 0;
-        $jumlahTransaksiPelanggaran = 0;
-        $jumlahTransaksiKebaikan = 0;
+        $user = Auth::user();
 
-        // jika model ada, ambil dari DB
-        if (class_exists(\App\Models\Student::class)) {
-            $jumlahSiswa = \App\Models\Student::count();
-        } else {
-            $jumlahSiswa = 1800; // placeholder
-        }
+        // --- Inisialisasi variabel statistik ---
+        // Menggunakan nilai dummy jika model belum dibuat, agar tidak error
+        $jumlahSiswa = \App\Models\Student::count() ?? 1800;
+        $jumlahGuru = \App\Models\User::where('role', 'guru')->count() ?? 3;
+        $jumlahPelanggaranJenis = 10;
+        $jumlahKebaikanJenis = 15;
+        $jumlahTransaksiPelanggaran =  7;
+        $jumlahTransaksiKebaikan =  7;
 
-        if (class_exists(\App\Models\User::class)) {
-            // anggap User yang punya role 'guru' -> jika belum ada, fallback
-            try {
-                $jumlahGuru = \App\Models\User::where('role','guru')->count() ?: 3;
-            } catch (\Throwable $e) {
-                $jumlahGuru = 3;
-            }
-        } else {
-            $jumlahGuru = 3;
-        }
+        return view('officer/dashboard', [
+            'user' => $user,
+            'jumlahSiswa' => $jumlahSiswa,
+            'jumlahGuru' => $jumlahGuru,
+            'jumlahPelanggaranJenis' => $jumlahPelanggaranJenis,
+            'jumlahKebaikanJenis' => $jumlahKebaikanJenis,
+            'jumlahTransaksiPelanggaran' => $jumlahTransaksiPelanggaran,
+            'jumlahTransaksiKebaikan' => $jumlahTransaksiKebaikan,
+        ]);
+        
+    }
 
-        if (class_exists(\App\Models\ViolationType::class)) {
-            $jumlahPelanggaranJenis = \App\Models\ViolationType::count();
-        } else {
-            $jumlahPelanggaranJenis = 10;
-        }
+    /**
+     * Menampilkan dashboard untuk role Guru.
+     * Dashboard ini berisi informasi terkait siswa yang diajar oleh guru.
+     */
+    public function guru()
+    {
+        $user = Auth::user();
+        // TODO: Ambil data siswa per kelas guru, pelanggaran di kelas guru, dll.
+        return view('teacher.dashboard', compact('user'));
+    }
 
-        if (class_exists(\App\Models\GoodPointType::class)) {
-            $jumlahKebaikanJenis = \App\Models\GoodPointType::count();
-        } else {
-            $jumlahKebaikanJenis = 15;
-        }
-
-        if (class_exists(\App\Models\Violation::class)) {
-            $jumlahTransaksiPelanggaran = \App\Models\Violation::count();
-        } else {
-            $jumlahTransaksiPelanggaran = 7;
-        }
-
-        if (class_exists(\App\Models\GoodPoint::class)) {
-            $jumlahTransaksiKebaikan = \App\Models\GoodPoint::count();
-        } else {
-            $jumlahTransaksiKebaikan = 7;
-        }
-
-        if (class_exists(\App\Models\Kelas::class)) {
-            $jumlahKelas = \App\Models\Kelas::count();
-        } else {
-            $jumlahKelas = 50;
-        }
-
-        if (class_exists(\App\Models\Jurusan::class)) {
-            $jumlahJurusan = \App\Models\Jurusan::count();
-        } else {
-            $jumlahJurusan = 7;
-        }
-
-        return view('dashboard', compact(
-            'jumlahSiswa',
-            'jumlahGuru',
-            'jumlahJurusan',
-            'jumlahKelas',
-            'jumlahPelanggaranJenis',
-            'jumlahKebaikanJenis',
-            'jumlahTransaksiPelanggaran',
-            'jumlahTransaksiKebaikan'
-        ));
+    /**
+     * Menampilkan dashboard untuk role Siswa.
+     * Dashboard ini berisi informasi poin pribadi siswa.
+     */
+    public function siswa()
+    {
+        $user = Auth::user();
+        // TODO: Ambil data poin pelanggaran, poin kebaikan, dan riwayat siswa.
+        return view('students.dashboard', compact('user'));
     }
 }

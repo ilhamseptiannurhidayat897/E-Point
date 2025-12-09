@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
 {
+    protected $table = 'siswa';
+
     protected $fillable = [
-        'nis','name','tingkat','jurusan','kelas','jenis_kelamin','alamat','photo'
+        'nis','nama','jk','kelas','alamat'
     ];
 
     public function violations()
@@ -25,4 +27,3 @@ class Student extends Model
         return $this->hasOne(PointsSummary::class);
     }
 }
-
