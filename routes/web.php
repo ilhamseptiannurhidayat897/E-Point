@@ -12,7 +12,6 @@ use App\Http\Controllers\Auth\LoginController;
 Route::get('/', function () {
     return view('index');
 });
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::resource('students', StudentController::class);
 Route::resource('violations', ViolationController::class);
 Route::resource('violation-types', ViolationTypeController::class);
@@ -27,19 +26,27 @@ Route::middleware('guest')->group(function () {
 });
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-// Routes untuk Petugas
-Route::middleware(['auth', 'role:petugas'])->prefix('petugas')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('petugas.dashboard');
-    })->name('petugas.dashboard');
-});
+// Routes untuk Officer
+Route::middleware(['auth', 'role:petugas'])
+    ->prefix('officer')
+    ->name('officer.')
+    ->group(function () {
+        Route::get('/dashboard', function () {
+            return view('officer.dashboard');
+        })->name('dashboard');
+    });
 
-// Routes untuk Guru
-Route::middleware(['auth', 'role:guru'])->prefix('guru')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('guru.dashboard');
-    })->name('guru.dashboard');
-});
+
+// Routes untuk Teacher
+Route::middleware(['auth', 'role:guru'])
+    ->prefix('teacher')
+    ->name('teacher.')
+    ->group(function () {
+        Route::get('/dashboard', function () {
+            return view('teacher.dashboard');
+        })->name('dashboard');
+    });
+
 
 // Routes untuk Siswa
 Route::middleware(['auth', 'role:siswa'])->prefix('siswa')->group(function () {

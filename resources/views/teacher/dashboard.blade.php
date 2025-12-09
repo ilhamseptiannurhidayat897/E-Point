@@ -73,7 +73,7 @@
 
             <div class="flex items-center space-x-3 pb-6 border-b border-purple-800">
                 <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-accent to-yellow-400 flex items-center justify-center">
-                    <i class="fas fa-graduation-cap text-white text-xl"></i>
+                    <img src="smkn1kawali.jpg" alt="logo SMKN 1 Kawali">
                 </div>
                 <div>
                     <h2 class="text-xl font-bold">E-Point</h2>
@@ -85,14 +85,6 @@
                 <a href="/dashboard" class="sidebar-item active flex items-center gap-3 px-4 py-3 rounded-lg bg-purple-900 text-accent font-medium">
                     <i class="fas fa-home w-5 text-center"></i>
                     <span>Dashboard</span>
-                </a>
-                <a href="/kebaikan/create" class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-purple-900 transition-colors duration-200 text-purple-200 hover:text-white">
-                    <i class="fas fa-star w-5 text-center"></i>
-                    <span>Input Kebaikan</span>
-                </a>
-                <a href="/pelanggaran/create" class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-purple-900 transition-colors duration-200 text-purple-200 hover:text-white">
-                    <i class="fas fa-exclamation-triangle w-5 text-center"></i>
-                    <span>Input Pelanggaran</span>
                 </a>
                 <a href="/kelas" class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-purple-900 transition-colors duration-200 text-purple-200 hover:text-white">
                     <i class="fas fa-school w-5 text-center"></i>
