@@ -65,7 +65,7 @@
 <body class="bg-gray-50 text-gray-800">
 
     <!-- SIDEBAR -->
-        @include('dasboard.petugas.sidebar')
+        @include('dashboard.petugas.sidebar')
 
 <script>
     function toggleSidebar() {

@@ -65,8 +65,11 @@
 <body class="bg-gray-50 text-gray-800">
 
     <!-- SIDEBAR -->
-        @include('dasboard.petugas.sidebar')
+        @include('dashboard.siswa.sidebar')
+    <!-- endsidebar -->
 
+
+    
 <script>
     function toggleSidebar() {
         const sidebar = document.getElementById('sidebar');
