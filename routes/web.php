@@ -8,7 +8,7 @@ use App\Http\Controllers\ViolationController;
 use App\Http\Controllers\ViolationTypeController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\LandingController; // Tambahkan ini
+use App\Http\Controllers\LandingController;
 
 // Halaman Landing Page (Publik)
 Route::get('/', [LandingController::class, 'index'])->name('landing');
