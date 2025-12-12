@@ -33,12 +33,12 @@
                 </a>
             </nav>
             
-            <div class="absolute bottom-0 left-0 right-0 p-6 border-t border-purple-800">
-                <a href="/logout" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-purple-900 transition-colors duration-200 text-purple-200 hover:text-white">
-                    <i class="fas fa-sign-out-alt w-5 text-center"></i>
-                    <span>Logout</span>
-                </a>
-            </div>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-danger">
+                    Logout
+                </button>
+            </form>
         </aside>
 
         <!-- Overlay mobile -->
