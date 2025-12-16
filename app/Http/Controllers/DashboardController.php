@@ -19,6 +19,6 @@ class DashboardController extends Controller
 
     public function guru()
     {
-        return view('dashboard.guru.main');
+        return view('dashboard.guru.dashboard');
     }
 }

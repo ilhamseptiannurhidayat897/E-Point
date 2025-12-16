@@ -2,13 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\GoodPointController;
-use App\Http\Controllers\GoodPointTypeController;
-use App\Http\Controllers\ViolationController;
-use App\Http\Controllers\ViolationTypeController;
-use App\Http\Controllers\StudentController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\DataSiswaController;
 
 // Halaman Landing Page (Publik)
 Route::get('/', [LandingController::class, 'index'])->name('landing');
@@ -29,4 +25,10 @@ Route::middleware(['auth'])->group(function () {
     
     // Dashboard Siswa
     Route::get('/dashboard/siswa', [DashboardController::class, 'siswa'])->name('dashboard.siswa')->middleware('role:siswa');
+});
+
+// CRUD Data Siswa
+Route::middleware(['auth'])->group(function () {
+
+    Route::resource('datasiswa', DataSiswaController::class);
 });
