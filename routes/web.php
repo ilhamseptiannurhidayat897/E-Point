@@ -21,7 +21,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/petugas', [DashboardController::class, 'petugas'])->name('dashboard')->middleware('role:petugas');
     
     // Dashboard Guru
-    Route::get('/dashboard/guru', [DashboardController::class, 'guru'])->name('dashboard.guru')->middleware('role:guru');
+    Route::get('/dashboard/guru', [DashboardController::class, 'guru'])->name('dashboard.guru.dashboard')->middleware('role:guru');
     
     // Dashboard Siswa
     Route::get('/dashboard/siswa', [DashboardController::class, 'siswa'])->name('dashboard.siswa')->middleware('role:siswa');
