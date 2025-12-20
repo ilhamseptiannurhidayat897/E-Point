@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
 
 class DataSiswaController extends Controller
 {
@@ -23,23 +27,34 @@ class DataSiswaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nis'   => 'required|unique:siswa,nis',
+            'nis'   => 'required|unique:siswa,nis|unique:users,login_id',
             'nama'  => 'required',
             'jk'    => 'required|in:L,P',
             'kelas' => 'required',
         ]);
 
-        Siswa::create([
-            'user_id' => Auth::id(),
-            'nis'     => $request->nis,
-            'nama'    => $request->nama,
-            'jk'      => $request->jk,
-            'kelas'   => $request->kelas,
-            'alamat'  => $request->alamat,
-        ]);
+        DB::transaction(function () use ($request) {
+
+            // BUAT AKUN SISWA
+            $user = User::create([
+                'login_id' => $request->nis,
+                'password' => Hash::make('12345678'),
+                'role'     => 'siswa',
+            ]);
+
+            // SIMPAN DATA SISWA
+            Siswa::create([
+                'user_id' => $user->id,
+                'nis'     => $request->nis,
+                'nama'    => $request->nama,
+                'jk'      => $request->jk,
+                'kelas'   => $request->kelas,
+                'alamat'  => $request->alamat,
+            ]);
+        });
 
         return redirect()->route('datasiswa.index')
-            ->with('success', 'Data siswa berhasil ditambahkan');
+            ->with('success', 'Siswa berhasil ditambahkan (Password: 12345678)');
     }
 
     public function edit($id)

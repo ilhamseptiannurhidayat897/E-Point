@@ -4,20 +4,24 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
 
-class Siswa extends Model
+class Petugas extends Model
 {
-    protected $table = 'siswa';
+    use HasFactory;
+
+    protected $table = 'petugas';
 
     protected $fillable = [
         'user_id',
-        'nis',
+        'nk',
         'nama',
-        'jk',
-        'kelas',
-        'alamat'
     ];
+
+    protected $casts = [
+        'nk' => 'string',
+    ];
+
+    /* ================= RELATION ================= */
 
     public function user()
     {

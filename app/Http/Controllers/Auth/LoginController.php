@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -17,35 +16,37 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'nis' => 'required|string',
+            'login_id' => 'required|string',
             'password' => 'required|string',
         ]);
 
-        // Coba login dengan field 'nis' sebagai username
-        if (Auth::attempt(['nis' => $credentials['nis'], 'password' => $credentials['password']], $request->filled('remember'))) {
+        if (Auth::attempt([
+            'login_id' => $credentials['login_id'],
+            'password' => $credentials['password'],
+        ], $request->filled('remember'))) {
+
             $request->session()->regenerate();
-            
             $user = Auth::user();
-            
-            // Redirect berdasarkan role
-            switch($user->role) {
+
+            // Redirect sesuai role
+            switch ($user->role) {
                 case 'petugas':
-                    return redirect()->intended(route('dashboard'));
+                    return redirect()->route('dashboard');
                 case 'guru':
-                    return redirect()->intended(route('dashboard.guru'));
+                    return redirect()->route('dashboard.guru.dashboard');
                 case 'siswa':
-                    return redirect()->intended(route('dashboard.siswa'));
+                    return redirect()->route('dashboard.siswa');
                 default:
                     Auth::logout();
                     return back()->withErrors([
-                        'nis' => 'Role tidak dikenali.',
+                        'login_id' => 'Role tidak dikenali',
                     ]);
             }
         }
 
         return back()->withErrors([
-            'nis' => 'NIS atau password salah.',
-        ])->withInput($request->only('nis', 'remember'));
+            'login_id' => 'Login ID atau password salah',
+        ])->withInput($request->only('login_id', 'remember'));
     }
 
     public function logout(Request $request)
@@ -56,6 +57,6 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('landing')
-        ->with('success', 'Berhasil logout');
+            ->with('success', 'Berhasil logout');
     }
 }

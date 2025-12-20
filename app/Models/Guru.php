@@ -6,18 +6,23 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 
-class Siswa extends Model
+class Guru extends Model
 {
-    protected $table = 'siswa';
+    use HasFactory;
+
+    protected $table = 'guru';
 
     protected $fillable = [
         'user_id',
-        'nis',
+        'nip',
         'nama',
-        'jk',
-        'kelas',
-        'alamat'
     ];
+
+    protected $casts = [
+        'nip' => 'string',
+    ];
+
+    /* ================= RELATION ================= */
 
     public function user()
     {
