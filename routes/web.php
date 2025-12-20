@@ -25,6 +25,14 @@ Route::middleware(['auth'])->group(function () {
     
     // Dashboard Siswa
     Route::get('/dashboard/siswa', [DashboardController::class, 'siswa'])->name('dashboard.siswa')->middleware('role:siswa');
+
+    Route::get('/laporan', [DashboardController::class, 'riwayatPoin'])
+    ->name('siswa.riwayat')
+    ->middleware('auth');
+
+    
+    // Logout
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
 
 // CRUD Data Siswa
