@@ -32,11 +32,6 @@
             box-shadow: 0 10px 25px rgba(43, 27, 100, 0.1);
         }
         
-        /* Hero section background */
-        .hero-bg {
-            background: linear-gradient(135deg, #2B1B64 0%, #1a0f3d 100%);
-        }
-        
         /* Feature card animation */
         .feature-card {
             transition: all 0.3s ease;
@@ -104,37 +99,44 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-bg text-white py-20 md:py-32">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0">
-                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Sistem Informasi Poin Siswa Terintegrasi</h1>
-                    <p class="text-lg md:text-xl mb-8 text-purple-200">Kelola poin kebaikan dan pelanggaran siswa dengan mudah, transparan, dan efisien</p>
-                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                        <a href="#features" class="bg-accent text-primary px-8 py-3 rounded-lg font-bold hover:bg-yellow-400 transition-colors duration-300 text-center">
-                            Pelajari Lebih Lanjut
-                        </a>
-                        <a href="/login" class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white hover:text-primary transition-colors duration-300 text-center">
-                            Masuk ke Sistem
-                        </a>
-                    </div>
-                </div>
-                <div class="md:w-1/2 flex justify-center">
-                    <div class="relative">
-                        <div class="w-64 h-64 md:w-80 md:h-80 bg-white/10 rounded-full flex items-center justify-center">
-                            <i class="fas fa-chart-line text-6xl md:text-8xl text-accent"></i>
-                        </div>
-                        <div class="absolute -top-4 -right-4 w-16 h-16 bg-accent rounded-full flex items-center justify-center">
-                            <i class="fas fa-star text-primary text-xl"></i>
-                        </div>
-                        <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-accent rounded-full flex items-center justify-center">
-                            <i class="fas fa-exclamation-triangle text-primary text-xl"></i>
-                        </div>
-                    </div>
-                </div>
+    <!-- Hero Wrapper (FULL WIDTH) -->
+<section 
+    id="home"
+    class="relative w-screen h-[70vh] md:h-[80vh] bg-cover bg-center bg-no-repeat flex items-center text-white overflow-hidden"
+    style="background-image: url('/logo/bg-smkkawali.jpg');"
+>
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-black/60"></div>
+
+    <!-- Content (DI-BATASI CONTAINER) -->
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="max-w-xl">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">
+                Sistem Informasi Poin<br>
+                Siswa Terintegrasi
+            </h1>
+
+            <p class="text-lg md:text-xl mb-8 text-gray-200">
+                Kelola poin kebaikan dan pelanggaran siswa dengan mudah,
+                transparan, dan efisien
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="#features"
+                   class="bg-accent text-primary px-8 py-3 rounded-lg font-bold hover:bg-yellow-400 transition">
+                    Pelajari Lebih Lanjut
+                </a>
+
+                <a href="/login"
+                   class="border-2 border-white px-8 py-3 rounded-lg font-bold hover:bg-white hover:text-primary transition">
+                    Masuk ke Sistem
+                </a>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+
 
     <!-- Features Section -->
     <section id="features" class="py-16 md:py-24">

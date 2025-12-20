@@ -2,11 +2,11 @@
 
         <!-- Sidebar -->
         <aside id="sidebar"
-            class="w-64 bg-primary text-white p-6 space-y-6 fixed md:relative transform md:translate-x-0 -translate-x-full transition-all duration-300 z-50 h-full overflow-y-auto shadow-xl">
+            class="w-64 bg-primary text-white p-6 space-y-6 fixed md:relative transform md:translate-x-0 -translate-x-full transition-all duration-300 z-50 h-full overflow-y-auto shadow-xl relative">
 
             <div class="flex items-center space-x-3 pb-6 border-b border-purple-800">
-                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-accent to-yellow-400 flex items-center justify-center">
-                    <img src="{{asset('logo/smkn1kawali.jpg')}}" alt="logo SMKN 1 Kawali">
+                <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-md">
+                    <img src="{{asset('logo/smkn1kawali.jpg')}}" alt="logo SMKN 1 Kawali" class="w-10 h-10 rounded-lg object-cover">
                 </div>
                 <div>
                     <h2 class="text-xl font-bold">E-Point</h2>
@@ -41,12 +41,15 @@
                 </a>
             </nav>
             
-            <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                @csrf
-                <button type="submit" class="btn btn-danger">
-                    Logout
-                </button>
-            </form>
+            <div class="absolute bottom-0 left-0 right-0 p-6 border-t border-purple-800">
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="w-full">
+                    @csrf
+                    <button type="submit" class="flex items-center gap-3 w-full px-4 py-3 rounded-lg hover:bg-purple-900 transition-colors duration-200 text-purple-200 hover:text-white">
+                        <i class="fas fa-sign-out-alt w-5 text-center"></i>
+                        <span>Logout</span>
+                    </button>
+                </form>
+            </div>
         </aside>
 
         <!-- Overlay mobile -->
