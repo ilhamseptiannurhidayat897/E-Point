@@ -32,7 +32,7 @@ class LoginController extends Controller
                 case 'petugas':
                     return redirect()->intended(route('dashboard'));
                 case 'guru':
-                    return redirect()->intended(route('dashboard.guru'));
+                    return redirect()->intended(route('dashboard.guru.dashboard'));
                 case 'siswa':
                     return redirect()->intended(route('dashboard.siswa'));
                 default:
