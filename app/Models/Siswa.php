@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 
@@ -14,12 +15,27 @@ class Siswa extends Model
         'nis',
         'nama',
         'jk',
-        'kelas',
+        'kelas_id',
         'alamat'
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+        
     }
+    public function kelas()
+{
+    return $this->belongsTo(Kelas::class);
+}
+
+public function kebaikan()
+{
+    return $this->hasMany(Kebaikan::class);
+}   
+public function Pelanggaran()
+{
+    return $this->hasMany(Pelanggaran::class);
+}   
+    
 }

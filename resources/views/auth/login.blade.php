@@ -197,11 +197,11 @@
                     </div>
                     <input 
                         type="text" 
-                        name="nis" 
-                        id="nis" 
-                        value="{{ old('nis') }}"
+                        name="login_id" 
+                        id="login_id" 
+                        value="{{ old('login_id') }}"
                         class="input-field w-full py-3 pr-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none"
-                        placeholder="Nis"
+                        placeholder="NIS / NIP / NK"
                         required
                         autofocus
                     >

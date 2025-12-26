@@ -13,7 +13,7 @@
     </div>
 
     <nav class="space-y-1">
-        <a href="{{route('dashboard.guru.dashboard')}}" class="sidebar-item active flex items-center gap-3 px-4 py-3 rounded-lg bg-purple-900 text-accent font-medium">
+        <a href="{{route('dashboard.guru')}}" class="sidebar-item active flex items-center gap-3 px-4 py-3 rounded-lg bg-purple-900 text-accent font-medium">
             <i class="fas fa-home w-5 text-center"></i>
             <span>Dashboard</span>
         </a>

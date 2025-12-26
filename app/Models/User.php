@@ -10,10 +10,10 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    protected $table = 'users';
+
     protected $fillable = [
-        'nis',
-        'name',
-        'email',
+        'login_id', // NIS / NIP / NK
         'password',
         'role',
     ];
@@ -25,6 +25,22 @@ class User extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
     ];
+
+    /* ================= RELATION ================= */
+
+    public function siswa()
+    {
+        return $this->hasOne(Siswa::class);
+    }
+
+    public function guru()
+    {
+        return $this->hasOne(Guru::class);
+    }
+
+    public function petugas()
+    {
+        return $this->hasOne(Petugas::class);
+    }
 }

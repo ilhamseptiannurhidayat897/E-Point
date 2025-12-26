@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('pelanggaran', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->unique();
-            $table->string('nama_pelanggaran');
-            $table->integer('poin'); 
+            $table->foreignId('siswa_id')->constrained('siswa');
+            $table->foreignId('jenis_pelanggaran_id')->constrained('jenis_pelanggaran');
+            $table->text('keterangan');
+            $table->date('tanggal');
+            $table->integer('poin');
+            $table->foreignId('petugas_id')->constrained('users');
             $table->timestamps();
         });
     }
