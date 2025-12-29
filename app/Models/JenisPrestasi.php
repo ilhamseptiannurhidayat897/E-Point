@@ -4,17 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class JenisKebaikan extends Model
+class JenisPrestasi extends Model
 {
-    protected $table = 'jenis_kebaikan';
+    protected $table = 'jenis_prestasi';
 
     protected $fillable = [
         'nama',
         'poin',
     ];
 
-    public function kebaikan()
+    public function prestasi()
     {
-        return $this->hasMany(Kebaikan::class);
+        return $this->hasMany(Prestasi::class);
     }
 }

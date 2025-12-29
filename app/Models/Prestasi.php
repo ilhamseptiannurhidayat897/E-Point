@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pelanggaran extends Model
+class Prestasi extends Model
 {
     protected $fillable = [
         'siswa_id',
-        'jenis_pelanggaran_id',
+        'jenis_prestasi_id',
         'petugas_id',
         'keterangan',
         'foto',
@@ -21,7 +20,7 @@ class Pelanggaran extends Model
     }
 
     public function jenis() {
-        return $this->belongsTo(JenisPelanggaran::class,'jenis_pelanggaran_id');
+        return $this->belongsTo(JenisPrestasi::class,'jenis_prestasi_id');
     }
 
     public function petugas()

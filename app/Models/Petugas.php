@@ -27,4 +27,14 @@ class Petugas extends Model
     {
         return $this->belongsTo(User::class);
     }
+    
+    public function pelanggaran()
+    {
+        return $this->hasMany(Pelanggaran::class);
+    }
+    
+    public function prestasi()
+    {
+        return $this->hasMany(Prestasi::class);
+    }
 }

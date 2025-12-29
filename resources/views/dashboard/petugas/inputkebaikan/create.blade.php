@@ -17,14 +17,13 @@
     </div>
 @endif
 
-        <form action="{{ route('kebaikan.store') }}" method="POST" class="space-y-5">
+        <form action="{{ route('inputkebaikan.store') }}" method="POST" class="space-y-5">
             @csrf
 
             {{-- Siswa --}}
             <div>
                 <label class="block text-sm font-medium mb-1">Siswa</label>
-                <select name="siswa_id" required
-                    class="w-full rounded-lg border-gray-300">
+                <select name="siswa_id" required>
                     <option value="">-- Pilih Siswa --</option>
                     @foreach ($siswa as $s)
                         <option value="{{ $s->id }}">
@@ -37,12 +36,11 @@
             {{-- Jenis Kebaikan --}}
             <div>
                 <label class="block text-sm font-medium mb-1">Jenis Kebaikan</label>
-                <select name="jenis_kebaikan_id" required
-                    class="w-full rounded-lg border-gray-300">
+                <select name="jenis_kebaikan_id" required>
                     <option value="">-- Pilih Jenis Kebaikan --</option>
-                    @foreach ($jenisKebaikan as $jk)
-                        <option value="{{ $jk->id }}">
-                            {{ $jk->nama }} (+{{ $jk->poin }} poin)
+                    @foreach ($jenisKebaikan as $j)
+                        <option value="{{ $j->id }}">
+                            {{ $j->nama }} ({{ $j->poin }} poin)
                         </option>
                     @endforeach
                 </select>
@@ -51,9 +49,12 @@
             {{-- Keterangan --}}
             <div>
                 <label class="block text-sm font-medium mb-1">Keterangan</label>
-                <textarea name="keterangan" rows="3"
-                    class="w-full rounded-lg border-gray-300"
-                    placeholder="Contoh: Membantu guru membawa buku"></textarea>
+                <textarea
+                    name="keterangan"
+                    rows="4"
+                    class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring focus:border-primary"
+                    placeholder="Contoh: Membantu guru membawa buku"
+                >{{ old('keterangan') }}</textarea>
             </div>
 
             {{-- Tanggal --}}

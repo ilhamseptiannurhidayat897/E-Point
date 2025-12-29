@@ -33,7 +33,7 @@ class PelanggaranController extends Controller
         $request->validate([
             'siswa_id' => 'required|exists:siswa,id',
             'jenis_pelanggaran_id' => 'required|exists:jenis_pelanggaran,id',
-            'keterangan' => 'required|string',
+            'keterangan' => 'nullable|string',
             'tanggal' => 'required|date',
         ]);
 

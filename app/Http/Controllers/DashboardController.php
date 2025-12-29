@@ -3,11 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use App\Models\GoodPoint;
-use App\Models\Violation;
-use App\Models\Student;
+use Illuminate\Support\Collection;
 
 class DashboardController extends Controller
 {
@@ -25,5 +21,4 @@ class DashboardController extends Controller
     {
         return view('dashboard.guru.dashboard');
     }
-
 }

@@ -10,9 +10,9 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('login_id')->unique(); // NIS / NIP
+            $table->string('login_id')->unique();
             $table->string('password');
-            $table->enum('role', ['siswa','guru','petugas']);
+            $table->enum('role', ['admin','bk','wali_kelas','petugas','siswa']);
             $table->timestamps();
         });
     }

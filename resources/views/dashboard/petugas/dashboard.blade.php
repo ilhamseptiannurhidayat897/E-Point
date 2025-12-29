@@ -32,34 +32,47 @@
     <div class="bg-white rounded shadow p-4">
         <h2 class="text-lg font-semibold mb-4">Aktivitas Terakhir</h2>
 
+        <div class="bg-white rounded shadow p-4">
         <table class="w-full text-sm">
             <thead>
                 <tr class="border-b">
-                    <th class="text-left py-2">Tanggal</th>
-                    <th class="text-left py-2">Siswa</th>
-                    <th class="text-left py-2">Kelas</th>
-                    <th class="text-left py-2">Keterangan</th>
-                    <th class="text-left py-2">Poin</th>
+                    <th class="py-2 text-left">Tanggal</th>
+                    <th class="py-2 text-left">Siswa</th>
+                    <th class="py-2 text-left">Jenis</th>
+                    <th class="py-2 text-left">Keterangan</th>
+                    <th class="py-2 text-right">Poin</th>
                 </tr>
             </thead>
-            {{-- <tbody>
-                @forelse ($activities as $a)
-                <tr class="border-b">
-                    <td>{{ $a->created_at }}</td>
-                    <td>{{ $a->nama_siswa }}</td>
-                    <td>{{ $a->nama_kelas }}</td>
-                    <td>{{ $a->keterangan }}</td>
-                    <td>{{ $a->poin }}</td>
-                </tr>
-                @empty
-                <tr>
-                    <td colspan="5" class="text-center py-4">
-                        Belum ada data
+
+            <tbody>
+            @forelse ($activities as $a)
+                <tr class="border-b hover:bg-gray-50">
+                    <td>{{ $a['tanggal'] }}</td>
+                    <td>{{ $a['siswa'] }}</td>
+
+                    <td>
+                        <span class="px-2 py-1 text-xs rounded
+                            {{ $a['jenis'] == 'Kebaikan' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
+                            {{ $a['jenis'] }}
+                        </span>
+                    </td>
+
+                    <td>{{ $a['keterangan'] }}</td>
+
+                    <td class="text-right font-bold text-{{ $a['warna'] }}-600">
+                        {{ $a['poin'] > 0 ? '+' : '' }}{{ $a['poin'] }}
                     </td>
                 </tr>
-                @endforelse
-            </tbody> --}}
+            @empty
+                <tr>
+                    <td colspan="5" class="text-center text-gray-500 py-4">
+                        Belum ada aktivitas
+                    </td>
+                </tr>
+            @endforelse
+            </tbody>
         </table>
+        </div>
     </div>
 
 </div>

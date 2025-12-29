@@ -9,17 +9,22 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('siswa', function (Blueprint $table) {
+        Schema::create('bk', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('nis')->unique();
+            $table->string('nip')->unique();
             $table->string('nama');
-            $table->enum('jk', ['L', 'P']);
-            $table->foreignId('kelas_id')->constrained('kelas');
-            $table->text('alamat')->nullable();
             $table->timestamps();
         });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('bk');
     }
 };

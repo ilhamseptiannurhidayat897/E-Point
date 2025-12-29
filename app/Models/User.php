@@ -29,16 +29,22 @@ class User extends Authenticatable
 
     /* ================= RELATION ================= */
 
+    public function admin()      
+    { 
+        return $this->hasOne(Admin::class); 
+    }
+    public function bk()         
+    { 
+        return $this->hasOne(Bk::class); 
+    }
+    public function waliKelas()  
+    { 
+        return $this->hasOne(WaliKelas::class);
+    }
     public function siswa()
     {
         return $this->hasOne(Siswa::class);
     }
-
-    public function guru()
-    {
-        return $this->hasOne(Guru::class);
-    }
-
     public function petugas()
     {
         return $this->hasOne(Petugas::class);

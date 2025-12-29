@@ -11,15 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pelanggaran', function (Blueprint $table) {
+        Schema::create('prestasi', function (Blueprint $table) {
             $table->id();
             $table->foreignId('siswa_id')->constrained('siswa')->cascadeOnDelete();
-            $table->foreignId('jenis_pelanggaran_id')->constrained();
+            $table->foreignId('jenis_prestasi_id')->constrained();
             $table->foreignId('petugas_id')->constrained('petugas');
             $table->text('keterangan')->nullable();
             $table->string('foto')->nullable();
             $table->enum('status',['pending','verifikasi'])->default('pending');
             $table->timestamps();
         });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('prestasi');
     }
 };

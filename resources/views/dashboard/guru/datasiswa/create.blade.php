@@ -179,17 +179,16 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                             </svg>
                         </div>
-                        <select id="kelas" 
-                                name="kelas" 
-                                class="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all appearance-none bg-white @error('kelas') border-red-300 @enderror"
+                        <select id="kelas_id"
+                                name="kelas_id"
+                                class="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg"
                                 required>
-                            <option value="" {{ old('kelas') == '' ? 'selected' : '' }} disabled>-- Pilih Kelas --</option>
-                            <option value="X RPL 1" {{ old('kelas') == 'X RPL 1' ? 'selected' : '' }}>X RPL 1</option>
-                            <option value="X RPL 2" {{ old('kelas') == 'X RPL 2' ? 'selected' : '' }}>X RPL 2</option>
-                            <option value="XI RPL 1" {{ old('kelas') == 'XI RPL 1' ? 'selected' : '' }}>XI RPL 1</option>
-                            <option value="XI RPL 2" {{ old('kelas') == 'XI RPL 2' ? 'selected' : '' }}>XI RPL 2</option>
-                            <option value="XII RPL 1" {{ old('kelas') == 'XII RPL 1' ? 'selected' : '' }}>XII RPL 1</option>
-                            <option value="XII RPL 2" {{ old('kelas') == 'XII RPL 2' ? 'selected' : '' }}>XII RPL 2</option>
+                            <option value="">-- Pilih Kelas --</option>
+                            @foreach ($kelas as $k)
+                                <option value="{{ $k->id }}" {{ old('kelas_id') == $k->id ? 'selected' : '' }}>
+                                    {{ $k->nama_kelas }}
+                                </option>
+                            @endforeach
                         </select>
                         <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                             <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -197,7 +196,7 @@
                             </svg>
                         </div>
                     </div>
-                    @error('kelas')
+                    @error('kelas_id')
                         <span class="text-red-500 text-xs mt-1 flex items-center">
                             <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
@@ -344,7 +343,7 @@
         let formSubmitted = false;
         
         // Required fields for progress calculation
-        const requiredFields = ['nis', 'nama', 'jk', 'kelas'];
+        const requiredFields = ['nis', 'nama', 'jk', 'kelas_id'];
         
         // Update progress bar
         function updateProgress() {

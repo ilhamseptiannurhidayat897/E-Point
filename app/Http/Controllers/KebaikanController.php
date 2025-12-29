@@ -23,7 +23,7 @@ class KebaikanController extends Controller
         $request->validate([
             'siswa_id' => 'required|exists:siswa,id',
             'jenis_kebaikan_id' => 'required|exists:jenis_kebaikan,id',
-            'keterangan' => 'required',
+            'keterangan' => 'nullable|string',
             'tanggal' => 'required|date',
         ]);
 

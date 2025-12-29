@@ -95,11 +95,18 @@ Route::middleware(['auth'])->group(function () {
             ->name('inputpelanggaran.store');
         
     });
-
+    Route::middleware(['auth', 'role:admin'])->group(function () {
+        Route::get('/admin/dashboard', [DashboardController::class, 'admin'])
+            ->name('dashboard.admin');
+    });
+    Route::middleware(['auth', 'role:bk'])->group(function () {
+        Route::get('/bk/dashboard', [DashboardController::class, 'bk'])
+            ->name('dashboard.bk');
+    });
     // Dashboard Guru
-    Route::get('/dashboard/guru', [DashboardController::class, 'guru'])
-        ->name('dashboard.guru')
-        ->middleware('role:guru');
+    Route::get('/dashboard/wali_kelas', [DashboardController::class, 'wali_kelas'])
+        ->name('dashboard.wali_kelas')
+        ->middleware('role:wali_kelas');
 
     // Dashboard Siswa
     Route::get('/dashboard/siswa', [DashboardController::class, 'siswa'])

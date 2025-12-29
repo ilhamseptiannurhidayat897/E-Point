@@ -16,7 +16,7 @@ class JenisPelanggaranController extends Controller
 
     public function create()
     {
-        return view('dashboard.petugas.pelanggaran.create_master');
+        return view('dashboard.petugas.pelanggaran.create');
     }
 
     public function store(Request $request)

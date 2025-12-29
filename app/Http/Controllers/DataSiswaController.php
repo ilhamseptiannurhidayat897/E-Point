@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Siswa;
+use App\Models\Kelas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +16,8 @@ class DataSiswaController extends Controller
     public function index()
     {
         return view('dashboard.guru.datasiswa.index', [
-            'siswa' => Siswa::latest()->get()
+            'siswa' => Siswa::latest()->get(),
+            'kelas' => Kelas::orderBy('nama_kelas')->get()
         ]);
     }
 
@@ -30,7 +32,7 @@ class DataSiswaController extends Controller
             'nis'   => 'required|unique:siswa,nis|unique:users,login_id',
             'nama'  => 'required',
             'jk'    => 'required|in:L,P',
-            'kelas' => 'required',
+            'kelas_id' => 'required|exists:kelas,id',
         ]);
 
         DB::transaction(function () use ($request) {
@@ -48,7 +50,7 @@ class DataSiswaController extends Controller
                 'nis'     => $request->nis,
                 'nama'    => $request->nama,
                 'jk'      => $request->jk,
-                'kelas'   => $request->kelas,
+                'kelas_id'   => $request->kelas_id,
                 'alamat'  => $request->alamat,
             ]);
         });
@@ -72,11 +74,11 @@ class DataSiswaController extends Controller
             'nis'   => 'required|unique:siswa,nis,' . $siswa->id,
             'nama'  => 'required',
             'jk'    => 'required|in:L,P',
-            'kelas' => 'required',
+            'kelas_id' => 'required|exists:kelas,id',
         ]);
 
         $siswa->update($request->only([
-            'nis', 'nama', 'jk', 'kelas', 'alamat'
+            'nis', 'nama', 'jk', 'kelas_id', 'alamat'
         ]));
 
         return redirect()->route('datasiswa.index')

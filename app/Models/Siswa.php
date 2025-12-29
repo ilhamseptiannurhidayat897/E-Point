@@ -22,20 +22,18 @@ class Siswa extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-        
     }
     public function kelas()
-{
-    return $this->belongsTo(Kelas::class);
-}
-
-public function kebaikan()
-{
-    return $this->hasMany(Kebaikan::class);
-}   
-public function Pelanggaran()
-{
-    return $this->hasMany(Pelanggaran::class);
-}   
-    
+    {
+        return $this->belongsTo(Kelas::class);
+    }
+    public function prestasi() 
+    {
+        return $this->hasMany(Prestasi::class);
+    }  
+    public function Pelanggaran()
+    {
+        return $this->hasMany(Pelanggaran::class);
+    }   
+        
 }

@@ -19,53 +19,77 @@
 
     {{-- MENU --}}
     <nav class="flex-1 p-4 space-y-1">
+
+        <!-- Dashboard -->
         <a href="{{ route('dashboard.petugas') }}"
-           class="sidebar-item active flex items-center gap-3 px-4 py-3 rounded-lg bg-purple-900 text-accent font-medium">
+        class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium
+        {{ request()->routeIs('dashboard.petugas')
+                ? 'bg-purple-900 text-accent'
+                : 'text-purple-200 hover:bg-purple-900 hover:text-white' }}">
             <i class="fas fa-home w-5 text-center"></i>
             <span>Dashboard</span>
         </a>
 
+        <!-- Kebaikan -->
         <a href="{{ route('kebaikan.index') }}"
-           class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-purple-900 text-purple-200 hover:text-white">
+        class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg
+        {{ request()->routeIs('kebaikan.*')
+                ? 'bg-purple-900 text-accent'
+                : 'text-purple-200 hover:bg-purple-900 hover:text-white' }}">
             <i class="fas fa-star w-5 text-center"></i>
             <span>Kebaikan</span>
         </a>
 
+        <!-- Pelanggaran -->
         <a href="{{ route('pelanggaran.index') }}"
-           class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-purple-900 text-purple-200 hover:text-white">
+        class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg
+        {{ request()->routeIs('pelanggaran.*')
+                ? 'bg-purple-900 text-accent'
+                : 'text-purple-200 hover:bg-purple-900 hover:text-white' }}">
             <i class="fas fa-exclamation-triangle w-5 text-center"></i>
             <span>Pelanggaran</span>
         </a>
 
+        <!-- Input Kebaikan -->
         <a href="{{ route('inputkebaikan.create') }}"
-           class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-purple-900 text-purple-200 hover:text-white">
-            <i class="fas fa-exclamation-triangle w-5 text-center"></i>
+        class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg
+        {{ request()->routeIs('inputkebaikan.*')
+                ? 'bg-purple-900 text-accent'
+                : 'text-purple-200 hover:bg-purple-900 hover:text-white' }}">
+            <i class="fas fa-star w-5 text-center"></i>
             <span>Input Kebaikan</span>
         </a>
 
+        <!-- Input Pelanggaran -->
         <a href="{{ route('inputpelanggaran.create') }}"
-           class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-purple-900 text-purple-200 hover:text-white">
+        class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg
+        {{ request()->routeIs('inputpelanggaran.*')
+                ? 'bg-purple-900 text-accent'
+                : 'text-purple-200 hover:bg-purple-900 hover:text-white' }}">
             <i class="fas fa-exclamation-triangle w-5 text-center"></i>
-            <span>Input pelanggaran</span>
+            <span>Input Pelanggaran</span>
         </a>
 
-        <a href="/kelas"
-           class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-purple-900 text-purple-200 hover:text-white">
-            <i class="fas fa-school w-5 text-center"></i>
-            <span>Data Kelas</span>
-        </a>
-
+        <!-- Data Siswa -->
         <a href="/siswa"
-           class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-purple-900 text-purple-200 hover:text-white">
+        class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg
+        {{ request()->is('siswa*')
+                ? 'bg-purple-900 text-accent'
+                : 'text-purple-200 hover:bg-purple-900 hover:text-white' }}">
             <i class="fas fa-users w-5 text-center"></i>
             <span>Data Siswa</span>
         </a>
 
+        <!-- Laporan -->
         <a href="/laporan"
-           class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-purple-900 text-purple-200 hover:text-white">
+        class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg
+        {{ request()->is('laporan*')
+                ? 'bg-purple-900 text-accent'
+                : 'text-purple-200 hover:bg-purple-900 hover:text-white' }}">
             <i class="fas fa-file-alt w-5 text-center"></i>
             <span>Laporan</span>
         </a>
+
     </nav>
 
     {{-- LOGOUT --}}
