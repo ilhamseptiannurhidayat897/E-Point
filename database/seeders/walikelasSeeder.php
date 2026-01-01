@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Guru;
+use App\Models\WaliKelas;
 use Illuminate\Database\Seeder;
 
-class GuruSeeder extends Seeder
+class walikelasSeeder extends Seeder
 {
     public function run(): void
     {
-        Guru::create([
+        WaliKelas::create([
             'user_id' => 2,
             'nip' => '2001',
-            'nama' => 'Guru Contoh',
+            'nama' => 'waliKlas Contoh',
         ]);
     }
 }

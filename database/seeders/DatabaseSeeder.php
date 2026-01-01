@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             KelasSeeder::class,
             SiswaSeeder::class,
-            GuruSeeder::class,
+            walikelasSeeder::class,
             PetugasSeeder::class,
         ]);
     }

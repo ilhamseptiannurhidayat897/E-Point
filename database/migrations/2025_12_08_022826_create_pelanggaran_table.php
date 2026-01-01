@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pelanggaran', function (Blueprint $table) {
             $table->id();
             $table->foreignId('siswa_id')->constrained('siswa')->cascadeOnDelete();
-            $table->foreignId('jenis_pelanggaran_id')->constrained();
+            $table->foreignId('jenis_pelanggaran_id')->constrained('jenis_pelanggaran');
             $table->foreignId('petugas_id')->constrained('petugas');
             $table->text('keterangan')->nullable();
             $table->string('foto')->nullable();
@@ -22,4 +22,9 @@ return new class extends Migration
             $table->timestamps();
         });
     }
+    public function down(): void
+{
+    Schema::dropIfExists('pelanggaran');
+}
+
 };

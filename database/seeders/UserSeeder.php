@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
         User::create([
             'login_id' => '2001', // NIP
             'password' => Hash::make('12345678'),
-            'role' => 'guru',
+            'role' => 'wali_kelas',
         ]);
 
         // PETUGAS
@@ -28,6 +28,20 @@ class UserSeeder extends Seeder
             'login_id' => '1001', // NK
             'password' => Hash::make('12345678'),
             'role' => 'petugas',
+        ]);
+
+        // ADMIN
+        User::create([
+            'login_id' => '4001', // NK
+            'password' => Hash::make('12345678'),
+            'role' => 'admin',
+        ]);
+
+        // BK
+        User::create([
+            'login_id' => '5001', // NK
+            'password' => Hash::make('12345678'),
+            'role' => 'bk',
         ]);
     }
 }

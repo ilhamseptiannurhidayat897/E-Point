@@ -32,11 +32,17 @@ class LoginController extends Controller
                 case 'petugas':
                     return redirect()->route('dashboard.petugas');
 
-                case 'guru':
-                    return redirect()->route('dashboard.guru');
+                case 'wali_kelas':
+                    return redirect()->route('dashboard.wali_kelas');
 
                 case 'siswa':
                     return redirect()->route('dashboard.siswa');
+
+                case 'admin':
+                    return redirect()->route('dashboard.admin');
+
+                case 'bk':
+                    return redirect()->route('dashboard.bk');
 
                 default:
                     Auth::logout();

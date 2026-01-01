@@ -45,7 +45,7 @@
             </thead>
 
             <tbody>
-            @forelse ($activities as $a)
+            {{-- @forelse ($activities as $a)
                 <tr class="border-b hover:bg-gray-50">
                     <td>{{ $a['tanggal'] }}</td>
                     <td>{{ $a['siswa'] }}</td>
@@ -69,7 +69,7 @@
                         Belum ada aktivitas
                     </td>
                 </tr>
-            @endforelse
+            @endforelse --}}
             </tbody>
         </table>
         </div>

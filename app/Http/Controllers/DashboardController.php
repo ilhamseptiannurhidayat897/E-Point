@@ -14,11 +14,21 @@ class DashboardController extends Controller
 
     public function siswa()
     {
-        return view('dashboard.siswa.main');
+        return view('dashboard.siswa.dashboard');
     }
 
-    public function guru()
+    public function wali_kelas()
     {
-        return view('dashboard.guru.dashboard');
+        return view('dashboard.wali_kelas.dashboard');
+    }
+
+    public function admin()
+    {
+        return view('dashboard.admin.dashboard');
+    }
+
+    public function bk()
+    {
+        return view('dashboard.bk.dashboard');
     }
 }

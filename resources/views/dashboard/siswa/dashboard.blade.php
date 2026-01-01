@@ -7,7 +7,7 @@
 <!-- INFO CARDS -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
 
-    <!-- Total Poin -->
+    {{-- <!-- Total Poin -->
 <h3 class="text-3xl font-bold text-primary">
     {{ $totalPoin }}
 </h3>
@@ -20,7 +20,7 @@
 <!-- Pelanggaran -->
 <h3 class="text-3xl font-bold text-red-600">
     {{ $totalPelanggaran }}
-</h3>
+</h3> --}}
 
 </div>
 
