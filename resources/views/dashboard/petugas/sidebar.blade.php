@@ -31,64 +31,44 @@
         </a>
 
         <!-- Kebaikan -->
-        <a href="{{ route('kebaikan.index') }}"
+        <!-- <a href="{{ route('kebaikan.index') }}"
         class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg
         {{ request()->routeIs('kebaikan.*')
                 ? 'bg-purple-900 text-accent'
                 : 'text-purple-200 hover:bg-purple-900 hover:text-white' }}">
             <i class="fas fa-star w-5 text-center"></i>
             <span>Kebaikan</span>
-        </a>
+        </a> -->
 
         <!-- Pelanggaran -->
-        <a href="{{ route('pelanggaran.index') }}"
+        <!-- <a href="{{ route('pelanggaran.index') }}"
         class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg
         {{ request()->routeIs('pelanggaran.*')
                 ? 'bg-purple-900 text-accent'
                 : 'text-purple-200 hover:bg-purple-900 hover:text-white' }}">
             <i class="fas fa-exclamation-triangle w-5 text-center"></i>
             <span>Pelanggaran</span>
-        </a>
+        </a> -->
 
         <!-- Input Kebaikan -->
-        <a href="{{ route('inputkebaikan.create') }}"
+        <!-- <a href="{{ route('inputkebaikan.create') }}"
         class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg
         {{ request()->routeIs('inputkebaikan.*')
                 ? 'bg-purple-900 text-accent'
                 : 'text-purple-200 hover:bg-purple-900 hover:text-white' }}">
             <i class="fas fa-star w-5 text-center"></i>
             <span>Input Kebaikan</span>
-        </a>
+        </a> -->
 
         <!-- Input Pelanggaran -->
-        <a href="{{ route('inputpelanggaran.create') }}"
+        <!-- <a href="{{ route('inputpelanggaran.create') }}"
         class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg
         {{ request()->routeIs('inputpelanggaran.*')
                 ? 'bg-purple-900 text-accent'
                 : 'text-purple-200 hover:bg-purple-900 hover:text-white' }}">
             <i class="fas fa-exclamation-triangle w-5 text-center"></i>
             <span>Input Pelanggaran</span>
-        </a>
-
-        <!-- Data Siswa -->
-        <a href="/siswa"
-        class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg
-        {{ request()->is('siswa*')
-                ? 'bg-purple-900 text-accent'
-                : 'text-purple-200 hover:bg-purple-900 hover:text-white' }}">
-            <i class="fas fa-users w-5 text-center"></i>
-            <span>Data Siswa</span>
-        </a>
-
-        <!-- Laporan -->
-        <a href="/laporan"
-        class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg
-        {{ request()->is('laporan*')
-                ? 'bg-purple-900 text-accent'
-                : 'text-purple-200 hover:bg-purple-900 hover:text-white' }}">
-            <i class="fas fa-file-alt w-5 text-center"></i>
-            <span>Laporan</span>
-        </a>
+        </a> -->
 
     </nav>
 

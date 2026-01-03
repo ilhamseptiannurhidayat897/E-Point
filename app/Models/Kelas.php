@@ -6,9 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kelas extends Model
 {
-    protected $table = 'kelas';
-
-    protected $fillable = ['nama_kelas'];
+    protected $fillable = [
+        'tingkat',
+        'jurusan',
+        'konsentrasi',
+        'nomor',
+        'nama_kelas'
+    ];
 
     public function siswa()
     {

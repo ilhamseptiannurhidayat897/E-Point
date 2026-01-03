@@ -1,0 +1,23 @@
+@extends('dashboard.admin.main')
+
+@section('content')
+<h1 class="text-xl font-bold mb-4">Edit Petugas</h1>
+
+<form method="POST" action="{{ route('datapetugas.update',$petugas->id) }}">
+@csrf @method('PUT')
+
+<label>NK</label>
+<input type="text" name="nip"
+       value="{{ $petugas->nk }}"
+       class="border w-full mb-3" required>
+
+<label>Nama</label>
+<input type="text" name="nama"
+       value="{{ $petugas->nama }}"
+       class="border w-full mb-3" required>
+
+<button class="bg-purple-600 text-white px-4 py-2 rounded">
+Update
+</button>
+</form>
+@endsection

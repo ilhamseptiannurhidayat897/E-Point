@@ -4,11 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DataSiswaController;
-use App\Http\Controllers\JenisKebaikanController;
-use App\Http\Controllers\JenisPelanggaranController;
-use App\Http\Controllers\kebaikanController;
-use App\Http\Controllers\PelanggaranController;
+use App\Http\Controllers\BKController;
+use App\Http\Controllers\PetugasController;
+use App\Http\Controllers\KelasController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +36,25 @@ Route::middleware(['auth'])->group(function () {
     |--------------------------------------------------------------------------
     */
 
+    //Admin
+    Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin/dashboard', [DashboardController::class, 'admin'])
+            ->name('dashboard.admin');
+    //Data BK
+    Route::get('/admin/bk', [BKController::class, 'index'])->name('databk.index');
+    Route::get('/admin/bk/create', [BKController::class, 'create'])->name('databk.create');
+    Route::post('/admin/bk', [BKController::class, 'store'])->name('databk.store');
+    Route::get('/admin/bk/{id}/edit', [BKController::class, 'edit'])->name('databk.edit');
+    Route::put('/admin/bk/{id}', [BKController::class, 'update'])->name('databk.update');
+    Route::delete('/admin/bk/{id}', [BKController::class, 'destroy'])->name('databk.destroy');
+    //Data Petugas
+    Route::resource('datapetugas', PetugasController::class);
+    //Data Kelas
+    Route::resource('datakelas', KelasController::class);
+
+});
+
+
     // Dashboard Petugas (POIN)
     Route::middleware('role:petugas')->group(function () {
 
@@ -44,60 +62,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard/petugas', [DashboardController::class, 'petugas'])
             ->name('dashboard.petugas');
 
-        Route::get('/master/kebaikan', [JenisKebaikanController::class, 'index'])
-            ->name('kebaikan.index');
-    
-        Route::get('/master/kebaikan/create', [JenisKebaikanController::class, 'create'])
-            ->name('kebaikan.create');
-    
-        Route::post('/master/kebaikan', [JenisKebaikanController::class, 'store'])
-            ->name('kebaikan.store');
-    
-        Route::get('/master/kebaikan/{kebaikan}/edit', [JenisKebaikanController::class, 'edit'])
-            ->name('kebaikan.edit');
-    
-        Route::put('/master/kebaikan/{kebaikan}', [JenisKebaikanController::class, 'update'])
-            ->name('kebaikan.update');
-    
-        Route::delete('/master/kebaikan/{kebaikan}', [JenisKebaikanController::class, 'destroy'])
-            ->name('kebaikan.destroy');
-        
-            Route::get('/master/pelanggaran', [JenisPelanggaranController::class, 'index'])
-        ->name('pelanggaran.index');
-
-        //pelanggaran
-        Route::get('/master/pelanggaran/create', [JenisPelanggaranController::class, 'create'])
-            ->name('pelanggaran.create');
-
-        Route::post('/master/pelanggaran', [JenisPelanggaranController::class, 'store'])
-            ->name('pelanggaran.store');
-
-        Route::get('/master/pelanggaran/{pelanggaran}/edit', [JenisPelanggaranController::class, 'edit'])
-            ->name('pelanggaran.edit');
-
-        Route::put('/master/pelanggaran/{pelanggaran}', [JenisPelanggaranController::class, 'update'])
-            ->name('pelanggaran.update');
-
-        Route::delete('/master/pelanggaran/{pelanggaran}', [JenisPelanggaranController::class, 'destroy'])
-            ->name('pelanggaran.destroy');
-
-        //input
-        Route::get('/inputkebaikan/create', [KebaikanController::class, 'create'])
-            ->name('inputkebaikan.create');
-        
-        Route::post('/inputkebaikan', [KebaikanController::class, 'store'])
-            ->name('inputkebaikan.store');
-
-        Route::get('/inputpelanggaran/create', [PelanggaranController::class, 'create'])
-            ->name('inputpelanggaran.create');
-        
-        Route::post('/inputpelanggaran', [PelanggaranController::class, 'store'])
-            ->name('inputpelanggaran.store');
-        
     });
-    Route::middleware(['auth', 'role:admin'])->group(function () {
-        Route::get('/admin/dashboard', [DashboardController::class, 'admin'])
-            ->name('dashboard.admin');
+
     });
     Route::middleware(['auth', 'role:bk'])->group(function () {
         Route::get('/bk/dashboard', [DashboardController::class, 'bk'])
@@ -112,11 +78,4 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/siswa', [DashboardController::class, 'siswa'])
         ->name('dashboard.siswa')
         ->middleware('role:siswa');
-    /*
-    |--------------------------------------------------------------------------
-    | CRUD Data Siswa
-    |--------------------------------------------------------------------------
-    */
-    Route::resource('datasiswa', DataSiswaController::class);
 
-});
