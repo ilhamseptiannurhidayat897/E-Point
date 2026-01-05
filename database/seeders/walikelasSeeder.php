@@ -5,14 +5,15 @@ namespace Database\Seeders;
 use App\Models\WaliKelas;
 use Illuminate\Database\Seeder;
 
-class walikelasSeeder extends Seeder
+class WaliKelasSeeder extends Seeder
 {
     public function run(): void
     {
         WaliKelas::create([
-            'user_id' => 2,
+            'user_id' => 1,
+            'kelas_id' => 1,
             'nip' => '2001',
-            'nama' => 'waliKlas Contoh',
+            'nama' => 'bzir',
         ]);
     }
 }

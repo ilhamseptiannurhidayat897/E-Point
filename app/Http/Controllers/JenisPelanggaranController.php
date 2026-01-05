@@ -9,52 +9,52 @@ class JenisPelanggaranController extends Controller
 {
     public function index()
     {
-        return view('dashboard.petugas.pelanggaran.index', [
-            'pelanggaran' => JenisPelanggaran::orderBy('nama')->get()
-        ]);
+        $pelanggaran = JenisPelanggaran::orderBy('nama')->get();
+        return view('dashboard.admin.jenispelanggaran.index', compact('pelanggaran'));
     }
 
     public function create()
     {
-        return view('dashboard.petugas.pelanggaran.create');
+        return view('dashboard.admin.jenispelanggaran.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|string|max:255',
+            'nama' => 'required',
             'poin' => 'required|integer|min:1',
         ]);
 
-        JenisPelanggaran::create($request->only('nama','poin'));
+        JenisPelanggaran::create($request->all());
 
-        return redirect()->route('pelanggaran.index')
-            ->with('success', 'Data pelanggaran berhasil ditambahkan');
+        return redirect()
+            ->route('jenispelanggaran.index')
+            ->with('success', 'Jenis pelanggaran berhasil ditambahkan');
     }
 
-    public function edit(JenisPelanggaran $pelanggaran)
+    public function edit(JenisPelanggaran $jenispelanggaran)
     {
-        return view('dashboard.petugas.pelanggaran.edit', compact('pelanggaran'));
+        return view('dashboard.admin.jenispelanggaran.edit', compact('jenispelanggaran'));
     }
 
-    public function update(Request $request, JenisPelanggaran $pelanggaran)
+    public function update(Request $request, JenisPelanggaran $jenispelanggaran)
     {
         $request->validate([
-            'nama' => 'required|string|max:255',
+            'nama' => 'required',
             'poin' => 'required|integer|min:1',
         ]);
 
-        $pelanggaran->update($request->only('nama','poin'));
+        $jenispelanggaran->update($request->all());
 
-        return redirect()->route('pelanggaran.index')
-            ->with('success', 'Data pelanggaran berhasil diperbarui');
+        return redirect()
+            ->route('jenispelanggaran.index')
+            ->with('success', 'Jenis pelanggaran berhasil diperbarui');
     }
 
-    public function destroy(JenisPelanggaran $pelanggaran)
+    public function destroy(JenisPelanggaran $jenispelanggaran)
     {
-        $pelanggaran->delete();
+        $jenispelanggaran->delete();
 
-        return redirect()->route('pelanggaran.index')
-            ->with('success', 'Data pelanggaran berhasil dihapus');
+        return back()->with('success', 'Jenis pelanggaran berhasil dihapus');
     }
 }

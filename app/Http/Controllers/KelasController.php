@@ -84,7 +84,7 @@ class KelasController extends Controller
             'nama_kelas' => $nama
         ]);
 
-        return redirect()->route('dashboard.admin.datakelas.index')->with('success','Kelas berhasil diupdate');
+        return redirect()->route('datakelas.index')->with('success','Kelas berhasil diupdate');
     }
 
     public function destroy(Kelas $kelas)

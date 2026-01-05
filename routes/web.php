@@ -5,16 +5,18 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BKController;
+use App\Http\Controllers\JenisPelanggaranController;
+use App\Http\Controllers\JenisPrestasiController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\KelasController;
-
+use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\WaliKelasController;
 
 /*
 |--------------------------------------------------------------------------
 | Landing & Auth
 |--------------------------------------------------------------------------
 */
-
 Route::get('/', [LandingController::class, 'index'])->name('landing');
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -22,60 +24,84 @@ Route::post('/login', [LoginController::class, 'login'])->name('login.post');
 
 /*
 |--------------------------------------------------------------------------
-| Authenticated Routes
+| Authenticated
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth'])->group(function () {
+Route::middleware('auth')->group(function () {
 
-    // Logout
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
     /*
     |--------------------------------------------------------------------------
-    | Dashboard
+    | ADMIN
     |--------------------------------------------------------------------------
     */
+    Route::middleware('role:admin')->group(function () {
 
-    //Admin
-    Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin/dashboard', [DashboardController::class, 'admin'])
+        Route::get('/admin/dashboard', [DashboardController::class, 'admin'])
             ->name('dashboard.admin');
-    //Data BK
-    Route::get('/admin/bk', [BKController::class, 'index'])->name('databk.index');
-    Route::get('/admin/bk/create', [BKController::class, 'create'])->name('databk.create');
-    Route::post('/admin/bk', [BKController::class, 'store'])->name('databk.store');
-    Route::get('/admin/bk/{id}/edit', [BKController::class, 'edit'])->name('databk.edit');
-    Route::put('/admin/bk/{id}', [BKController::class, 'update'])->name('databk.update');
-    Route::delete('/admin/bk/{id}', [BKController::class, 'destroy'])->name('databk.destroy');
-    //Data Petugas
-    Route::resource('datapetugas', PetugasController::class);
-    //Data Kelas
-    Route::resource('datakelas', KelasController::class);
 
-});
+        // BK
+        Route::resource('databk', BKController::class);
 
+        // Petugas
+        Route::resource('datapetugas', PetugasController::class);
 
-    // Dashboard Petugas (POIN)
+        // Kelas
+        Route::resource('datakelas', KelasController::class)
+            ->parameters(['datakelas' => 'kelas']);
+
+        // Wali Kelas
+        Route::resource('walikelas', WaliKelasController::class);
+
+        // Siswa
+        Route::resource('datasiswa', SiswaController::class);
+
+        // Jenis Prestasi
+        Route::resource('jenisprestasi', JenisPrestasiController::class);
+
+        // Jenis Pelanggaran
+        Route::resource('jenispelanggaran', JenisPelanggaranController::class);
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | PETUGAS
+    |--------------------------------------------------------------------------
+    */
     Route::middleware('role:petugas')->group(function () {
-
-        //kebaikan
         Route::get('/dashboard/petugas', [DashboardController::class, 'petugas'])
             ->name('dashboard.petugas');
-
     });
 
-    });
-    Route::middleware(['auth', 'role:bk'])->group(function () {
+    /*
+    |--------------------------------------------------------------------------
+    | BK
+    |--------------------------------------------------------------------------
+    */
+    Route::middleware('role:bk')->group(function () {
         Route::get('/bk/dashboard', [DashboardController::class, 'bk'])
             ->name('dashboard.bk');
     });
-    // Dashboard Guru
-    Route::get('/dashboard/wali_kelas', [DashboardController::class, 'wali_kelas'])
-        ->name('dashboard.wali_kelas')
-        ->middleware('role:wali_kelas');
 
-    // Dashboard Siswa
-    Route::get('/dashboard/siswa', [DashboardController::class, 'siswa'])
-        ->name('dashboard.siswa')
-        ->middleware('role:siswa');
+    /*
+    |--------------------------------------------------------------------------
+    | WALI KELAS
+    |--------------------------------------------------------------------------
+    */
+    Route::middleware('role:wali_kelas')->group(function () {
+        Route::get('/dashboard/wali-kelas', [DashboardController::class, 'wali_kelas'])
+            ->name('dashboard.wali_kelas');
+    });
 
+    /*
+    |--------------------------------------------------------------------------
+    | SISWA
+    |--------------------------------------------------------------------------
+    */
+    Route::middleware('role:siswa')->group(function () {
+        Route::get('/dashboard/siswa', [DashboardController::class, 'siswa'])
+            ->name('dashboard.siswa');
+    });
+
+});

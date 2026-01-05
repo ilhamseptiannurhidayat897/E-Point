@@ -50,6 +50,7 @@
             <span>Data Petugas</span>
         </a>
 
+        <!-- kelas-->
         <a href="{{ route('datakelas.index') }}"
         class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg
         {{ request()->routeIs('datakelas.*')
@@ -59,7 +60,45 @@
             <span>Data Kelas</span>
         </a>
 
-        
+        <!--wali kelas-->
+        <a href="{{ route('walikelas.index') }}"
+        class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg
+        {{ request()->routeIs('walikelas.*')
+                ? 'bg-purple-900 text-accent'
+                : 'text-purple-200 hover:bg-purple-900 hover:text-white' }}">
+            <i class="fas fa-star w-5 text-center"></i>
+            <span>Data Wali Kelas</span>
+        </a>
+
+        <!--siswa-->
+        <a href="{{ route('datasiswa.index') }}"
+        class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg
+        {{ request()->routeIs('datasiswa.*')
+                ? 'bg-purple-900 text-accent'
+                : 'text-purple-200 hover:bg-purple-900 hover:text-white' }}">
+            <i class="fas fa-star w-5 text-center"></i>
+            <span>Data Siswa</span>
+        </a>
+
+        <!-- Jenis Kebaikan -->
+        <a href="{{ route('jenisprestasi.index') }}"
+        class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg
+        {{ request()->routeIs('jenisprestasi.*')
+                ? 'bg-purple-900 text-accent'
+                : 'text-purple-200 hover:bg-purple-900 hover:text-white' }}">
+            <i class="fas fa-star w-5 text-center"></i>
+            <span>Jenis Prestasi</span>
+        </a>
+
+        <!-- Jenis Pelanggaran -->
+        <a href="{{ route('jenispelanggaran.index') }}"
+        class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg
+        {{ request()->routeIs('jenispelanggaran.*')
+                ? 'bg-purple-900 text-accent'
+                : 'text-purple-200 hover:bg-purple-900 hover:text-white' }}">
+            <i class="fas fa-star w-5 text-center"></i>
+            <span>Jenis Pelanggaran</span>
+        </a>
 
     </nav>
 

@@ -8,18 +8,20 @@ class WaliKelas extends Model
 {
     protected $table = 'wali_kelas';
 
-    protected $fillable = ['user_id','nip','nama','kelas_id'];
+    protected $fillable = [
+        'user_id',
+        'kelas_id',
+        'nip',
+        'nama',
+    ];
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function kelas() {
+    public function kelas()
+    {
         return $this->belongsTo(Kelas::class);
-    }
-
-    // AKSES SISWA YANG DIWALI-KELASI
-    public function siswa() {
-        return $this->kelas->siswa();
     }
 }

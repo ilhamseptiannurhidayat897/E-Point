@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('siswa', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('kelas_id')->constrained('kelas')->cascadeOnDelete();
             $table->string('nis')->unique();
             $table->string('nama');
             $table->enum('jk', ['L', 'P']);
-            $table->foreignId('kelas_id')->constrained('kelas');
             $table->text('alamat')->nullable();
             $table->timestamps();
         });
