@@ -10,7 +10,7 @@ class KelasController extends Controller
     public function index()
     {
         return view('dashboard.admin.datakelas.index', [
-            'kelas' => Kelas::orderBy('tingkat')->get()
+            'kelas' => Kelas::orderBy('tingkat')->orderBy('jurusan')->orderBy('nomor')->get()
         ]);
     }
 
@@ -21,34 +21,29 @@ class KelasController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'tingkat' => 'required',
-            'jurusan' => 'required',
-            'nomor'   => 'required|numeric'
+        // VALIDASI: 'nomor' sekarang 'nullable' (boleh kosong)
+        $validatedData = $request->validate([
+            'tingkat' => 'required|string|in:X,XI,XII',
+            'jurusan' => 'required|string|in:TO,TJKT,DPIB,MPLB,AKL,SP,RPL,GIM',
+            'nomor'   => 'nullable|numeric|min:1' // <-- PERUBAHAN DI SINI
         ]);
 
-        // khusus PPLG wajib konsentrasi
-        if ($request->jurusan === 'PPLG' && !$request->konsentrasi) {
-            return back()->withErrors(['konsentrasi'=>'PPLG wajib pilih konsentrasi']);
+        // LOGIKA NAMA KELAS: Periksa apakah nomor ada
+        $namaKelas = $validatedData['tingkat'] . ' ' . $validatedData['jurusan'];
+        
+        // Tambahkan nomor hanya jika diisi
+        if (!empty($validatedData['nomor'])) {
+            $namaKelas .= ' ' . $validatedData['nomor'];
         }
-
-        $nama = $request->tingkat.' '.$request->jurusan;
-
-        if ($request->jurusan === 'PPLG') {
-            $nama .= ' '.$request->konsentrasi;
-        }
-
-        $nama .= ' '.$request->nomor;
 
         Kelas::create([
-            'tingkat' => $request->tingkat,
-            'jurusan' => $request->jurusan,
-            'konsentrasi' => $request->jurusan === 'PPLG' ? $request->konsentrasi : null,
-            'nomor' => $request->nomor,
-            'nama_kelas' => $nama
+            'tingkat'    => $validatedData['tingkat'],
+            'jurusan'    => $validatedData['jurusan'],
+            'nomor'      => $validatedData['nomor'], // Akan null jika tidak diisi
+            'nama_kelas' => $namaKelas
         ]);
 
-        return redirect()->route('datakelas.index')->with('success','Kelas berhasil ditambahkan');
+        return redirect()->route('datakelas.index')->with('success', 'Kelas berhasil ditambahkan');
     }
 
     public function edit(Kelas $kelas)
@@ -58,39 +53,33 @@ class KelasController extends Controller
 
     public function update(Request $request, Kelas $kelas)
     {
-        $request->validate([
-            'tingkat' => 'required',
-            'jurusan' => 'required',
-            'nomor'   => 'required|numeric'
+        // VALIDASI: 'nomor' sekarang 'nullable'
+        $validatedData = $request->validate([
+            'tingkat' => 'required|string|in:X,XI,XII',
+            'jurusan' => 'required|string|in:TO,TJKT,DPIB,MPLB,AKL,SP,RPL,GIM',
+            'nomor'   => 'nullable|numeric|min:1' // <-- PERUBAHAN DI SINI
         ]);
 
-        if ($request->jurusan === 'PPLG' && !$request->konsentrasi) {
-            return back()->withErrors(['konsentrasi'=>'PPLG wajib pilih konsentrasi']);
+        // LOGIKA NAMA KELAS: Sama seperti di store
+        $namaKelas = $validatedData['tingkat'] . ' ' . $validatedData['jurusan'];
+        
+        if (!empty($validatedData['nomor'])) {
+            $namaKelas .= ' ' . $validatedData['nomor'];
         }
-
-        $nama = $request->tingkat.' '.$request->jurusan;
-
-        if ($request->jurusan === 'PPLG') {
-            $nama .= ' '.$request->konsentrasi;
-        }
-
-        $nama .= ' '.$request->nomor;
 
         $kelas->update([
-            'tingkat' => $request->tingkat,
-            'jurusan' => $request->jurusan,
-            'konsentrasi' => $request->jurusan === 'PPLG' ? $request->konsentrasi : null,
-            'nomor' => $request->nomor,
-            'nama_kelas' => $nama
+            'tingkat'    => $validatedData['tingkat'],
+            'jurusan'    => $validatedData['jurusan'],
+            'nomor'      => $validatedData['nomor'],
+            'nama_kelas' => $namaKelas
         ]);
 
-        return redirect()->route('datakelas.index')->with('success','Kelas berhasil diupdate');
+        return redirect()->route('datakelas.index')->with('success', 'Kelas berhasil diupdate');
     }
 
     public function destroy(Kelas $kelas)
     {
         $kelas->delete();
-        return back()->with('success','Kelas dihapus');
+        return redirect()->route('datakelas.index')->with('success', 'Kelas berhasil dihapus');
     }
 }
-
