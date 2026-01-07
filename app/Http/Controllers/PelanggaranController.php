@@ -10,49 +10,69 @@ use Illuminate\Support\Facades\Auth;
 
 class PelanggaranController extends Controller
 {
-    /**
-     * Tampilkan form input pelanggaran siswa
-     */
+    public function index()
+    {
+        $query = Pelanggaran::with([
+            'siswa','jenis','admin','petugas','verifikator'
+        ]);
+
+        // Petugas hanya lihat laporan sendiri
+        if (Auth::user()->role === 'petugas') {
+            $query->where('petugas_id', Auth::id());
+        }
+
+        $pelanggaran = $query->latest()->get();
+
+        return view('dashboard.admin.pelanggaran.index', compact('pelanggaran'));
+    }
+
     public function create()
     {
         $siswa = Siswa::orderBy('nama')->get();
-        $jenisPelanggaran = JenisPelanggaran::orderBy('nama')->get();
+        $jenis = JenisPelanggaran::orderBy('nama')->get();
 
-        return view('dashboard.petugas.inputpelanggaran.create', [
-            'siswa' => $siswa,
-            'jenisPelanggaran' => $jenisPelanggaran,
-        ]);
+        return view('dashboard.admin.pelanggaran.create', compact('siswa','jenis'));
     }
 
-    /**
-     * Simpan data pelanggaran siswa
-     */
     public function store(Request $request)
     {
-        // validasi
         $request->validate([
-            'siswa_id' => 'required|exists:siswa,id',
-            'jenis_pelanggaran_id' => 'required|exists:jenis_pelanggaran,id',
-            'keterangan' => 'nullable|string',
-            'tanggal' => 'required|date',
+            'siswa_id' => 'required',
+            'jenis_pelanggaran_id' => 'required',
+            'foto' => 'nullable|image|max:2048'
         ]);
 
-        // ambil jenis pelanggaran (poin NEGATIF)
-        $jenis = JenisPelanggaran::findOrFail($request->jenis_pelanggaran_id);
+        $foto = null;
+        if ($request->hasFile('foto')) {
+            $foto = $request->file('foto')->store('pelanggaran','public');
+        }
 
-        // simpan
         Pelanggaran::create([
             'siswa_id' => $request->siswa_id,
             'jenis_pelanggaran_id' => $request->jenis_pelanggaran_id,
+            'admin_id' => Auth::user()->role === 'admin' ? Auth::id() : null,
+            'petugas_id' => Auth::user()->role === 'petugas' ? Auth::id() : null,
             'keterangan' => $request->keterangan,
-            'tanggal' => $request->tanggal,
-            'poin' => $jenis->poin, // poin negatif
-            'petugas_id' => Auth::id(),
+            'foto' => $foto,
+            'status' => 'pending'
         ]);
 
-        return redirect()
-            ->route('dashboard.petugas')
-            ->with('success', 'Data pelanggaran berhasil ditambahkan');
+        return redirect()->route('pelanggaran.index')
+            ->with('success','Laporan berhasil dikirim');
     }
 
+    public function verifikasi(Request $request, Pelanggaran $pelanggaran)
+    {
+        $request->validate([
+            'status' => 'required|in:diterima,ditolak'
+        ]);
+
+        $pelanggaran->update([
+            'status' => $request->status,
+            'verified_by' => Auth::id(),
+            'verified_at' => now()
+        ]);
+
+        return back()->with('success','Pelanggaran berhasil diverifikasi');
+    }
 }

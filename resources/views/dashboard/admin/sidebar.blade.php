@@ -90,11 +90,14 @@
             <span class="truncate">Data Siswa</span>
         </a>
 
+<<<<<<< Updated upstream
         <!-- Divider -->
         <div class="pt-3 pb-2">
             <p class="px-4 text-xs font-semibold text-purple-300 uppercase tracking-wider opacity-70">Pengaturan</p>
         </div>
 
+=======
+>>>>>>> Stashed changes
         <!-- Jenis Prestasi -->
         <a href="{{ route('jenisprestasi.index') }}"
            class="sidebar-menu-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200
@@ -114,6 +117,29 @@
             <i class="fas fa-exclamation-triangle w-5 text-center flex-shrink-0"></i>
             <span class="truncate">Jenis Pelanggaran</span>
         </a>
+
+        <!-- Input Prestasi -->
+        <a href="{{ route('prestasi.index') }}"
+        class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg
+        {{ request()->routeIs('prestasi.*')
+                ? 'bg-purple-900 text-accent'
+                : 'text-purple-200 hover:bg-purple-900 hover:text-white' }}">
+            <i class="fas fa-star w-5 text-center"></i>
+            <span>Prestasi</span>
+        </a>
+        
+        <!-- Input Pelanggarani -->
+        <a href="{{ route('pelanggaran.index') }}"
+        class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg
+        {{ request()->routeIs('pelanggaran.*')
+                ? 'bg-purple-900 text-accent'
+                : 'text-purple-200 hover:bg-purple-900 hover:text-white' }}">
+            <i class="fas fa-star w-5 text-center"></i>
+            <span>Pelanggaran</span>
+        </a>
+
+
+
 
     </nav>
 

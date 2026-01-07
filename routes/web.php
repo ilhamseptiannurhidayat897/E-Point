@@ -9,9 +9,10 @@ use App\Http\Controllers\JenisPelanggaranController;
 use App\Http\Controllers\JenisPrestasiController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\PelanggaranController;
+use App\Http\Controllers\PrestasiController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\WaliKelasController;
-
 /*
 |--------------------------------------------------------------------------
 | Landing & Auth
@@ -62,8 +63,54 @@ Route::middleware('auth')->group(function () {
 
         // Jenis Pelanggaran
         Route::resource('jenispelanggaran', JenisPelanggaranController::class);
+
     });
 
+    Route::middleware('auth')->group(function () {
+
+    // LIHAT DATA (SEMUA ROLE)
+    Route::get('/pelanggaran', [PelanggaranController::class,'index'])
+        ->name('pelanggaran.index');
+
+    // INPUT (ADMIN & PETUGAS)
+    Route::middleware('role:admin,petugas')->group(function () {
+        Route::get('/pelanggaran/create', [PelanggaranController::class,'create'])
+            ->name('pelanggaran.create');
+        Route::post('/pelanggaran', [PelanggaranController::class,'store'])
+            ->name('pelanggaran.store');
+    });
+
+    // VERIFIKASI (ADMIN & BK)
+    Route::middleware('role:admin,bk')->group(function () {
+        Route::patch(
+            '/pelanggaran/{pelanggaran}/verifikasi',
+            [PelanggaranController::class,'verifikasi']
+        )->name('pelanggaran.verifikasi');
+    });
+});
+
+    Route::middleware('auth')->group(function () {
+
+    // LIHAT DATA (SEMUA ROLE)
+    Route::get('/prestasi', [PrestasiController::class,'index'])
+        ->name('prestasi.index');
+
+    // INPUT (ADMIN & PETUGAS)
+    Route::middleware('role:admin,petugas')->group(function () {
+        Route::get('/prestasi/create', [PrestasiController::class,'create'])
+            ->name('prestasi.create');
+        Route::post('/prestasi', [PrestasiController::class,'store'])
+            ->name('prestasi.store');
+    });
+
+    // VERIFIKASI (ADMIN & BK)
+    Route::middleware('role:admin,bk')->group(function () {
+        Route::patch(
+            '/prestasi/{prestasi}/verifikasi',
+            [PrestasiController::class,'verifikasi']
+        )->name('prestasi.verifikasi');
+    });
+});
     /*
     |--------------------------------------------------------------------------
     | PETUGAS
