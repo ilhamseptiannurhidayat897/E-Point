@@ -11,6 +11,7 @@ use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\WaliKelasController;
+use App\Http\Controllers\PeraturanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,9 @@ use App\Http\Controllers\WaliKelasController;
 |--------------------------------------------------------------------------
 */
 Route::get('/', [LandingController::class, 'index'])->name('landing');
+Route::get('/peraturan', [PeraturanController::class, 'index'])
+    ->name('peraturan');
+
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.post');
