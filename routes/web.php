@@ -21,9 +21,7 @@ use App\Http\Controllers\PeraturanController;
 |--------------------------------------------------------------------------
 */
 Route::get('/', [LandingController::class, 'index'])->name('landing');
-Route::get('/peraturan', [PeraturanController::class, 'index'])
-    ->name('peraturan');
-
+// Route::get('/peraturan', [PeraturanController::class, 'index'])->name('peraturan');
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.post');
@@ -47,37 +45,24 @@ Route::middleware('auth')->group(function () {
         Route::get('/admin/dashboard', [DashboardController::class, 'admin'])
             ->name('dashboard.admin');
 
-        // BK
         Route::resource('databk', BKController::class);
-
-        // Petugas
         Route::resource('datapetugas', PetugasController::class);
-
-        // Kelas
         Route::resource('datakelas', KelasController::class)
             ->parameters(['datakelas' => 'kelas']);
-
-        // Wali Kelas
         Route::resource('walikelas', WaliKelasController::class);
-
-        // Siswa
         Route::resource('datasiswa', SiswaController::class);
-
-        // Jenis Prestasi
         Route::resource('jenisprestasi', JenisPrestasiController::class);
-
-        // Jenis Pelanggaran
         Route::resource('jenispelanggaran', JenisPelanggaranController::class);
-
     });
 
-    Route::middleware('auth')->group(function () {
-
-    // LIHAT DATA (SEMUA ROLE)
+    /*
+    |--------------------------------------------------------------------------
+    | PELANGGARAN (GLOBAL)
+    |--------------------------------------------------------------------------
+    */
     Route::get('/pelanggaran', [PelanggaranController::class,'index'])
         ->name('pelanggaran.index');
 
-    // INPUT (ADMIN & PETUGAS)
     Route::middleware('role:admin,petugas')->group(function () {
         Route::get('/pelanggaran/create', [PelanggaranController::class,'create'])
             ->name('pelanggaran.create');
@@ -85,22 +70,20 @@ Route::middleware('auth')->group(function () {
             ->name('pelanggaran.store');
     });
 
-    // VERIFIKASI (ADMIN & BK)
     Route::middleware('role:admin,bk')->group(function () {
-        Route::patch(
-            '/pelanggaran/{pelanggaran}/verifikasi',
+        Route::patch('/pelanggaran/{pelanggaran}/verifikasi',
             [PelanggaranController::class,'verifikasi']
         )->name('pelanggaran.verifikasi');
     });
-});
 
-    Route::middleware('auth')->group(function () {
-
-    // LIHAT DATA (SEMUA ROLE)
+    /*
+    |--------------------------------------------------------------------------
+    | PRESTASI (GLOBAL)
+    |--------------------------------------------------------------------------
+    */
     Route::get('/prestasi', [PrestasiController::class,'index'])
         ->name('prestasi.index');
 
-    // INPUT (ADMIN & PETUGAS)
     Route::middleware('role:admin,petugas')->group(function () {
         Route::get('/prestasi/create', [PrestasiController::class,'create'])
             ->name('prestasi.create');
@@ -108,22 +91,30 @@ Route::middleware('auth')->group(function () {
             ->name('prestasi.store');
     });
 
-    // VERIFIKASI (ADMIN & BK)
     Route::middleware('role:admin,bk')->group(function () {
-        Route::patch(
-            '/prestasi/{prestasi}/verifikasi',
+        Route::patch('/prestasi/{prestasi}/verifikasi',
             [PrestasiController::class,'verifikasi']
         )->name('prestasi.verifikasi');
     });
-});
+
     /*
     |--------------------------------------------------------------------------
     | PETUGAS
     |--------------------------------------------------------------------------
     */
     Route::middleware('role:petugas')->group(function () {
+
         Route::get('/dashboard/petugas', [DashboardController::class, 'petugas'])
             ->name('dashboard.petugas');
+
+        Route::get('/petugas/siswa', [SiswaController::class, 'index'])
+            ->name('petugas.siswa');
+
+        Route::get('/petugas/pelanggaran', [PelanggaranController::class, 'index'])
+            ->name('petugas.pelanggaran');
+
+        Route::get('/petugas/prestasi', [PrestasiController::class, 'index'])
+            ->name('petugas.prestasi');
     });
 
     /*
@@ -132,8 +123,18 @@ Route::middleware('auth')->group(function () {
     |--------------------------------------------------------------------------
     */
     Route::middleware('role:bk')->group(function () {
+
         Route::get('/bk/dashboard', [DashboardController::class, 'bk'])
             ->name('dashboard.bk');
+
+        Route::get('/bk/siswa', [SiswaController::class, 'index'])
+            ->name('bk.siswa');
+
+        Route::get('/bk/pelanggaran', [PelanggaranController::class, 'index'])
+            ->name('bk.pelanggaran');
+
+        Route::get('/bk/prestasi', [PrestasiController::class, 'index'])
+            ->name('bk.prestasi');
     });
 
     /*
@@ -142,8 +143,21 @@ Route::middleware('auth')->group(function () {
     |--------------------------------------------------------------------------
     */
     Route::middleware('role:wali_kelas')->group(function () {
+
         Route::get('/dashboard/wali-kelas', [DashboardController::class, 'wali_kelas'])
             ->name('dashboard.wali_kelas');
+
+        Route::get('/wali-kelas/siswa', [SiswaController::class, 'index'])
+            ->name('wali.siswa');
+
+        Route::get('/wali-kelas/pelanggaran', [PelanggaranController::class, 'index'])
+            ->name('wali.pelanggaran');
+
+        Route::get('/wali-kelas/prestasi', [PrestasiController::class, 'index'])
+            ->name('wali.prestasi');
+
+        Route::get('/wali-kelas/rekap', [DashboardController::class, 'waliRekap'])
+            ->name('wali.rekap');
     });
 
     /*
@@ -152,8 +166,14 @@ Route::middleware('auth')->group(function () {
     |--------------------------------------------------------------------------
     */
     Route::middleware('role:siswa')->group(function () {
+
         Route::get('/dashboard/siswa', [DashboardController::class, 'siswa'])
             ->name('dashboard.siswa');
-    });
 
+        Route::get('/siswa/pelanggaran', [PelanggaranController::class, 'siswaIndex'])
+            ->name('siswa.pelanggaran');
+
+        Route::get('/siswa/prestasi', [PrestasiController::class, 'siswaIndex'])
+            ->name('siswa.prestasi');
+    });
 });

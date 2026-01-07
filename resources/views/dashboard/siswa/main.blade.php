@@ -3,56 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title','E-Point')</title>
+    <title>E-Point | Siswa</title>
 
     <link rel="stylesheet" href="/build/tailwind.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <style>
-        ::-webkit-scrollbar{width:8px}
-        ::-webkit-scrollbar-thumb{background:#2B1B64;border-radius:4px}
-        .sidebar-item::before{
-            content:'';position:absolute;left:0;top:0;width:3px;height:100%;
-            background:#F2C94C;transform:translateX(-100%);transition:.3s
-        }
-        .sidebar-item:hover::before,
-        .sidebar-item.active::before{transform:translateX(0)}
-    </style>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-gray-50 text-gray-900">
 
-    {{-- LAYOUT --}}
-    @yield('layout')
+<div class="flex h-screen overflow-hidden">
+
+    {{-- SIDEBAR --}}
+    @include('dashboard.siswa.sidebar')
+
+    {{-- OVERLAY MOBILE --}}
+    <div id="overlay"
+         class="fixed inset-0 bg-black/50 md:hidden z-30 hidden"
+         onclick="closeSidebar()"></div>
+
+    {{-- MAIN --}}
+    <div class="flex-1 flex flex-col overflow-hidden">
+
+        {{-- TOPBAR --}}
+        <header class="bg-white shadow-sm border-b px-4 py-3 flex justify-between items-center">
+
+            <div class="flex items-center gap-3">
+                <button onclick="toggleSidebar()" class="md:hidden text-primary">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+
+                <h1 class="text-lg font-bold text-primary">
+                    Dashboard Siswa
+                </h1>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <div class="text-right hidden sm:block">
+                    <p class="text-sm font-semibold">
+                        {{ auth()->user()->login_id }}
+                    </p>
+                    <p class="text-xs text-gray-500">Siswa</p>
+                </div>
+
+                <div
+                    class="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center font-bold">
+                    SW
+                </div>
+            </div>
+
+        </header>
+
+        {{-- CONTENT --}}
+        <main class="flex-1 overflow-y-auto p-4 md:p-6">
+            @yield('content')
+        </main>
+
+    </div>
+</div>
 
 <script>
-function updateTime() {
-    const now = new Date();
+    function toggleSidebar() {
+        document.getElementById('sidebar')
+            .classList.toggle('-translate-x-full');
+        document.getElementById('overlay')
+            .classList.toggle('hidden');
+    }
 
-    const timeString = now.toLocaleTimeString('id-ID', {
-        hour: '2-digit',
-        minute: '2-digit'
-    });
-
-    const dateString = now.toLocaleDateString('id-ID', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    });
-
-    const timeEl = document.getElementById('current-time');
-    const dateEl = document.getElementById('current-date');
-
-    if (timeEl) timeEl.textContent = timeString;
-    if (dateEl) dateEl.textContent = dateString;
-}
-
-updateTime();
-setInterval(updateTime, 1000);
+    function closeSidebar() {
+        document.getElementById('sidebar')
+            .classList.add('-translate-x-full');
+        document.getElementById('overlay')
+            .classList.add('hidden');
+    }
 </script>
 
-@stack('scripts')
 </body>
 </html>

@@ -10,41 +10,69 @@ use Illuminate\Support\Facades\Auth;
 
 class PelanggaranController extends Controller
 {
+    /**
+     * Tampilkan daftar pelanggaran (semua role)
+     */
     public function index()
     {
         $query = Pelanggaran::with([
-            'siswa','jenis','admin','petugas','verifikator'
+            'siswa',
+            'jenisPelanggaran',
+            'admin',
+            'petugas',
+            'verifikator'
         ]);
 
-        // Petugas hanya lihat laporan sendiri
-        if (Auth::user()->role === 'petugas') {
-            $query->where('petugas_id', Auth::id());
+        $user = Auth::user();
+
+        // Petugas: hanya lihat laporan sendiri
+        if ($user->role === 'petugas') {
+            $query->where('petugas_id', $user->id);
+        }
+
+        // Siswa: hanya lihat data dirinya
+        if ($user->role === 'siswa') {
+            $query->where('siswa_id', $user->siswa->id ?? 0);
+        }
+
+        // Wali kelas: filter kelas (opsional, kalau relasi sudah ada)
+        if ($user->role === 'wali_kelas') {
+            $query->whereHas('siswa', function ($q) use ($user) {
+                $q->where('kelas_id', $user->waliKelas->kelas_id ?? 0);
+            });
         }
 
         $pelanggaran = $query->latest()->get();
 
-        return view('dashboard.admin.pelanggaran.index', compact('pelanggaran'));
+        return view('pelanggaran.index', compact('pelanggaran'));
     }
 
+    /**
+     * Form input pelanggaran
+     */
     public function create()
     {
         $siswa = Siswa::orderBy('nama')->get();
         $jenis = JenisPelanggaran::orderBy('nama')->get();
 
-        return view('dashboard.admin.pelanggaran.create', compact('siswa','jenis'));
+        return view('pelanggaran.create', compact('siswa', 'jenis'));
     }
 
+    /**
+     * Simpan laporan pelanggaran
+     */
     public function store(Request $request)
     {
         $request->validate([
-            'siswa_id' => 'required',
-            'jenis_pelanggaran_id' => 'required',
+            'siswa_id' => 'required|exists:siswa,id',
+            'jenis_pelanggaran_id' => 'required|exists:jenis_pelanggaran,id',
+            'keterangan' => 'nullable|string',
             'foto' => 'nullable|image|max:2048'
         ]);
 
         $foto = null;
         if ($request->hasFile('foto')) {
-            $foto = $request->file('foto')->store('pelanggaran','public');
+            $foto = $request->file('foto')->store('pelanggaran', 'public');
         }
 
         Pelanggaran::create([
@@ -58,9 +86,12 @@ class PelanggaranController extends Controller
         ]);
 
         return redirect()->route('pelanggaran.index')
-            ->with('success','Laporan berhasil dikirim');
+            ->with('success', 'Laporan pelanggaran berhasil dikirim');
     }
 
+    /**
+     * Verifikasi pelanggaran (Admin & BK)
+     */
     public function verifikasi(Request $request, Pelanggaran $pelanggaran)
     {
         $request->validate([
@@ -73,6 +104,6 @@ class PelanggaranController extends Controller
             'verified_at' => now()
         ]);
 
-        return back()->with('success','Pelanggaran berhasil diverifikasi');
+        return back()->with('success', 'Pelanggaran berhasil diverifikasi');
     }
 }

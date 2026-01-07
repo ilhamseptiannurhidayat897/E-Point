@@ -1,80 +1,55 @@
-@extends('dashboard.siswa.sidebar')
-
-@section('title','Dashboard E-Point')
+@extends('dashboard.siswa.main')
 
 @section('content')
 
-<!-- INFO CARDS -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
 
-    {{-- <!-- Total Poin -->
-<h3 class="text-3xl font-bold text-primary">
-    {{ $totalPoin }}
-</h3>
+    {{-- PRESTASI --}}
+    {{-- <div class="bg-white rounded-xl shadow p-5">
+        <p class="text-sm text-gray-500">Total Prestasi</p>
+        <h2 class="text-3xl font-bold text-green-600">
+            +{{ $totalPrestasi }}
+        </h2>
+    </div> --}}
 
-<!-- Kebaikan -->
-<h3 class="text-3xl font-bold text-green-600">
-    {{ $totalKebaikan }}
-</h3>
+    {{-- PELANGGARAN --}}
+    {{-- <div class="bg-white rounded-xl shadow p-5">
+        <p class="text-sm text-gray-500">Total Pelanggaran</p>
+        <h2 class="text-3xl font-bold text-red-600">
+            -{{ $totalPelanggaran }}
+        </h2>
+    </div> --}}
 
-<!-- Pelanggaran -->
-<h3 class="text-3xl font-bold text-red-600">
-    {{ $totalPelanggaran }}
-</h3> --}}
+    {{-- TOTAL POIN --}}
+    {{-- <div class="bg-white rounded-xl shadow p-5">
+        <p class="text-sm text-gray-500">Total Poin</p>
+        <h2 class="text-3xl font-bold
+            {{ $totalPoin < 0 ? 'text-red-600' : 'text-primary' }}">
+            {{ $totalPoin }}
+        </h2>
+    </div> --}}
 
 </div>
 
-<!-- CHART -->
-<div class="bg-white rounded-xl shadow p-6">
-    <h3 class="text-lg font-bold text-primary mb-4">Grafik Poin Bulanan</h3>
+{{-- STATUS --}}
+{{-- <div class="bg-white rounded-xl shadow p-6">
 
-    <div class="chart-container">
-        <canvas id="monthlyChart"></canvas>
-    </div>
+    <h3 class="text-lg font-semibold mb-2">Status Poin</h3>
+
+    @if ($totalPoin >= 0)
+        <span class="px-4 py-2 rounded-full bg-green-100 text-green-700">
+            Aman
+        </span>
+    @elseif ($totalPoin < -20 && $totalPoin >= -50)
+        <span class="px-4 py-2 rounded-full bg-yellow-100 text-yellow-700">
+            Pembinaan
+        </span>
+    @else
+        <span class="px-4 py-2 rounded-full bg-red-100 text-red-700">
+            Panggilan BK
+        </span>
+    @endif --}}
+
 </div>
 
 @endsection
-
-@push('scripts')
-<script>
-    const ctx = document.getElementById('monthlyChart').getContext('2d');
-
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
-            datasets: [
-                {
-                    label: 'Pelanggaran',
-                    data: [12, 19, 7, 15, 10, 18],
-                    backgroundColor: 'rgba(239, 68, 68, 0.7)',
-                    borderRadius: 6
-                },
-                {
-                    label: 'Kebaikan',
-                    data: [30, 25, 40, 35, 45, 50],
-                    backgroundColor: 'rgba(16, 185, 129, 0.7)',
-                    borderRadius: 6
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        stepSize: 10
-                    }
-                }
-            },
-            plugins: {
-                legend: {
-                    position: 'top'
-                }
-            }
-        }
-    });
-</script>
-@endpush
