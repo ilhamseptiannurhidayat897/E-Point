@@ -1,74 +1,127 @@
 @extends('dashboard.admin.main')
 
 @section('content')
-<div class="p-6">
-
-    <div class="flex justify-between items-center mb-4">
-        <h1 class="text-xl font-bold">Data Wali Kelas</h1>
-
-        <a href="{{ route('walikelas.create') }}"
-           class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-            + Tambah Wali Kelas
-        </a>
+<!-- Hero Section -->
+<div class="bg-gradient-to-r from-primary to-purple-800 rounded-xl p-8 mb-8 text-white shadow-lg">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+        <div>
+            <h1 class="text-3xl font-bold mb-2">Master Data Wali Kelas</h1>
+            <p class="text-green-100">Kelola data wali kelas dan penugasan kelas</p>
+        </div>
+        <div class="mt-4 md:mt-0">
+            <a href="{{ route('walikelas.create') }}" 
+               class="bg-white text-green-600 hover:bg-green-50 px-6 py-3 rounded-lg font-semibold inline-flex items-center transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                </svg>
+                Tambah Wali Kelas
+            </a>
+        </div>
     </div>
+</div>
 
-    <div class="overflow-x-auto bg-white shadow rounded">
-        <table class="w-full border-collapse">
-            <thead class="bg-gray-100">
+<!-- Success Message -->
+@if(session('success'))
+<div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+    <div class="flex">
+        <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+        </svg>
+        <p class="ml-3 text-sm text-green-700">{{ session('success') }}</p>
+    </div>
+</div>
+@endif
+
+<!-- Data Table Card -->
+<div class="bg-white rounded-xl shadow overflow-hidden border border-gray-100">
+    <div class="px-6 py-4 border-b border-gray-100">
+        <h2 class="text-lg font-semibold text-gray-800">Daftar Wali Kelas</h2>
+    </div>
+    
+    <div class="overflow-x-auto">
+        <table class="w-full">
+            <thead class="bg-gray-50 border-b border-gray-200">
                 <tr>
-                    <th class="border px-4 py-2">No</th>
-                    <th class="border px-4 py-2">Nama</th>
-                    <th class="border px-4 py-2">NIP</th>
-                    <th class="border px-4 py-2">Kelas</th>
-                    <th class="border px-4 py-2">Username</th>
-                    <th class="border px-4 py-2">Aksi</th>
+                    <th class="px-6 py-4 text-center text-xs font-semibold text-gray-600 uppercase w-16">No</th>
+                    <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase">Nama</th>
+                    <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase">NIP</th>
+                    <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase">Kelas</th>
+                    <th class="px-6 py-4 text-center text-xs font-semibold text-gray-600 uppercase w-32">Aksi</th>
                 </tr>
             </thead>
-
-            <tbody>
+            <tbody class="divide-y divide-gray-100">
                 @forelse ($walikelas as $item)
-                <tr class="text-center">
-                    <td class="border px-4 py-2">{{ $loop->iteration }}</td>
-
-                    <td class="border px-4 py-2">
-                        {{ $item->nama }}
+                <tr class="hover:bg-gray-50 transition-colors">
+                    <td class="px-6 py-4 text-center">
+                        <span class="text-gray-600 font-medium">{{ $loop->iteration }}</span>
                     </td>
-
-                    <td class="border px-4 py-2">
-                        {{ $item->nip }}
+                    <td class="px-6 py-4">
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 flex-shrink-0 rounded-lg bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-white font-bold text-sm">
+                                {{ substr($item->nama, 0, 2) }}
+                            </div>
+                            <div class="ml-3">
+                                <div class="text-sm font-medium text-gray-900">{{ $item->nama }}</div>
+                            </div>
+                        </div>
                     </td>
-
-                    <td class="border px-4 py-2">
-                        {{ $item->kelas->nama_kelas ?? '-' }}
+                    <td class="px-6 py-4">
+                        <div class="text-sm text-gray-900 font-medium">{{ $item->nip }}</div>
                     </td>
-
-                    <td class="border px-4 py-2">
-                        {{ $item->user->username ?? '-' }}
+                    <td class="px-6 py-4">
+                        @if($item->kelas)
+                        <div class="flex items-center">
+                            <div class="h-8 w-8 flex-shrink-0 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-xs">
+                                {{ substr($item->kelas->nama_kelas, 0, 2) }}
+                            </div>
+                            <div class="ml-2">
+                                <div class="text-sm font-medium text-gray-900">{{ $item->kelas->nama_kelas }}</div>
+                            </div>
+                        </div>
+                        @else
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                            Belum ditugaskan
+                        </span>
+                        @endif
                     </td>
-
-                    <td class="border px-4 py-2 space-x-2">
-                        <a href="{{ route('walikelas.edit', $item->id) }}"
-                           class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600">
-                            Edit
-                        </a>
-
-                        <form action="{{ route('walikelas.destroy', $item->id) }}"
-                              method="POST"
-                              class="inline"
-                              onsubmit="return confirm('Yakin hapus data?')">
-                            @csrf
-                            @method('DELETE')
-
-                            <button class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">
-                                Hapus
-                            </button>
-                        </form>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center justify-center space-x-2">
+                            <a href="{{ route('walikelas.edit', $item->id) }}" 
+                               class="text-indigo-600 hover:text-indigo-900 p-2 hover:bg-indigo-50 rounded-lg transition-colors"
+                               title="Edit">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                </svg>
+                            </a>
+                            <form action="{{ route('walikelas.destroy', $item->id) }}" method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" 
+                                        onclick="return confirm('Yakin ingin menghapus data wali kelas ini?')"
+                                        class="text-red-600 hover:text-red-900 p-2 hover:bg-red-50 rounded-lg transition-colors"
+                                        title="Hapus">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="6" class="text-center py-4">
-                        Data wali kelas belum ada
+                    <td colspan="5" class="px-6 py-12 text-center">
+                        <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                        <h3 class="text-lg font-medium text-gray-900 mb-2">Belum ada data wali kelas</h3>
+                        <p class="text-gray-500 mb-4">Mulai dengan menambahkan wali kelas baru</p>
+                        <a href="{{ route('walikelas.create') }}" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg inline-flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                            </svg>
+                            Tambah Wali Kelas
+                        </a>
                     </td>
                 </tr>
                 @endforelse

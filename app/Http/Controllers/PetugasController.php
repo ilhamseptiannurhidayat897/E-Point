@@ -70,7 +70,7 @@ class PetugasController extends Controller
         ]);
 
         $petugas->user->update([
-            'login_id' => $request->nip
+            'login_id' => $request->nk
         ]);
 
         return redirect()->route('datapetugas.index')
