@@ -53,7 +53,10 @@ Route::middleware('auth')->group(function () {
             ->parameters(['datakelas' => 'kelas']);
 
         // Wali Kelas
-        Route::resource('walikelas', WaliKelasController::class);
+        Route::resource('walikelas', WaliKelasController::class)
+        ->parameters([
+            'walikelas' => 'walikelas'
+        ]);
 
         // Siswa
         Route::resource('datasiswa', SiswaController::class);

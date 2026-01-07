@@ -34,22 +34,19 @@ class SiswaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nis' => 'required|unique:siswa,nis',
+            'nis' => 'required|unique:siswa,nis|unique:users,login_id',
             'nama' => 'required',
             'jk' => 'required|in:L,P',
             'kelas_id' => 'required|exists:kelas,id',
             'alamat' => 'nullable',
         ]);
 
-        // buat user
         $user = User::create([
-            'name' => $request->nama,
-            'username' => $request->username,
-            'password' => Hash::make($request->password),
+            'login_id' => $request->nis,
+            'password' => Hash::make($request->nis),
             'role' => 'siswa',
         ]);
 
-        // buat siswa
         Siswa::create([
             'user_id' => $user->id,
             'kelas_id' => $request->kelas_id,
