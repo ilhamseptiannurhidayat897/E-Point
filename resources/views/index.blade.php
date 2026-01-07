@@ -54,8 +54,10 @@
         <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-2">
-                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-accent to-yellow-400 flex items-center justify-center">
-                        <i class="fas fa-graduation-cap text-white text-xl"></i>
+                    <div>
+                        <img src="{{ asset('logo/logosmk.png') }}"
+                            alt="logo SMKN 1 Kawali"
+                            class="w-10 h-10 rounded-lg object-cover">
                     </div>
                     <span class="text-xl font-bold text-primary">E-Point</span>
                 </div>
@@ -65,8 +67,13 @@
                     <a href="#home" class="text-gray-700 hover:text-primary font-medium">Beranda</a>
                     <a href="#features" class="text-gray-700 hover:text-primary font-medium">Fitur</a>
                     <a href="#how-it-works" class="text-gray-700 hover:text-primary font-medium">Cara Kerja</a>
-                    <a href="#testimonials" class="text-gray-700 hover:text-primary font-medium">Testimoni</a>
                     <a href="#faq" class="text-gray-700 hover:text-primary font-medium">FAQ</a>
+
+                    <!-- Peraturan -->
+                    <a href="{{ route('peraturan') }}"
+                    class="text-gray-700 hover:text-primary font-medium">
+                        Peraturan
+                    </a>
                 </div>
                 
                 <!-- Login Button -->
@@ -88,7 +95,6 @@
                     <a href="#home" class="text-gray-700 hover:text-primary font-medium">Beranda</a>
                     <a href="#features" class="text-gray-700 hover:text-primary font-medium">Fitur</a>
                     <a href="#how-it-works" class="text-gray-700 hover:text-primary font-medium">Cara Kerja</a>
-                    <a href="#testimonials" class="text-gray-700 hover:text-primary font-medium">Testimoni</a>
                     <a href="#faq" class="text-gray-700 hover:text-primary font-medium">FAQ</a>
                     <a href="/login" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-purple-800 transition-colors duration-300 text-center">
                         Masuk
@@ -252,106 +258,7 @@
             </div>
         </div>
     </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="py-16 md:py-24">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">Apa Kata Mereka</h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Testimoni dari pengguna E-Point di berbagai sekolah</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Testimonial 1 -->
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full bg-purple-200 flex items-center justify-center mr-4">
-                            <i class="fas fa-user text-primary"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-primary">Budi Santoso</h4>
-                            <p class="text-sm text-gray-600">Kepala Sekolah</p>
-                        </div>
-                    </div>
-                    <div class="flex mb-4">
-                        <i class="fas fa-star text-accent"></i>
-                        <i class="fas fa-star text-accent"></i>
-                        <i class="fas fa-star text-accent"></i>
-                        <i class="fas fa-star text-accent"></i>
-                        <i class="fas fa-star text-accent"></i>
-                    </div>
-                    <p class="text-gray-600">"E-Point telah membantu sekolah kami dalam mengelola poin siswa dengan lebih transparan dan efisien. Sangat direkomendasikan!"</p>
-                </div>
-                
-                <!-- Testimonial 2 -->
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full bg-purple-200 flex items-center justify-center mr-4">
-                            <i class="fas fa-user text-primary"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-primary">Siti Nurhaliza</h4>
-                            <p class="text-sm text-gray-600">Guru BK</p>
-                        </div>
-                    </div>
-                    <div class="flex mb-4">
-                        <i class="fas fa-star text-accent"></i>
-                        <i class="fas fa-star text-accent"></i>
-                        <i class="fas fa-star text-accent"></i>
-                        <i class="fas fa-star text-accent"></i>
-                        <i class="fas fa-star text-accent"></i>
-                    </div>
-                    <p class="text-gray-600">"Sebagai guru BK, saya sangat terbantu dengan fitur notifikasi otomatis ke orang tua. Komunikasi jadi lebih mudah."</p>
-                </div>
-                
-                <!-- Testimonial 3 -->
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full bg-purple-200 flex items-center justify-center mr-4">
-                            <i class="fas fa-user text-primary"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-primary">Ahmad Rizki</h4>
-                            <p class="text-sm text-gray-600">Orang Tua Siswa</p>
-                        </div>
-                    </div>
-                    <div class="flex mb-4">
-                        <i class="fas fa-star text-accent"></i>
-                        <i class="fas fa-star text-accent"></i>
-                        <i class="fas fa-star text-accent"></i>
-                        <i class="fas fa-star text-accent"></i>
-                        <i class="fas fa-star text-accent"></i>
-                    </div>
-                    <p class="text-gray-600">"Saya bisa memantau perkembangan anak saya di sekolah melalui notifikasi yang masuk ke ponsel. Praktis sekali!"</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="py-16 md:py-24 bg-primary text-white">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                <div>
-                    <div class="text-4xl md:text-5xl font-bold mb-2">50+</div>
-                    <div class="text-purple-200">Sekolah</div>
-                </div>
-                <div>
-                    <div class="text-4xl md:text-5xl font-bold mb-2">10,000+</div>
-                    <div class="text-purple-200">Siswa</div>
-                </div>
-                <div>
-                    <div class="text-4xl md:text-5xl font-bold mb-2">500+</div>
-                    <div class="text-purple-200">Guru</div>
-                </div>
-                <div>
-                    <div class="text-4xl md:text-5xl font-bold mb-2">98%</div>
-                    <div class="text-purple-200">Kepuasan</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    
     <!-- FAQ Section -->
     <section id="faq" class="py-16 md:py-24">
         <div class="container mx-auto px-4">
@@ -379,7 +286,7 @@
                         <i class="fas fa-chevron-down text-primary"></i>
                     </button>
                     <div class="hidden bg-white rounded-b-xl shadow-lg p-6 border-t border-gray-100">
-                        <p class="text-gray-600">Untuk mendaftar sekolah Anda, silakan hubungi tim kami melalui halaman kontak atau kirim email ke info@epoint.com. Tim kami akan membantu proses pendaftaran dan pelatihan penggunaan sistem.</p>
+                        <p class="text-gray-600">Untuk mendaftar sekolah Anda, silakan hubungi tim kami melalui halaman kontak atau kirim email ke smkn1kawali@gmail.com. Tim kami akan membantu proses pendaftaran dan pelatihan penggunaan sistem.</p>
                     </div>
                 </div>
                 
@@ -393,29 +300,7 @@
                         <p class="text-gray-600">Ya, E-Point dilengkapi dengan enkripsi data tingkat tinggi dan kontrol akses berbasis peran. Data siswa hanya dapat diakses oleh pihak yang berwenang sesuai dengan peran masing-masing.</p>
                     </div>
                 </div>
-                
-                <!-- FAQ Item 4 -->
-                <div class="mb-6">
-                    <button class="w-full text-left bg-white rounded-xl shadow-lg p-6 flex justify-between items-center focus:outline-none">
-                        <h3 class="text-lg font-bold text-primary">Bagaimana orang tua dapat mengakses data anaknya?</h3>
-                        <i class="fas fa-chevron-down text-primary"></i>
-                    </button>
-                    <div class="hidden bg-white rounded-b-xl shadow-lg p-6 border-t border-gray-100">
-                        <p class="text-gray-600">Orang tua akan mendapatkan akun khusus yang dapat diakses melalui web atau aplikasi mobile. Mereka dapat melihat poin anak, riwayat kebaikan/pelanggaran, dan menerima notifikasi otomatis.</p>
-                    </div>
-                </div>
             </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="py-16 md:py-24 bg-gradient-to-r from-primary to-purple-800 text-white">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">Siap Meningkatkan Manajemen Sekolah Anda?</h2>
-            <p class="text-lg mb-8 max-w-2xl mx-auto text-purple-200">Bergabunglah dengan ratusan sekolah yang telah menggunakan E-Point untuk mengelola poin siswa</p>
-            <a href="/register" class="bg-accent text-primary px-8 py-3 rounded-lg font-bold hover:bg-yellow-400 transition-colors duration-300 inline-block">
-                Daftar Sekolah Anda
-            </a>
         </div>
     </section>
 
@@ -426,17 +311,18 @@
                 <!-- Logo and Description -->
                 <div class="md:col-span-2">
                     <div class="flex items-center space-x-2 mb-4">
-                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-accent to-yellow-400 flex items-center justify-center">
-                            <i class="fas fa-graduation-cap text-white text-xl"></i>
-                        </div>
+                        <div>
+                        <img src="{{ asset('logo/logosmk.png') }}"
+                            alt="logo SMKN 1 Kawali"
+                            class="w-10 h-10 rounded-lg object-cover">
+                    </div>  
                         <span class="text-xl font-bold">E-Point</span>
                     </div>
                     <p class="text-gray-400 mb-4 max-w-md">Sistem informasi poin siswa terintegrasi untuk membantu sekolah dalam mengelola kebaikan dan pelanggaran siswa dengan mudah dan transparan.</p>
                     <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.facebook.com/smkn1kawali/?locale=id_ID" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/smkn1kawali/?hl=en" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/company/smkn1kawali/?originalSubdomain=id" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 
@@ -457,15 +343,15 @@
                     <ul class="space-y-2">
                         <li class="flex items-center">
                             <i class="fas fa-map-marker-alt mr-2 text-accent"></i>
-                            <span class="text-gray-400">Jl. Pendidikan No. 123, Jakarta</span>
+                            <span class="text-gray-400">Jl.Talagasari, No.35 Kawalimukti, Kawali Kabupaten Ciamis Jawa Barat 46252</span>
                         </li>
                         <li class="flex items-center">
                             <i class="fas fa-phone mr-2 text-accent"></i>
-                            <span class="text-gray-400">+62 21 1234 5678</span>
+                            <span class="text-gray-400">(0265) 791 727-Central Office</span>
                         </li>
                         <li class="flex items-center">
                             <i class="fas fa-envelope mr-2 text-accent"></i>
-                            <span class="text-gray-400">info@epoint.com</span>
+                            <span class="text-gray-400">smkn1kawali@gmail.com</span>
                         </li>
                     </ul>
                 </div>
