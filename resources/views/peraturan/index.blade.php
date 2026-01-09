@@ -5,1089 +5,1543 @@
     <title>Peraturan dan Tata Tertib Murid</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        
+        :root {
+            --primary: #0f4c81;
+            --primary-light: #1a5f9a;
+            --primary-dark: #0a345c;
+            --accent: #fbbf24;
+            --accent-light: #fcd34d;
+            --danger: #dc2626;
+            --danger-light: #ef4444;
+            --warning: #d97706;
+            --success: #059669;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+        }
+        
+        * {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        
         body {
-            font-family: 'Inter', sans-serif;
+            background-color: var(--gray-50);
+            color: var(--gray-800);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
+        
         .primary-color {
-            color: #0f4c81;
+            color: var(--primary);
         }
+        
+        .primary-bg {
+            background-color: var(--primary);
+        }
+        
+        .accent-bg {
+            background-color: var(--accent);
+        }
+        
         .accent-color {
-            background-color: #fbbf24;
+            color: var(--accent);
         }
+        
         .danger-color {
-            color: #dc2626;
+            color: var(--danger);
         }
+        
         .warning-color {
-            color: #d97706;
+            color: var(--warning);
         }
+        
+        .success-color {
+            color: var(--success);
+        }
+        
+        .section-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .section-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .section-header {
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(50%, -50%);
+        }
+        
+        .section-header h2 {
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-header h3 {
+            font-weight: 600;
+            margin: 0.5rem 0 0 0;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-content {
+            padding: 2rem;
+        }
+        
+        /* Responsive tables */
+        .regulation-table {
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .regulation-table table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px; /* Minimum width for table content */
+        }
+        
+        .regulation-table th {
+            font-weight: 600;
+            text-align: left;
+            padding: 0.75rem;
+            background-color: var(--gray-100);
+            border-bottom: 2px solid var(--gray-200);
+            font-size: 0.875rem;
+        }
+        
+        .regulation-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--gray-200);
+            font-size: 0.875rem;
+        }
+        
+        .regulation-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .regulation-table tr:hover {
+            background-color: var(--gray-50);
+        }
+        
+        .category-header {
+            font-weight: 600;
+            background-color: var(--gray-100);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .violation-table .category-header {
+            border-left-color: var(--warning);
+            background-color: #fef3c7;
+        }
+        
+        .reward-table .category-header {
+            border-left-color: var(--success);
+            background-color: #d1fae5;
+        }
+        
+        .sanction-table .category-header {
+            border-left-color: var(--danger);
+            background-color: #fee2e2;
+        }
+        
+        .point-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 2.5rem;
+            height: 2.5rem;
+            padding: 0 0.5rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+        
+        .point-low {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+        
+        .point-medium {
+            background-color: #fed7aa;
+            color: #c2410c;
+        }
+        
+        .point-high {
+            background-color: #fecaca;
+            color: #b91c1c;
+        }
+        
+        .point-critical {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+        
         .scroll-to-top {
             transition: all 0.3s ease;
         }
-        .regulation-table {
-            overflow-x: auto;
-        }
-        .regulation-table table {
-            min-width: 100%;
-        }
+        
         @media print {
             .no-print {
                 display: none !important;
+            }
+            
+            .section-card {
+                box-shadow: none;
+                break-inside: avoid;
+            }
+            
+            .section-header {
+                background: var(--primary) !important;
+                -webkit-print-color-adjust: exact;
+            }
+        }
+        
+        .highlight-box {
+            background-color: var(--gray-50);
+            border-left: 4px solid var(--accent);
+            padding: 1rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+        
+        .danger-box {
+            background-color: #fef2f2;
+            border-left-color: var(--danger);
+        }
+        
+        .warning-box {
+            background-color: #fffbeb;
+            border-left-color: var(--warning);
+        }
+        
+        .success-box {
+            background-color: #f0fdf4;
+            border-left-color: var(--success);
+        }
+        
+        /* Responsive tabs */
+        .tab-container {
+            margin-top: 1.5rem;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            border-bottom: 2px solid var(--gray-200);
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .tab-button {
+            padding: 0.75rem 1rem;
+            font-weight: 500;
+            color: var(--gray-600);
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            font-size: 0.875rem;
+            flex-shrink: 0;
+        }
+        
+        .tab-button:hover {
+            color: var(--primary);
+        }
+        
+        .tab-button.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .regulation-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .regulation-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--gray-100);
+            position: relative;
+            padding-left: 2rem;
+            font-size: 0.875rem;
+        }
+        
+        .regulation-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 1.25rem;
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 50%;
+            background-color: var(--accent);
+        }
+        
+        .regulation-list li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Mobile navigation */
+        .mobile-menu-btn {
+            display: none;
+        }
+        
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background-color: white;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease;
+            z-index: 999;
+            overflow-y: auto;
+        }
+        
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            display: none;
+        }
+        
+        .mobile-menu-overlay.active {
+            display: block;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .section-content {
+                padding: 1rem;
+            }
+            
+            .section-header {
+                padding: 1rem;
+            }
+            
+            .section-header h2 {
+                font-size: 1.25rem;
+            }
+            
+            .highlight-box, .danger-box, .warning-box, .success-box {
+                padding: 0.75rem 1rem;
+                margin: 1rem 0;
+            }
+            
+            .tab-button {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.8rem;
+            }
+            
+            .point-badge {
+                min-width: 2rem;
+                height: 2rem;
+                font-size: 0.75rem;
+            }
+            
+            .regulation-list li {
+                padding: 0.5rem 0;
+                padding-left: 1.5rem;
+                font-size: 0.8rem;
+            }
+            
+            .regulation-list li::before {
+                top: 1rem;
+                width: 0.4rem;
+                height: 0.4rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .section-content {
+                padding: 0.75rem;
+            }
+            
+            .section-header {
+                padding: 0.75rem;
+            }
+            
+            .section-header h2 {
+                font-size: 1.125rem;
+            }
+            
+            .highlight-box, .danger-box, .warning-box, .success-box {
+                padding: 0.5rem 0.75rem;
+                margin: 0.75rem 0;
+            }
+            
+            .tab-button {
+                padding: 0.5rem;
+                font-size: 0.75rem;
+            }
+            
+            .regulation-table th, .regulation-table td {
+                padding: 0.5rem;
+                font-size: 0.75rem;
             }
         }
     </style>
 </head>
 
-<body class="bg-slate-50 text-slate-800 leading-relaxed">
+<body class="bg-gray-50 text-gray-800 leading-relaxed">
 
 <!-- Navbar -->
-<nav class="bg-white shadow sticky top-0 z-50 no-print">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <div class="flex items-center space-x-2">
-                    <div>
-                        <img src="{{ asset('logo/logosmk.png') }}"
-                            alt="logo SMKN 1 Kawali"
-                            class="w-10 h-10 rounded-lg object-cover">
-                    </div>
-                    <span class="text-xl font-bold text-primary">SMK Negeri 1 Kawali</span>
-        </div>
-        <div class="flex gap-3">
-            <button onclick="window.print()" class="text-sm bg-slate-100 hover:bg-slate-200 px-3 py-1 rounded transition">
-                <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
-                </svg>
-                Cetak
-            </button>
-            <a href="/" class="text-sm text-gray-600 hover:text-primary transition flex items-center">
-                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                </svg>
-                Kembali ke Beranda
-            </a>
+<nav class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-3">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div>
+                    <img src="{{ asset('logo/logosmk.png') }}"
+                        alt="logo SMKN 1 Kawali"
+                        class="w-10 h-10 rounded-lg object-cover">
+                </div>
+                <span class="text-xl font-bold text-primary hidden sm:block">SMK Negeri 1 Kawali</span>
+                <span class="text-lg font-bold text-primary sm:hidden">SMKN 1 Kawali</span>
+            </div>
+            <div class="flex gap-2">
+                <button onclick="window.print()" class="text-sm bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded-lg transition flex items-center hidden sm:flex">
+                    <i class="fas fa-print mr-2"></i>
+                    <span class="hidden md:inline">Cetak</span>
+                </button>
+                <a href="/" class="text-sm text-gray-600 hover:text-primary transition flex items-center px-3 py-2 hidden sm:flex">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    <span class="hidden md:inline">Kembali ke Beranda</span>
+                </a>
+                <button class="mobile-menu-btn text-gray-600 hover:text-primary p-2" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
         </div>
     </div>
 </nav>
 
-<div class="max-w-6xl mx-auto px-4 py-8">
-
-    <!-- HEADER -->
-    <div class="text-center mb-10 bg-white rounded-xl shadow-sm p-6">
-        <h1 class="text-3xl md:text-4xl font-bold uppercase primary-color mb-3">
-            Peraturan dan Tata Tertib Murid
-        </h1>
-        <p class="mt-2 font-semibold text-lg">SMK Negeri 1 Kawali</p>
-        <p class="text-slate-600">
-            Tahun Pelajaran 2024 / 2025
-        </p>
+<!-- Mobile Menu -->
+<div class="mobile-menu-overlay" onclick="toggleMobileMenu()"></div>
+<div class="mobile-menu">
+    <div class="p-4">
+        <div class="flex justify-between items-center mb-4">
+            <span class="text-lg font-bold text-primary">Menu</span>
+            <button class="text-gray-600 hover:text-primary" onclick="toggleMobileMenu()">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+        <div class="space-y-3">
+            <button onclick="window.print(); toggleMobileMenu();" class="w-full text-left bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-lg transition flex items-center">
+                <i class="fas fa-print mr-2"></i>
+                Cetak
+            </button>
+            <a href="/" onclick="toggleMobileMenu();" class="block text-gray-600 hover:text-primary transition px-4 py-2 rounded-lg">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Kembali ke Beranda
+            </a>
+        </div>
     </div>
+</div>
 
-    <!-- BAB I -->
-    <section class="bg-white rounded-xl shadow-sm p-6 mb-8 scroll-mt-20" id="bab-i">
-        <h2 class="text-2xl font-bold mb-4 primary-color">BAB I</h2>
-        <h3 class="font-semibold text-lg mb-4">Dasar Pemikiran, Dasar Hukum, dan Tujuan</h3>
-
-        <h4 class="font-semibold mt-6 text-lg">Pasal 1<br>Dasar Pemikiran</h4>
-        <p class="mt-3 text-justify">
-            Tata tertib kehidupan sosial sekolah bersumber pada nilai-nilai keagamaan akhlak mulia, nilai sosial budaya seperti adat istiadat setempat yang dihormati. Dalam penerapannya tata tertib tersebut tetap dalam kerangka pengembangan budaya nasional, hak-hak asasi manusia (HAM), implementasi dari kurikulum dan nilai-nilai lain yang mendukung proses pendidikan yang efektif, yang sifatnya mencerminkan kebutuhan sekolah dalam konteks sosial sekolah, lingkungan, dan masyarakat. Program pembentukan kepribadian dan program manajemen peningkatan mutu berbasis sekolah (school-based quality improvement) sebagai salah satu manajemen pendidikan kita di masa depan telah dirintis di sejumlah sekolah, termasuk di SMK Negeri 1 Kawali.
-        </p>
-        <p class="mt-3 text-justify">
-            Di SMK Negeri 1 Kawali program tersebut dibuat dengan mengacu pada visi dan misi sekolah, yakni "Terwujudnya lulusan yang berakhlak mulia, unggul, profesional dan berdaya saing global pada tahun 2026". Untuk mencapai visi tersebut, diperlukan karakter murid yang berdisplin tinggi, taat dan patuh pada ajaran agama, serta menguasai teknologi dengan penuh tanggung jawab. Oleh karena itu, dibuatlah sebuah pedoman tata tertib yang mengarahkan murid agar terbentuk karakater yang diharapkan.
-        </p>
-
-        <h4 class="font-semibold mt-6 text-lg">Pasal 2<br>Dasar Hukum</h4>
-        <ol class="list-decimal list-inside mt-3 space-y-2">
-            <li>Undang-undang Nomor 20 Tahun 2003 tentang Sistem Pendidikan Nasional</li>
-            <li>Peraturan Pemerintah Nomor 19 Tahun 2005 tentang Standar Nasional Pendidikan</li>
-            <li>Keputusan Menteri Pendidikan Nasional Nomor 21, 22, 23 dan 24 tentang Standar Isi, Standar Hasil dan Pelaksanaan Kepmen Nomor 21, 22 dan 23 tahun 2016</li>
-            <li>Peraturan Menteri Pendidikan Nasional Nomor 39 Tahun 2008 tentang Pembinaan Kemuridan</li>
-            <li>Permendikbud No. 45 tahun 2014 tentang pakaian seragam sekolah bagi peserta didik pada jenjang pendidikan dasar dan menengah</li>
-            <li>Keputusan Kwartir Nasional Gerakan Pramuka No 174 tahun 2012 tentang petunjuk penyelenggaraan pakaian sragam anggota gerakan pramuka</li>
-        </ol>
-
-        <h4 class="font-semibold mt-6 text-lg">Pasal 3<br>Tujuan</h4>
-        <ol class="list-decimal list-inside mt-3 space-y-2">
-            <li>Sebagai pedoman pelaksanaan tatatertib murid di lingkungan SMK Negeri 1 Kawali</li>
-            <li>Mengarahkan perilaku murid di lingkungan SMK Negeri 1 Kawali</li>
-            <li>Mewujudkan ketertiban di lingkungan SMK Negeri 1 Kawali</li>
-            <li>Membekali murid dalam proses penyesuaian diri dengan lingkungan di mana pun dia berada</li>
-            <li>Menjaga dan menjamin keadaan serta suasana belajar. Tata tertib di sekolah, di tiap-tiap kelas, dan dalam semua kegiatan merupakan syarat mutlak bagi hidup dan kelancaran proses mengajar maupun belajar di sekolah</li>
-            <li>Membentuk kepribadian. Pembentukan kepribadian akan terlaksana apabila tingkah laku dilandaskan pada asas-asas yang benar dan peraturan yang berlaku. Semangat kejujuran, keterbukaan dan disiplin harus menjiwai kesanggupan menaati peraturan-peraturan sekolah</li>
-        </ol>
-    </section>
-
-    <!-- BAB II -->
-    <section class="bg-white rounded-xl shadow-sm p-6 mb-8 scroll-mt-20" id="bab-ii">
-        <h2 class="text-2xl font-bold mb-4 primary-color">BAB II</h2>
-        <h3 class="font-semibold text-lg mb-4">Ketentuan Umum</h3>
-
-        <h4 class="font-semibold mt-4">Pasal 1<br>Tata Tertib Murid</h4>
-        <ol class="list-decimal list-inside mt-3 space-y-2">
-            <li>
-                <p class="font-medium">Dimaksudkan sebagai rambu-rambu bagi murid dalam bersikap, berucap, bertindak dan melaksanakan kegiatan sehari-hari di sekolah dalam rangka menciptakan iklim/kultur sekolah yang dapat menunjang kegiatan pembelajaran yang efektif.</p>
-            </li>
-            <li>
-                <p class="font-medium">Dibuat berdasarkan nilai-nilai yang dianut sekolah dan masyarakat sekitar, yang meliputi: nilai ketakwaan, rendah hati, sopan santun, kejujuran, kedisiplinan, ketangguhan, keberanian, ketertiban, kebersihan, kesehatan, kerapian, keamanan, dan nilai-nilai yang mendukung kegiatan belajar yang efektif.</p>
-            </li>
-            <li>
-                <p class="font-medium">Setiap murid wajib melaksanakan ketentuan yang tercantum dalam tata tertib secara konsekuen, ikhlas, dan penuh kesadaran</p>
-            </li>
-        </ol>
-    </section>
-
-    <!-- BAB III -->
-    <section class="bg-white rounded-xl shadow-sm p-6 mb-8 scroll-mt-20" id="bab-iii">
-        <h2 class="text-2xl font-bold mb-4 primary-color">BAB III</h2>
-        <h3 class="font-semibold text-lg mb-4">Hak dan Kewajiban Murid</h3>
-
-        <h4 class="font-semibold mt-6 text-lg">Pasal 1<br>Hak-Hak Murid</h4>
-        <ol class="list-decimal list-inside mt-3 space-y-2">
-            <li>Murid berhak mendapatkan pendidikan, pengajaran dan bimbingan sesuai dengan ketentuan yang berlaku</li>
-            <li>Murid yang berprestasi dalam kegiatan OSN, LKS, O2SN dan FLS2N serta kegiatan yang mengharumkan nama sekolah mulai dari tingkat Kabupaten, Provinsi, nasional sampai dengan tingkat International mendapatkan penghargaan yang layak sesuai dengan aturan yang berlaku</li>
-            <li>Murid berhak mendapat perlakuan yang sama dan proporsional dalam mendapatkan pelayanan standar dari SMK Negeri 1 Kawali</li>
-        </ol>
-
-        <h4 class="font-semibold mt-6 text-lg">Pasal 2<br>Kewajiban Murid</h4>
-        
-        <h5 class="font-medium mt-4 text-md">Ayat 1<br>Pakaian Seragam</h5>
-        <p class="mt-2">Murid wajib mengenakan pakaian seragam sekolah dengan ketentuan sebagai berikut:</p>
-        
-        <h6 class="font-medium mt-4">Umum</h6>
-        <ul class="list-disc list-inside mt-2 space-y-1 ml-4">
-            <li>Sopan dan rapi sesuai dengan ketentuan yang berlaku</li>
-            <li>Senin memakai baju putih - bawahan abu tua berdasi abu dan menggunakan evolet sesuai dengan jurusan dan tingkat kelas</li>
-            <li>Selasa memakai baju batik sekolah-bawahan abu tua berdasi abu</li>
-            <li>Rabu memakai seragam Pramuka</li>
-            <li>Kamis menggunakan pakaian Adat laki-laki memakai pangsi (baju batik bebas) dan perempuan kebaya</li>
-            <li>Jumat memakai baju Busana Muslim</li>
-            <li>Memakai badge OSIS dan identitas sekolah</li>
-            <li>Memakai ikat pinggang berwarna hitam lebar maksimum gesper 3 cm</li>
-            <li>Senin-Selasa Memakai kaos kaki warna putih, Rabu-Kamis memakai kaos kaki hitam minimal 5 cm di atas mata kaki, sepatu dominan warna hitam</li>
-            <li>Memakai kaos kaki warna hitam sepatu warna hitam untuk hari Jum'at</li>
-            <li>Pakaian tidak terbuat dari kain yang tipis dan tembus pandang, tidak ketat dan tidak membentuk tubuh</li>
-            <li>Tidak mengenakan atribut selain atribut resmi SMK Negeri 1 Kawali</li>
-            <li>Tidak mengenakan jaket/sweater selama kegiatan sekolah, kecuali dengan izin khusus</li>
-            <li>Memakai pakaian/kaus dalam</li>
-        </ul>
-        
-        <h6 class="font-medium mt-4">Khusus Pria</h6>
-        <ul class="list-disc list-inside mt-2 space-y-1 ml-4">
-            <li>Celana tidak sobek, dibuka jahitannya, atau ditambal</li>
-            <li>Tidak memakai perhiasan atau aksesoris seperti: Kalung, gelang, anting dan cincin</li>
-        </ul>
-        
-        <h6 class="font-medium mt-4">Khusus Wanita</h6>
-        <ul class="list-disc list-inside mt-2 space-y-1 ml-4">
-            <li>Pakaian/baju seragam yang sedang dikenakan, selalu dimasukan ke dalam rok kecuali seragam pramuka</li>
-            <li>Rok abu panjang sampai dengan mata kaki dengan lipit hadap pada tengah muka</li>
-            <li>Memakai kerudung segi empat tidak menerawang, Senin-Selasa warna putih, Rabu warna coklat tua, Kamis- Jumat warna hitam (boleh memakai kerudung blouse)</li>
-            <li>Khusus peserta didik muslimah diwajibkan mengenakan pakaian khas muslimah</li>
-            <li>Tidak memakai perhiasan atau aksesoris yang mencolok dan berlebihan</li>
-            <li>Lengan baju tidak dilipat atau digulung</li>
-            <li>Model baju di ban atau dikancing</li>
-        </ul>
-        
-        <h6 class="font-medium mt-4">Pakaian Olahraga</h6>
-        <ul class="list-disc list-inside mt-2 space-y-1 ml-4">
-            <li>Murid wajib mengenakan pakaian olahraga yang telah ditetapkan sekolah</li>
-            <li>Menggunakan kerudung warna bebas yang wajib menutupi dada (khusus Wanita)</li>
-            <li>Diperbolehkan menggunakan sepatu olahraga pada saat jam pelajaran olahraga</li>
-        </ul>
-        
-        <h6 class="font-medium mt-4">Pakaian khusus praktik</h6>
-        <ul class="list-disc list-inside mt-2 space-y-1 ml-4">
-            <li>Pakaian tersebut wajib dikenakan pada saat jam pelajaran praktik</li>
-        </ul>
-        
-        <h6 class="font-medium mt-4">Pakaian khusus organisasi</h6>
-        <ul class="list-disc list-inside mt-2 space-y-1 ml-4">
-            <li>Pakaian tersebut hanya digunakan pada saat kegiatan organisasi</li>
-        </ul>
-
-        <h5 class="font-medium mt-6 text-md">Pasal 3<br>Rambut, Kuku, Tato, Make Up</h5>
-        
-        <h6 class="font-medium mt-4">Umum</h6>
-        <p class="mt-2">Murid dilarang:</p>
-        <ul class="list-disc list-inside mt-2 space-y-1 ml-4">
-            <li>Berkuku panjang, bertato</li>
-            <li>Mengecat rambut dan kuku</li>
-            <li>Alis tidak boleh dicukur habis</li>
-        </ul>
-        
-        <h6 class="font-medium mt-4">Khusus Pria</h6>
-        <ul class="list-disc list-inside mt-2 space-y-1 ml-4">
-            <li>Rambut ukuran 4 cm</li>
-            <li>Tidak bertindik</li>
-            <li>Rambut tidak dimodifikasi</li>
-            <li>Rambut tidak dicukur habis</li>
-        </ul>
-        
-        <h6 class="font-medium mt-4">Khusus Wanita</h6>
-        <ul class="list-disc list-inside mt-2 space-y-1 ml-4">
-            <li>Rambut murid wanita disisir rapi atau diikat</li>
-            <li>Tidak diperbolehkan mewarnai rambut</li>
-            <li>Tidak memakai make-up berlebihan ke sekolah</li>
-        </ul>
-
-        <h5 class="font-medium mt-6 text-md">Pasal 4<br>Masuk, Proses KBM, dan Pulang Sekolah</h5>
-        <ul class="list-disc list-inside mt-2 space-y-1 ml-4">
-            <li>Murid wajib hadir di lingkungan sekolah selambat-lambatnya pukul 06.20 WIB</li>
-            <li>Murid wajib melakukan absensi chek in sekolah pada aplikasi yang sudah disediakan</li>
-            <li>Sesudah pukul 06.30 WIB, murid melaksanakan kegiatan positif</li>
-            <li>Murid yang terlambat datang maksimal pukul 06.30 WIB harus melapor kepada guru mapel dan diizinkan masuk kelas</li>
-            <li>Murid yang terlambat datang ke sekolah lebih dari pukul 06.30 WIB harus lapor kepada guru piket dan diizinkan masuk kelas pada pelajaran berikutnya, setelah mendapatkan pembinaan dari guru piket, pembina OSIS, guru BK atau wakasek di SMK Negeri 1 Kawali</li>
-            <li>Murid yang tidak dapat hadir karena sakit atau sebab lain, wajib membuat surat keterangan dokter atau orang tua/wali yang bersangkutan, dan melakukan absen izin atau sakit melalui aplikasi yang telah disediakan</li>
-            <li>Selama proses belajar murid tidak diperkenankan menggunakan alat komunikasi yang tidak berkaitan dengan proses belajar mengajar</li>
-            <li>Selama pelajaran berlangsung/pada pergantian jam/ketika guru berhalangan hadir, murid dilarang berada di luar kelas, atau meninggalkan kelas tanpa izin guru kelas/piket</li>
-            <li>Ketika pembelajaran praktik, murid harus berada di tempat/ruang praktik</li>
-            <li>Setiap tepat pukul 10.00 WIB murid wajib berhenti melakukan aktifitas sejenak dan berdiri untuk membacakan Pancasila dan menyanyikan lagu Indonesia Raya</li>
-            <li>Setelah KBM berakhir murid berdo'a, wajib melaksanakan kebersihan kelas (piket) sebelum meninggalkan sekolah</li>
-            <li>Murid dapat meninggalkan sekolah sebelum jam pelajaran berakhir dengan alasan sakit atau permintaan orang tua atau kepentingan lain setelah mendapat izin guru piket dan guru mata pelajaran. Surat izin meninggalkan sekolah diserahkan kembali kepada walikelas keesokan harinya</li>
-            <li>Salam resmi yang digunakan bagi murid muslim adalah "Assalaamu'alaikum", sedangkan bagi nonmuslim adalah "selamat pagi/siang/sore"</li>
-        </ul>
-
-        <h5 class="font-medium mt-6 text-md">Pasal 5<br>Kebersihan, Kedisiplinan, Ketertiban dan Sopan Santun</h5>
-        
-        <h6 class="font-medium mt-4">Lingkungan Kelas</h6>
-        <ul class="list-disc list-inside mt-2 space-y-1 ml-4">
-            <li>Setiap kelas membentuk tim piket kelas yang secara bergiliran bertugas menjaga kebersihan, dan ketertiban, serta memelihara perlengkapan kelas</li>
-            <li>Tim piket kelas mempunyai tugas sebagai berikut:
-                <ul class="list-circle list-inside mt-1 space-y-1 ml-4">
-                    <li>Membersihkan papan tulis setiap pergantian pelajaran</li>
-                    <li>Membantu menyiapkan dan membereskan perlengkapan KBM</li>
-                    <li>Membersihkan kelas serta merapikan bangku-bangku dan meja setelah KBM berakhir</li>
-                    <li>Merapikan hiasan dinding kelas, seperti struktur organisasi kelas, jadwal piket, papan absensi dan hiasan lainnya</li>
-                    <li>Melaporkan kepada guru piket tentang tindakan-tindakan pelanggaran di kelas yang menyangkut kebersihan dan ketertiban kelas, misalnya mengotori atau merusak sarana yang ada di kelas</li>
-                </ul>
-            </li>
-            <li>Sebelum pulang seluruh murid melakukan doa bersama serta mengucapkan terima kasih kepada guru</li>
-        </ul>
-        
-        <h6 class="font-medium mt-4">Lingkungan Sekolah</h6>
-        <ul class="list-disc list-inside mt-2 space-y-1 ml-4">
-            <li>Setiap murid menjaga kebersihan kamar kecil/toilet, dan seluruh lingkungan sekolah lainnya</li>
-            <li>Setiap murid membuang sampah pada tempatnya</li>
-            <li>Setiap murid membiasakan budaya antre dalam mengikuti berbagai kegiatan sekolah yang berlangsung pada waktu bersamaan</li>
-            <li>Setiap murid menjaga suasana ketenangan belajar, baik di kelas, di perpustakaan, di laboratorium, dan tempat praktik maupun di tempat lain di lingkungan sekolah</li>
-            <li>Setiap murid menaati peraturan yang berlaku di perpustakaan, penggunaan laboratorium, tempat praktik dan tempat belajar lainnya</li>
-            <li>Setiap murid wajib mengikuti satu kegiatan ekstrakurikuler dan hanya diperkenankan mengikuti maksimal dua kegiatan ekstrakurikuler dan satu organisasi</li>
-        </ul>
-        
-        <h6 class="font-medium mt-4">Upacara Bendera</h6>
-        <ul class="list-disc list-inside mt-2 space-y-1 ml-4">
-            <li>Semua murid wajib mengikuti upacara bendera hari Senin, kecuali yang mendapat dispensasi/ijin dari guru piket</li>
-            <li>Memakai topi saat upacara bendera dengan topi yang sudah ditentukan oleh sekolah kecuali ada rekomendasi dari kepala sekolah dan atau guru yang diberi wewenang untuk menentukan topi lain</li>
-            <li>Pada hari pelaksanaan upacara, murid wajib mengenakan seragam sesuai dengan jadwal seragam yang telah ditentukan</li>
-        </ul>
-        
-        <h6 class="font-medium mt-4">Sopan santun dan Hubungan kekeluargaan</h6>
-        <ul class="list-disc list-inside mt-2 space-y-1 ml-4">
-            <li>Setiap murid wajib bersikap sopan baik di sekolah maupun di luar sekolah</li>
-            <li>Murid wajib menunjukkan tingkah laku sopan dan hormat kepada siapapun: Orang tua, Bapak/Ibu guru atau pendidik, karyawan, penjual di kantin, tamu dan sesama murid. Misalnya: memberi salam/tanda hormat kepada guru sewaktu bertemu/berpisah, memberi jalan kepada orang yang mau lewat, duduk pada kursi (bukan meja) dan lain sebagainya</li>
-            <li>Kesempatan jajan di kantin hanya pada saat sebelum/sesudah jam sekolah, waktu jam istirahat, dan sesudah pelajaran Olah Raga untuk yang bersangkutan</li>
-            <li>Para murid diwajibkan menjaga dan melaksanakan Kebersihan, Ketertiban, Keamanan, Kesehatan, Kekeluargaan</li>
-        </ul>
-    </section>
-
-    <!-- BAB VI - Larangan -->
-    <section class="bg-white rounded-xl shadow-sm p-6 mb-8 scroll-mt-20" id="bab-vi">
-        <div class="flex items-center mb-4">
-            <h2 class="text-2xl font-bold primary-color">BAB VI</h2>
-            <div class="ml-3 px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm font-medium">Penting</div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
+    <!-- Main Content (tanpa sidebar) -->
+    <div>
+        <!-- HEADER -->
+        <div class="text-center mb-6 sm:mb-8 lg:mb-10 bg-white rounded-xl shadow-sm p-6 sm:p-8">
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold uppercase primary-color mb-3">
+                Peraturan dan Tata Tertib Murid
+            </h1>
+            <p class="mt-2 font-semibold text-lg">SMK Negeri 1 Kawali</p>
+            <p class="text-gray-600">
+                Tahun Pelajaran 2024 / 2025
+            </p>
         </div>
-        <h3 class="font-semibold text-lg mb-4 danger-color">Larangan</h3>
-        <p class="mt-2 mb-4">Murid-murid selama Jam Kegiatan Belajar Mengajar (KBM), dilarang:</p>
-        
-        <div class="bg-red-50 rounded-lg p-4 mb-4">
-            <ul class="list-disc list-inside space-y-2">
-                <li>Membawa segala macam buku bacaan yang tidak sopan, gambar-gambar porno, kaset audio, kaset video, VCD, DVD, walkman, radio, kamera, atau alat elektronik yang tidak berkaitan dengan pelajaran, senjata tajam, kartu/alat games atau judi, rokok/korek api, rokok elektronik, maupun segala jenis minuman keras dan obat terlarang</li>
-                <li>Membawa dan menggunakan alat elektronik music (ipod, radio, Walkman, headset) dalam waktu pembelajaran, tanpa seizin dari guru kelas</li>
-                <li>Merokok di lingkungan dan sekitar sekolah, dan maupun kegiatan yang diadakan di luar sekolah (selama 24 jam)</li>
-                <li>Membawa atau menggunakan obat terlarang/minuman keras</li>
-                <li>Melakukan tawuran terhadap sesama murid SMK Negeri 1 Kawali maupun dengan pihak lain</li>
-                <li>Melakukan praktik perjudian dan atau main kartu di lingkungan sekolah dan sekitarnya</li>
-                <li>Melakukan perbuatan asusila</li>
-                <li>Memakai pakaian yang "compang-camping" (celana pendek, robek) selama kegiatan sekolah</li>
-                <li>Memakai perhiasan yang berlebihan</li>
-                <li>Memakai/menggunakan make up, lipstik, cat kuku dan mewarnai rambut selain warna hitam, memiliki potongan rambut yang nyentrik/aneh</li>
-                <li>Membuat atau Memakai baju jaket selain jaket resmi sekolah</li>
-                <li>Membawa senjata, pisau, pistol, bahan peledak, (membunyikan petasan) dan lain lain yang memungkinkan untuk membahayakan diri sendiri dan orang lain</li>
-                <li>Pinjam-meminjam barang barang berharga</li>
-                <li>Mencuri atau merugikan orang lain dengan sengaja</li>
-                <li>Berkelahi/menghasut/mengitimidasi murid siswi lainnya dilingkungan sekolah atau diluar sekolah</li>
-                <li>Menerima tamu pada saat jam belajar berlangsung tanpa seizin guru piket</li>
-                <li>Berolah raga saat jam belajar kecuali pelajaran olah raga</li>
-                <li>Memakai sendal atau sepatu diinjak pada bagian belakangnya</li>
-                <li>Berada di kantin saat jam jam belajar atau pergantian waktu</li>
-                <li>Mencoret coret peralatan pembelajaran didalam kelas termasuk: tembok, AC, LCD, dan merusak fasilitas sekolah</li>
-                <li>Berkerumun dan berada di luar lingkungan sekolah sebelum jam pelajaran dimulai, pada jam istirahat, atau pulang sekolah</li>
-                <li>Membuang sampah sembarangan</li>
-                <li>Membentuk organisasi serta kegiatan ekstra lain dan melakukan kegiatan-kegiatan di dalam atau di luar sekolah dengan menggunakan nama SMK Negeri 1 Kawali tanpa seizin kepala sekolah</li>
-                <li>Merokok, melompat pagar, mengajak murid sekolah lain untuk berkerumun dilingkungan sekolah</li>
-                <li>Memalsukan dokumen</li>
-                <li>Mengikuti organisasi/LSM diluar sekolah (yang tidak baik)</li>
-                <li>Menjalin hubungan yang berlebihan di sekolah, dengan sesama jenis (LGBT), dan melakukan pergaulan bebas</li>
-            </ul>
-        </div>
-    </section>
 
-    <!-- BAB VII - Sanksi -->
-    <section class="bg-white rounded-xl shadow-sm p-6 mb-8 scroll-mt-20" id="bab-vii">
-        <div class="flex items-center mb-4">
-            <h2 class="text-2xl font-bold primary-color">BAB VII</h2>
-            <div class="ml-3 px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">Penting</div>
-        </div>
-        <h3 class="font-semibold text-lg mb-4 warning-color">Sanksi-Sanksi dan Penghargaan</h3>
-        
-        <div class="mb-6">
-            <h4 class="font-semibold text-md mb-3">Ayat 1<br>Sanksi Poin Negatif</h4>
-            <p class="mt-2 mb-4">Dalam sanksi dipergunakan sistem poin, dengan istilah point negatif, yaitu:</p>
-            
-            <div class="regulation-table bg-orange-50 rounded-lg p-4">
-                <table class="w-full border-collapse">
-                    <thead>
-                        <tr class="bg-orange-100">
-                            <th class="border border-orange-200 px-4 py-2 text-left">Kategori Pelanggaran</th>
-                            <th class="border border-orange-200 px-4 py-2 text-center">Jumlah Poin</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td colspan="2" class="border border-orange-200 px-4 py-2 font-semibold bg-orange-100">Pakaian / Seragam (P)</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Senin tidak berpakaian PSAS (Putih-Abu) lengkap</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Selasa tidak berpakaian Batik (Batik-Abu)</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Rabu tidak berpakaian pramuka lengkap (memakai hasduk)</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Kamis tidak menggunakan pakaian adat</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Jum'at tidak tidak menggunakan pakaian busana muslim</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Senin-Jum'at tidak bersepatu hitam, Senin-selasa tidak berkaos kaki putih, Rabu-Kamis tidak berkaos kaki hitam Jum'at tidak berkaos kaki warna hitam</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Tidak berikat pinggang hitam (lebar maksimal 3 cm gesper seimbang)</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Tidak memakai topi saat upacara bendera</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Tidak memakai rok/celana panjang, ke atas sebatas pinggang, ke bawah sebatas mata kaki</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Berpakaian ketat</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Model seragam tidak rapih/tidak sopan</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Memakai jaket/sweater/ topi bebas di dalam lingkungan sekolah selama KBM berlangsung</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Baju seragam tidak dimasukan</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Tidak menggunakan kerudung bagi peserta didik putri (muslimah)</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Tidak menggunakan pakaian olahraga yang ditetapkan sekolah pada saat jam pelajaran olahraga</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Tidak menggunakan kerudung hitam pada saat jam pelajaran olahraga</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        
-                        <tr>
-                            <td colspan="2" class="border border-orange-200 px-4 py-2 font-semibold bg-orange-100">Rambut (R)</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Dicat selain warna hitam</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">8</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Model rambut bagian depan melebihi alis, bagian samping melebihi telinga, dan bagian belakang melebihi kerah baju</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Model rambut Dimodifikasi</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">8</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Tidak tertutupi kerudung (Khusus Perempuan)</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">8</td>
-                        </tr>
-                        
-                        <tr>
-                            <td colspan="2" class="border border-orange-200 px-4 py-2 font-semibold bg-orange-100">Aksesoris (A)</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Memakai cat/pacar kuku</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Make Up berlebihan (Eye Shadow, lip stick)</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Laki-laki memakai perhiasan</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Perempuan memakai perhiasan berlebihan</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Berkuku panjang</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        
-                        <tr>
-                            <td colspan="2" class="border border-orange-200 px-4 py-2 font-semibold bg-orange-100">Kehadiran (K)</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Terlambat masuk pintu gerbang >5 menit (masuk pukul 06.50)</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Terlambat masuk kelas > 10 menit</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">8</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Bolos/Kabur/Pilih pelajaran</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">10</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Alpa</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">8</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Surat Palsu</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">10</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Keluar kelas tanpa izin guru</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Keluar lingkungan Sekolah tanpa izin piket guru</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Tidak mengikuti tadarus dan atau pembacaan Surat Yasin</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Tidak mengikuti upacara bendera</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">8</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Terlambat mengikuti upacara bendera (saat bendera sudah naik)</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Izin (tanpa keterangan) lebih dari 3 hari berturut-turut</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Sakit lebih dari 6 hari tanpa surat keterangan petugas kesehatan/dokter/orang tua</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Tidak mengikuti kegiatan yang dilaksanakan disekolah (keagamaan, keosisan, belanegara, dll)</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">15</td>
-                        </tr>
-                        
-                        <tr>
-                            <td colspan="2" class="border border-orange-200 px-4 py-2 font-semibold bg-orange-100">Kebersihan (Kb)</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Tidak melaksanakan tugas piket kelas</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">8</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Membuang sampah tidak pada tempatnya</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Mencoret-coret sarana dan prasarana sekolah</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">10</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Menggunakan WC kepala sekolah, guru dan karyawan</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Merusak tanaman lingkungan sekolah</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">8</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Makan dan minum di dalam kelas/ruang praktek selama KBM berlangsung</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">8</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Merusak / menghilangkan sarana dan prasarana sekolah dengan sengaja</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">25</td>
-                        </tr>
-                        
-                        <tr>
-                            <td colspan="2" class="border border-orange-200 px-4 py-2 font-semibold bg-orange-100">Tingkah Laku (TL)</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Keluar /masuk ruangan melewati jendela</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">10</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Berkata tidak sopan</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">5</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Memanggil nama buruk yang bukan namanya</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">5</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Selama KBM berlangsung: Menggunakan HP</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Membawa dan menggunakan alat musik (walkman, radio, ipod, dll)</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">8</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Menyontek memberi informasi saat ulangan berlangsung</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">8</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Bersolek</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Tidak mengerjakan tugas dari guru</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Mengganggu KBM</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Tidak membawa peralatan belajar</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Membaca/mengerjakan pelajaran yang lain</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Tidur di kelas</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Ganti pakaian olah raga diwaktu pelajaran bukan olahraga</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Membawa kendaraan tidak sesuai ketentuan lalu lintas</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">8</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Memarkir kendaraan tidak pada tempatnya</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Tidak menggunakan seragam praktek/menggunakan milik orang lain</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Mengendarai kendaraan dalam keadaan mesin hidup selama KBM berlangsung di dalam lingkungan sekolah (mesin kendaraan harus dimatikan dari gerbang ke tempat parkir atau dari tempat parkir ke gerbang) kecuali keseluruhan KBM sudah berakhir</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">8</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Tidak melaksanakan Kegiatan hari jum'at (Kebersihan,Kerohanian,Olahraga)</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        
-                        <tr>
-                            <td colspan="2" class="border border-orange-200 px-4 py-2 font-semibold bg-orange-100">Susila (S)</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Menyalahgunaan barang cetakan/elektronik yang bersifat sara, sosial dan porno</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">30</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Membawa atau merokok di lingkungan sekolah (radius 100 m)</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">30</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Berpacaran di sekolah</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">25</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Anggota badan bertato dan bertindik (pria)</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">30</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Berprilaku buruk terhadap kepala sekolah, guru dan karyawan</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">50</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Membawa alat kontrasepsi</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">50</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Bermain judi /kartu di Sekolah</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">50</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Berbohong, memfitnah, menuduh, mengancam, mengintimidasi</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">50</td>
-                        </tr>
-                        
-                        <tr>
-                            <td colspan="2" class="border border-orange-200 px-4 py-2 font-semibold bg-orange-100">Pelanggaran Berat (PB)</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Membawa senjata tajam tanpa izin</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">75</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Menganiaya</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">75</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Berkelahi</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">75</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Mengikuti organisasi/LSM diluar sekolah (yang tidak baik)</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">100</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Menjalin hubungan yang berlebihan di sekolah, dengan sesama jenis (LGBT)</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">100</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Tawuran</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">100</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Mengganti/memalsukan dokumen (rapot, ijazah, dsb)</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">100</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Mencuri/menipu</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">100</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Pemerasan</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">100</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Melawan secara fisik terhadap kepala sekolah, guru, dan karyawan sekolah</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">200</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Membawa/menggunakan/mengedarkan NARKOBA</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">200</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Membawa/menggunakan/mengedarkan MIRAS</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">200</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Hamil (sengaja/terencana) /menghamili</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">200</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Menikah</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">200</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Pelecehan seksual</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">200</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Sex bebas, bergaul bebas, bergaul sesama jenis</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">200</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Memperkosa</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">200</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-orange-200 px-4 py-2">Terbukti terlibat geng motor, sekolah berhak mengeluarkan murid</td>
-                            <td class="border border-orange-200 px-4 py-2 text-center">200</td>
-                        </tr>
-                    </tbody>
-                </table>
+        <!-- BAB III -->
+        <section class="section-card mb-6 sm:mb-8 scroll-mt-20" id="bab-iii">
+            <div class="section-header">
+                <h2>Hak dan Kewajiban Murid</h2>
             </div>
-        </div>
-        
-        <div class="mb-6">
-            <h4 class="font-semibold text-md mb-3">Ayat 2<br>Penghargaan Poin Positif</h4>
-            
-            <div class="regulation-table bg-green-50 rounded-lg p-4">
-                <table class="w-full border-collapse">
-                    <thead>
-                        <tr class="bg-green-100">
-                            <th class="border border-green-200 px-4 py-2 text-left">Kategori Prestasi</th>
-                            <th class="border border-green-200 px-4 py-2 text-center">Jumlah Poin</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td colspan="2" class="border border-green-200 px-4 py-2 font-semibold bg-green-100">Prestasi Lomba</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Tingkat Kelas: Juara I</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Tingkat Kelas: Juara II</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">3</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Tingkat Kelas: Juara III</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">2</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Tingkat Sekolah/Kecamatan: Juara I</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">6</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Tingkat Sekolah/Kecamatan: Juara II</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Tingkat Sekolah/Kecamatan: Juara III</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">3</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Tingkat Kabupaten: Juara I</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">8</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Tingkat Kabupaten: Juara II</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">6</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Tingkat Kabupaten: Juara III</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Tingkat Wilayah: Juara I</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">10</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Tingkat Wilayah: Juara II</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">8</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Tingkat Wilayah: Juara III</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">6</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Tingkat Propinsi: Juara I</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">12</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Tingkat Propinsi: Juara II</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">10</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Tingkat Propinsi: Juara III</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">8</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Tingkat Nasional: Juara I</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">40</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Tingkat Nasional: Juara II</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">30</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Tingkat Nasional: Juara III</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">20</td>
-                        </tr>
+            <div class="section-content">
+                <div class="tab-container">
+                    <div class="tab-buttons">
+                        <button class="tab-button active" onclick="openTab(event, 'hak-murid')">Hak Murid</button>
+                        <button class="tab-button" onclick="openTab(event, 'kewajiban-murid')">Kewajiban Murid</button>
+                    </div>
+                    
+                    <div id="hak-murid" class="tab-content active">
+                        <h4 class="font-semibold text-lg mb-4">Pasal 1<br>Hak-Hak Murid</h4>
+                        <ol class="list-decimal list-inside space-y-3">
+                            <li class="pl-2">Murid berhak mendapatkan pendidikan, pengajaran dan bimbingan sesuai dengan ketentuan yang berlaku</li>
+                            <li class="pl-2">Murid yang berprestasi dalam kegiatan OSN, LKS, O2SN dan FLS2N serta kegiatan yang mengharumkan nama sekolah mulai dari tingkat Kabupaten, Provinsi, nasional sampai dengan tingkat International mendapatkan penghargaan yang layak sesuai dengan aturan yang berlaku</li>
+                            <li class="pl-2">Murid berhak mendapat perlakuan yang sama dan proporsional dalam mendapatkan pelayanan standar dari SMK Negeri 1 Kawali</li>
+                        </ol>
+                    </div>
+                    
+                    <div id="kewajiban-murid" class="tab-content">
+                        <h4 class="font-semibold text-lg mb-4">Pasal 2<br>Kewajiban Murid</h4>
                         
-                        <tr>
-                            <td colspan="2" class="border border-green-200 px-4 py-2 font-semibold bg-green-100">Prestasi Keagamaan</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Tahfid Surat-surat Al-Qur'an: 5 surat</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">2</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Tahfid Surat-surat Al-Qur'an: 10 surat</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Tahfid Surat-surat Al-Qur'an: 15 surat</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">6</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Tahfid Surat-surat Al-Qur'an: 20 surat</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">8</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Tahfid Surat-surat Al-Qur'an: > 20 surat</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">20</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Tahfidz Qur'an / Juz</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">40</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Membaca Surat – surat Al-Qur'an: 10 surat</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">2</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Membaca Surat – surat Al-Qur'an: 14 surat</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Membaca Surat – surat Al-Qur'an: 16 surat</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">6</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Membaca Surat – surat Al-Qur'an: 18 surat</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">8</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Membaca Surat – surat Al-Qur'an: ≥ 20 surat</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">15</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Qur'an /Juz</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">30</td>
-                        </tr>
+                        <div class="highlight-box">
+                            <h5 class="font-medium">Ayat 1: Pakaian Seragam</h5>
+                            <p class="mt-2">Murid wajib mengenakan pakaian seragam sekolah dengan ketentuan sebagai berikut:</p>
+                        </div>
                         
-                        <tr>
-                            <td colspan="2" class="border border-green-200 px-4 py-2 font-semibold bg-green-100">Prestasi Organisasi</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Pengurus inti kelas (KM, WKM. Sekretaris, Bendahara) /semester</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">2</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Anggota MPK/semester</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Pengurus inti MPK/semester</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">6</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Anggota pengurus OSIS/semester</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Pengurus inti OSIS/semester</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">6</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Pengurus organisasi otonomi: Tingkat Kecamatan</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">4</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Pengurus organisasi otonomi: Tingkat Kabupaten</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">6</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-green-200 px-4 py-2">Pengurus organisasi otonomi: Tingkat Wilayah</td>
-                            <td class="border border-green-200 px-4 py-2 text-center">8</td>
-                        </tr>
-                    </tbody>
-                </table>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mt-6">
+                            <div>
+                                <h6 class="font-semibold text-md mb-3 flex items-center">
+                                    <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-2 text-sm">1</span>
+                                    Umum
+                                </h6>
+                                <ul class="regulation-list">
+                                    <li>Sopan dan rapi sesuai dengan ketentuan yang berlaku</li>
+                                    <li>Senin memakai baju putih - bawahan abu tua berdasi abu</li>
+                                    <li>Selasa memakai baju batik sekolah-bawahan abu tua</li>
+                                    <li>Rabu memakai seragam Pramuka</li>
+                                    <li>Kamis menggunakan pakaian Adat</li>
+                                    <li>Jumat memakai baju Busana Muslim</li>
+                                    <li>Memakai badge OSIS dan identitas sekolah</li>
+                                    <li>Memakai ikat pinggang berwarna hitam</li>
+                                    <li>Memakai kaos kaki sesuai hari yang ditentukan</li>
+                                    <li>Pakaian tidak terbuat dari kain yang tipis dan tembus pandang</li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h6 class="font-semibold text-md mb-3 flex items-center">
+                                    <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-2 text-sm">2</span>
+                                    Khusus Pria
+                                </h6>
+                                <ul class="regulation-list">
+                                    <li>Celana tidak sobek, dibuka jahitannya, atau ditambal</li>
+                                    <li>Tidak memakai perhiasan atau aksesoris</li>
+                                    <li>Rambut ukuran 4 cm</li>
+                                    <li>Tidak bertindik</li>
+                                    <li>Rambut tidak dimodifikasi</li>
+                                    <li>Rambut tidak dicukur habis</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mt-6">
+                            <div>
+                                <h6 class="font-semibold text-md mb-3 flex items-center">
+                                    <span class="w-8 h-8 bg-pink-100 text-pink-600 rounded-full flex items-center justify-center mr-2 text-sm">3</span>
+                                    Khusus Wanita
+                                </h6>
+                                <ul class="regulation-list">
+                                    <li>Pakaian/baju seragam dimasukan ke dalam rok</li>
+                                    <li>Rok abu panjang sampai dengan mata kaki</li>
+                                    <li>Memakai kerudung sesuai warna yang ditentukan</li>
+                                    <li>Peserta didik muslimah wajib mengenakan pakaian khas muslimah</li>
+                                    <li>Tidak memakai perhiasan yang mencolok dan berlebihan</li>
+                                    <li>Lengan baju tidak dilipat atau digulung</li>
+                                    <li>Rambut disisir rapi atau diikat</li>
+                                    <li>Tidak diperbolehkan mewarnai rambut</li>
+                                    <li>Tidak memakai make-up berlebihan ke sekolah</li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h6 class="font-semibold text-md mb-3 flex items-center">
+                                    <span class="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center mr-2 text-sm">4</span>
+                                    Pakaian Khusus
+                                </h6>
+                                <div class="space-y-4">
+                                    <div>
+                                        <h6 class="font-medium">Pakaian Olahraga</h6>
+                                        <ul class="regulation-list mt-2">
+                                            <li>Wajib mengenakan pakaian olahraga yang ditetapkan</li>
+                                            <li>Menggunakan kerudung yang menutupi dada (khusus Wanita)</li>
+                                            <li>Diperbolehkan menggunakan sepatu olahraga</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h6 class="font-medium">Pakaian Praktik</h6>
+                                        <ul class="regulation-list mt-2">
+                                            <li>Wajib dikenakan pada saat jam pelajaran praktik</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h6 class="font-medium">Pakaian Organisasi</h6>
+                                        <ul class="regulation-list mt-2">
+                                            <li>Hanya digunakan pada saat kegiatan organisasi</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 sm:mt-8">
+                            <h5 class="font-semibold text-lg mb-4">Pasal 3<br>Rambut, Kuku, Tato, Make Up</h5>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+                                <div class="highlight-box">
+                                    <h6 class="font-medium">Umum</h6>
+                                    <p class="mt-2">Murid dilarang:</p>
+                                    <ul class="regulation-list mt-2">
+                                        <li>Berkuku panjang, bertato</li>
+                                        <li>Mengecat rambut dan kuku</li>
+                                        <li>Alis tidak boleh dicukur habis</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="highlight-box">
+                                    <h6 class="font-medium">Khusus Pria</h6>
+                                    <ul class="regulation-list mt-2">
+                                        <li>Rambut ukuran 4 cm</li>
+                                        <li>Tidak bertindik</li>
+                                        <li>Rambut tidak dimodifikasi</li>
+                                        <li>Rambut tidak dicukur habis</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="highlight-box">
+                                    <h6 class="font-medium">Khusus Wanita</h6>
+                                    <ul class="regulation-list mt-2">
+                                        <li>Rambut disisir rapi atau diikat</li>
+                                        <li>Tidak diperbolehkan mewarnai rambut</li>
+                                        <li>Tidak memakai make-up berlebihan</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 sm:mt-8">
+                            <h5 class="font-semibold text-lg mb-4">Pasal 4<br>Masuk, Proses KBM, dan Pulang Sekolah</h5>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                                <div>
+                                    <h6 class="font-medium mb-3">Kehadiran</h6>
+                                    <ul class="regulation-list">
+                                        <li>Wajib hadir selambat-lambatnya pukul 06.20 WIB</li>
+                                        <li>Wajib melakukan absensi check in pada aplikasi</li>
+                                        <li>Terlambat melapor kepada guru mapel/piket</li>
+                                        <li>Sakit/izin membuat surat keterangan</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h6 class="font-medium mb-3">Selama KBM</h6>
+                                    <ul class="regulation-list">
+                                        <li>Tidak menggunakan alat komunikasi yang tidak berkaitan</li>
+                                        <li>Dilarang berada di luar kelas tanpa izin</li>
+                                        <li>Praktikum harus di tempat/ruang praktik</li>
+                                        <li>Pukul 10.00 WIB wajib berhenti untuk membacakan Pancasila</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 sm:mt-8">
+                            <h5 class="font-semibold text-lg mb-4">Pasal 5<br>Kebersihan, Kedisiplinan, Ketertiban dan Sopan Santun</h5>
+
+                            <!-- Lingkungan Kelas -->
+                            <div class="mb-4 sm:mb-6">
+                                <h6 class="font-semibold text-md mb-3 flex items-center">
+                                    <i class="fas fa-chalkboard-teacher text-blue-500 mr-2"></i>
+                                    Lingkungan Kelas
+                                </h6>
+                                <div class="bg-gray-50 rounded-lg p-3 sm:p-4 border-l-4 border-blue-500">
+                                    <ul class="regulation-list">
+                                        <li>Setiap kelas membentuk tim piket kelas yang secara bergiliran bertugas menjaga kebersihan, dan ketertiban, serta memelihara perlengkapan kelas</li>
+                                        <li>Tim piket kelas mempunyai tugas sebagai berikut:
+                                            <ul class="list-circle list-inside mt-2 ml-4 space-y-1">
+                                                <li>Membersihkan papan tulis setiap pergantian pelajaran</li>
+                                                <li>Membantu menyiapkan dan membereskan perlengkapan KBM</li>
+                                                <li>Membersihkan kelas serta merapikan bangku-bangku dan meja setelah KBM berakhir</li>
+                                                <li>Merapikan hiasan dinding kelas, seperti struktur organisasi kelas, jadwal piket, papan absensi dan hiasan lainnya</li>
+                                                <li>Melaporkan kepada guru piket tentang tindakan-tindakan pelanggaran di kelas yang menyangkut kebersihan dan ketertiban kelas, misalnya mengotori atau merusak sarana yang ada di kelas</li>
+                                            </ul>
+                                        </li>
+                                        <li>Sebelum pulang seluruh murid melakukan doa bersama serta mengucapkan terima kasih kepada guru</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Lingkungan Sekolah -->
+                            <div class="mb-4 sm:mb-6">
+                                <h6 class="font-semibold text-md mb-3 flex items-center">
+                                    <i class="fas fa-school text-green-500 mr-2"></i>
+                                    Lingkungan Sekolah
+                                </h6>
+                                <div class="bg-gray-50 rounded-lg p-3 sm:p-4 border-l-4 border-green-500">
+                                    <ul class="regulation-list">
+                                        <li>Setiap murid menjaga kebersihan kamar kecil/toilet, dan seluruh lingkungan sekolah lainnya</li>
+                                        <li>Setiap murid membuang sampah pada tempatnya</li>
+                                        <li>Setiap murid membiasakan budaya antre dalam mengikuti berbagai kegiatan sekolah yang berlangsung pada waktu bersamaan</li>
+                                        <li>Setiap murid menjaga suasana ketenangan belajar, baik di kelas, di perpustakaan, di laboratorium, dan tempat praktik maupun di tempat lain di lingkungan sekolah</li>
+                                        <li>Setiap murid menaati peraturan yang berlaku di perpustakaan, penggunaan laboratorium, tempat praktik dan tempat belajar lainnya</li>
+                                        <li>Setiap murid wajib mengikuti satu kegiatan ekstrakurikuler dan hanya diperkenankan mengikuti maksimal dua kegiatan ekstrakurikuler dan satu organisasi</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Upacara Bendera -->
+                            <div class="mb-4 sm:mb-6">
+                                <h6 class="font-semibold text-md mb-3 flex items-center">
+                                    <i class="fas fa-flag text-red-500 mr-2"></i>
+                                    Upacara Bendera
+                                </h6>
+                                <div class="bg-gray-50 rounded-lg p-3 sm:p-4 border-l-4 border-red-500">
+                                    <ul class="regulation-list">
+                                        <li>Semua murid wajib mengikuti upacara bendera hari Senin, kecuali yang mendapat dispensasi/ijin dari guru piket</li>
+                                        <li>Memakai topi saat upacara bendera dengan topi yang sudah ditentukan oleh sekolah kecuali ada rekomendasi dari kepala sekolah dan atau guru yang diberi wewenang untuk menentukan topi lain</li>
+                                        <li>Pada hari pelaksanaan upacara, murid wajib mengenakan seragam sesuai dengan jadwal seragam yang telah ditentukan</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Sopan Santun dan Hubungan Kekeluargaan -->
+                            <div class="mb-4 sm:mb-6">
+                                <h6 class="font-semibold text-md mb-3 flex items-center">
+                                    <i class="fas fa-handshake text-purple-500 mr-2"></i>
+                                    Sopan Santun dan Hubungan Kekeluargaan
+                                </h6>
+                                <div class="bg-gray-50 rounded-lg p-3 sm:p-4 border-l-4 border-purple-500">
+                                    <ul class="regulation-list">
+                                        <li>Setiap murid wajib bersikap sopan baik di sekolah maupun di luar sekolah</li>
+                                        <li>Murid wajib menunjukkan tingkah laku sopan dan hormat kepada siapapun: Orang tua, Bapak/Ibu guru atau pendidik, karyawan, penjual di kantin, tamu dan sesama murid. Misalnya: memberi salam/tanda hormat kepada guru sewaktu bertemu/berpisah, memberi jalan kepada orang yang mau lewat, duduk pada kursi (bukan meja) dan lain sebagainya</li>
+                                        <li>Kesempatan jajan di kantin hanya pada saat sebelum/sesudah jam sekolah, waktu jam istirahat, dan sesudah pelajaran Olah Raga untuk yang bersangkutan</li>
+                                        <li>Para murid diwajibkan menjaga dan melaksanakan Kebersihan, Ketertiban, Keamanan, Kesehatan, Kekeluargaan</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        
-        <div class="mb-6">
-            <h4 class="font-semibold text-md mb-3">Pasal 7<br>Bentuk-Bentuk Sanksi</h4>
-            <p class="mt-2 mb-4">Bentuk sanksi pelanggaran berdasarkan akumulasi point negatif sebagai berikut:</p>
-            
-            <div class="regulation-table bg-red-50 rounded-lg p-4">
-                <table class="w-full border-collapse">
-                    <thead>
-                        <tr class="bg-red-100">
-                            <th class="border border-red-200 px-4 py-2 text-center">No</th>
-                            <th class="border border-red-200 px-4 py-2">Jumlah Poin</th>
-                            <th class="border border-red-200 px-4 py-2">Keterangan</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="border border-red-200 px-4 py-2 text-center">1</td>
-                            <td class="border border-red-200 px-4 py-2 text-center">≥12</td>
-                            <td class="border border-red-200 px-4 py-2">Teguran lisan</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-red-200 px-4 py-2 text-center">2</td>
-                            <td class="border border-red-200 px-4 py-2 text-center">≥18</td>
-                            <td class="border border-red-200 px-4 py-2">Peringatan tertulis</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-red-200 px-4 py-2 text-center">3</td>
-                            <td class="border border-red-200 px-4 py-2 text-center">≥22</td>
-                            <td class="border border-red-200 px-4 py-2">Peringatan tertulis disampaikan kepada orang tua</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-red-200 px-4 py-2 text-center">4</td>
-                            <td class="border border-red-200 px-4 py-2 text-center">≥50</td>
-                            <td class="border border-red-200 px-4 py-2">Pemanggilan orang tua</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-red-200 px-4 py-2 text-center">5</td>
-                            <td class="border border-red-200 px-4 py-2 text-center">≥75</td>
-                            <td class="border border-red-200 px-4 py-2">Murid dan orang tua membuat surat perjanjian bermaterai</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-red-200 px-4 py-2 text-center">6</td>
-                            <td class="border border-red-200 px-4 py-2 text-center">≥100</td>
-                            <td class="border border-red-200 px-4 py-2">Murid diskor selama tiga hari</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-red-200 px-4 py-2 text-center">7</td>
-                            <td class="border border-red-200 px-4 py-2 text-center">≥135</td>
-                            <td class="border border-red-200 px-4 py-2">Murid diskor selama enam hari</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-red-200 px-4 py-2 text-center">8</td>
-                            <td class="border border-red-200 px-4 py-2 text-center">≥175</td>
-                            <td class="border border-red-200 px-4 py-2">Murid diminta pindah sekolah</td>
-                        </tr>
-                        <tr>
-                            <td class="border border-red-200 px-4 py-2 text-center">9</td>
-                            <td class="border border-red-200 px-4 py-2 text-center">≥200</td>
-                            <td class="border border-red-200 px-4 py-2">Murid dikembalikan kepada orang tua</td>
-                        </tr>
-                    </tbody>
-                </table>
+        </section>
+
+        <!-- BAB VI - Larangan -->
+        <section class="section-card mb-6 sm:mb-8 scroll-mt-20" id="bab-vi">
+            <div class="section-header">
+                <h2>Larangan</h2>
             </div>
-            
-            <div class="mt-6 space-y-4">
-                <div>
-                    <h5 class="font-semibold text-md">Khusus Keterlambatan:</h5>
-                    <ol class="list-decimal list-inside mt-2 space-y-2 ml-4">
-                        <li>2 kali: peringatan dan pembinaan oleh wali kelas dan guru BK</li>
-                        <li>3 kali: diundang orang tuanya, membuat perjanjian tertulis dihadapan wali kelas dan diberikan pembinaan</li>
-                        <li>5 kali: peringatan keras oleh wali kelas dan wakil kemuridan, dilanjutkan pembinaan dari guru BK</li>
-                        <li>6 kali: orang tua diundang untuk membuat perjanjian secara tertulis bermaterai, dihadapan wakil kemuridan dan murid diberikan skorsing 1 hari</li>
-                        <li>9 kali: orang tua diundang untuk membuat perjanjian secara tertulis bermaterai dihadapan kepala sekolah dan murid diberikan skorsing 3 hari</li>
-                        <li>10 kali: dilaksanakan konferensi kasus</li>
-                    </ol>
+            <div class="section-content">
+                <div class="danger-box">
+                    <p class="font-semibold text-lg mb-2">Murid-murid selama Jam Kegiatan Belajar Mengajar (KBM), dilarang:</p>
                 </div>
                 
-                <div>
-                    <h5 class="font-semibold text-md">Khusus Kehadiran (Tidak Masuk Tanpa Keterangan (Alpa)):</h5>
-                    <ol class="list-decimal list-inside mt-2 space-y-2 ml-4">
-                        <li>3 kali: orang tua diundang dan murid diberikan pembinaan secara khusus</li>
-                        <li>4 kali: orang tua diundang untuk membuat perjanjian tertulis bermaterai dihadapan wakil kemuridan, murid diberikan skorsing 1 hari/bakti masyarakat</li>
-                        <li>5 kali: orang tua diundang untuk membuat perjanjian tertulis bermaterai dihadapan kepala sekolah, murid diberikan skors 2 hari/bakti masyarakat</li>
-                        <li>6 kali: diadakan konferensi kasus</li>
-                    </ol>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mt-6">
+                    <div>
+                        <h6 class="font-semibold text-md mb-3 flex items-center">
+                            <i class="fas fa-ban text-red-500 mr-2"></i>
+                            Larangan Umum
+                        </h6>
+                        <ul class="regulation-list">
+                            <li>Membawa buku bacaan yang tidak sopan atau porno</li>
+                            <li>Membawa alat elektronik yang tidak berkaitan dengan pelajaran</li>
+                            <li>Merokok di lingkungan dan sekitar sekolah</li>
+                            <li>Membawa atau menggunakan obat terlarang/minuman keras</li>
+                            <li>Melakukan tawuran terhadap sesama murid</li>
+                            <li>Melakukan praktik perjudian dan main kartu</li>
+                            <li>Melakukan perbuatan asusila</li>
+                            <li>Memakai pakaian yang "compang-camping"</li>
+                            <li>Memakai perhiasan yang berlebihan</li>
+                            <li>Memakai make up, lipstik, cat kuku berlebihan</li>
+                            <li>Membawa senjata tajam atau bahan peledak</li>
+                            <li>Mencuri atau merugikan orang lain</li>
+                            <li>Berkelahi/menghasut/mengintimidasi</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h6 class="font-semibold text-md mb-3 flex items-center">
+                            <i class="fas fa-exclamation-triangle text-orange-500 mr-2"></i>
+                            Larangan Khusus
+                        </h6>
+                        <ul class="regulation-list">
+                            <li>Menerima tamu saat jam belajar tanpa izin</li>
+                            <li>Berolah raga saat jam belajar (kecuali pelajaran olah raga)</li>
+                            <li>Memakai sendal atau sepatu diinjak pada bagian belakangnya</li>
+                            <li>Berada di kantin saat jam belajar</li>
+                            <li>Mencoret-coret peralatan pembelajaran</li>
+                            <li>Berkerumun di luar lingkungan sekolah</li>
+                            <li>Membuang sampah sembarangan</li>
+                            <li>Membentuk organisasi tanpa seizin kepala sekolah</li>
+                            <li>Memalsukan dokumen</li>
+                            <li>Mengikuti organisasi/LSM diluar sekolah (yang tidak baik)</li>
+                            <li>Menjalin hubungan yang berlebihan di sekolah</li>
+                            <li>Menjalin hubungan dengan sesama jenis (LGBT)</li>
+                            <li>Melakukan pergaulan bebas</li>
+                        </ul>
+                    </div>
                 </div>
-                
-                <div>
-                    <h5 class="font-semibold text-md">Ketentuan Pelanggaran:</h5>
-                    <ul class="list-disc list-inside mt-2 space-y-2 ml-4">
-                        <li>Pelanggaran terhadap kewajiban, larangan-larangan dan aturan berpakaian akan diproses dengan ketentuan:
-                            <ul class="list-circle list-inside mt-1 space-y-1 ml-4">
-                                <li>Dinasehati langsung oleh guru/wali kelas/kemuridan</li>
-                                <li>Dibina oleh guru bimbingan konseling</li>
-                                <li>Mengundang orang tua murid serta membuat surat perjanjian bermaterai</li>
-                                <li>Apabila masih melakukan pelanggaran, maka akan dilaksanakan konfrensi kasus, termasuk kasus khusus (Narkoba, hamil dan menghamili, dan dijadikan tersangka oleh pihak penyidik)</li>
+            </div>
+        </section>
+
+        <!-- BAB VII - Sanksi -->
+        <section class="section-card mb-6 sm:mb-8 scroll-mt-20" id="bab-vii">
+            <div class="section-header">
+                <h2>Sanksi-Sanksi dan Penghargaan</h2>
+            </div>
+            <div class="section-content">
+                <div class="tab-container">
+                    <div class="tab-buttons">
+                        <button class="tab-button active" onclick="openTab(event, 'sanksi-poin')">Sanksi Poin</button>
+                        <button class="tab-button" onclick="openTab(event, 'penghargaan-poin')">Penghargaan Poin</button>
+                        <button class="tab-button" onclick="openTab(event, 'bentuk-sanksi')">Bentuk Sanksi</button>
+                    </div>
+                    
+                    <div id="sanksi-poin" class="tab-content active">
+                        <h4 class="font-semibold text-lg mb-4">Ayat 1: Sanksi Poin Negatif</h4>
+                        <p class="mb-4">Dalam sanksi dipergunakan sistem poin, dengan istilah point negatif, yaitu:</p>
+                        
+                        <div class="regulation-table violation-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Kategori Pelanggaran</th>
+                                        <th class="text-center">Jumlah Poin</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="category-header">
+                                        <td colspan="2">Pakaian / Seragam (P)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Senin tidak berpakaian PSAS (Putih-Abu) lengkap</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Selasa tidak berpakaian Batik (Batik-Abu)</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Rabu tidak berpakaian pramuka lengkap</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kamis tidak menggunakan pakaian adat</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jum'at tidak menggunakan pakaian busana muslim</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tidak bersepatu hitam/kaos kaki sesuai hari</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Berpakaian ketat atau tidak rapi</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    
+                                    <tr class="category-header">
+                                        <td colspan="2">Rambut (R)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Model rambut tidak sesuai ketentuan</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Model rambut Dimodifikasi</td>
+                                        <td class="text-center"><span class="point-badge point-medium">8</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dicat selain warna hitam</td>
+                                        <td class="text-center"><span class="point-badge point-medium">8</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tidak tertutupi kerudung (Khusus Perempuan)</td>
+                                        <td class="text-center"><span class="point-badge point-medium">8</span></td>
+                                    </tr>
+                                    
+                                    <tr class="category-header">
+                                        <td colspan="2">Aksesoris (A)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Memakai cat/pacar kuku</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Make Up berlebihan</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Laki-laki memakai perhiasan</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Perempuan memakai perhiasan berlebihan</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Berkuku panjang</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    
+                                    <tr class="category-header">
+                                        <td colspan="2">Kehadiran (K)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Terlambat masuk pintu gerbang >5 menit</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Terlambat masuk kelas > 10 menit</td>
+                                        <td class="text-center"><span class="point-badge point-medium">8</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bolos/Kabur/Pilih pelajaran</td>
+                                        <td class="text-center"><span class="point-badge point-medium">10</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Alpa</td>
+                                        <td class="text-center"><span class="point-badge point-medium">8</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Surat Palsu</td>
+                                        <td class="text-center"><span class="point-badge point-medium">10</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Keluar kelas/lingkungan sekolah tanpa izin</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tidak mengikuti upacara bendera</td>
+                                        <td class="text-center"><span class="point-badge point-medium">8</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tidak mengikuti kegiatan sekolah</td>
+                                        <td class="text-center"><span class="point-badge point-medium">15</span></td>
+                                    </tr>
+                                    
+                                    <tr class="category-header">
+                                        <td colspan="2">Kebersihan (Kb)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tidak melaksanakan tugas piket kelas</td>
+                                        <td class="text-center"><span class="point-badge point-medium">8</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Membuang sampah tidak pada tempatnya</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mencoret-coret sarana dan prasarana sekolah</td>
+                                        <td class="text-center"><span class="point-badge point-medium">10</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Menggunakan WC kepala sekolah, guru dan karyawan</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Merusak tanaman lingkungan sekolah</td>
+                                        <td class="text-center"><span class="point-badge point-medium">8</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Makan dan minum di dalam kelas/ruang praktek</td>
+                                        <td class="text-center"><span class="point-badge point-medium">8</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Merusak / menghilangkan sarana sekolah</td>
+                                        <td class="text-center"><span class="point-badge point-high">25</span></td>
+                                    </tr>
+                                    
+                                    <tr class="category-header">
+                                        <td colspan="2">Tingkah Laku (TL)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Keluar /masuk ruangan melewati jendela</td>
+                                        <td class="text-center"><span class="point-badge point-medium">10</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Berkata tidak sopan</td>
+                                        <td class="text-center"><span class="point-badge point-low">5</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Memanggil nama buruk yang bukan namanya</td>
+                                        <td class="text-center"><span class="point-badge point-low">5</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Menggunakan HP selama KBM</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Membawa alat musik (walkman, radio, ipod)</td>
+                                        <td class="text-center"><span class="point-badge point-medium">8</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Menyontek saat ulangan</td>
+                                        <td class="text-center"><span class="point-badge point-medium">8</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tidak mengerjakan tugas dari guru</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mengganggu KBM</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tidak membawa peralatan belajar</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tidur di kelas</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    
+                                    <tr class="category-header">
+                                        <td colspan="2">Susila (S)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Menyalahgunakan barang cetakan/elektronik porno</td>
+                                        <td class="text-center"><span class="point-badge point-high">30</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Membawa atau merokok di lingkungan sekolah</td>
+                                        <td class="text-center"><span class="point-badge point-high">30</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Berpacaran di sekolah</td>
+                                        <td class="text-center"><span class="point-badge point-high">25</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Anggota badan bertato dan bertindik (pria)</td>
+                                        <td class="text-center"><span class="point-badge point-high">30</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Berprilaku buruk terhadap kepala sekolah</td>
+                                        <td class="text-center"><span class="point-badge point-high">50</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Membawa alat kontrasepsi</td>
+                                        <td class="text-center"><span class="point-badge point-high">50</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bermain judi /kartu di Sekolah</td>
+                                        <td class="text-center"><span class="point-badge point-high">50</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Berbohong, memfitnah, menuduh, mengancam</td>
+                                        <td class="text-center"><span class="point-badge point-high">50</span></td>
+                                    </tr>
+                                    
+                                    <tr class="category-header">
+                                        <td colspan="2">Pelanggaran Berat (PB)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Membawa senjata tajam tanpa izin</td>
+                                        <td class="text-center"><span class="point-badge point-high">75</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Menganiaya / Berkelahi</td>
+                                        <td class="text-center"><span class="point-badge point-high">75</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mengikuti organisasi/LSM diluar sekolah</td>
+                                        <td class="text-center"><span class="point-badge point-critical">100</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Menjalin hubungan dengan sesama jenis (LGBT)</td>
+                                        <td class="text-center"><span class="point-badge point-critical">100</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tawuran</td>
+                                        <td class="text-center"><span class="point-badge point-critical">100</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mengganti/memalsukan dokumen</td>
+                                        <td class="text-center"><span class="point-badge point-critical">100</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mencuri/menipu / Pemerasan</td>
+                                        <td class="text-center"><span class="point-badge point-critical">100</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Melawan secara fisik terhadap kepala sekolah</td>
+                                        <td class="text-center"><span class="point-badge point-critical">200</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Membawa/menggunakan/mengedarkan NARKOBA</td>
+                                        <td class="text-center"><span class="point-badge point-critical">200</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Membawa/menggunakan/mengedarkan MIRAS</td>
+                                        <td class="text-center"><span class="point-badge point-critical">200</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Hamil /menghamili / Menikah</td>
+                                        <td class="text-center"><span class="point-badge point-critical">200</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pelecehan seksual / Sex bebas / Memperkosa</td>
+                                        <td class="text-center"><span class="point-badge point-critical">200</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Terbukti terlibat geng motor</td>
+                                        <td class="text-center"><span class="point-badge point-critical">200</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div id="penghargaan-poin" class="tab-content">
+                        <h4 class="font-semibold text-lg mb-4">Ayat 2: Penghargaan Poin Positif</h4>
+                        
+                        <div class="regulation-table reward-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Kategori Prestasi</th>
+                                        <th class="text-center">Jumlah Poin</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="category-header">
+                                        <td colspan="2">Prestasi Lomba</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tingkat Kelas: Juara I</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tingkat Kelas: Juara II</td>
+                                        <td class="text-center"><span class="point-badge point-low">3</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tingkat Kelas: Juara III</td>
+                                        <td class="text-center"><span class="point-badge point-low">2</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tingkat Sekolah/Kecamatan: Juara I</td>
+                                        <td class="text-center"><span class="point-badge point-low">6</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tingkat Sekolah/Kecamatan: Juara II</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tingkat Sekolah/Kecamatan: Juara III</td>
+                                        <td class="text-center"><span class="point-badge point-low">3</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tingkat Kabupaten: Juara I</td>
+                                        <td class="text-center"><span class="point-badge point-medium">8</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tingkat Kabupaten: Juara II</td>
+                                        <td class="text-center"><span class="point-badge point-low">6</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tingkat Kabupaten: Juara III</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tingkat Wilayah: Juara I</td>
+                                        <td class="text-center"><span class="point-badge point-medium">10</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tingkat Wilayah: Juara II</td>
+                                        <td class="text-center"><span class="point-badge point-low">8</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tingkat Wilayah: Juara III</td>
+                                        <td class="text-center"><span class="point-badge point-low">6</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tingkat Propinsi: Juara I</td>
+                                        <td class="text-center"><span class="point-badge point-medium">12</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tingkat Propinsi: Juara II</td>
+                                        <td class="text-center"><span class="point-badge point-medium">10</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tingkat Propinsi: Juara III</td>
+                                        <td class="text-center"><span class="point-badge point-low">8</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tingkat Nasional: Juara I</td>
+                                        <td class="text-center"><span class="point-badge point-high">40</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tingkat Nasional: Juara II</td>
+                                        <td class="text-center"><span class="point-badge point-high">30</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tingkat Nasional: Juara III</td>
+                                        <td class="text-center"><span class="point-badge point-medium">20</span></td>
+                                    </tr>
+                                    
+                                    <tr class="category-header">
+                                        <td colspan="2">Prestasi Keagamaan</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tahfid Surat-surat Al-Qur'an: 5 surat</td>
+                                        <td class="text-center"><span class="point-badge point-low">2</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tahfid Surat-surat Al-Qur'an: 10 surat</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tahfid Surat-surat Al-Qur'an: 15 surat</td>
+                                        <td class="text-center"><span class="point-badge point-low">6</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tahfid Surat-surat Al-Qur'an: 20 surat</td>
+                                        <td class="text-center"><span class="point-badge point-low">8</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tahfid Surat-surat Al-Qur'an: > 20 surat</td>
+                                        <td class="text-center"><span class="point-badge point-medium">20</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tahfidz Qur'an / Juz</td>
+                                        <td class="text-center"><span class="point-badge point-high">40</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Membaca Surat – surat Al-Qur'an: 10 surat</td>
+                                        <td class="text-center"><span class="point-badge point-low">2</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Membaca Surat – surat Al-Qur'an: 14 surat</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Membaca Surat – surat Al-Qur'an: 16 surat</td>
+                                        <td class="text-center"><span class="point-badge point-low">6</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Membaca Surat – surat Al-Qur'an: 18 surat</td>
+                                        <td class="text-center"><span class="point-badge point-low">8</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Membaca Surat – surat Al-Qur'an: ≥ 20 surat</td>
+                                        <td class="text-center"><span class="point-badge point-medium">15</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Qur'an /Juz</td>
+                                        <td class="text-center"><span class="point-badge point-medium">30</span></td>
+                                    </tr>
+                                    
+                                    <tr class="category-header">
+                                        <td colspan="2">Prestasi Organisasi</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pengurus inti kelas /semester</td>
+                                        <td class="text-center"><span class="point-badge point-low">2</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Anggota MPK/semester</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pengurus inti MPK/semester</td>
+                                        <td class="text-center"><span class="point-badge point-low">6</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Anggota pengurus OSIS/semester</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pengurus inti OSIS/semester</td>
+                                        <td class="text-center"><span class="point-badge point-low">6</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pengurus organisasi otonomi: Tingkat Kecamatan</td>
+                                        <td class="text-center"><span class="point-badge point-low">4</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pengurus organisasi otonomi: Tingkat Kabupaten</td>
+                                        <td class="text-center"><span class="point-badge point-low">6</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pengurus organisasi otonomi: Tingkat Wilayah</td>
+                                        <td class="text-center"><span class="point-badge point-low">8</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div id="bentuk-sanksi" class="tab-content">
+                        <h4 class="font-semibold text-lg mb-4">Pasal 7: Bentuk-Bentuk Sanksi</h4>
+                        <p class="mb-4">Bentuk sanksi pelanggaran berdasarkan akumulasi point negatif sebagai berikut:</p>
+                        
+                        <div class="regulation-table sanction-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">No</th>
+                                        <th>Jumlah Poin</th>
+                                        <th>Keterangan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-center">1</td>
+                                        <td class="text-center"><span class="point-badge point-low">≥12</span></td>
+                                        <td>Teguran lisan</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">2</td>
+                                        <td class="text-center"><span class="point-badge point-low">≥18</span></td>
+                                        <td>Peringatan tertulis</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">3</td>
+                                        <td class="text-center"><span class="point-badge point-low">≥22</span></td>
+                                        <td>Peringatan tertulis disampaikan kepada orang tua</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">4</td>
+                                        <td class="text-center"><span class="point-badge point-medium">≥50</span></td>
+                                        <td>Pemanggilan orang tua</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">5</td>
+                                        <td class="text-center"><span class="point-badge point-medium">≥75</span></td>
+                                        <td>Murid dan orang tua membuat surat perjanjian bermaterai</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">6</td>
+                                        <td class="text-center"><span class="point-badge point-high">≥100</span></td>
+                                        <td>Murid diskor selama tiga hari</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">7</td>
+                                        <td class="text-center"><span class="point-badge point-high">≥135</span></td>
+                                        <td>Murid diskor selama enam hari</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">8</td>
+                                        <td class="text-center"><span class="point-badge point-high">≥175</span></td>
+                                        <td>Murid diminta pindah sekolah</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">9</td>
+                                        <td class="text-center"><span class="point-badge point-critical">≥200</span></td>
+                                        <td>Murid dikembalikan kepada orang tua</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mt-6 sm:mt-8">
+                            <div class="warning-box">
+                                <h5 class="font-semibold text-md mb-3">Khusus Keterlambatan:</h5>
+                                <ol class="list-decimal list-inside space-y-2">
+                                    <li>2 kali: peringatan dan pembinaan oleh wali kelas dan guru BK</li>
+                                    <li>3 kali: diundang orang tuanya, membuat perjanjian tertulis</li>
+                                    <li>5 kali: peringatan keras oleh wali kelas dan wakil kemuridan</li>
+                                    <li>6 kali: orang tua diundang, murid diberikan skorsing 1 hari</li>
+                                    <li>9 kali: orang tua diundang, murid diberikan skorsing 3 hari</li>
+                                    <li>10 kali: dilaksanakan konferensi kasus</li>
+                                </ol>
+                            </div>
+                            
+                            <div class="warning-box">
+                                <h5 class="font-semibold text-md mb-3">Khusus Kehadiran (Alpa):</h5>
+                                <ol class="list-decimal list-inside space-y-2">
+                                    <li>3 kali: orang tua diundang dan murid diberikan pembinaan khusus</li>
+                                    <li>4 kali: orang tua diundang, murid diberikan skorsing 1 hari</li>
+                                    <li>5 kali: orang tua diundang, murid diberikan skors 2 hari</li>
+                                    <li>6 kali: diadakan konferensi kasus</li>
+                                </ol>
+                            </div>
+                        </div>
+                        
+                        <div class="success-box mt-4 sm:mt-6">
+                            <h5 class="font-semibold text-md mb-3">Ketentuan Pelanggaran:</h5>
+                            <ul class="list-disc list-inside space-y-2">
+                                <li>Pelanggaran akan diproses dengan tahapan: dinasehati, dibina, mengundang orang tua, konferensi kasus</li>
+                                <li>Pelanggaran di luar lingkungan sekolah akan diproses berdasarkan ketentuan sekolah</li>
+                                <li>Pelanggaran hukum/tindakan pidana akan diserahkan kepada pihak yang berwenang</li>
                             </ul>
-                        </li>
-                        <li>Pelanggaran yang dilakukan diluar lingkungan sekolah berdasarkan laporan dari masyarakat menyangkut segala pelanggaran yang tercantum dalam tata tertib sekolah akan diproes berdasarkan ketentuan sekolah</li>
-                        <li>Pelanggaraan yang menyangkut pelanggaran hukum/tindakan pidana akan diserahkan kepada pihak yang berwenang (kepolisian) untuk diproses secara hukum</li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h5 class="font-semibold text-md">Ketentuan Diberlakukan Tata Tertib, Poin dan Skorsing:</h5>
-                    <ul class="list-disc list-inside mt-2 space-y-2 ml-4">
-                        <li>Poin berlaku untuk satu tahun pelajaran</li>
-                        <li>Poin positif berfungsi untuk mengurangi/menghapus poin negatif atau sebagai bentuk penghargaan prestasi</li>
-                        <li>Untuk yang terkena Skorsing:
-                            <ul class="list-circle list-inside mt-1 space-y-1 ml-4">
-                                <li>Wajib menandatangani daftar hadir khusus (pagi dan siang) di petugas khusus/piket</li>
-                                <li>Melaksanakan tugas yang diberikan guru piket (tidak bersifat perpeloncoan)</li>
-                                <li>Belajar/mengerjakan tugas pelajaran pada hari itu di perpustakaan</li>
+                        </div>
+                        
+                        <div class="highlight-box mt-4 sm:mt-6">
+                            <h5 class="font-semibold text-md mb-3">Ketentuan Poin dan Skorsing:</h5>
+                            <ul class="list-disc list-inside space-y-2">
+                                <li>Poin berlaku untuk satu tahun pelajaran</li>
+                                <li>Poin positif berfungsi untuk mengurangi/menghapus poin negatif</li>
+                                <li>Murid yang diskors wajib menandatangani daftar hadir khusus, melaksanakan tugas, dan belajar di perpustakaan</li>
+                                <li>Tata tertib ini berlaku di lingkungan sekolah dan pada waktu sekolah</li>
                             </ul>
-                        </li>
-                        <li>Tata tertib ini berlaku di lingkungan sekolah dan pada waktu sekolah</li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- FOOTER -->
-    <div class="text-center text-sm text-slate-500 py-6 border-t">
-        <p>© {{ date('Y') }} SMK Negeri 1 Kawali</p>
-        <p class="mt-1">Jl. Talagasari No. 35 Kawali, Kabupaten Ciamis 46253</p>
-        <p class="mt-1">Telp. (0265) 791727 | e-mail: smkn1kawali@gmail.com</p>
+        <!-- FOOTER -->
+        <div class="text-center text-sm text-gray-500 py-4 sm:py-6 border-t">
+            <p>© {{ date('Y') }} SMK Negeri 1 Kawali</p>
+            <p class="mt-1">Jl. Talagasari No. 35 Kawali, Kabupaten Ciamis 46253</p>
+            <p class="mt-1">Telp. (0265) 791727 | e-mail: smkn1kawali@gmail.com</p>
+        </div>
     </div>
 </div>
 
 <!-- Scroll to top button -->
 <button id="scrollToTop" class="scroll-to-top fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg hidden no-print hover:bg-blue-700 transition">
-    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-    </svg>
+    <i class="fas fa-arrow-up"></i>
 </button>
 
 <script>
+document.addEventListener('DOMContentLoaded', function() {
     // Scroll to top functionality
     const scrollToTopBtn = document.getElementById('scrollToTop');
     
-    window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 300) {
-            scrollToTopBtn.classList.remove('hidden');
-        } else {
-            scrollToTopBtn.classList.add('hidden');
-        }
-    });
+    if (scrollToTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.remove('hidden');
+            } else {
+                scrollToTopBtn.classList.add('hidden');
+            }
+        });
+        
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
     
-    scrollToTopBtn.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
+    // Tab functionality - improved version
+    const tabButtons = document.querySelectorAll('.tab-button');
+    
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            // Get tab name from data attribute or onclick
+            let tabName;
+            
+            // Try to get from data-tab attribute first
+            if (this.hasAttribute('data-tab')) {
+                tabName = this.getAttribute('data-tab');
+            } 
+            // Fallback to onclick attribute parsing
+            else if (this.hasAttribute('onclick')) {
+                const onclickAttr = this.getAttribute('onclick');
+                const match = onclickAttr.match(/openTab\([^,]+,\s*['"]([^'"]+)['"]\)/);
+                if (match && match[1]) {
+                    tabName = match[1];
+                }
+            }
+            
+            if (tabName) {
+                // Remove active class from all tab contents and buttons
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                document.querySelectorAll('.tab-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Add active class to the selected tab content and button
+                const tabContent = document.getElementById(tabName);
+                if (tabContent) {
+                    tabContent.classList.add('active');
+                    this.classList.add('active');
+                }
+            }
         });
     });
+    
+    // Fallback openTab function for backward compatibility
+    window.openTab = function(evt, tabName) {
+        // Remove active class from all tab contents and buttons
+        document.querySelectorAll('.tab-content').forEach(content => {
+            content.classList.remove('active');
+        });
+        
+        document.querySelectorAll('.tab-button').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        // Add active class to the selected tab content and button
+        const tabContent = document.getElementById(tabName);
+        if (tabContent) {
+            tabContent.classList.add('active');
+            if (evt && evt.currentTarget) {
+                evt.currentTarget.classList.add('active');
+            }
+        }
+    };
     
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
         });
     });
+});
+
+// Mobile menu toggle
+function toggleMobileMenu() {
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const overlay = document.querySelector('.mobile-menu-overlay');
+    
+    mobileMenu.classList.toggle('active');
+    overlay.classList.toggle('active');
+}
 </script>
 
 </body>
