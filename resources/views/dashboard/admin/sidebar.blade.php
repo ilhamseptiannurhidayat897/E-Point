@@ -91,8 +91,6 @@
         </a>
 
 
-
-
         <!-- Jenis Prestasi -->
         <a href="{{ route('jenisprestasi.index') }}"
            class="sidebar-menu-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200

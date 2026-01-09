@@ -49,7 +49,15 @@ Route::middleware('auth')->group(function () {
         Route::resource('datapetugas', PetugasController::class);
         Route::resource('datakelas', KelasController::class)
             ->parameters(['datakelas' => 'kelas']);
-        Route::resource('walikelas', WaliKelasController::class);
+
+
+        // Wali Kelas
+        Route::resource('walikelas', WaliKelasController::class)
+        ->parameters([
+            'walikelas' => 'walikelas'
+        ]);
+
+        // Siswa
         Route::resource('datasiswa', SiswaController::class);
         Route::resource('jenisprestasi', JenisPrestasiController::class);
         Route::resource('jenispelanggaran', JenisPelanggaranController::class);
