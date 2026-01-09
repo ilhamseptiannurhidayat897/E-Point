@@ -6,15 +6,32 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use App\Models\Pelanggaran;
 use App\Models\Siswa;
+use App\Models\User;
+use App\Models\Kelas;
+use App\Models\Prestasi;
 
 
 class DashboardController extends Controller
 {
     public function admin()
     {
-        return view('dashboard.admin.dashboard');
+        return view('dashboard.admin.dashboard', [
+            'totalSiswa' => Siswa::count(),
+            'totalKelas' => Kelas::count(),
+            'totalPelanggaran' => Pelanggaran::count(),
+            'totalPrestasi' => Prestasi::count(),
+    
+            'pelanggaranTerbaru' => Pelanggaran::with(['siswa'])
+                ->latest()
+                ->limit(5)
+                ->get(),
+    
+            'prestasiTerbaru' => Prestasi::with(['siswa'])
+                ->latest()
+                ->limit(5)
+                ->get(),
+        ]);
     }
-
    
     public function bk()
     {

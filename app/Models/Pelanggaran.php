@@ -33,7 +33,7 @@ class Pelanggaran extends Model
         return $this->belongsTo(Siswa::class);
     }
 
-    public function jenis()
+    public function jenisPelanggaran()
     {
         return $this->belongsTo(JenisPelanggaran::class, 'jenis_pelanggaran_id');
     }

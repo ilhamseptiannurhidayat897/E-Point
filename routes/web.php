@@ -21,7 +21,7 @@ use App\Http\Controllers\PeraturanController;
 |--------------------------------------------------------------------------
 */
 Route::get('/', [LandingController::class, 'index'])->name('landing');
-// Route::get('/peraturan', [PeraturanController::class, 'index'])->name('peraturan');
+Route::get('/peraturan', [PeraturanController::class, 'index'])->name('peraturan');
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.post');

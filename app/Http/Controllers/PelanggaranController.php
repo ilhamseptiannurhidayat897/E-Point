@@ -44,7 +44,7 @@ class PelanggaranController extends Controller
 
         $pelanggaran = $query->latest()->get();
 
-        return view('pelanggaran.index', compact('pelanggaran'));
+        return view('dashboard.admin.pelanggaran.index', compact('pelanggaran'));
     }
 
     /**
@@ -55,7 +55,7 @@ class PelanggaranController extends Controller
         $siswa = Siswa::orderBy('nama')->get();
         $jenis = JenisPelanggaran::orderBy('nama')->get();
 
-        return view('pelanggaran.create', compact('siswa', 'jenis'));
+        return view('dashboard.admin.pelanggaran.create', compact('siswa', 'jenis'));
     }
 
     /**
