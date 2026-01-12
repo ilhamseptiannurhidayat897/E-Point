@@ -112,8 +112,8 @@
                             <span class="text-gray-400 italic text-xs md:text-sm">Tidak ada</span>
                             @endif
                         </td>
-                        <td class="px-3 md:px-6 py-3 md:py-4 text-sm text-gray-600">
-                            {{ $p->jenisPrestasi->nama ?? '-' }}
+                        <td>
+                            {{ $item->pelapor }}
                         </td>
                         <td class="px-3 md:px-6 py-3 md:py-4">
                             <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium

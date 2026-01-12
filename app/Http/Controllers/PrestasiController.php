@@ -16,7 +16,7 @@ class PrestasiController extends Controller
             'siswa',
             'jenis',
             'admin',
-            'petugas',
+            'petugas.user','admin',
             'verifikator'
         ]);
     
