@@ -51,10 +51,17 @@ class JenisPelanggaranController extends Controller
             ->with('success', 'Jenis pelanggaran berhasil diperbarui');
     }
 
-    public function destroy(JenisPelanggaran $jenispelanggaran)
+    public function destroy(JenisPelanggaran $jenisPelanggaran)
     {
-        $jenispelanggaran->delete();
-
+        if ($jenisPelanggaran->pelanggaran()->exists()) {
+            return back()->with('error', 
+                'Jenis pelanggaran tidak bisa dihapus karena sudah digunakan'
+            );
+        }
+    
+        $jenisPelanggaran->delete();
+    
         return back()->with('success', 'Jenis pelanggaran berhasil dihapus');
     }
+    
 }

@@ -34,15 +34,9 @@
             <i class="fas fa-home w-5 text-center"></i>
             <span>Dashboard</span>
         </a>
-
-        <a href="{{ route('petugas.siswa') }}"
-           class="sidebar-item {{ $menu('petugas.siswa') }}">
-            <i class="fas fa-user-graduate w-5 text-center"></i>
-            <span>Data Siswa</span>
-        </a>
-
+        
         <a href="{{ route('inputpelanggaran.create') }}"
-           class="sidebar-item {{ $menu('inputpelanggaran.*') }}">
+            class="sidebar-item {{ $menu('inputpelanggaran.*') }}">
             <i class="fas fa-exclamation-triangle w-5 text-center"></i>
             <span>Input Pelanggaran</span>
         </a>

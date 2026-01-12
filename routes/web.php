@@ -14,6 +14,8 @@ use App\Http\Controllers\PrestasiController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\WaliKelasController;
 use App\Http\Controllers\PeraturanController;
+use App\Http\Controllers\Petugas\InputPelanggaranController;
+use App\Http\Controllers\Petugas\InputPrestasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,14 +52,9 @@ Route::middleware('auth')->group(function () {
         Route::resource('datakelas', KelasController::class)
             ->parameters(['datakelas' => 'kelas']);
 
-
-        // Wali Kelas
         Route::resource('walikelas', WaliKelasController::class)
-        ->parameters([
-            'walikelas' => 'walikelas'
-        ]);
+            ->parameters(['walikelas' => 'walikelas']);
 
-        // Siswa
         Route::resource('datasiswa', SiswaController::class);
         Route::resource('jenisprestasi', JenisPrestasiController::class);
         Route::resource('jenispelanggaran', JenisPelanggaranController::class);
@@ -68,19 +65,20 @@ Route::middleware('auth')->group(function () {
     | PELANGGARAN (GLOBAL)
     |--------------------------------------------------------------------------
     */
-    Route::get('/pelanggaran', [PelanggaranController::class,'index'])
+    Route::get('/pelanggaran', [PelanggaranController::class, 'index'])
         ->name('pelanggaran.index');
 
     Route::middleware('role:admin,petugas')->group(function () {
-        Route::get('/pelanggaran/create', [PelanggaranController::class,'create'])
+        Route::get('/pelanggaran/create', [PelanggaranController::class, 'create'])
             ->name('pelanggaran.create');
-        Route::post('/pelanggaran', [PelanggaranController::class,'store'])
+        Route::post('/pelanggaran', [PelanggaranController::class, 'store'])
             ->name('pelanggaran.store');
     });
 
     Route::middleware('role:admin,bk')->group(function () {
-        Route::patch('/pelanggaran/{pelanggaran}/verifikasi',
-            [PelanggaranController::class,'verifikasi']
+        Route::patch(
+            '/pelanggaran/{pelanggaran}/verifikasi',
+            [PelanggaranController::class, 'verifikasi']
         )->name('pelanggaran.verifikasi');
     });
 
@@ -89,19 +87,20 @@ Route::middleware('auth')->group(function () {
     | PRESTASI (GLOBAL)
     |--------------------------------------------------------------------------
     */
-    Route::get('/prestasi', [PrestasiController::class,'index'])
+    Route::get('/prestasi', [PrestasiController::class, 'index'])
         ->name('prestasi.index');
 
     Route::middleware('role:admin,petugas')->group(function () {
-        Route::get('/prestasi/create', [PrestasiController::class,'create'])
+        Route::get('/prestasi/create', [PrestasiController::class, 'create'])
             ->name('prestasi.create');
-        Route::post('/prestasi', [PrestasiController::class,'store'])
+        Route::post('/prestasi', [PrestasiController::class, 'store'])
             ->name('prestasi.store');
     });
 
     Route::middleware('role:admin,bk')->group(function () {
-        Route::patch('/prestasi/{prestasi}/verifikasi',
-            [PrestasiController::class,'verifikasi']
+        Route::patch(
+            '/prestasi/{prestasi}/verifikasi',
+            [PrestasiController::class, 'verifikasi']
         )->name('prestasi.verifikasi');
     });
 
@@ -118,11 +117,31 @@ Route::middleware('auth')->group(function () {
         Route::get('/petugas/siswa', [SiswaController::class, 'index'])
             ->name('petugas.siswa');
 
-        Route::get('/petugas/pelanggaran', [PelanggaranController::class, 'index'])
-            ->name('petugas.pelanggaran');
+        // INPUT PELANGGARAN
+        Route::get('/petugas/pelanggaran/create',
+            [InputPelanggaranController::class, 'create']
+        )->name('inputpelanggaran.create');
 
-        Route::get('/petugas/prestasi', [PrestasiController::class, 'index'])
-            ->name('petugas.prestasi');
+        Route::post('/petugas/pelanggaran',
+            [InputPelanggaranController::class, 'store']
+        )->name('inputpelanggaran.store');
+
+        Route::get('/petugas/pelanggaran',
+            [InputPelanggaranController::class, 'index']
+        )->name('petugas.pelanggaran');
+
+        // INPUT PRESTASI
+        Route::get('/petugas/prestasi/create',
+            [InputPrestasiController::class, 'create']
+        )->name('inputprestasi.create');
+
+        Route::post('/petugas/prestasi',
+            [InputPrestasiController::class, 'store']
+        )->name('inputprestasi.store');
+
+        Route::get('/petugas/prestasi',
+            [InputPrestasiController::class, 'index']
+        )->name('petugas.prestasi');
     });
 
     /*
@@ -184,4 +203,5 @@ Route::middleware('auth')->group(function () {
         Route::get('/siswa/prestasi', [PrestasiController::class, 'siswaIndex'])
             ->name('siswa.prestasi');
     });
-});
+
+}); // ⬅️ PENUTUP AUTH (WAJIB)

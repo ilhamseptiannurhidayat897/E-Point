@@ -113,7 +113,7 @@
                             @endif
                         </td>
                         <td class="px-3 md:px-6 py-3 md:py-4 text-sm text-gray-600">
-                            {{ $item->petugas->name ?? 'Admin' }}
+                            {{ $item->petugas?->nama ?? 'Admin' }}
                         </td>
                         <td class="px-3 md:px-6 py-3 md:py-4">
                             <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium

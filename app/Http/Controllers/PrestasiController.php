@@ -13,18 +13,23 @@ class PrestasiController extends Controller
     public function index()
     {
         $query = Prestasi::with([
-            'siswa','jenis','admin','petugas','verifikator'
+            'siswa',
+            'jenis',
+            'admin',
+            'petugas',
+            'verifikator'
         ]);
-
-        // Petugas hanya lihat data yang dia input
+    
+        // Petugas hanya lihat data sendiri
         if (Auth::user()->role === 'petugas') {
-            $query->where('petugas_id', Auth::id());
+            $query->where('petugas_id', Auth::user()->petugas->id);
         }
-
+    
         $prestasi = $query->latest()->get();
-
+    
         return view('dashboard.admin.prestasi.index', compact('prestasi'));
     }
+    
 
     public function create()
     {
@@ -51,11 +56,14 @@ class PrestasiController extends Controller
             'siswa_id' => $request->siswa_id,
             'jenis_prestasi_id' => $request->jenis_prestasi_id,
             'admin_id' => Auth::user()->role === 'admin' ? Auth::id() : null,
-            'petugas_id' => Auth::user()->role === 'petugas' ? Auth::id() : null,
+            'petugas_id' => Auth::user()->role === 'petugas'
+                ? Auth::user()->petugas->id
+                : null,
             'keterangan' => $request->keterangan,
             'foto' => $foto,
             'status' => 'pending'
         ]);
+        
 
         return redirect()->route('prestasi.index')
             ->with('success','Prestasi berhasil ditambahkan');

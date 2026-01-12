@@ -29,6 +29,8 @@ class PelanggaranController extends Controller
         if ($user->role === 'petugas') {
             $query->where('petugas_id', $user->id);
         }
+        
+        
 
         // Siswa: hanya lihat data dirinya
         if ($user->role === 'siswa') {
@@ -79,8 +81,7 @@ class PelanggaranController extends Controller
             'siswa_id' => $request->siswa_id,
             'jenis_pelanggaran_id' => $request->jenis_pelanggaran_id,
             'admin_id' => Auth::user()->role === 'admin' ? Auth::id() : null,
-            'petugas_id' => Auth::user()->role === 'petugas' ? Auth::id() : null,
-            'keterangan' => $request->keterangan,
+                    'keterangan' => $request->keterangan,
             'foto' => $foto,
             'status' => 'pending'
         ]);
