@@ -107,7 +107,6 @@ class SiswaController extends Controller
      */
     public function destroy(Siswa $datasiswa)
     {
-        $datasiswa->delete();
         $datasiswa->user()->delete();
 
         return redirect()

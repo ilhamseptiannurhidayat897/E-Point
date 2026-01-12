@@ -33,7 +33,7 @@ class LoginController extends Controller
                     return redirect()->route('dashboard.petugas');
 
                 case 'wali_kelas':
-                    return redirect()->route('dashboard.wali_kelas');
+                    return redirect()->route('wali_kelas.dashboard');
 
                 case 'siswa':
                     return redirect()->route('dashboard.siswa');
@@ -42,7 +42,7 @@ class LoginController extends Controller
                     return redirect()->route('dashboard.admin');
 
                 case 'bk':
-                    return redirect()->route('dashboard.bk');
+                    return redirect()->route('bk.dashboard');
 
                 default:
                     Auth::logout();

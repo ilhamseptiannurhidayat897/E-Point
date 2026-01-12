@@ -23,7 +23,7 @@
     <nav class="flex-1 overflow-y-auto p-4 space-y-2 custom-scrollbar">
 
         <!-- Dashboard -->
-        <a href="{{ route('dashboard.bk') }}"
+        <a href="{{ route('bk.dashboard') }}"
            class="sidebar-menu-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium
            {{ request()->routeIs('dashboard.bk')
                 ? 'bg-gradient-to-r from-purple-700 to-purple-800 text-white shadow-lg border-l-4 border-yellow-400'
@@ -39,30 +39,13 @@
             </p>
         </div>
 
-        <!-- Verifikasi Pelanggaran -->
-        <a href="{{ route('bk.pelanggaran') }}"
-           class="sidebar-menu-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium
-           {{ request()->routeIs('bk.pelanggaran*')
-                ? 'bg-gradient-to-r from-purple-700 to-purple-800 text-white shadow-lg border-l-4 border-yellow-400'
-                : 'text-purple-200 hover:bg-purple-800/40 hover:text-white' }}">
-            <i class="fas fa-exclamation-triangle w-5 text-center"></i>
-            <span>Pelanggaran</span>
-        </a>
 
-        <!-- Verifikasi Prestasi -->
-        <a href="{{ route('bk.prestasi') }}"
-           class="sidebar-menu-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium
-           {{ request()->routeIs('bk.prestasi*')
-                ? 'bg-gradient-to-r from-purple-700 to-purple-800 text-white shadow-lg border-l-4 border-yellow-400'
-                : 'text-purple-200 hover:bg-purple-800/40 hover:text-white' }}">
-            <i class="fas fa-trophy w-5 text-center"></i>
-            <span>Prestasi</span>
-        </a>
+
 
         <!-- Data Siswa -->
-        <a href="{{ route('bk.siswa') }}"
+        <a href="{{ route('bk.siswa.index') }}"
            class="sidebar-menu-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium
-           {{ request()->routeIs('bk.siswa*')
+           {{ request()->routeIs('siswa*')
                 ? 'bg-gradient-to-r from-purple-700 to-purple-800 text-white shadow-lg border-l-4 border-yellow-400'
                 : 'text-purple-200 hover:bg-purple-800/40 hover:text-white' }}">
             <i class="fas fa-user-graduate w-5 text-center"></i>

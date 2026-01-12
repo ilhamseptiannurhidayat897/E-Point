@@ -28,34 +28,16 @@
                 : 'text-purple-200 hover:bg-purple-800/40 hover:text-white';
         @endphp
 
-        <a href="{{ route('dashboard.wali_kelas') }}"
+        <a href="{{ route('wali_kelas.dashboard') }}"
            class="sidebar-item {{ $menu('dashboard.wali_kelas') }}">
             <i class="fas fa-home w-5 text-center"></i>
             <span>Dashboard</span>
         </a>
 
-        <a href="{{ route('wali.siswa') }}"
-           class="sidebar-item {{ $menu('wali.siswa') }}">
+        <a href="{{ route('wali_kelas.siswa.index') }}"
+           class="sidebar-item {{ $menu('wali_kelas.siswa') }}">
             <i class="fas fa-user-graduate w-5 text-center"></i>
             <span>Data Siswa</span>
-        </a>
-
-        <a href="{{ route('wali.pelanggaran') }}"
-           class="sidebar-item {{ $menu('wali.pelanggaran') }}">
-            <i class="fas fa-exclamation-circle w-5 text-center"></i>
-            <span>Pelanggaran Kelas</span>
-        </a>
-
-        <a href="{{ route('wali.prestasi') }}"
-           class="sidebar-item {{ $menu('wali.prestasi') }}">
-            <i class="fas fa-star w-5 text-center"></i>
-            <span>Prestasi Kelas</span>
-        </a>
-
-        <a href="{{ route('wali.rekap') }}"
-           class="sidebar-item {{ $menu('wali.rekap') }}">
-            <i class="fas fa-chart-line w-5 text-center"></i>
-            <span>Rekap Poin</span>
         </a>
 
     </nav>

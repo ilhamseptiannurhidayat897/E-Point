@@ -10,17 +10,18 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        User::create([
-            'login_id' => '3001',
-            'password' => Hash::make('12345678'),
-            'role' => 'siswa',
-        ]);
-
         // GURU
         User::create([
             'login_id' => '2001', // NIP
             'password' => Hash::make('12345678'),
             'role' => 'wali_kelas',
+        ]);
+
+        // Siswa
+        User::create([
+            'login_id' => '3001',
+            'password' => Hash::make('12345678'),
+            'role' => 'siswa',
         ]);
 
         // PETUGAS
