@@ -45,7 +45,7 @@ class Pelanggaran extends Model
 
     public function petugas()
     {
-        return $this->belongsTo(User::class, 'petugas_id');
+        return $this->belongsTo(Petugas::class);
     }
 
     public function verifikator()

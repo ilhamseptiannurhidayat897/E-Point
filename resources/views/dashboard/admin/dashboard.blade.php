@@ -2,20 +2,17 @@
 
 @section('content')
 <!-- Hero Section -->
-<div class="bg-gradient-to-r from-primary to-purple-800 rounded-xl p-4 md:p-6 lg:p-8 mb-6 md:mb-8 text-white shadow-lg">
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+<div class="bg-gradient-to-r from-primary to-purple-800 rounded-xl p-6 text-white shadow-lg mb-6">
+    <div class="flex justify-between items-center">
         <div>
-            <h1 class="text-xl md:text-2xl lg:text-3xl font-bold mb-1 md:mb-2">Dashboard Admin</h1>
-            <p class="text-sm md:text-base text-purple-200">Sistem E-Point SMKN 1 Kawali</p>
+            <h2 class="text-2xl font-bold mb-2">Selamat Datang di Website Informasi E-Point Siswa</h2>
+            <p class="text-purple-200">Kelola data siswa, kebaikan, dan pelanggaran dengan mudah</p>
         </div>
-        <div class="flex items-center gap-3">
-            <div class="text-right">
-                <p class="text-xs text-purple-200">Selamat datang,</p>
-                <p class="text-sm md:text-base font-medium">{{ auth()->user()->name }}</p>
+        <div class="hidden md:block">
+            <div class="text-4xl font-bold">
+                <span id="current-time"></span>
             </div>
-            <div class="h-10 w-10 md:h-12 md:w-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                <span class="text-lg md:text-xl font-bold">{{ strtoupper(substr(auth()->user()->name, 0, 1)) }}</span>
-            </div>
+            <div class="text-sm text-purple-200" id="current-date"></div>
         </div>
     </div>
 </div>
@@ -274,6 +271,20 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+
+    // Update current time
+    function updateTime() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+        const dateString = now.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        
+        document.getElementById('current-time').textContent = timeString;
+        document.getElementById('current-date').textContent = dateString;
+    }
+    
+    updateTime();
+    setInterval(updateTime, 1000);
+    
     document.addEventListener('DOMContentLoaded', function() {
         // Chart Pelanggaran
         const pelanggaranCtx = document.getElementById('pelanggaranChart').getContext('2d');

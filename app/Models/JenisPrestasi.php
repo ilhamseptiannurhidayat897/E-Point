@@ -17,4 +17,5 @@ class JenisPrestasi extends Model
     {
         return $this->hasMany(Prestasi::class);
     }
+    
 }

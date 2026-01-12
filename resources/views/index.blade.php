@@ -96,6 +96,10 @@
                     <a href="#features" class="text-gray-700 hover:text-primary font-medium">Fitur</a>
                     <a href="#how-it-works" class="text-gray-700 hover:text-primary font-medium">Cara Kerja</a>
                     <a href="#faq" class="text-gray-700 hover:text-primary font-medium">FAQ</a>
+                    <a href="{{ route('peraturan') }}"
+                    class="text-gray-700 hover:text-primary font-medium">
+                        Peraturan
+                    </a>
                     <a href="/login" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-purple-800 transition-colors duration-300 text-center">
                         Masuk
                     </a>
@@ -204,7 +208,7 @@
                         <i class="fas fa-users text-primary text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold text-primary mb-3">Multi-User</h3>
-                    <p class="text-gray-600">Dukungan untuk berbagai peran pengguna: admin, guru, dan orang tua/wali siswa</p>
+                    <p class="text-gray-600">Dukungan untuk berbagai peran pengguna: admin, dan guru</p>
                 </div>
             </div>
         </div>
@@ -239,7 +243,7 @@
                         <span class="text-white text-2xl font-bold">2</span>
                     </div>
                     <h3 class="text-xl font-bold text-primary mb-2">Proses Otomatis</h3>
-                    <p class="text-gray-600 text-center">Sistem menghitung poin dan mengirim notifikasi ke orang tua</p>
+                    <p class="text-gray-600 text-center">Sistem menghitung poin</p>
                 </div>
                 
                 <!-- Arrow -->
@@ -275,18 +279,18 @@
                         <i class="fas fa-chevron-down text-primary"></i>
                     </button>
                     <div class="hidden bg-white rounded-b-xl shadow-lg p-6 border-t border-gray-100">
-                        <p class="text-gray-600">E-Point adalah sistem informasi yang dirancang khusus untuk mengelola poin kebaikan dan pelanggaran siswa di sekolah. Sistem ini memudahkan guru, admin, dan orang tua dalam memantau perkembangan siswa.</p>
+                        <p class="text-gray-600">E-Point adalah sistem informasi yang dirancang khusus untuk mengelola poin kebaikan dan pelanggaran siswa di sekolah. Sistem ini memudahkan admin, dan guru dalam memantau perkembangan siswa.</p>
                     </div>
                 </div>
                 
                 <!-- FAQ Item 2 -->
                 <div class="mb-6">
                     <button class="w-full text-left bg-white rounded-xl shadow-lg p-6 flex justify-between items-center focus:outline-none">
-                        <h3 class="text-lg font-bold text-primary">Bagaimana cara mendaftar sekolah saya?</h3>
+                        <h3 class="text-lg font-bold text-primary">-?</h3>
                         <i class="fas fa-chevron-down text-primary"></i>
                     </button>
                     <div class="hidden bg-white rounded-b-xl shadow-lg p-6 border-t border-gray-100">
-                        <p class="text-gray-600">Untuk mendaftar sekolah Anda, silakan hubungi tim kami melalui halaman kontak atau kirim email ke smkn1kawali@gmail.com. Tim kami akan membantu proses pendaftaran dan pelatihan penggunaan sistem.</p>
+                        <p class="text-gray-600">-</p>
                     </div>
                 </div>
                 
