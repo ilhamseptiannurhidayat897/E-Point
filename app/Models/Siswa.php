@@ -16,6 +16,7 @@ class Siswa extends Model
         'nis',
         'nama',
         'jk',
+        'poin',
         'alamat'
     ];
 

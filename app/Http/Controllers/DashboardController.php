@@ -74,6 +74,30 @@ class DashboardController extends Controller
 
     public function siswa()
     {
-        return view('dashboard.siswa.dashboard');
-    }
+        $siswa = auth()->user()->siswa;
+
+        // TOTAL PRESTASI (HANYA YANG DITERIMA)
+        $totalPrestasi = Prestasi::where('siswa_id', $siswa->id)
+            ->where('status', 'diterima')
+            ->with('jenis')
+            ->get()
+            ->sum(fn ($item) => $item->jenis->poin);
+
+        // TOTAL PELANGGARAN (HANYA YANG DITERIMA)
+        $totalPelanggaran = Pelanggaran::where('siswa_id', $siswa->id)
+            ->where('status', 'diterima')
+            ->with('jenisPelanggaran')
+            ->get()
+            ->sum(fn ($item) => $item->jenisPelanggaran->poin);
+
+        // TOTAL POIN AKHIR
+        $totalPoin = $totalPrestasi - $totalPelanggaran;
+
+        return view('dashboard.siswa.dashboard', compact(
+            'totalPrestasi',
+            'totalPelanggaran',
+            'totalPoin'
+        ));
+}
+
 }

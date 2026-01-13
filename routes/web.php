@@ -19,6 +19,10 @@ use App\Http\Controllers\WaliKelasController;
 use App\Http\Controllers\PeraturanController;
 use App\Http\Controllers\Petugas\InputPelanggaranController;
 use App\Http\Controllers\Petugas\InputPrestasiController;
+use App\Http\Controllers\BK\VerifikasiPelanggaranController;
+use App\Http\Controllers\BK\VerifikasiPrestasiController;
+use App\Http\Controllers\Siswa\PelanggaranController as SiswaPelanggaran;
+use App\Http\Controllers\Siswa\PrestasiController as SiswaPrestasi;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,61 +74,33 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('jenisprestasi', JenisPrestasiController::class);
         Route::resource('jenispelanggaran', JenisPelanggaranController::class);
-    });
 
-    /*
-    |--------------------------------------------------------------------------
-    | PELANGGARAN (GLOBAL)
-    |--------------------------------------------------------------------------
-    */
-
-});
-
-    // LIHAT DATA (SEMUA ROLE)
-    Route::get('/pelanggaran', [PelanggaranController::class, 'index'])
+            Route::get('/pelanggaran', [PelanggaranController::class, 'index'])
         ->name('pelanggaran.index');
 
-    Route::middleware('role:admin,petugas')->group(function () {
         Route::get('/pelanggaran/create', [PelanggaranController::class, 'create'])
             ->name('pelanggaran.create');
+
         Route::post('/pelanggaran', [PelanggaranController::class,'store']
         )->name('pelanggaran.store');
+
         Route::post('/pelanggaran', [PelanggaranController::class, 'store'])
             ->name('pelanggaran.store');
-    });
-
-    Route::middleware('role:admin,bk')->group(function () {
         Route::patch(
             '/pelanggaran/{pelanggaran}/verifikasi',
             [PelanggaranController::class, 'verifikasi']
         )->name('pelanggaran.verifikasi');
-    });
-
-    /*
-    |--------------------------------------------------------------------------
-    | PRESTASI (GLOBAL)
-    |--------------------------------------------------------------------------
-    */
-    Route::get('/prestasi', [PrestasiController::class, 'index'])
+        
+        Route::get('/prestasi', [PrestasiController::class, 'index'])
         ->name('prestasi.index');
 
-    Route::middleware('role:admin,petugas')->group(function () {
         Route::get('/prestasi/create', [PrestasiController::class, 'create'])
             ->name('prestasi.create');
+
         Route::post('/prestasi', [PrestasiController::class, 'store'])
             ->name('prestasi.store');
     });
 
-    Route::middleware('role:admin,bk')->group(function () {
-        Route::patch(
-            '/prestasi/{prestasi}/verifikasi',
-            [PrestasiController::class, 'verifikasi']
-        )->name('prestasi.verifikasi');
-    });
-
-    Route::middleware(['auth','role:admin'])->group(function () {
-        Route::resource('datasiswa', SiswaController::class);
-    });
     /*
     |--------------------------------------------------------------------------
     | PETUGAS
@@ -187,13 +163,32 @@ Route::middleware('auth')->group(function () {
         Route::get('siswa/{siswa}', [BKSiswa::class, 'show']
         )->name('siswa.show');
 
-        // PELANGGARAN
-        Route::get('pelanggaran', [PelanggaranController::class, 'index'])
-            ->name('pelanggaran.index');
+        // pelanggaran
+        Route::get('/pelanggaran', 
+            [VerifikasiPelanggaranController::class, 'index']
+        )->name('pelanggaran');
 
-        // PRESTASI
-        Route::get('prestasi', [PrestasiController::class, 'index'])
-            ->name('prestasi.index');
+        Route::put('/pelanggaran/{id}', 
+            [VerifikasiPelanggaranController::class, 'verifikasi']
+        )->name('pelanggaran.verifikasi');
+
+        // prestasi
+        Route::get('/prestasi', 
+            [VerifikasiPrestasiController::class, 'index']
+        )->name('prestasi');
+
+        Route::put('/prestasi/{id}', 
+            [VerifikasiPrestasiController::class, 'verifikasi']
+        )->name('prestasi.verifikasi');
+        // RIWAYAT VERIFIKASI
+        Route::get('pelanggaran/riwayat',
+            [VerifikasiPelanggaranController::class, 'riwayat']
+        )->name('pelanggaran.riwayat');
+
+        Route::get('prestasi/riwayat',
+            [VerifikasiPrestasiController::class, 'riwayat']
+        )->name('prestasi.riwayat');
+
     });
     /*
     |--------------------------------------------------------------------------
@@ -236,11 +231,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard/siswa', [DashboardController::class, 'siswa'])
             ->name('dashboard.siswa');
 
-        Route::get('/siswa/pelanggaran', [PelanggaranController::class, 'siswaIndex'])
-            ->name('siswa.pelanggaran');
+        Route::get('pelanggaran', [SiswaPelanggaran::class, 'index'])
+            ->name('pelanggaran');
 
-        Route::get('/siswa/prestasi', [PrestasiController::class, 'siswaIndex'])
-            ->name('siswa.prestasi');
+        Route::get('prestasi', [SiswaPrestasi::class, 'index'])
+            ->name('prestasi');
 
             Route::get('/profil-saya', [ProfilController::class, 'index'])
                 ->name('siswa.profil');
@@ -251,4 +246,4 @@ Route::middleware('auth')->group(function () {
             Route::put('/profil-saya', [ProfilController::class, 'update'])
                 ->name('siswa.profil.update');
     });
-
+});

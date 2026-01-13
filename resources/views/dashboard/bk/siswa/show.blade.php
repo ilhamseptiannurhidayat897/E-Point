@@ -13,7 +13,7 @@
 <h2 class="font-bold">Pelanggaran</h2>
 <ul>
 @forelse ($siswa->pelanggaran as $p)
-    <li>{{ $p->jenis->nama }} ({{ $p->status }})</li>
+    <li>{{ $p->jenisPelanggaran->nama }} ({{ $p->status }})</li>
 @empty
     <li>Tidak ada pelanggaran</li>
 @endforelse

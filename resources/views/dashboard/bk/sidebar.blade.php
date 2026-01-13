@@ -52,6 +52,46 @@
             <span>Data Siswa</span>
         </a>
 
+        <a href="{{ route('bk.pelanggaran') }}"
+        class="sidebar-menu-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium
+        {{ request()->routeIs('bk.pelanggaran')
+                ? 'bg-gradient-to-r from-purple-700 to-purple-800 text-white shadow-lg border-l-4 border-yellow-400'
+                : 'text-purple-200 hover:bg-purple-800/40 hover:text-white' }}">
+
+            <i class="fas fa-exclamation-triangle w-5 text-center"></i>
+            <span>Verifikasi Pelanggaran</span>
+        </a>
+
+        <a href="{{ route('bk.prestasi') }}"
+            class="sidebar-menu-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium
+            {{ request()->routeIs('bk.prestasi')
+                    ? 'bg-gradient-to-r from-purple-700 to-purple-800 text-white shadow-lg border-l-4 border-yellow-400'
+                    : 'text-purple-200 hover:bg-purple-800/40 hover:text-white' }}">
+
+                <i class="fas fa-award w-5 text-center"></i>
+            <span>Verifikasi Prestasi</span>
+        </a>
+
+        <a href="{{ route('bk.pelanggaran.riwayat') }}"
+        class="sidebar-menu-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium
+        {{ request()->routeIs('bk.pelanggaran.riwayat')
+                ? 'bg-gradient-to-r from-purple-700 to-purple-800 text-white shadow-lg border-l-4 border-yellow-400'
+                : 'text-purple-200 hover:bg-purple-800/40 hover:text-white' }}">
+
+            <i class="fas fa-history w-5 text-center"></i>
+            <span>Riwayat Pelanggaran</span>
+        </a>
+
+        <a href="{{ route('bk.prestasi.riwayat') }}"
+        class="sidebar-menu-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium
+        {{ request()->routeIs('bk.prestasi.riwayat')
+                ? 'bg-gradient-to-r from-purple-700 to-purple-800 text-white shadow-lg border-l-4 border-yellow-400'
+                : 'text-purple-200 hover:bg-purple-800/40 hover:text-white' }}">
+
+            <i class="fas fa-history w-5 text-center"></i>
+            <span>Riwayat Prestasi</span>
+        </a>
+
     </nav>
 
     <!-- Logout -->

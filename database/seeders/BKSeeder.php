@@ -14,7 +14,7 @@ class BKSeeder extends Seeder
     {
         BK::create([
             'user_id' => 5,
-            'nk' => '4001',
+            'nk' => '5001',
             'nama' => 'Petugas Contoh',
         ]);
     }

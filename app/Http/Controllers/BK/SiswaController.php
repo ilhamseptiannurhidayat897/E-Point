@@ -14,7 +14,7 @@ class SiswaController extends Controller
     {
         $siswa = Siswa::with([
             'kelas.walikelas',
-            'pelanggaran.jenis',
+            'pelanggaran.jenisPelanggaran',
             'prestasi.jenis'
         ])->latest()->get();
 
@@ -28,7 +28,7 @@ class SiswaController extends Controller
     {
         $siswa->load([
             'kelas.walikelas',
-            'pelanggaran.jenis',
+            'pelanggaran.jenisPelanggaran',
             'prestasi.jenis'
         ]);
 

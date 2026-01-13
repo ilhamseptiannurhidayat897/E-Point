@@ -201,7 +201,7 @@
                         id="login_id" 
                         value="{{ old('login_id') }}"
                         class="input-field w-full py-3 pr-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none"
-                        placeholder="NIS / NIP / NK"
+                        placeholder="NIS / NIP "
                         required
                         autofocus
                     >
@@ -240,10 +240,10 @@
                 <!-- Remember Me & Forgot Password -->
                 <div class="flex justify-between items-center">
                     <div class="checkbox-wrapper">
-                        <input type="checkbox" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}>
-                        <label for="remember" class="text-gray-700 cursor-pointer">Ingatkan saya</label>
+                        <!-- <input type="checkbox" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}> -->
+                        <!-- <label for="remember" class="text-gray-700 cursor-pointer">Ingatkan saya</label> -->
                     </div>
-                    <a href="#" class="text-purple-600 hover:text-purple-800 font-medium transition-colors">Lupa Kata Sandi?</a>
+                    <!-- <a href="#" class="text-purple-600 hover:text-purple-800 font-medium transition-colors">Lupa Kata Sandi?</a> -->
                 </div>
 
                 <!-- Submit Button -->
@@ -275,7 +275,7 @@
             <div class="absolute inset-0 flex flex-col justify-end p-6">
                 <div class="text-white bg-black/30 backdrop-blur-sm rounded-lg p-4">
                     <h2 class="text-2xl font-bold mb-2">SMKN 1 Kawali</h2>
-                    <p class="text-base opacity-90">Membangun Karakter Unggul Melalui Poin Kebaikan</p>
+                    <p class="text-base opacity-90">Membangun Karakter Unggul Melalui Poin Prestasi</p>
                 </div>
             </div>
         </div>

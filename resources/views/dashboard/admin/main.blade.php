@@ -142,16 +142,7 @@
                     </div>
 
                     <!-- Right Section -->
-                    <div class="flex items-center gap-2 md:gap-4">
-                        
-                        <!-- Notification Button -->
-                        <button 
-                            class="relative p-2 text-gray-600 hover:text-primary hover:bg-gray-100 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary/20"
-                            aria-label="Notifications">
-                            <i class="fas fa-bell text-base md:text-lg"></i>
-                            <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full ring-2 ring-white"></span>
-                        </button>
-                        
+                    <div class="flex items-center gap-2 md:gap-4">                      
                         <!-- User Profile -->
                         <div class="flex items-center gap-2 md:gap-3 p-1 md:p-2 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
                             <div class="relative">
