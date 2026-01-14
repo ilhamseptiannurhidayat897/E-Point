@@ -33,7 +33,7 @@
             Dashboard
         </a>
 
-        <a href="{{ route('profil-saya.index') }}"
+        <a href="{{ route('siswa.profil') }}"
         class="flex items-center gap-3 px-4 py-3 rounded-xl
         {{ request()->routeIs('profil*') ? $active : $normal }}">
             <i class="fas fa-user w-5 text-center"></i>

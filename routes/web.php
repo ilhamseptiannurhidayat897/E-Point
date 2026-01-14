@@ -191,7 +191,13 @@ Route::middleware('auth')->group(function () {
         Route::get('prestasi', [SiswaPrestasi::class, 'index'])
             ->name('siswa.prestasi');
 
-        Route::resource('profil-saya', ProfilController::class)
-            ->only(['index','edit','update']);
+        Route::get('/profil', [ProfilController::class, 'index'])
+            ->name('siswa.profil');
+
+        Route::get('/profil/edit', [ProfilController::class, 'edit'])
+            ->name('siswa.profil.edit');
+
+        Route::put('/profil', [ProfilController::class, 'update'])
+            ->name('siswa.profil.update');
     });
 });
