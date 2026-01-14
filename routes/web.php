@@ -26,18 +26,17 @@ use App\Http\Controllers\Siswa\PrestasiController as SiswaPrestasi;
 
 /*
 |--------------------------------------------------------------------------
-| Landing & Auth
+| PUBLIC
 |--------------------------------------------------------------------------
 */
 Route::get('/', [LandingController::class, 'index'])->name('landing');
 Route::get('/peraturan', [PeraturanController::class, 'index'])->name('peraturan');
-
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.post');
 
 /*
 |--------------------------------------------------------------------------
-| Authenticated
+| AUTHENTICATED
 |--------------------------------------------------------------------------
 */
 Route::middleware('auth')->group(function () {
@@ -56,49 +55,60 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('databk', BKController::class);
         Route::resource('datapetugas', PetugasController::class);
-
-        // Siswa
         Route::resource('datasiswa', SiswaController::class);
 
-        // Kelas
         Route::resource('datakelas', KelasController::class)
             ->parameters(['datakelas' => 'kelas']);
 
-        // Wali Kelas
         Route::resource('walikelas', WaliKelasController::class)
             ->parameters(['walikelas' => 'walikelas']);
 
-        Route::resource('datasiswa', SiswaController::class);
-
-        // Jenis Prestasi
-
         Route::resource('jenisprestasi', JenisPrestasiController::class);
         Route::resource('jenispelanggaran', JenisPelanggaranController::class);
+    });
 
-            Route::get('/pelanggaran', [PelanggaranController::class, 'index'])
+    /*
+    |--------------------------------------------------------------------------
+    | PELANGGARAN
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/pelanggaran', [PelanggaranController::class, 'index'])
         ->name('pelanggaran.index');
 
+    Route::middleware('role:admin,petugas')->group(function () {
         Route::get('/pelanggaran/create', [PelanggaranController::class, 'create'])
             ->name('pelanggaran.create');
 
-        Route::post('/pelanggaran', [PelanggaranController::class,'store']
-        )->name('pelanggaran.store');
-
         Route::post('/pelanggaran', [PelanggaranController::class, 'store'])
             ->name('pelanggaran.store');
-        Route::patch(
-            '/pelanggaran/{pelanggaran}/verifikasi',
+    });
+
+    Route::middleware('role:admin,bk')->group(function () {
+        Route::patch('/pelanggaran/{pelanggaran}/verifikasi',
             [PelanggaranController::class, 'verifikasi']
         )->name('pelanggaran.verifikasi');
-        
-        Route::get('/prestasi', [PrestasiController::class, 'index'])
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | PRESTASI
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/prestasi', [PrestasiController::class, 'index'])
         ->name('prestasi.index');
 
+    Route::middleware('role:admin,petugas')->group(function () {
         Route::get('/prestasi/create', [PrestasiController::class, 'create'])
             ->name('prestasi.create');
 
         Route::post('/prestasi', [PrestasiController::class, 'store'])
             ->name('prestasi.store');
+    });
+
+    Route::middleware('role:admin,bk')->group(function () {
+        Route::patch('/prestasi/{prestasi}/verifikasi',
+            [PrestasiController::class, 'verifikasi']
+        )->name('prestasi.verifikasi');
     });
 
     /*
@@ -114,31 +124,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/petugas/siswa', [SiswaController::class, 'index'])
             ->name('petugas.siswa');
 
-        // INPUT PELANGGARAN
-        Route::get('/petugas/pelanggaran/create',
-            [InputPelanggaranController::class, 'create']
-        )->name('inputpelanggaran.create');
+        Route::resource('petugas/pelanggaran', InputPelanggaranController::class)
+            ->only(['index','create','store']);
 
-        Route::post('/petugas/pelanggaran',
-            [InputPelanggaranController::class, 'store']
-        )->name('inputpelanggaran.store');
-
-        Route::get('/petugas/pelanggaran',
-            [InputPelanggaranController::class, 'index']
-        )->name('petugas.pelanggaran');
-
-        // INPUT PRESTASI
-        Route::get('/petugas/prestasi/create',
-            [InputPrestasiController::class, 'create']
-        )->name('inputprestasi.create');
-
-        Route::post('/petugas/prestasi',
-            [InputPrestasiController::class, 'store']
-        )->name('inputprestasi.store');
-
-        Route::get('/petugas/prestasi',
-            [InputPrestasiController::class, 'index']
-        )->name('petugas.prestasi');
+        Route::resource('petugas/prestasi', InputPrestasiController::class)
+            ->only(['index','create','store']);
     });
 
     /*
@@ -146,104 +136,62 @@ Route::middleware('auth')->group(function () {
     | BK
     |--------------------------------------------------------------------------
     */
+    Route::prefix('bk')->name('bk.')->middleware('role:bk')->group(function () {
 
-    Route::middleware(['auth','role:bk'])
-        ->prefix('bk')
-        ->name('bk.')
-        ->group(function () {
+        Route::get('dashboard', [DashboardController::class, 'bk'])->name('dashboard');
+        Route::resource('siswa', BKSiswa::class)->only(['index','show']);
 
-        // DASHBOARD BK
-        Route::get('dashboard', [DashboardController::class, 'bk'])
-            ->name('dashboard');
+        Route::get('pelanggaran', [VerifikasiPelanggaranController::class, 'index'])
+            ->name('pelanggaran');
 
-        // DATA SISWA
-        Route::get('siswa', [BKSiswa::class, 'index'])
-            ->name('siswa.index');
-
-        Route::get('siswa/{siswa}', [BKSiswa::class, 'show']
-        )->name('siswa.show');
-
-        // pelanggaran
-        Route::get('/pelanggaran', 
-            [VerifikasiPelanggaranController::class, 'index']
-        )->name('pelanggaran');
-
-        Route::put('/pelanggaran/{id}', 
+        Route::put('pelanggaran/{id}',
             [VerifikasiPelanggaranController::class, 'verifikasi']
         )->name('pelanggaran.verifikasi');
 
-        // prestasi
-        Route::get('/prestasi', 
-            [VerifikasiPrestasiController::class, 'index']
-        )->name('prestasi');
+        Route::get('prestasi', [VerifikasiPrestasiController::class, 'index'])
+            ->name('prestasi');
 
-        Route::put('/prestasi/{id}', 
+        Route::put('prestasi/{id}',
             [VerifikasiPrestasiController::class, 'verifikasi']
         )->name('prestasi.verifikasi');
-        // RIWAYAT VERIFIKASI
-        Route::get('pelanggaran/riwayat',
-            [VerifikasiPelanggaranController::class, 'riwayat']
-        )->name('pelanggaran.riwayat');
-
-        Route::get('prestasi/riwayat',
-            [VerifikasiPrestasiController::class, 'riwayat']
-        )->name('prestasi.riwayat');
-
     });
+
     /*
     |--------------------------------------------------------------------------
     | WALI KELAS
     |--------------------------------------------------------------------------
     */
-    Route::middleware(['auth','role:wali_kelas'])
-        ->prefix('wali-kelas')
-        ->name('wali_kelas.')
-        ->group(function () {
+    Route::prefix('wali-kelas')->name('wali_kelas.')
+        ->middleware('role:wali_kelas')->group(function () {
 
-            Route::get('dashboard', [DashboardController::class, 'wali_kelas'])
-                ->name('dashboard');
+        Route::get('dashboard', [DashboardController::class, 'wali_kelas'])
+            ->name('dashboard');
 
-            Route::get('siswa', [WaliSiswa::class, 'index'])
-                ->name('siswa.index');
-
-            Route::get('siswa/{siswa}', [WaliSiswa::class, 'show'])
-                ->name('siswa.show');
-
-        // PELANGGARAN
+        Route::resource('siswa', WaliSiswa::class)->only(['index','show']);
         Route::get('pelanggaran', [PelanggaranController::class, 'index'])
             ->name('pelanggaran.index');
 
-        // PRESTASI
         Route::get('prestasi', [PrestasiController::class, 'index'])
             ->name('prestasi.index');
-
-        // REKAP (opsional)
-        Route::get('rekap', [DashboardController::class, 'waliRekap'])
-            ->name('rekap');
     });
+
     /*
     |--------------------------------------------------------------------------
     | SISWA
     |--------------------------------------------------------------------------
     */
-    Route::middleware(['auth','role:siswa'])->group(function () {
+    Route::middleware('role:siswa')->group(function () {
 
         Route::get('/dashboard/siswa', [DashboardController::class, 'siswa'])
             ->name('dashboard.siswa');
 
         Route::get('pelanggaran', [SiswaPelanggaran::class, 'index'])
-            ->name('pelanggaran');
+            ->name('siswa.pelanggaran');
 
         Route::get('prestasi', [SiswaPrestasi::class, 'index'])
-            ->name('prestasi');
+            ->name('siswa.prestasi');
 
-            Route::get('/profil-saya', [ProfilController::class, 'index'])
-                ->name('siswa.profil');
-
-            Route::get('/profil-saya/edit', [ProfilController::class, 'edit'])
-                ->name('siswa.profil.edit');
-
-            Route::put('/profil-saya', [ProfilController::class, 'update'])
-                ->name('siswa.profil.update');
+        Route::resource('profil-saya', ProfilController::class)
+            ->only(['index','edit','update']);
     });
 });
