@@ -33,21 +33,21 @@
             Dashboard
         </a>
 
-        <a href="{{ route('siswa.profil') }}"
+        <a href="{{ route('profil-saya.index') }}"
         class="flex items-center gap-3 px-4 py-3 rounded-xl
-        {{ request()->routeIs('siswa.profil*') ? $active : $normal }}">
+        {{ request()->routeIs('profil*') ? $active : $normal }}">
             <i class="fas fa-user w-5 text-center"></i>
             Profil
         </a>
 
-        <a href="{{ route('prestasi') }}"
+        <a href="{{ route('siswa.prestasi') }}"
         class="flex items-center gap-3 px-4 py-3 rounded-xl
         {{ request()->routeIs('prestasi*') ? $active : $normal }}">
             <i class="fas fa-user w-5 text-center"></i>
             Prestasi
         </a>
         
-        <a href="{{ route('pelanggaran') }}"
+        <a href="{{ route('siswa.pelanggaran') }}"
         class="flex items-center gap-3 px-4 py-3 rounded-xl
         {{ request()->routeIs('pelanggaran*') ? $active : $normal }}">
             <i class="fas fa-user w-5 text-center"></i>
