@@ -32,15 +32,18 @@
             <span>Dashboard</span>
         </a>
 
+        <a href="{{ route('bk.profil') }}"
+        class="sidebar-item {{ request()->routeIs('profil*') ? 'active' : '' }}">
+            <i class="fas fa-user-graduate"></i>
+            <span>Profil</span>
+        </a>
+
         <!-- Divider -->
         <div class="pt-3 pb-2">
             <p class="px-4 text-xs font-semibold text-purple-300 uppercase tracking-wider opacity-70">
                 Monitoring
             </p>
         </div>
-
-
-
 
         <!-- Data Siswa -->
         <a href="{{ route('bk.siswa.index') }}"
@@ -72,25 +75,6 @@
             <span>Verifikasi Prestasi</span>
         </a>
 
-        <a href="{{ route('bk.pelanggaran.riwayat') }}"
-        class="sidebar-menu-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium
-        {{ request()->routeIs('bk.pelanggaran.riwayat')
-                ? 'bg-gradient-to-r from-purple-700 to-purple-800 text-white shadow-lg border-l-4 border-yellow-400'
-                : 'text-purple-200 hover:bg-purple-800/40 hover:text-white' }}">
-
-            <i class="fas fa-history w-5 text-center"></i>
-            <span>Riwayat Pelanggaran</span>
-        </a>
-
-        <a href="{{ route('bk.prestasi.riwayat') }}"
-        class="sidebar-menu-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium
-        {{ request()->routeIs('bk.prestasi.riwayat')
-                ? 'bg-gradient-to-r from-purple-700 to-purple-800 text-white shadow-lg border-l-4 border-yellow-400'
-                : 'text-purple-200 hover:bg-purple-800/40 hover:text-white' }}">
-
-            <i class="fas fa-history w-5 text-center"></i>
-            <span>Riwayat Prestasi</span>
-        </a>
 
     </nav>
 

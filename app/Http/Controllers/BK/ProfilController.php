@@ -1,59 +1,44 @@
 <?php
 
-namespace App\Http\Controllers\Siswa;
+namespace App\Http\Controllers\BK;
 
 use App\Http\Controllers\Controller;
-use App\Models\Siswa;
+use App\Models\BK;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
 
 class ProfilController extends Controller
 {
     public function index()
     {
-        $siswa = Siswa::with('kelas')
-            ->where('user_id', Auth::id())
+        $bk = BK::where('user_id', Auth::id())
             ->firstOrFail();
 
-        return view('dashboard.siswa.profil.index', compact('siswa'));
+        return view('dashboard.bk.profil.index', compact('bk'));
     }
 
     public function edit()
     {
-        $siswa = Siswa::where('user_id', Auth::id())
+        $bk = BK::where('user_id', Auth::id())
             ->firstOrFail();
 
-        return view('dashboard.siswa.profil.edit', compact('siswa'));
+        return view('dashboard.bk.profil.edit', compact('bk'));
     }
 
     public function update(Request $request)
     {
-        $siswa = Siswa::where('user_id', Auth::id())
-            ->firstOrFail();
-
         $request->validate([
-            'alamat' => 'nullable|string',
-
-            // validasi password (boleh kosong)
             'current_password' => 'nullable|required_with:password',
             'password' => 'nullable|min:6|confirmed',
         ]);
 
-        // update alamat
-        $siswa->update([
-            'alamat' => $request->alamat,
-        ]);
-
-        // =============================
-        // GANTI PASSWORD JIKA DIISI
-        // =============================
+        // ganti password jika diisi
         if ($request->filled('password')) {
 
             if (!Hash::check($request->current_password, Auth::user()->password)) {
                 return back()->withErrors([
-                    'current_password' => 'Password lama tidak sesuai'
+                    'current_password' => 'Password lama salah'
                 ]);
             }
 
@@ -63,7 +48,7 @@ class ProfilController extends Controller
         }
 
         return redirect()
-            ->route('siswa.profil')
-            ->with('success', 'Profil berhasil diperbarui');
+            ->route('bk.profil')
+            ->with('success', 'Password berhasil diperbarui');
     }
 }

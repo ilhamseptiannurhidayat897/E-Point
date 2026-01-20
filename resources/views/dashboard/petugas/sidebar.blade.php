@@ -34,7 +34,8 @@
             <i class="fas fa-home w-5 text-center"></i>
             <span>Dashboard</span>
         </a>
-        
+
+             
         <a href="{{ route('inputpelanggaran.create') }}"
             class="sidebar-item {{ $menu('inputpelanggaran.*') }}">
             <i class="fas fa-exclamation-triangle w-5 text-center"></i>
@@ -47,13 +48,13 @@
             <span>Input Prestasi</span>
         </a>
 
-        <a href="{{ route('petugas.pelanggaran') }}"
+        <a href="{{ route('inputpelanggaran.index') }}"
            class="sidebar-item {{ $menu('petugas.pelanggaran') }}">
             <i class="fas fa-list w-5 text-center"></i>
             <span>Riwayat Pelanggaran</span>
         </a>
 
-        <a href="{{ route('petugas.prestasi') }}"
+        <a href="{{ route('inputprestsai.index') }}"
            class="sidebar-item {{ $menu('petugas.prestasi') }}">
             <i class="fas fa-medal w-5 text-center"></i>
             <span>Riwayat Prestasi</span>

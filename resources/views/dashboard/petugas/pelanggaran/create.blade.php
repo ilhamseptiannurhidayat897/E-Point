@@ -14,82 +14,43 @@
     </div>
 @endif
 
-    <form action="{{ route('inputpelanggaran.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
+    <form action="{{ route('inputpelanggaran.store') }}"
+      method="POST"
+      enctype="multipart/form-data">
+    @csrf
 
-        <div class="mb-4">
-            <label class="font-medium">Siswa</label>
-        
-            <select name="siswa_id"
-                class="w-full border rounded p-2
-                @error('siswa_id') border-red-500 @enderror">
-                <option value="">-- Pilih Siswa --</option>
-                @foreach($siswa as $s)
-                    <option value="{{ $s->id }}"
-                        {{ old('siswa_id') == $s->id ? 'selected' : '' }}>
-                        {{ $s->nama }}
-                    </option>
-                @endforeach
-            </select>
-        
-            @error('siswa_id')
-                <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
-            @enderror
-        </div>
-        
+    <div class="mb-3">
+        <label>Siswa</label>
+        <select name="siswa_id" class="form-control" required>
+            <option value="">-- Pilih Siswa --</option>
+            @foreach ($siswa as $s)
+                <option value="{{ $s->id }}">{{ $s->nama }}</option>
+            @endforeach
+        </select>
+    </div>
 
-        <div class="mb-4">
-            <label class="font-medium">Jenis Pelanggaran</label>
-        
-            <select name="jenis_pelanggaran_id"
-                class="w-full border rounded p-2
-                @error('jenis_pelanggaran_id') border-red-500 @enderror">
-        
-                <option value="">-- Pilih --</option>
-                @foreach($jenis as $j)
-                    <option value="{{ $j->id }}"
-                        {{ old('jenis_pelanggaran_id') == $j->id ? 'selected' : '' }}>
-                        {{ $j->nama }}
-                    </option>
-                @endforeach
-            </select>
-        
-            @error('jenis_pelanggaran_id')
-                <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
-            @enderror
-        </div>
-        
+    <div class="mb-3">
+        <label>Jenis Pelanggaran</label>
+        <select name="jenis_pelanggaran_id" class="form-control" required>
+            <option value="">-- Pilih Jenis --</option>
+            @foreach ($jenis as $j)
+                <option value="{{ $j->id }}">{{ $j->nama }}</option>
+            @endforeach
+        </select>
+    </div>
 
-        <div class="mb-4">
-            <label class="font-medium">Keterangan</label>
-        
-            <textarea name="keterangan"
-                class="w-full border rounded p-2
-                @error('keterangan') border-red-500 @enderror"
-                rows="3">{{ old('keterangan') }}</textarea>
-        
-            @error('keterangan')
-                <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
-            @enderror
-        </div>
-        
+    <div class="mb-3">
+        <label>Keterangan</label>
+        <textarea name="keterangan" class="form-control"></textarea>
+    </div>
 
-        <div class="mb-4">
-            <label class="font-medium">Foto (opsional)</label>
-        
-            <input type="file" name="foto"
-                class="w-full
-                @error('foto') border-red-500 @enderror">
-        
-            @error('foto')
-                <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
-            @enderror
-        </div>
-        
+    <div class="mb-3">
+        <label>Foto (opsional)</label>
+        <input type="file" name="foto" class="form-control">
+    </div>
 
-        <button class="bg-purple-700 text-white px-4 py-2 rounded">
-            Simpan
-        </button>
-    </form>
+    <button class="btn btn-success">Simpan</button>
+</form>
+
 </div>
 @endsection

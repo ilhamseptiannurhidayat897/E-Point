@@ -40,6 +40,28 @@
                       rows="3">{{ old('alamat', $siswa->alamat) }}</textarea>
         </div>
 
+        <hr class="my-6">
+
+        <h2 class="text-lg font-semibold mb-3">Ganti Password</h2>
+
+        <div class="mb-4">
+            <label class="block font-medium mb-1">Password Lama</label>
+            <input type="password" name="current_password"
+                class="w-full border rounded px-3 py-2">
+        </div>
+
+        <div class="mb-4">
+            <label class="block font-medium mb-1">Password Baru</label>
+            <input type="password" name="password"
+                class="w-full border rounded px-3 py-2">
+        </div>
+
+        <div class="mb-4">
+            <label class="block font-medium mb-1">Konfirmasi Password Baru</label>
+            <input type="password" name="password_confirmation"
+                class="w-full border rounded px-3 py-2">
+        </div>
+
         <div class="flex gap-2">
             <button type="submit"
                     class="px-4 py-2 bg-purple-700 text-white rounded hover:bg-purple-800">

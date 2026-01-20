@@ -34,6 +34,12 @@
             <span>Dashboard</span>
         </a>
 
+        <a href="{{ route('wali_kelas.profil') }}"
+            class="sidebar-item {{ $menu('wali_kelas.profil*') }}">
+            <i class="fas fa-user-graduate w-5 text-center"></i>
+            <span>Profil</span>
+        </a>
+        
         <a href="{{ route('wali_kelas.siswa.index') }}"
            class="sidebar-item {{ $menu('wali_kelas.siswa') }}">
             <i class="fas fa-user-graduate w-5 text-center"></i>

@@ -13,7 +13,9 @@ use App\Http\Controllers\PelanggaranController;
 use App\Http\Controllers\PrestasiController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\BK\SiswaController as BKSiswa;
+use App\Http\Controllers\BK\ProfilController as BKProfil;
 use App\Http\Controllers\WaliKelas\SiswaController as WaliSiswa;
+use App\Http\Controllers\WaliKelas\ProfilController as WaliProfil;
 use App\Http\Controllers\Siswa\ProfilController;
 use App\Http\Controllers\WaliKelasController;
 use App\Http\Controllers\PeraturanController;
@@ -125,10 +127,20 @@ Route::middleware('auth')->group(function () {
             ->name('petugas.siswa');
 
         Route::resource('petugas/pelanggaran', InputPelanggaranController::class)
-            ->only(['index','create','store']);
+            ->only(['index','create','store'])
+            ->names([
+                'index' => 'inputpelanggaran.index',
+                'create' => 'inputpelanggaran.create',
+                'store' => 'inputpelanggaran.store',
+            ]);
 
         Route::resource('petugas/prestasi', InputPrestasiController::class)
-            ->only(['index','create','store']);
+            ->only(['index','create','store'])
+            ->names([
+                'index' => 'inputprestsai.index',
+                'create' => 'inputprestasi.create',
+                'store' => 'inputprestasi.store',
+            ]);
     });
 
     /*
@@ -154,6 +166,16 @@ Route::middleware('auth')->group(function () {
         Route::put('prestasi/{id}',
             [VerifikasiPrestasiController::class, 'verifikasi']
         )->name('prestasi.verifikasi');
+
+        Route::get('/profil', [BKProfil::class, 'index'])
+            ->name('profil');
+
+        Route::get('/profil/edit', [BKProfil::class, 'edit'])
+            ->name('profil.edit');
+
+        Route::put('/profil', [BKProfil::class, 'update'])
+            ->name('profil.update');
+
     });
 
     /*
@@ -173,6 +195,15 @@ Route::middleware('auth')->group(function () {
 
         Route::get('prestasi', [PrestasiController::class, 'index'])
             ->name('prestasi.index');
+
+        Route::get('/profil', [WaliProfil::class, 'index'])
+        ->name('profil');
+
+        Route::get('/profil/edit', [WaliProfil::class, 'edit'])
+            ->name('profil.edit');
+
+        Route::put('/profil', [WaliProfil::class, 'update'])
+            ->name('profil.update');
     });
 
     /*
