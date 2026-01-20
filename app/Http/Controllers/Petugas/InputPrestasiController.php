@@ -17,7 +17,7 @@ class InputPrestasiController extends Controller
     public function index()
     {
         $prestasi = Prestasi::with(['siswa', 'jenis'])
-            ->where('petugas_id', auth()->user()->petugas->id)
+            ->where('petugas_id', Auth::user()->petugas->id)
             ->latest()
             ->get();
     
@@ -56,12 +56,10 @@ class InputPrestasiController extends Controller
         Prestasi::create([
             'siswa_id' => $request->siswa_id,
             'jenis_prestasi_id' => $request->jenis_prestasi_id,
-            'petugas_id' => auth()->user()->petugas->id, // ⬅️ WAJIB
+            'petugas_id' => Auth::user()->petugas->id,// ⬅️ WAJIB
             'keterangan' => $request->keterangan,
             'status' => 'pending',
         ]);
-        return redirect()
-            ->route('petugas.prestasi')
-            ->with('success', 'Prestasi berhasil dikirim');
+        return back()->with('success', 'Prestasi berhasil dikirim');
     }
 }

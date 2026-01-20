@@ -43,7 +43,7 @@ class SiswaController extends Controller
 
         $user = User::create([
             'login_id' => $request->nis,
-            'password' => Hash::make($request->nis),
+            'password' => Hash::make('12345678'),
             'role' => 'siswa',
         ]);
 

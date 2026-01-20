@@ -27,7 +27,13 @@ class WaliKelasController extends Controller
     public function create()
     {
         return view('dashboard.admin.walikelas.create', [
-            'kelas' => Kelas::orderBy('nama_kelas')->get()
+            'kelas' => Kelas::whereNotIn('id', function ($query) {
+                $query->select('kelas_id')
+                    ->from('wali_kelas')
+                    ->whereNotNull('kelas_id');
+            })
+            ->orderBy('nama_kelas')
+            ->get()
         ]);
     }
 
@@ -71,7 +77,16 @@ class WaliKelasController extends Controller
     {
         return view('dashboard.admin.walikelas.edit', [
             'walikelas' => $walikelas,
-            'kelas'     => Kelas::orderBy('nama_kelas')->get()
+            'kelas' => Kelas::where(function ($query) use ($walikelas) {
+                $query->whereNotIn('id', function ($sub) use ($walikelas) {
+                    $sub->select('kelas_id')
+                        ->from('wali_kelas')
+                        ->where('id', '!=', $walikelas->id);
+                })
+                ->orWhere('id', $walikelas->kelas_id);
+            })
+            ->orderBy('nama_kelas')
+            ->get()
         ]);
     }
 

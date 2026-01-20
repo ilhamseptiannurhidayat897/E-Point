@@ -50,11 +50,16 @@ Route::middleware('auth')->group(function () {
     | ADMIN
     |--------------------------------------------------------------------------
     */
-    Route::middleware('role:admin')->group(function () {
+    Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
 
-        Route::get('/admin/dashboard', [DashboardController::class, 'admin'])
+        Route::get('/dashboard', [DashboardController::class, 'admin'])
             ->name('dashboard.admin');
 
+        /*
+        |--------------------------------------------------------------------------
+        | MASTER DATA
+        |--------------------------------------------------------------------------
+        */
         Route::resource('databk', BKController::class);
         Route::resource('datapetugas', PetugasController::class);
         Route::resource('datasiswa', SiswaController::class);
@@ -67,51 +72,44 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('jenisprestasi', JenisPrestasiController::class);
         Route::resource('jenispelanggaran', JenisPelanggaranController::class);
-    });
 
-    /*
-    |--------------------------------------------------------------------------
-    | PELANGGARAN
-    |--------------------------------------------------------------------------
-    */
-    Route::get('/pelanggaran', [PelanggaranController::class, 'index'])
-        ->name('pelanggaran.index');
+        /*
+        |--------------------------------------------------------------------------
+        | PELANGGARAN (ADMIN ONLY)
+        |--------------------------------------------------------------------------
+        */
+        Route::get('/pelanggaran', [PelanggaranController::class, 'index'])
+            ->name('pelanggaran.index');
 
-    Route::middleware('role:admin,petugas')->group(function () {
         Route::get('/pelanggaran/create', [PelanggaranController::class, 'create'])
             ->name('pelanggaran.create');
 
         Route::post('/pelanggaran', [PelanggaranController::class, 'store'])
             ->name('pelanggaran.store');
-    });
 
-    Route::middleware('role:admin,bk')->group(function () {
         Route::patch('/pelanggaran/{pelanggaran}/verifikasi',
             [PelanggaranController::class, 'verifikasi']
         )->name('pelanggaran.verifikasi');
-    });
 
-    /*
-    |--------------------------------------------------------------------------
-    | PRESTASI
-    |--------------------------------------------------------------------------
-    */
-    Route::get('/prestasi', [PrestasiController::class, 'index'])
-        ->name('prestasi.index');
+        /*
+        |--------------------------------------------------------------------------
+        | PRESTASI (ADMIN ONLY)
+        |--------------------------------------------------------------------------
+        */
+        Route::get('/prestasi', [PrestasiController::class, 'index'])
+            ->name('prestasi.index');
 
-    Route::middleware('role:admin,petugas')->group(function () {
         Route::get('/prestasi/create', [PrestasiController::class, 'create'])
             ->name('prestasi.create');
 
         Route::post('/prestasi', [PrestasiController::class, 'store'])
             ->name('prestasi.store');
-    });
 
-    Route::middleware('role:admin,bk')->group(function () {
         Route::patch('/prestasi/{prestasi}/verifikasi',
             [PrestasiController::class, 'verifikasi']
         )->name('prestasi.verifikasi');
     });
+
 
     /*
     |--------------------------------------------------------------------------
@@ -160,12 +158,20 @@ Route::middleware('auth')->group(function () {
             [VerifikasiPelanggaranController::class, 'verifikasi']
         )->name('pelanggaran.verifikasi');
 
+        Route::get('pelanggaran/riwayat',
+            [VerifikasiPelanggaranController::class, 'riwayat']
+        )->name('pelanggaran.riwayat');
+
         Route::get('prestasi', [VerifikasiPrestasiController::class, 'index'])
             ->name('prestasi');
 
         Route::put('prestasi/{id}',
             [VerifikasiPrestasiController::class, 'verifikasi']
         )->name('prestasi.verifikasi');
+
+        Route::get('prestasi/riwayat',
+            [VerifikasiPrestasiController::class, 'riwayat']
+        )->name('prestasi.riwayat');
 
         Route::get('/profil', [BKProfil::class, 'index'])
             ->name('profil');
@@ -190,6 +196,7 @@ Route::middleware('auth')->group(function () {
             ->name('dashboard');
 
         Route::resource('siswa', WaliSiswa::class)->only(['index','show']);
+
         Route::get('pelanggaran', [PelanggaranController::class, 'index'])
             ->name('pelanggaran.index');
 

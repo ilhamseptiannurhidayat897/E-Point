@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Kelas;
 use App\Models\Prestasi;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -69,12 +70,38 @@ class DashboardController extends Controller
 
     public function wali_kelas()
     {
-        return view('dashboard.wali_kelas.dashboard');
+        // ambil wali kelas yang login
+        $user = Auth::user();
+        $waliKelas = $user->waliKelas;
+
+        if (!$waliKelas || !$waliKelas->kelas_id) {
+            abort(403, 'Anda belum memiliki kelas');
+        }
+
+        $kelasId = $waliKelas->kelas_id;
+
+        return view('dashboard.wali_kelas.dashboard', [
+            // TOTAL SISWA DI KELAS
+            'totalSiswa' => Siswa::where('kelas_id', $kelasId)->count(),
+
+            // TOTAL PELANGGARAN SISWA DI KELAS
+            'totalPelanggaran' => Pelanggaran::whereHas('siswa', function ($q) use ($kelasId) {
+                $q->where('kelas_id', $kelasId);
+            })->count(),
+
+            // TOTAL PRESTASI SISWA DI KELAS
+            'totalPrestasi' => Prestasi::whereHas('siswa', function ($q) use ($kelasId) {
+                $q->where('kelas_id', $kelasId);
+            })->count(),
+
+            // TOTAL POIN KELAS
+            'totalPoin' => Siswa::where('kelas_id', $kelasId)->sum('poin'),
+        ]);
     }
 
     public function siswa()
     {
-        $siswa = auth()->user()->siswa;
+        $siswa = Auth::user()->siswa;
 
         // TOTAL PRESTASI (HANYA YANG DITERIMA)
         $totalPrestasi = Prestasi::where('siswa_id', $siswa->id)

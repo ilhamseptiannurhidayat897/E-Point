@@ -16,7 +16,6 @@
                         <th>Prestasi</th>
                         <th>Poin</th>
                         <th>Status</th>
-                        <th>Waktu</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,7 +33,6 @@
                                 {{ strtoupper($item->status) }}
                             </span>
                         </td>
-                        <td>{{ $item->verified_at?->format('d-m-Y H:i') }}</td>
                     </tr>
                 @empty
                     <tr>

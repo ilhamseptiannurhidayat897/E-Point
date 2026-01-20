@@ -68,8 +68,6 @@ class InputPelanggaranController extends Controller
             'status' => 'pending'
         ]);
 
-        return redirect()
-            ->route('petugas.pelanggaran')
-            ->with('success', 'Pelanggaran berhasil dikirim');
+return back()->with('success', 'Pelanggaran berhasil dikirim');
     }
 }

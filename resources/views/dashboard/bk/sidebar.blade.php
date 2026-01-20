@@ -75,6 +75,15 @@
             <span>Verifikasi Prestasi</span>
         </a>
 
+                <a href="{{ route('bk.prestasi.riwayat') }}"
+           class="block px-4 py-2 rounded hover:bg-white/10">
+            Riwayat Prestasi
+        </a>
+
+                <a href="{{ route('bk.pelanggaran.riwayat') }}"
+           class="block px-4 py-2 rounded hover:bg-white/10">
+            Riwayat Pelanggaran
+        </a>
 
     </nav>
 

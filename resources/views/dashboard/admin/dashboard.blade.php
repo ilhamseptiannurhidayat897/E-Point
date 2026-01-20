@@ -163,9 +163,9 @@
                         </td>
                         <td class="px-4 py-3 text-sm text-gray-600">{{ $item->created_at->format('d M Y') }}</td>
                         <td class="px-4 py-3">
-                            @if($item->jenis)
+                            @if($item->jenispelanggaran)
                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                                {{ $item->jenis->nama }}
+                                {{ $item->jenispelanggaran->nama }}
                             </span>
                             @else
                             <span class="text-gray-400 text-xs">-</span>

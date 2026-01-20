@@ -10,41 +10,14 @@ use Illuminate\Support\Facades\Auth;
 
 class PelanggaranController extends Controller
 {
-    /**
-     * Tampilkan daftar pelanggaran (semua role)
-     */
-    public function index()
+public function index()
     {
-        $query = Pelanggaran::with([
+        $pelanggaran = Pelanggaran::with([
             'siswa',
             'jenisPelanggaran',
             'admin',
-            'petugas',
             'verifikator'
-        ]);
-
-        $user = Auth::user();
-
-        // Petugas: hanya lihat laporan sendiri
-        if ($user->role === 'petugas') {
-            $query->where('petugas_id', $user->id);
-        }
-        
-        
-
-        // Siswa: hanya lihat data dirinya
-        if ($user->role === 'siswa') {
-            $query->where('siswa_id', $user->siswa->id ?? 0);
-        }
-
-        // Wali kelas: filter kelas (opsional, kalau relasi sudah ada)
-        if ($user->role === 'wali_kelas') {
-            $query->whereHas('siswa', function ($q) use ($user) {
-                $q->where('kelas_id', $user->waliKelas->kelas_id ?? 0);
-            });
-        }
-
-        $pelanggaran = $query->latest()->get();
+        ])->latest()->get();
 
         return view('dashboard.admin.pelanggaran.index', compact('pelanggaran'));
     }

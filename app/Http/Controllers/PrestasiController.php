@@ -12,20 +12,13 @@ class PrestasiController extends Controller
 {
     public function index()
     {
-        $query = Prestasi::with([
+        $prestasi = Prestasi::with([
             'siswa',
             'jenis',
             'admin',
-            'petugas.user','admin',
+            'petugas.user',
             'verifikator'
-        ]);
-    
-        // Petugas hanya lihat data sendiri
-        if (Auth::user()->role === 'petugas') {
-            $query->where('petugas_id', Auth::user()->petugas->id);
-        }
-    
-        $prestasi = $query->latest()->get();
+        ])->latest()->get();
     
         return view('dashboard.admin.prestasi.index', compact('prestasi'));
     }
