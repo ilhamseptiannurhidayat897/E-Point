@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('dashboard.petugas.main')
 
 @section('content')
 <div class="container">
     <h3>Ubah Password Petugas</h3>
 
-    <form action="{{ route('petugas.update') }}" method="POST">
+    <form action="{{ route('petugas.profil.update') }}" method="POST">
         @csrf
 
         <div class="mb-3">
@@ -26,7 +26,9 @@
         </div>
 
         <button class="btn btn-primary">Simpan</button>
-        <a href="{{ route('petugas.index') }}" class="btn btn-secondary">Kembali</a>
+        <a href="{{ route('petugas.profil.index') }}" class="btn btn-secondary">
+            Kembali
+        </a>
     </form>
 </div>
 @endsection

@@ -21,6 +21,7 @@ use App\Http\Controllers\WaliKelasController;
 use App\Http\Controllers\PeraturanController;
 use App\Http\Controllers\Petugas\InputPelanggaranController;
 use App\Http\Controllers\Petugas\InputPrestasiController;
+use App\Http\Controllers\Petugas\ProfilController as PetugasProfil;
 use App\Http\Controllers\BK\VerifikasiPelanggaranController;
 use App\Http\Controllers\BK\VerifikasiPrestasiController;
 use App\Http\Controllers\Siswa\PelanggaranController as SiswaPelanggaran;
@@ -139,6 +140,16 @@ Route::middleware('auth')->group(function () {
                 'create' => 'inputprestasi.create',
                 'store' => 'inputprestasi.store',
             ]);
+
+        Route::get('/petugas/profil', [PetugasProfil::class, 'index'])
+            ->name('petugas.profil.index');
+
+        Route::get('/petugas/profil/edit', [PetugasProfil::class, 'edit'])
+            ->name('petugas.profil.edit');
+
+        Route::post('/petugas/profil/update', [PetugasProfil::class, 'update'])
+            ->name('petugas.profil.update');
+
     });
 
     /*

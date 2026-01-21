@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('dashboard.petugas.main')
 
 @section('content')
 <div class="container">
@@ -13,14 +13,11 @@
             <th>NK</th>
             <td>{{ $petugas->nk }}</td>
         </tr>
-        <tr>
-            <th>Email</th>
-            <td>{{ $petugas->user->email }}</td>
-        </tr>
     </table>
 
-    <a href="{{ route('petugas.edit') }}" class="btn btn-warning">
-        Ubah Password
+    <a href="{{ route('petugas.profil.edit') }}" class="btn btn-warning">
+    Ubah Password
     </a>
+
 </div>
 @endsection

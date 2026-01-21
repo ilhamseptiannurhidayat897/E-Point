@@ -60,6 +60,12 @@
             <span>Riwayat Prestasi</span>
         </a>
 
+        <a href="{{ route('petugas.profil.index') }}"
+        class="sidebar-item {{ $menu('petugas.profil.*') }}">
+            <i class="fas fa-user-cog w-5 text-center"></i>
+            <span>Profil</span>
+        </a>
+
     </nav>
 
     {{-- LOGOUT --}}
