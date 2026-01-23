@@ -16,10 +16,39 @@ class SiswaController extends Controller
             'kelas.walikelas',
             'pelanggaran.jenisPelanggaran',
             'prestasi.jenis'
-        ])->latest()->get();
-
-        return view('dashboard.bk.siswa.index', compact('siswa'));
+        ])->latest()->paginate(10);
+    
+        $siswaData = $siswa->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'nama' => $item->nama,
+                'nis' => $item->nis,
+                'kelas' => $item->kelas->nama_kelas ?? '-',
+                'walikelas' => $item->kelas->walikelas->nama ?? '-',
+                'pelanggaran' => $item->pelanggaran->map(function ($p) {
+                    return [
+                        'nama' => $p->jenisPelanggaran->nama ?? '-',
+                        'poin' => $p->jenisPelanggaran->poin ?? 0,
+                        'status' => $p->status,
+                        'tanggal' => $p->created_at->format('d M Y'),
+                    ];
+                })->values(),
+                'prestasi' => $item->prestasi->map(function ($p) {
+                    return [
+                        'nama' => $p->jenis->nama ?? '-',
+                        'poin' => $p->jenis->poin ?? 0,
+                        'status' => $p->status,
+                        'tanggal' => $p->created_at->format('d M Y'),
+                        'foto' => $p->foto,
+                    ];
+                })->values(),
+            ];
+        })->keyBy('id');
+    
+        return view('dashboard.bk.siswa.index', compact('siswa', 'siswaData'));
     }
+    
+    
 
     /**
      * Detail siswa

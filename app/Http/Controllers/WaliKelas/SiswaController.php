@@ -15,20 +15,32 @@ class SiswaController extends Controller
     public function index()
     {
         // Ambil wali kelas berdasarkan user login
-        $waliKelas = WaliKelas::with('kelas.siswa')
+        $waliKelas = WaliKelas::with('kelas')
             ->where('user_id', Auth::id())
             ->first();
 
         // Jika wali kelas belum disetting
         if (!$waliKelas || !$waliKelas->kelas) {
+            // Kirim data kosong agar view tidak error
             return view('dashboard.wali_kelas.siswa.index', [
-                'siswa' => collect(),
+                'siswa' => collect(), // Koleksi kosong
+                'siswaData' => collect()->keyBy('id'), // Data kosong untuk modal
                 'kelas' => null
             ]);
         }
 
+        // Ambil data siswa untuk ditampilkan di tabel
+        $siswa = $waliKelas->kelas->siswa()->paginate(10);
+
+        // Siapkan data siswa untuk modal (DENGAN pelanggaran dan prestasi)
+        $siswaData = Siswa::with(['pelanggaran', 'prestasi'])
+            ->where('kelas_id', $waliKelas->kelas->id) // Pastikan menggunakan $waliKelas->kelas->id
+            ->get()
+            ->keyBy('id');
+
         return view('dashboard.wali_kelas.siswa.index', [
-            'siswa' => $waliKelas->kelas->siswa,
+            'siswa' => $siswa,
+            'siswaData' => $siswaData,
             'kelas' => $waliKelas->kelas
         ]);
     }
