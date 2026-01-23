@@ -136,7 +136,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('petugas/prestasi', InputPrestasiController::class)
             ->only(['index','create','store'])
             ->names([
-                'index' => 'inputprestsai.index',
+                'index' => 'inputprestasi.index',
                 'create' => 'inputprestasi.create',
                 'store' => 'inputprestasi.store',
             ]);

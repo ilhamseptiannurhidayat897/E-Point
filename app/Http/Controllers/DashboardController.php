@@ -9,31 +9,99 @@ use App\Models\Siswa;
 use App\Models\User;
 use App\Models\Kelas;
 use App\Models\Prestasi;
+use App\Models\JenisPelanggaran;
+use App\Models\JenisPrestasi;
+use App\Models\WaliKelas;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Petugas;
 
 
 
 class DashboardController extends Controller
 {
+   
+   
     public function admin()
     {
-        return view('dashboard.admin.dashboard', [
-            'totalSiswa' => Siswa::count(),
-            'totalKelas' => Kelas::count(),
-            'totalPelanggaran' => Pelanggaran::count(),
-            'totalPrestasi' => Prestasi::count(),
-    
-            'pelanggaranTerbaru' => Pelanggaran::with(['siswa'])
-                ->latest()
-                ->limit(5)
-                ->get(),
-    
-            'prestasiTerbaru' => Prestasi::with(['siswa'])
-                ->latest()
-                ->limit(5)
-                ->get(),
-        ]);
+        // Statistik dasar
+        $totalSiswa = Siswa::count();
+        $totalKelas = Kelas::count();
+        $totalPelanggaran = Pelanggaran::count();
+        $totalPrestasi = Prestasi::count();
+        
+        // Data bulan ini
+        $pelanggaranBulanIni = Pelanggaran::whereMonth('created_at', Carbon::now()->month)
+                                        ->whereYear('created_at', Carbon::now()->year)
+                                        ->count();
+        $prestasiBulanIni = Prestasi::whereMonth('created_at', Carbon::now()->month)
+                                   ->whereYear('created_at', Carbon::now()->year)
+                                   ->count();
+        
+        // Data untuk chart (6 bulan terakhir)
+        $chartLabels = [];
+        $chartPelanggaran = [];
+        $chartPrestasi = [];
+        
+        for ($i = 5; $i >= 0; $i--) {
+            $month = Carbon::now()->subMonths($i);
+            $chartLabels[] = $month->translatedFormat('M Y');
+            
+            $chartPelanggaran[] = Pelanggaran::whereMonth('created_at', $month->month)
+                                           ->whereYear('created_at', $month->year)
+                                           ->count();
+            
+            $chartPrestasi[] = Prestasi::whereMonth('created_at', $month->month)
+                                      ->whereYear('created_at', $month->year)
+                                      ->count();
+        }
+        
+        // Data terbaru
+        $pelanggaranTerbaru = Pelanggaran::with(['siswa.kelas', 'jenisPelanggaran'])
+                                       ->latest()
+                                       ->take(5)
+                                       ->get();
+        
+        $prestasiTerbaru = Prestasi::with(['siswa.kelas', 'jenis'])
+                                 ->latest()
+                                 ->take(5)
+                                 ->get();
+        
+        // Top siswa pelanggaran
+        $topPelanggaran = Siswa::withCount('pelanggaran')
+                             ->orderBy('pelanggaran_count', 'desc')
+                             ->take(5)
+                             ->get();
+        
+        // Top siswa prestasi
+        $topPrestasi = Siswa::withCount('prestasi')
+                           ->orderBy('prestasi_count', 'desc')
+                           ->take(5)
+                           ->get();
+        
+        // Total pengguna
+        $totalBK = User::where('role', 'bk')->count();
+        $totalWaliKelas = User::where('role', 'wali_kelas')->count();
+        $totalPetugas = User::where('role', 'petugas')->count();
+        
+        return view('dashboard.admin.dashboard', compact(
+            'totalSiswa',
+            'totalKelas',
+            'totalPelanggaran',
+            'totalPrestasi',
+            'pelanggaranBulanIni',
+            'prestasiBulanIni',
+            'chartLabels',
+            'chartPelanggaran',
+            'chartPrestasi',
+            'pelanggaranTerbaru',
+            'prestasiTerbaru',
+            'topPelanggaran',
+            'topPrestasi',
+            'totalBK',
+            'totalWaliKelas',
+            'totalPetugas'
+        ));
     }
    
     public function bk()
@@ -56,12 +124,38 @@ class DashboardController extends Controller
 
     public function petugas()
     {
-        return view('dashboard.petugas.dashboard', [
-            'totalSiswa' => Siswa::count(),
-            'pelanggaranHariIni' => Pelanggaran::whereDate('created_at', Carbon::today())->count(),
-            'prestasiHariIni' => Prestasi::whereDate('created_at', Carbon::today())->count(),
+        
+
+$petugasId = Petugas::where('user_id', auth()->id())->value('id');
+
+
     
-            'pelanggaranTerbaru' => Pelanggaran::with('siswa')
+        return view('dashboard.petugas.dashboard', [
+            // Statistik Umum
+            'totalSiswa' => Siswa::count(),
+            
+            // Pelanggaran Hari Ini (semua petugas)
+            'pelanggaranHariIni' => Pelanggaran::whereDate('created_at', Carbon::today())->count(),
+            
+            // Prestasi Hari Ini (semua petugas)
+            'prestasiHariIni' => Prestasi::whereDate('created_at', Carbon::today())->count(),
+            
+            // Total Input yang dibuat oleh petugas yang sedang login
+            'totalInputSaya' =>
+            Pelanggaran::where('petugas_id', $petugasId)->count()
+            +
+            Prestasi::where('petugas_id', $petugasId)->count(),
+    
+
+            
+            // Pelanggaran Terbaru (5 data terakhir dengan relasi siswa dan jenis pelanggaran)
+            'pelanggaranTerbaru' => Pelanggaran::with(['siswa.kelas', 'jenispelanggaran'])
+                ->latest()
+                ->limit(5)
+                ->get(),
+            
+            // Prestasi Terbaru (5 data terakhir dengan relasi siswa dan jenis prestasi)
+            'prestasiTerbaru' => Prestasi::with(['siswa.kelas', 'jenis'])
                 ->latest()
                 ->limit(5)
                 ->get(),

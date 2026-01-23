@@ -1,182 +1,222 @@
 <aside id="sidebar"
-    class="fixed md:relative inset-y-0 left-0 w-64
-           bg-gradient-to-b from-primary to-purple-900 text-white
+    class="fixed md:relative
+           inset-y-0 left-0
+           w-64 bg-gradient-to-b from-white to-gray-50
            flex flex-col
            transform md:translate-x-0 -translate-x-full
            transition-transform duration-300 ease-in-out
            z-40 md:z-auto
            h-screen overflow-hidden
-           shadow-2xl md:shadow-xl">
+           shadow-xl border-r border-gray-200">
 
-    <!-- Logo -->
-    <div class="flex items-center gap-3 p-5 border-b border-purple-700/50">
-        <div class="w-12 h-12 rounded-xl bg-white shadow-lg flex items-center justify-center">
-            <img src="{{ asset('logo/smkn1kawali.jpg') }}" class="w-10 h-10 rounded-lg">
+    <!-- Logo Header -->
+    <div class="flex items-center gap-3 p-5 border-b border-gray-200 flex-shrink-0">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-purple-600 shadow-lg flex items-center justify-center flex-shrink-0">
+            <img src="{{ asset('logo/smkn1kawali.jpg') }}"
+                 alt="Logo SMKN 1 Kawali"
+                 class="w-10 h-10 rounded-lg object-cover">
         </div>
-        <div>
-            <h2 class="text-xl font-bold">E-Point</h2>
-            <p class="text-xs text-purple-200">Dashboard BK</p>
+        <div class="flex-1 min-w-0">
+            <h2 class="text-xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">E-Point</h2>
+            <p class="text-xs text-gray-500 truncate">Dashboard BK</p>
         </div>
     </div>
 
-    <!-- Menu -->
-    <nav class="flex-1 overflow-y-auto p-4 space-y-2 custom-scrollbar">
-
+    <!-- Navigation Menu -->
+    <nav class="flex-1 overflow-y-auto p-4 space-y-1 custom-scrollbar">
+        
         <!-- Dashboard -->
         <a href="{{ route('bk.dashboard') }}"
-           class="sidebar-menu-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium
-           {{ request()->routeIs('dashboard.bk')
-                ? 'bg-gradient-to-r from-purple-700 to-purple-800 text-white shadow-lg border-l-4 border-yellow-400'
-                : 'text-purple-200 hover:bg-purple-800/40 hover:text-white' }}">
-            <i class="fas fa-home w-5 text-center"></i>
-            <span>Dashboard</span>
+           class="sidebar-menu-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200
+                  {{ request()->routeIs('bk.dashboard') 
+                      ? 'bg-gradient-to-r from-primary/10 to-purple-600/10 text-primary border-l-4 border-primary shadow-sm' 
+                      : 'text-gray-700 hover:bg-gray-100 hover:text-primary hover:translate-x-1 hover:shadow-sm' }}">
+            <i class="fas fa-home w-5 text-center flex-shrink-0 {{ request()->routeIs('bk.dashboard') ? 'text-primary' : 'text-gray-500' }}"></i>
+            <span class="truncate">Dashboard</span>
+            @if(request()->routeIs('bk.dashboard'))
+            <div class="ml-auto w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+            @endif
         </a>
 
+        <!-- Profil -->
         <a href="{{ route('bk.profil') }}"
-        class="sidebar-item {{ request()->routeIs('profil*') ? 'active' : '' }}">
-            <i class="fas fa-user-graduate"></i>
-            <span>Profil</span>
+           class="sidebar-menu-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200
+                  {{ request()->routeIs('bk.profil') 
+                      ? 'bg-gradient-to-r from-primary/10 to-purple-600/10 text-primary border-l-4 border-primary shadow-sm' 
+                      : 'text-gray-700 hover:bg-gray-100 hover:text-primary hover:translate-x-1 hover:shadow-sm' }}">
+            <i class="fas fa-user w-5 text-center flex-shrink-0 {{ request()->routeIs('bk.profil') ? 'text-primary' : 'text-gray-500' }}"></i>
+            <span class="truncate">Profil</span>
         </a>
 
         <!-- Divider -->
-        <div class="pt-3 pb-2">
-            <p class="px-4 text-xs font-semibold text-purple-300 uppercase tracking-wider opacity-70">
-                Monitoring
-            </p>
+        <div class="pt-4 pb-2">
+            <p class="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Monitoring</p>
         </div>
 
         <!-- Data Siswa -->
         <a href="{{ route('bk.siswa.index') }}"
-           class="sidebar-menu-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium
-           {{ request()->routeIs('siswa*')
-                ? 'bg-gradient-to-r from-purple-700 to-purple-800 text-white shadow-lg border-l-4 border-yellow-400'
-                : 'text-purple-200 hover:bg-purple-800/40 hover:text-white' }}">
-            <i class="fas fa-user-graduate w-5 text-center"></i>
-            <span>Data Siswa</span>
+           class="sidebar-menu-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200
+                  {{ request()->routeIs('bk.siswa.*') 
+                      ? 'bg-gradient-to-r from-primary/10 to-purple-600/10 text-primary border-l-4 border-primary shadow-sm' 
+                      : 'text-gray-700 hover:bg-gray-100 hover:text-primary hover:translate-x-1 hover:shadow-sm' }}">
+            <i class="fas fa-user-graduate w-5 text-center flex-shrink-0 {{ request()->routeIs('bk.siswa.*') ? 'text-primary' : 'text-gray-500' }}"></i>
+            <span class="truncate">Data Siswa</span>
         </a>
 
+        <!-- Divider -->
+        <div class="pt-4 pb-2">
+            <p class="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Verifikasi</p>
+        </div>
+
+        <!-- Verifikasi Pelanggaran -->
         <a href="{{ route('bk.pelanggaran') }}"
-        class="sidebar-menu-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium
-        {{ request()->routeIs('bk.pelanggaran')
-                ? 'bg-gradient-to-r from-purple-700 to-purple-800 text-white shadow-lg border-l-4 border-yellow-400'
-                : 'text-purple-200 hover:bg-purple-800/40 hover:text-white' }}">
-
-            <i class="fas fa-exclamation-triangle w-5 text-center"></i>
-            <span>Verifikasi Pelanggaran</span>
+           class="sidebar-menu-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200
+                  {{ request()->routeIs('bk.pelanggaran') 
+                      ? 'bg-gradient-to-r from-primary/10 to-purple-600/10 text-primary border-l-4 border-primary shadow-sm' 
+                      : 'text-gray-700 hover:bg-gray-100 hover:text-primary hover:translate-x-1 hover:shadow-sm' }}">
+            <i class="fas fa-exclamation-triangle w-5 text-center flex-shrink-0 {{ request()->routeIs('bk.pelanggaran') ? 'text-primary' : 'text-gray-500' }}"></i>
+            <span class="truncate">Verifikasi Pelanggaran</span>
         </a>
 
+        <!-- Verifikasi Prestasi -->
         <a href="{{ route('bk.prestasi') }}"
-            class="sidebar-menu-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium
-            {{ request()->routeIs('bk.prestasi')
-                    ? 'bg-gradient-to-r from-purple-700 to-purple-800 text-white shadow-lg border-l-4 border-yellow-400'
-                    : 'text-purple-200 hover:bg-purple-800/40 hover:text-white' }}">
-
-                <i class="fas fa-award w-5 text-center"></i>
-            <span>Verifikasi Prestasi</span>
+           class="sidebar-menu-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200
+                  {{ request()->routeIs('bk.prestasi') 
+                      ? 'bg-gradient-to-r from-primary/10 to-purple-600/10 text-primary border-l-4 border-primary shadow-sm' 
+                      : 'text-gray-700 hover:bg-gray-100 hover:text-primary hover:translate-x-1 hover:shadow-sm' }}">
+            <i class="fas fa-award w-5 text-center flex-shrink-0 {{ request()->routeIs('bk.prestasi') ? 'text-primary' : 'text-gray-500' }}"></i>
+            <span class="truncate">Verifikasi Prestasi</span>
         </a>
 
-                <a href="{{ route('bk.prestasi.riwayat') }}"
-           class="block px-4 py-2 rounded hover:bg-white/10">
-            Riwayat Prestasi
+        <!-- Divider -->
+        <div class="pt-4 pb-2">
+            <p class="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Riwayat</p>
+        </div>
+
+        <!-- Riwayat Prestasi -->
+        <a href="{{ route('bk.prestasi.riwayat') }}"
+           class="sidebar-menu-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200
+                  {{ request()->routeIs('bk.prestasi.riwayat') 
+                      ? 'bg-gradient-to-r from-primary/10 to-purple-600/10 text-primary border-l-4 border-primary shadow-sm' 
+                      : 'text-gray-700 hover:bg-gray-100 hover:text-primary hover:translate-x-1 hover:shadow-sm' }}">
+            <i class="fas fa-history w-5 text-center flex-shrink-0 {{ request()->routeIs('bk.prestasi.riwayat') ? 'text-primary' : 'text-gray-500' }}"></i>
+            <span class="truncate">Riwayat Prestasi</span>
         </a>
 
-                <a href="{{ route('bk.pelanggaran.riwayat') }}"
-           class="block px-4 py-2 rounded hover:bg-white/10">
-            Riwayat Pelanggaran
+        <!-- Riwayat Pelanggaran -->
+        <a href="{{ route('bk.pelanggaran.riwayat') }}"
+           class="sidebar-menu-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200
+                  {{ request()->routeIs('bk.pelanggaran.riwayat') 
+                      ? 'bg-gradient-to-r from-primary/10 to-purple-600/10 text-primary border-l-4 border-primary shadow-sm' 
+                      : 'text-gray-700 hover:bg-gray-100 hover:text-primary hover:translate-x-1 hover:shadow-sm' }}">
+            <i class="fas fa-list-alt w-5 text-center flex-shrink-0 {{ request()->routeIs('bk.pelanggaran.riwayat') ? 'text-primary' : 'text-gray-500' }}"></i>
+            <span class="truncate">Riwayat Pelanggaran</span>
         </a>
 
     </nav>
 
-    <!-- Logout -->
-    <div class="p-4 border-t border-purple-700/50">
+    <!-- Logout Section -->
+    <div class="p-4 border-t border-gray-200 flex-shrink-0">
         <form action="{{ route('logout') }}" method="POST">
             @csrf
-            <button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium
-                           text-purple-200 hover:bg-purple-800/40 hover:text-white">
-                <i class="fas fa-sign-out-alt w-5 text-center"></i>
-                <span>Logout</span>
+            <button type="submit"
+                    class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gradient-to-r hover:from-primary/5 hover:to-purple-600/5 hover:text-primary transition-all duration-200 group">
+                <i class="fas fa-sign-out-alt w-5 text-center flex-shrink-0 text-gray-500 group-hover:text-primary group-hover:rotate-12 transition-all duration-300"></i>
+                <span class="truncate">Logout</span>
+                <i class="fas fa-arrow-right ml-auto text-xs opacity-0 group-hover:opacity-100 transition-all duration-300"></i>
             </button>
         </form>
     </div>
+
 </aside>
+
 <style>
-    /* Custom Scrollbar Styling */
-    .custom-scrollbar::-webkit-scrollbar {
-        width: 4px;
-    }
-    
-    .custom-scrollbar::-webkit-scrollbar-track {
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 10px;
-        margin: 10px 0;
-    }
-    
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
-        border-radius: 10px;
-        transition: background 0.3s ease;
-    }
-    
-    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.2));
-    }
-    
-    /* Firefox scrollbar */
-    .custom-scrollbar {
-        scrollbar-width: thin;
-        scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
-    }
-    
-    /* Menu Item Styling */
-    .sidebar-menu-item {
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .sidebar-menu-item::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-        transition: left 0.5s ease;
-    }
-    
-    .sidebar-menu-item:hover::before {
-        left: 100%;
-    }
-    
-    /* Active menu indicator */
-    .sidebar-menu-item[style*="bg-gradient-to-r"]::after {
-        content: '';
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 6px;
-        height: 6px;
-        background: #F2C94C;
-        border-radius: 50%;
-        box-shadow: 0 0 10px rgba(242, 201, 76, 0.5);
-        animation: pulse 2s infinite;
-    }
-    
-    @keyframes pulse {
-        0%, 100% {
-            opacity: 1;
-            transform: translateY(-50%) scale(1);
-        }
-        50% {
-            opacity: 0.7;
-            transform: translateY(-50%) scale(1.2);
-        }
-    }
-    
-    /* Icon animation on hover */
-    .sidebar-menu-item:hover i {
-        transform: scale(1.1);
-        transition: transform 0.2s ease;
-    }
-    </style>
+/* Custom Scrollbar Styling untuk tema putih */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 10px;
+    margin: 4px 0;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, rgba(107, 33, 168, 0.2), rgba(124, 58, 237, 0.15));
+    border-radius: 10px;
+    transition: background 0.3s ease;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, rgba(107, 33, 168, 0.3), rgba(124, 58, 237, 0.25));
+}
+
+/* Firefox scrollbar */
+.custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(107, 33, 168, 0.2) transparent;
+}
+
+/* Menu Item Styling dengan efek yang lebih halus */
+.sidebar-menu-item {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-menu-item::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--primary), var(--purple-600));
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-menu-item:hover::after {
+    transform: scaleY(1);
+}
+
+/* Active menu dengan indikator yang lebih profesional */
+.sidebar-menu-item[class*="border-primary"] {
+    box-shadow: 0 2px 10px -2px rgba(107, 33, 168, 0.1);
+}
+
+/* Efek hover dengan gradient yang halus */
+.sidebar-menu-item:hover {
+    box-shadow: 0 4px 12px -2px rgba(107, 33, 168, 0.08);
+}
+
+/* Icon animation dengan warna tema */
+.sidebar-menu-item:hover i {
+    transform: translateX(2px);
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+/* Animasi untuk active indicator */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.sidebar-menu-item {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Staggered animation delay untuk menu items */
+.sidebar-menu-item:nth-child(1) { animation-delay: 0.1s; }
+.sidebar-menu-item:nth-child(2) { animation-delay: 0.15s; }
+.sidebar-menu-item:nth-child(3) { animation-delay: 0.2s; }
+.sidebar-menu-item:nth-child(4) { animation-delay: 0.25s; }
+.sidebar-menu-item:nth-child(5) { animation-delay: 0.3s; }
+.sidebar-menu-item:nth-child(6) { animation-delay: 0.35s; }
+.sidebar-menu-item:nth-child(7) { animation-delay: 0.4s; }
+.sidebar-menu-item:nth-child(8) { animation-delay: 0.45s; }
+.sidebar-menu-item:nth-child(9) { animation-delay: 0.5s; }
+.sidebar-menu-item:nth-child(10) { animation-delay: 0.55s; }
+</style>

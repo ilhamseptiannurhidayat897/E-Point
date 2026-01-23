@@ -20,6 +20,7 @@ class InputPrestasiController extends Controller
             ->where('petugas_id', Auth::user()->petugas->id)
             ->latest()
             ->get();
+            
     
         return view('dashboard.petugas.prestasi.index', compact('prestasi'));
     }

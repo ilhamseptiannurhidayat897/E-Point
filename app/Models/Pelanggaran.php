@@ -14,6 +14,7 @@ class Pelanggaran extends Model
     protected $fillable = [
         'siswa_id',
         'jenis_pelanggaran_id',
+        'user_id', // tambahkan ini
         'admin_id',
         'petugas_id',
         'keterangan',
@@ -51,5 +52,10 @@ class Pelanggaran extends Model
     public function verifikator()
     {
         return $this->belongsTo(User::class, 'verified_by');
+    }
+   
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

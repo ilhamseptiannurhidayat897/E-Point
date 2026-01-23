@@ -1,368 +1,509 @@
 @extends('dashboard.admin.main')
 
 @section('content')
-<!-- Hero Section -->
-<div class="bg-gradient-to-r from-primary to-purple-800 rounded-xl p-6 text-white shadow-lg mb-6">
-    <div class="flex justify-between items-center">
+<!-- Header dengan Purple Elegan -->
+<div class="mb-8 relative overflow-hidden rounded-2xl bg-purple-800 p-6 text-white shadow-xl">
+    <div class="absolute top-0 right-0 -mt-4 -mr-4 h-32 w-32 rounded-full bg-white/5"></div>
+    <div class="absolute bottom-0 left-0 -mb-4 -ml-4 h-24 w-24 rounded-full bg-white/5"></div>
+    <div class="absolute top-1/2 right-1/4 transform -translate-y-1/2 h-40 w-40 rounded-full bg-white/3 blur-xl"></div>
+    
+    <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-            <h2 class="text-2xl font-bold mb-2">Selamat Datang di Website Informasi E-Point Siswa</h2>
-            <p class="text-purple-200">Kelola data siswa, kebaikan, dan pelanggaran dengan mudah</p>
+            <h1 class="text-2xl md:text-3xl font-bold tracking-tight">Dashboard Admin</h1>
+            <p class="text-purple-100 mt-1 text-sm">Sistem Informasi E-Point SMKN 1 Kawali</p>
         </div>
-        <div class="hidden md:block">
-            <div class="text-4xl font-bold">
-                <span id="current-time"></span>
-            </div>
-            <div class="text-sm text-purple-200" id="current-date"></div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 text-sm border border-white/10">
+            <i class="far fa-calendar-alt mr-2"></i>
+            {{ \Carbon\Carbon::now()->translatedFormat('l, d F Y') }}
         </div>
     </div>
 </div>
 
-<!-- Statistics Cards -->
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
-    <div class="bg-white rounded-xl shadow p-4 md:p-6 border border-gray-100 card-hover">
-        <div class="flex items-center justify-between mb-4">
-            <div class="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center">
-                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
-                </svg>
+<!-- Statistik Utama dengan Efek Hover dan Animasi -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+    <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden">
+        <div class="absolute top-0 right-0 h-16 w-16 bg-blue-50 rounded-bl-full opacity-70"></div>
+        <div class="relative">
+            <div class="flex items-center justify-between mb-2">
+                <div class="text-gray-500 text-sm">Total Siswa</div>
+                <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-users text-blue-600 text-sm"></i>
+                </div>
             </div>
-        </div>
-        <p class="text-gray-500 text-sm">Total Siswa</p>
-        <h3 class="text-3xl font-bold text-blue-600">{{ $totalSiswa }}</h3>
-        <div class="mt-2 flex items-center text-xs text-blue-600">
-            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414l-4-4a1 1 0 00-1.414 0z" clip-rule="evenodd"/>
-            </svg>
-            <span>12% dari bulan lalu</span>
+            <div class="text-2xl font-bold text-gray-900">{{ number_format($totalSiswa) }}</div>
+            <div class="text-xs text-gray-400 mt-2 flex items-center">
+                <span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
+                Aktif
+            </div>
         </div>
     </div>
     
-    <div class="bg-white rounded-xl shadow p-4 md:p-6 border border-gray-100 card-hover">
-        <div class="flex items-center justify-between mb-4">
-            <div class="w-12 h-12 rounded-lg bg-indigo-100 flex items-center justify-center">
-                <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5-10v4a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2z"/>
-                </svg>
+    <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden">
+        <div class="absolute top-0 right-0 h-16 w-16 bg-purple-50 rounded-bl-full opacity-70"></div>
+        <div class="relative">
+            <div class="flex items-center justify-between mb-2">
+                <div class="text-gray-500 text-sm">Total Kelas</div>
+                <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-school text-purple-600 text-sm"></i>
+                </div>
             </div>
-        </div>
-        <p class="text-gray-500 text-sm">Total Kelas</p>
-        <h3 class="text-3xl font-bold text-indigo-600">{{ $totalKelas }}</h3>
-        <div class="mt-2 flex items-center text-xs text-indigo-600">
-            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414l-4-4a1 1 0 00-1.414 0z" clip-rule="evenodd"/>
-            </svg>
-            <span>8% dari bulan lalu</span>
+            <div class="text-2xl font-bold text-gray-900">{{ number_format($totalKelas) }}</div>
+            <div class="text-xs text-gray-400 mt-2 flex items-center">
+                <span class="w-2 h-2 bg-purple-500 rounded-full mr-1"></span>
+                Kelas
+            </div>
         </div>
     </div>
     
-    <div class="bg-white rounded-xl shadow p-4 md:p-6 border border-gray-100 card-hover">
-        <div class="flex items-center justify-between mb-4">
-            <div class="w-12 h-12 rounded-lg bg-red-100 flex items-center justify-center">
-                <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 15.5c-.77.833.192 2.5 1.732 2.5z"/>
-                </svg>
+    <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden">
+        <div class="absolute top-0 right-0 h-16 w-16 bg-red-50 rounded-bl-full opacity-70"></div>
+        <div class="relative">
+            <div class="flex items-center justify-between mb-2">
+                <div class="text-gray-500 text-sm">Pelanggaran</div>
+                <div class="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-exclamation-triangle text-red-600 text-sm"></i>
+                </div>
             </div>
-        </div>
-        <p class="text-gray-500 text-sm">Total Pelanggaran</p>
-        <h3 class="text-3xl font-bold text-red-600">{{ $totalPelanggaran }}</h3>
-        <div class="mt-2 flex items-center text-xs text-red-600">
-            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M12 7a1 1 0 110-2 1 1 0 010 2zm-7 4a1 1 0 11-2 0 1 1 0 012 0zM5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414l-4-4a1 1 0 00-1.414 0z" clip-rule="evenodd"/>
-            </svg>
-            <span>5% dari bulan lalu</span>
+            <div class="text-2xl font-bold text-gray-900">{{ number_format($totalPelanggaran) }}</div>
+            <div class="text-xs text-gray-400 mt-2 flex items-center">
+                <span class="w-2 h-2 bg-red-500 rounded-full mr-1"></span>
+                {{ $pelanggaranBulanIni }} bulan ini
+            </div>
         </div>
     </div>
     
-    <div class="bg-white rounded-xl shadow p-4 md:p-6 border border-gray-100 card-hover">
-        <div class="flex items-center justify-between mb-4">
-            <div class="w-12 h-12 rounded-lg bg-green-100 flex items-center justify-center">
-                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
+    <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden">
+        <div class="absolute top-0 right-0 h-16 w-16 bg-green-50 rounded-bl-full opacity-70"></div>
+        <div class="relative">
+            <div class="flex items-center justify-between mb-2">
+                <div class="text-gray-500 text-sm">Prestasi</div>
+                <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-trophy text-green-600 text-sm"></i>
+                </div>
             </div>
-        </div>
-        <p class="text-gray-500 text-sm">Total Prestasi</p>
-        <h3 class="text-3xl font-bold text-green-600">{{ $totalPrestasi }}</h3>
-        <div class="mt-2 flex items-center text-xs text-green-600">
-            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M12 7a1 1 0 110-2 1 1 0 010 2zm-7 4a1 1 0 11-2 0 1 1 0 012 0zM5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414l-4-4a1 1 0 00-1.414 0z" clip-rule="evenodd"/>
-            </svg>
-            <span>15% dari bulan lalu</span>
+            <div class="text-2xl font-bold text-gray-900">{{ number_format($totalPrestasi) }}</div>
+            <div class="text-xs text-gray-400 mt-2 flex items-center">
+                <span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
+                {{ $prestasiBulanIni }} bulan ini
+            </div>
         </div>
     </div>
 </div>
 
-<!-- Charts Section -->
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6 md:mb-8">
-    <!-- Chart Pelanggaran per Bulan -->
-    <div class="bg-white rounded-xl shadow p-4 md:p-6 border border-gray-100">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-base md:text-lg font-semibold text-gray-800">Pelanggaran per Bulan</h3>
-            <button class="text-primary hover:text-purple-700 text-sm font-medium">
-                Lihat Detail
-            </button>
-        </div>
-        <div class="relative h-64">
-            <canvas id="pelanggaranChart"></canvas>
+<!-- Chart & Data dengan Desain yang Ditingkatkan -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+    <!-- Chart dengan Efek Bayangan -->
+   <!-- Chart dengan Efek Bayangan -->
+<div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
+    <div class="flex items-center justify-between mb-4">
+        <h3 class="font-semibold text-gray-900">Tren Bulanan</h3>
+        <div class="flex space-x-2">
+            <button class="w-2 h-2 rounded-full bg-blue-500"></button>
+            <button class="w-2 h-2 rounded-full bg-green-500"></button>
         </div>
     </div>
+    <div class="h-64 relative chart-container">
+        <canvas id="trenChart"></canvas>
+    </div>
+</div>
     
-    <!-- Chart Prestasi per Bulan -->
-    <div class="bg-white rounded-xl shadow p-4 md:p-6 border border-gray-100">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-base md:text-lg font-semibold text-gray-800">Prestasi per Bulan</h3>
-            <button class="text-primary hover:text-purple-700 text-sm font-medium">
-                Lihat Detail
-            </button>
-        </div>
-        <div class="relative h-64">
-            <canvas id="prestasiChart"></canvas>
+    <!-- Peran Sistem dengan Hover Effects -->
+    <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
+        <h3 class="font-semibold text-gray-900 mb-4">Pengguna Sistem</h3>
+        <div class="space-y-3">
+            <div class="flex items-center justify-between py-3 px-4 rounded-lg hover:bg-purple-50 transition-colors duration-200 group">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center mr-3 group-hover:bg-purple-200 transition-colors">
+                        <i class="fas fa-crown text-purple-600"></i>
+                    </div>
+                    <span class="text-gray-700 font-medium">Admin</span>
+                </div>
+                <span class="font-medium text-purple-600 bg-purple-50 px-3 py-1 rounded-full text-sm">1</span>
+            </div>
+            
+            <div class="flex items-center justify-between py-3 px-4 rounded-lg hover:bg-blue-50 transition-colors duration-200 group">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center mr-3 group-hover:bg-blue-200 transition-colors">
+                        <i class="fas fa-user-tie text-blue-600"></i>
+                    </div>
+                    <span class="text-gray-700 font-medium">BK</span>
+                </div>
+                <span class="font-medium text-blue-600 bg-blue-50 px-3 py-1 rounded-full text-sm">{{ $totalBK }}</span>
+            </div>
+            
+            <div class="flex items-center justify-between py-3 px-4 rounded-lg hover:bg-green-50 transition-colors duration-200 group">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center mr-3 group-hover:bg-green-200 transition-colors">
+                        <i class="fas fa-chalkboard-teacher text-green-600"></i>
+                    </div>
+                    <span class="text-gray-700 font-medium">Wali Kelas</span>
+                </div>
+                <span class="font-medium text-green-600 bg-green-50 px-3 py-1 rounded-full text-sm">{{ $totalWaliKelas }}</span>
+            </div>
+            
+            <div class="flex items-center justify-between py-3 px-4 rounded-lg hover:bg-amber-50 transition-colors duration-200 group">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center mr-3 group-hover:bg-amber-200 transition-colors">
+                        <i class="fas fa-user-shield text-amber-600"></i>
+                    </div>
+                    <span class="text-gray-700 font-medium">Petugas</span>
+                </div>
+                <span class="font-medium text-amber-600 bg-amber-50 px-3 py-1 rounded-full text-sm">{{ $totalPetugas }}</span>
+            </div>
         </div>
     </div>
 </div>
 
-<!-- Tables Section -->
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- Data Terbaru dengan Desain yang Lebih Menarik -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
     <!-- Pelanggaran Terbaru -->
-    <div class="bg-white rounded-xl shadow overflow-hidden border border-gray-100">
-        <div class="px-4 md:px-6 py-3 md:py-4 border-b border-gray-100">
-            <h3 class="text-base md:text-lg font-semibold text-gray-800 flex items-center">
-                <svg class="w-5 h-5 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 15.5c-.77.833.192 2.5 1.732 2.5z"/>
-                </svg>
+    <div class="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300">
+        <div class="px-6 py-4 border-b border-gray-100 bg-gradient-to-r from-red-50 to-transparent">
+            <h3 class="font-semibold text-gray-900 flex items-center">
+                <i class="fas fa-exclamation-circle text-red-500 mr-2"></i>
                 Pelanggaran Terbaru
             </h3>
         </div>
-        
-        <div class="overflow-x-auto">
-            <table class="w-full">
-                <thead class="bg-gray-50 border-b border-gray-200">
-                    <tr>
-                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Siswa</th>
-                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal</th>
-                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jenis</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-100">
-                    @forelse ($pelanggaranTerbaru as $item)
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-4 py-3">
-                            @if($item->siswa)
-                            <div class="flex items-center">
-                                <div class="h-8 w-8 flex-shrink-0 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center text-white font-semibold text-xs">
-                                    {{ strtoupper(substr($item->siswa->nama ?? '?', 0, 2)) }}
-                                </div>
-                                <div class="ml-3">
-                                    <div class="text-sm font-medium text-gray-900">{{ $item->siswa->nama }}</div>
-                                    <div class="text-xs text-gray-500">{{ $item->siswa->kelas->nama_kelas ?? '-' }}</div>
-                                </div>
+        <div class="divide-y divide-gray-100">
+            @foreach($pelanggaranTerbaru as $index => $item)
+            <div class="px-6 py-4 hover:bg-gray-50 transition-colors duration-200" style="animation-delay: {{ $index * 50 }}ms">
+                <div class="flex justify-between items-start">
+                    <div class="flex items-start">
+                        <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center mr-3 flex-shrink-0">
+                            <i class="fas fa-user text-red-600 text-sm"></i>
+                        </div>
+                        <div>
+                            <div class="font-medium text-gray-900">{{ $item->siswa->nama ?? 'N/A' }}</div>
+                            <div class="text-sm text-gray-500 mt-1">
+                                {{ $item->siswa->kelas->nama_kelas ?? '-' }} • 
+                                {{ $item->jenisPelanggaran->nama ?? 'Tidak diketahui' }}
                             </div>
-                            @else
-                            <div class="text-sm text-gray-500">Data siswa tidak tersedia</div>
-                            @endif
-                        </td>
-                        <td class="px-4 py-3 text-sm text-gray-600">{{ $item->created_at->format('d M Y') }}</td>
-                        <td class="px-4 py-3">
-                            @if($item->jenispelanggaran)
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                                {{ $item->jenispelanggaran->nama }}
-                            </span>
-                            @else
-                            <span class="text-gray-400 text-xs">-</span>
-                            @endif
-                        </td>
-                    </tr>
-                    @empty
-                    <tr>
-                        <td colspan="3" class="px-4 py-8 text-center">
-                            <svg class="w-12 h-12 text-gray-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 15.5c-.77.833.192 2.5 1.732 2.5z"/>
-                            </svg>
-                            <h3 class="text-base font-medium text-gray-900 mb-1">Belum ada data pelanggaran</h3>
-                            <p class="text-sm text-gray-500">Data pelanggaran akan muncul di sini</p>
-                        </td>
-                    </tr>
-                    @endforelse
-                </tbody>
-            </table>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-sm font-medium text-red-600 bg-red-50 px-2 py-1 rounded">{{ $item->jenisPelanggaran->poin ?? 0 }} poin</div>
+                        <div class="text-xs text-gray-400 mt-1">{{ $item->created_at->format('d/m') }}</div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
         </div>
     </div>
-
+    
     <!-- Prestasi Terbaru -->
-    <div class="bg-white rounded-xl shadow overflow-hidden border border-gray-100">
-        <div class="px-4 md:px-6 py-3 md:py-4 border-b border-gray-100">
-            <h3 class="text-base md:text-lg font-semibold text-gray-800 flex items-center">
-                <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
+    <div class="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300">
+        <div class="px-6 py-4 border-b border-gray-100 bg-gradient-to-r from-green-50 to-transparent">
+            <h3 class="font-semibold text-gray-900 flex items-center">
+                <i class="fas fa-trophy text-green-500 mr-2"></i>
                 Prestasi Terbaru
             </h3>
         </div>
-        
-        <div class="overflow-x-auto">
-            <table class="w-full">
-                <thead class="bg-gray-50 border-b border-gray-200">
-                    <tr>
-                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Siswa</th>
-                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal</th>
-                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jenis</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-100">
-                    @forelse ($prestasiTerbaru as $item)
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-4 py-3">
-                            @if($item->siswa)
-                            <div class="flex items-center">
-                                <div class="h-8 w-8 flex-shrink-0 rounded-full bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center text-white font-semibold text-xs">
-                                    {{ strtoupper(substr($item->siswa->nama ?? '?', 0, 2)) }}
-                                </div>
-                                <div class="ml-3">
-                                    <div class="text-sm font-medium text-gray-900">{{ $item->siswa->nama }}</div>
-                                    <div class="text-xs text-gray-500">{{ $item->siswa->kelas->nama_kelas ?? '-' }}</div>
-                                </div>
+        <div class="divide-y divide-gray-100">
+            @foreach($prestasiTerbaru as $index => $item)
+            <div class="px-6 py-4 hover:bg-gray-50 transition-colors duration-200" style="animation-delay: {{ $index * 50 }}ms">
+                <div class="flex justify-between items-start">
+                    <div class="flex items-start">
+                        <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3 flex-shrink-0">
+                            <i class="fas fa-award text-green-600 text-sm"></i>
+                        </div>
+                        <div>
+                            <div class="font-medium text-gray-900">{{ $item->siswa->nama ?? 'N/A' }}</div>
+                            <div class="text-sm text-gray-500 mt-1">
+                                {{ $item->siswa->kelas->nama_kelas ?? '-' }} • 
+                                {{ $item->jenis->nama ?? 'Tidak diketahui' }}
                             </div>
-                            @else
-                            <div class="text-sm text-gray-500">Data siswa tidak tersedia</div>
-                            @endif
-                        </td>
-                        <td class="px-4 py-3 text-sm text-gray-600">{{ $item->created_at->format('d M Y') }}</td>
-                        <td class="px-4 py-3">
-                            @if($item->jenis)
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                {{ $item->jenis->nama }}
-                            </span>
-                            @else
-                            <span class="text-gray-400 text-xs">-</span>
-                            @endif
-                        </td>
-                    </tr>
-                    @empty
-                    <tr>
-                        <td colspan="3" class="px-4 py-8 text-center">
-                            <svg class="w-12 h-12 text-gray-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                            </svg>
-                            <h3 class="text-base font-medium text-gray-900 mb-1">Belum ada data prestasi</h3>
-                            <p class="text-sm text-gray-500">Data prestasi akan muncul di sini</p>
-                        </td>
-                    </tr>
-                    @endforelse
-                </tbody>
-            </table>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-sm font-medium text-green-600 bg-green-50 px-2 py-1 rounded">{{ $item->jenis->poin ?? 0 }} poin</div>
+                        <div class="text-xs text-gray-400 mt-1">{{ $item->created_at->format('d/m') }}</div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
         </div>
     </div>
 </div>
 
-@endsection
+<!-- Top Siswa dengan Desain yang Lebih Menarik -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+    <!-- Top Pelanggaran -->
+    <div class="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300">
+        <div class="px-6 py-4 border-b border-gray-100 bg-gradient-to-r from-red-50 to-transparent">
+            <h3 class="font-semibold text-gray-900 flex items-center">
+                <i class="fas fa-exclamation-triangle text-red-500 mr-2"></i>
+                Siswa dengan Pelanggaran Terbanyak
+            </h3>
+        </div>
+        <div class="divide-y divide-gray-100">
+            @foreach($topPelanggaran as $index => $siswa)
+            <div class="px-6 py-4 hover:bg-gray-50 transition-colors duration-200">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center text-white font-medium text-sm mr-3 
+                        {{ $index == 0 ? 'bg-gradient-to-r from-yellow-400 to-yellow-600' : 
+                           ($index == 1 ? 'bg-gradient-to-r from-gray-300 to-gray-500' : 
+                           ($index == 2 ? 'bg-gradient-to-r from-orange-400 to-orange-600' : 'bg-red-500')) }}">
+                        {{ $index + 1 }}
+                    </div>
+                    <div class="flex-1">
+                        <div class="font-medium text-gray-900">{{ $siswa->nama }}</div>
+                        <div class="text-sm text-gray-500">{{ $siswa->kelas->nama_kelas ?? '-' }}</div>
+                    </div>
+                    <div class="bg-red-50 text-red-600 font-medium px-3 py-1 rounded-full text-sm">
+                        {{ $siswa->pelanggaran_count }}
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+    
+    <!-- Top Prestasi -->
+    <div class="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300">
+        <div class="px-6 py-4 border-b border-gray-100 bg-gradient-to-r from-green-50 to-transparent">
+            <h3 class="font-semibold text-gray-900 flex items-center">
+                <i class="fas fa-trophy text-green-500 mr-2"></i>
+                Siswa dengan Prestasi Terbanyak
+            </h3>
+        </div>
+        <div class="divide-y divide-gray-100">
+            @foreach($topPrestasi as $index => $siswa)
+            <div class="px-6 py-4 hover:bg-gray-50 transition-colors duration-200">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center text-white font-medium text-sm mr-3 
+                        {{ $index == 0 ? 'bg-gradient-to-r from-yellow-400 to-yellow-600' : 
+                           ($index == 1 ? 'bg-gradient-to-r from-gray-300 to-gray-500' : 
+                           ($index == 2 ? 'bg-gradient-to-r from-orange-400 to-orange-600' : 'bg-green-500')) }}">
+                        {{ $index + 1 }}
+                    </div>
+                    <div class="flex-1">
+                        <div class="font-medium text-gray-900">{{ $siswa->nama }}</div>
+                        <div class="text-sm text-gray-500">{{ $siswa->kelas->nama_kelas ?? '-' }}</div>
+                    </div>
+                    <div class="bg-green-50 text-green-600 font-medium px-3 py-1 rounded-full text-sm">
+                        {{ $siswa->prestasi_count }}
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</div>
 
-@push('styles')
+<!-- Akses Cepat dengan Desain yang Lebih Modern -->
+<div class="mt-8 p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl shadow-sm">
+    <h3 class="font-semibold text-gray-900 mb-4 flex items-center">
+        <i class="fas fa-rocket text-purple-500 mr-2"></i>
+        Akses Cepat
+    </h3>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <a href="{{ route('datasiswa.index') }}" 
+           class="bg-white p-5 rounded-xl border border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300 text-center group">
+            <div class="w-12 h-12 mx-auto bg-blue-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-blue-200 transition-colors">
+                <i class="fas fa-users text-blue-600 text-lg"></i>
+            </div>
+            <div class="text-sm font-medium text-gray-900">Data Siswa</div>
+        </a>
+        
+        <a href="{{ route('walikelas.index') }}" 
+           class="bg-white p-5 rounded-xl border border-gray-200 hover:border-green-300 hover:shadow-lg transition-all duration-300 text-center group">
+            <div class="w-12 h-12 mx-auto bg-green-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-green-200 transition-colors">
+                <i class="fas fa-chalkboard-teacher text-green-600 text-lg"></i>
+            </div>
+            <div class="text-sm font-medium text-gray-900">Wali Kelas</div>
+        </a>
+        
+        <a href="{{ route('datapetugas.index') }}" 
+           class="bg-white p-5 rounded-xl border border-gray-200 hover:border-amber-300 hover:shadow-lg transition-all duration-300 text-center group">
+            <div class="w-12 h-12 mx-auto bg-amber-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-amber-200 transition-colors">
+                <i class="fas fa-user-shield text-amber-600 text-lg"></i>
+            </div>
+            <div class="text-sm font-medium text-gray-900">Petugas</div>
+        </a>
+        
+        <a href="{{ route('jenispelanggaran.index') }}" 
+           class="bg-white p-5 rounded-xl border border-gray-200 hover:border-red-300 hover:shadow-lg transition-all duration-300 text-center group">
+            <div class="w-12 h-12 mx-auto bg-red-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-red-200 transition-colors">
+                <i class="fas fa-exclamation-circle text-red-600 text-lg"></i>
+            </div>
+            <div class="text-sm font-medium text-gray-900">Jenis Pelanggaran</div>
+        </a>
+    </div>
+</div>
+
 <style>
-    .card-hover {
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+/* Animasi untuk elemen yang muncul */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
     }
-    .card-hover:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 24px rgba(43, 27, 100, 0.12);
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
+}
+
+/* Terapkan animasi ke elemen-elemen tertentu */
+.grid > div {
+    animation: fadeInUp 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+/* Delay animasi untuk setiap elemen */
+.grid > div:nth-child(1) { animation-delay: 0.1s; }
+.grid > div:nth-child(2) { animation-delay: 0.2s; }
+.grid > div:nth-child(3) { animation-delay: 0.3s; }
+.grid > div:nth-child(4) { animation-delay: 0.4s; }
+
+/* Chart Container Fix */
+.chart-container {
+    position: relative;
+    height: 256px !important; /* h-64 = 256px */
+    width: 100% !important;
+}
+
+#trenChart {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+}
 </style>
-@endpush
 
 @push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Tunggu sebentar agar DOM sepenuhnya dimuat
+    setTimeout(function() {
+        // Data dari controller
+        const labels = @json($chartLabels);
+        const pelanggaranData = @json($chartPelanggaran);
+        const prestasiData = @json($chartPrestasi);
 
-    // Update current time
-    function updateTime() {
-        const now = new Date();
-        const timeString = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-        const dateString = now.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-        
-        document.getElementById('current-time').textContent = timeString;
-        document.getElementById('current-date').textContent = dateString;
-    }
-    
-    updateTime();
-    setInterval(updateTime, 1000);
-    
-    document.addEventListener('DOMContentLoaded', function() {
-        // Chart Pelanggaran
-        const pelanggaranCtx = document.getElementById('pelanggaranChart').getContext('2d');
-        const pelanggaranChart = new Chart(pelanggaranCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
-                datasets: [{
-                    label: 'Jumlah Pelanggaran',
-                    data: [12, 19, 15, 25, 22, 30],
-                    backgroundColor: 'rgba(239, 68, 68, 0.5)',
-                    borderColor: 'rgba(239, 68, 68, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
+        // DEBUG: Log data ke console
+        console.log('Labels:', labels);
+        console.log('Pelanggaran:', pelanggaranData);
+        console.log('Prestasi:', prestasiData);
+
+        // Cek apakah elemen canvas ada
+        const chartCanvas = document.getElementById('trenChart');
+        if(chartCanvas) {
+            console.log('Canvas element found!');
+            
+            // Set ukuran canvas secara eksplisit
+            const container = chartCanvas.parentElement;
+            chartCanvas.width = container.offsetWidth;
+            chartCanvas.height = container.offsetHeight;
+            
+            // Get the context
+            const ctx = chartCanvas.getContext('2d');
+            
+            // Gradien untuk pelanggaran
+            const pelanggaranGradient = ctx.createLinearGradient(0, 0, 0, 300);
+            pelanggaranGradient.addColorStop(0, 'rgba(239, 68, 68, 0.2)');
+            pelanggaranGradient.addColorStop(1, 'rgba(239, 68, 68, 0.01)');
+            
+            // Gradien untuk prestasi
+            const prestasiGradient = ctx.createLinearGradient(0, 0, 0, 300);
+            prestasiGradient.addColorStop(0, 'rgba(16, 185, 129, 0.2)');
+            prestasiGradient.addColorStop(1, 'rgba(16, 185, 129, 0.01)');
+            
+            // Buat grafik baru
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Pelanggaran',
+                            data: pelanggaranData,
+                            borderColor: '#ef4444',
+                            backgroundColor: pelanggaranGradient,
+                            borderWidth: 3,
+                            tension: 0.4,
+                            fill: true,
+                            pointBackgroundColor: '#ef4444',
+                            pointBorderColor: '#fff',
+                            pointBorderWidth: 2,
+                            pointRadius: 4,
+                            pointHoverRadius: 6
+                        },
+                        {
+                            label: 'Prestasi',
+                            data: prestasiData,
+                            borderColor: '#10b981',
+                            backgroundColor: prestasiGradient,
+                            borderWidth: 3,
+                            tension: 0.4,
+                            fill: true,
+                            pointBackgroundColor: '#10b981',
+                            pointBorderColor: '#fff',
+                            pointBorderWidth: 2,
+                            pointRadius: 4,
+                            pointHoverRadius: 6
+                        }
+                    ]
                 },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: 'rgba(0, 0, 0, 0.05)'
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                usePointStyle: true,
+                                padding: 15
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            padding: 12,
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            borderColor: '#ddd',
+                            borderWidth: 1,
+                            displayColors: true,
+                            intersect: false
                         }
                     },
-                    x: {
-                        grid: {
-                            display: false
-                        }
-                    }
-                }
-            }
-        });
-
-        // Chart Prestasi
-        const prestasiCtx = document.getElementById('prestasiChart').getContext('2d');
-        const prestasiChart = new Chart(prestasiCtx, {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
-                datasets: [{
-                    label: 'Jumlah Prestasi',
-                    data: [25, 32, 28, 42, 35, 48],
-                    backgroundColor: 'rgba(34, 197, 94, 0.1)',
-                    borderColor: 'rgba(34, 197, 94, 1)',
-                    borderWidth: 2,
-                    tension: 0.4,
-                    fill: true
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: 'rgba(0, 0, 0, 0.05)'
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)',
+                                drawBorder: false
+                            },
+                            ticks: {
+                                padding: 10
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false,
+                                drawBorder: false
+                            },
+                            ticks: {
+                                padding: 10
+                            }
                         }
                     },
-                    x: {
-                        grid: {
-                            display: false
-                        }
+                    interaction: {
+                        intersect: false,
+                        mode: 'index'
+                    },
+                    animation: {
+                        duration: 1000,
+                        easing: 'easeOutQuart'
                     }
                 }
-            }
-        });
-    });
+            });
+            
+            console.log('Chart created successfully!');
+        } else {
+            console.error('Canvas element with ID "trenChart" NOT found!');
+        }
+    }, 100); // Tunggu 100ms untuk memastikan DOM sepenuhnya dimuat
+});
 </script>
 @endpush
+@endsection
