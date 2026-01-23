@@ -9,6 +9,9 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+<style>
+    [x-cloak] { display: none !important; }
+</style>
 
 <body class="bg-gray-50 text-gray-900">
 
@@ -36,17 +39,57 @@
                     Dashboard Wali Kelas
                 </h1>
             </div>
+            @php
+                $namaWali = optional(auth()->user()->waliKelas)->nama ?? 'Wali Kelas';
+                $inisial = collect(explode(' ', $namaWali))
+                    ->map(fn ($n) => strtoupper(substr($n, 0, 1)))
+                    ->take(2)
+                    ->join('');
+            @endphp
 
-            <div class="flex items-center gap-3">
-                <div class="text-right hidden sm:block">
-                    <p class="text-sm font-semibold">{{ auth()->user()->login_id }}</p>
-                    <p class="text-xs text-gray-500">Wali Kelas</p>
-                </div>
-                <div class="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center font-bold">
-                    WK
+            <div x-data="{ open: false }" class="relative">
+                <!-- Trigger -->
+                <button @click="open = !open"
+                    class="flex items-center gap-3 hover:bg-gray-100 px-3 py-2 rounded-xl transition">
+
+                    <div class="text-right hidden sm:block">
+                        <p class="text-sm font-semibold text-gray-800 truncate">
+                            {{ $namaWali }}
+                        </p>
+                        <p class="text-xs text-gray-500">Wali Kelas</p>
+                    </div>
+
+                    <div class="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center font-bold">
+                        {{ $inisial }}
+                    </div>
+                </button>
+
+                <!-- Popup -->
+                <div x-show="open"
+                    x-cloak
+                    @click.outside="open = false"
+                    x-transition
+                    class="absolute right-0 mt-3 w-56 bg-white rounded-2xl shadow-xl
+                            border border-gray-200 z-50 overflow-hidden">
+                            
+                    <a href="{{ route('wali_kelas.profil') }}"
+                    class="flex items-center gap-3 px-4 py-3 text-sm
+                            text-gray-700 hover:bg-gray-100 transition">
+                        <i class="fas fa-user w-4"></i>
+                        Profil
+                    </a>
+
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit"
+                            class="w-full flex items-center gap-3 px-4 py-3 text-sm
+                                text-red-600 hover:bg-red-50 transition">
+                            <i class="fas fa-sign-out-alt w-4"></i>
+                            Logout
+                        </button>
+                    </form>
                 </div>
             </div>
-
         </header>
 
         {{-- CONTENT --}}
@@ -67,6 +110,6 @@ function closeSidebar(){
     document.getElementById('overlay').classList.add('hidden')
 }
 </script>
-
+<script src="//unpkg.com/alpinejs" defer></script>
 </body>
 </html>

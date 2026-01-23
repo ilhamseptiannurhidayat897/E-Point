@@ -38,16 +38,6 @@
             @endif
         </a>
 
-        <!-- Profil -->
-        <a href="{{ route('siswa.profil') }}"
-           class="sidebar-menu-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200
-                  {{ request()->routeIs('siswa.profil*') 
-                      ? 'bg-gradient-to-r from-primary/10 to-purple-600/10 text-primary border-l-4 border-primary shadow-sm' 
-                      : 'text-gray-700 hover:bg-gray-100 hover:text-primary hover:translate-x-1 hover:shadow-sm' }}">
-            <i class="fas fa-user w-5 text-center flex-shrink-0 {{ request()->routeIs('siswa.profil*') ? 'text-primary' : 'text-gray-500' }}"></i>
-            <span class="truncate">Profil</span>
-        </a>
-
         <!-- Divider -->
         <div class="pt-4 pb-2">
             <p class="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Aktivitas</p>
@@ -74,19 +64,6 @@
         </a>
 
     </nav>
-
-    <!-- Logout Section -->
-    <div class="p-4 border-t border-gray-200 flex-shrink-0">
-        <form action="{{ route('logout') }}" method="POST">
-            @csrf
-            <button type="submit"
-                    class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gradient-to-r hover:from-primary/5 hover:to-purple-600/5 hover:text-primary transition-all duration-200 group">
-                <i class="fas fa-sign-out-alt w-5 text-center flex-shrink-0 text-gray-500 group-hover:text-primary group-hover:rotate-12 transition-all duration-300"></i>
-                <span class="truncate">Logout</span>
-                <i class="fas fa-arrow-right ml-auto text-xs opacity-0 group-hover:opacity-100 transition-all duration-300"></i>
-            </button>
-        </form>
-    </div>
 
 </aside>
 

@@ -26,6 +26,13 @@ use App\Http\Controllers\BK\VerifikasiPelanggaranController;
 use App\Http\Controllers\BK\VerifikasiPrestasiController;
 use App\Http\Controllers\Siswa\PelanggaranController as SiswaPelanggaran;
 use App\Http\Controllers\Siswa\PrestasiController as SiswaPrestasi;
+use App\Http\Controllers\Admin\KelasImportController;
+use App\Http\Controllers\Admin\WaliKelasImportController;
+use App\Http\Controllers\Admin\SiswaImportController;
+use App\Http\Controllers\Admin\JenisPrestasiImportController;
+use App\Http\Controllers\Admin\JenisPelanggaranImportController;
+use App\Http\Controllers\Admin\SiswaPdfController;
+use App\Http\Controllers\Admin\SiswaExportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -109,6 +116,60 @@ Route::middleware('auth')->group(function () {
         Route::patch('/prestasi/{prestasi}/verifikasi',
             [PrestasiController::class, 'verifikasi']
         )->name('prestasi.verifikasi');
+        /*
+        |--------------------------------------------------------------------------
+        | Import (ADMIN ONLY)
+        |--------------------------------------------------------------------------
+        */
+        Route::get('/kelas/import', [KelasImportController::class, 'index'])
+            ->name('datakelas.import');
+
+        Route::post('/kelas/import', [KelasImportController::class, 'store'])
+            ->name('datakelas.import.store');
+
+        Route::get('/wali-kelas/import',
+            [WaliKelasImportController::class, 'index']
+        )->name('walikelas.import');
+
+        Route::post('/wali-kelas/import',
+            [WaliKelasImportController::class, 'store']
+        )->name('walikelas.import.store');
+
+        Route::get('/siswa/import',
+            [SiswaImportController::class, 'index']
+        )->name('datasiswa.import');
+
+        Route::post('/siswa/import',
+            [SiswaImportController::class, 'store']
+        )->name('datasiswa.import.store');
+
+        Route::get('/jenis-prestasi/import',
+            [JenisPrestasiImportController::class, 'index']
+        )->name('jenisprestasi.import');
+
+        Route::post('/jenis-prestasi/import',
+            [JenisPrestasiImportController::class, 'store']
+        )->name('jenisprestasi.import.store');
+
+        Route::get('/jenis-pelanggaran/import',
+            [JenisPelanggaranImportController::class, 'index']
+        )->name('jenispelanggaran.import');
+
+        Route::post('/jenis-pelanggaran/import',
+            [JenisPelanggaranImportController::class, 'store']
+        )->name('jenispelanggaran.import.store');
+        /*
+        |--------------------------------------------------------------------------
+        | Import (ADMIN ONLY)
+        |--------------------------------------------------------------------------
+        */
+        Route::get('/siswa/export-pdf',
+            [SiswaPdfController::class, 'export']
+        )->name('datasiswa.pdf');
+
+        Route::get('/siswa/export-excel',
+            [SiswaExportController::class, 'export']
+        )->name('datasiswa.excel');
     });
 
 

@@ -53,7 +53,7 @@ class LoginController extends Controller
         }
 
         return back()->withErrors([
-            'login_id' => 'Login ID atau password salah',
+            'login_id' => 'username atau password salah',
         ])->withInput($request->only('login_id', 'remember'));
     }
 
