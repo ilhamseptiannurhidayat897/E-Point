@@ -38,6 +38,17 @@
             @endif
         </a>
 
+        <a href="{{ route('petugas.profil.index') }}"
+        class="sidebar-menu-item flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200
+               {{ request()->routeIs('petugas.profil.index') 
+                   ? 'bg-gradient-to-r from-primary/10 to-purple-600/10 text-primary border-l-4 border-primary shadow-sm' 
+                   : 'text-gray-700 hover:bg-gray-100 hover:text-primary hover:translate-x-1 hover:shadow-sm' }}">
+                               <i class="fas fa-user w-5 text-center flex-shrink-0 {{ request()->routeIs('petugas.profil.index') ? 'text-primary' : 'text-gray-500' }}"></i>
+
+         <span class="truncate">Profil</span>
+     </a>
+
+
         <!-- Divider -->
         <div class="pt-4 pb-2">
             <p class="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Input Data</p>
@@ -88,11 +99,8 @@
             <span class="truncate">Riwayat Prestasi</span>
         </a>
 
-        <a href="{{ route('petugas.profil.index') }}"
-        class="sidebar-item {{ $menu('petugas.profil.*') }}">
-            <i class="fas fa-user-cog w-5 text-center"></i>
-            <span>Profil</span>
-        </a>
+
+
 
     </nav>
 
