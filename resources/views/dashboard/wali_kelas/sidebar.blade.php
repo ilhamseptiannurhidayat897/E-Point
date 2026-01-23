@@ -38,8 +38,6 @@
             @endif
         </a>
 
-
-
         <!-- Divider -->
         <div class="pt-4 pb-2">
             <p class="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Data Kelas</p>
@@ -57,8 +55,11 @@
 
     </nav>
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 3df166f39387874691c7fe410cc59334cf4d50b6
 </aside>
 
 <style>

@@ -30,8 +30,7 @@ return new class extends Migration
 
             // poin E-Point
             $table->integer('poin')
-                ->default(0)
-                ->comment('Total poin siswa');
+                ->default(0);
 
             // data tambahan
             $table->text('alamat')->nullable();
