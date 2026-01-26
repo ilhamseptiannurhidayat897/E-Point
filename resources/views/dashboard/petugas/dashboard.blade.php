@@ -204,7 +204,7 @@
                     <p class="text-xs text-gray-500">5 Data terbaru yang dicatat</p>
                 </div>
             </div>
-            <a href="{{ route('prestasi.index') }}" 
+            <a href="{{ route('inputprestasi.index') }}" 
                class="text-xs font-semibold text-primary hover:text-purple-600 flex items-center gap-1.5 bg-primary/5 hover:bg-primary/10 px-4 py-2 rounded-lg transition-colors">
                 <span>Lihat Semua</span>
                 <i class="fas fa-arrow-right text-xs"></i>

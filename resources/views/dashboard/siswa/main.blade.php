@@ -126,5 +126,7 @@
 {{-- Library AlpineJS --}}
 <script src="//unpkg.com/alpinejs" defer></script>
 
+@stack('scripts') {{-- Tambahkan ini --}}
+
 </body>
 </html>

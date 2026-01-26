@@ -16,8 +16,21 @@ class PrestasiController extends Controller
             ->where('siswa_id', $siswa->id)
             ->where('status', 'diterima')
             ->latest()
-            ->get();
+            ->paginate(10);
 
-        return view('dashboard.siswa.prestasi.index', compact('data'));
+        // Hitung statistik
+        $totalPoinPrestasi = 0;
+        $rataRataPoin = 0;
+        
+        if ($data->count() > 0) {
+            $totalPoinPrestasi = $data->sum(fn($item) => $item->jenis->poin ?? 0);
+            $rataRataPoin = number_format($data->avg(fn($item) => $item->jenis->poin ?? 0), 1);
+        }
+
+        return view('dashboard.siswa.prestasi.index', [
+            'data' => $data,
+            'totalPoinPrestasi' => $totalPoinPrestasi,
+            'rataRataPoin' => $rataRataPoin,
+        ]);
     }
 }

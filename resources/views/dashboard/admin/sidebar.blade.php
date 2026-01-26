@@ -93,10 +93,7 @@
             <span class="truncate">Data Siswa</span>
         </a>
 
-        <!-- Divider -->
-        <div class="pt-4 pb-2">
-            <p class="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Pengaturan</p>
-        </div>
+        
 
         <!-- Jenis Prestasi -->
         <a href="{{ route('jenisprestasi.index') }}"
@@ -118,10 +115,7 @@
             <span class="truncate">Jenis Pelanggaran</span>
         </a>
 
-        <!-- Divider -->
-        <div class="pt-4 pb-2">
-            <p class="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Transaksi</p>
-        </div>
+       
 
         <!-- Input Prestasi -->
         <a href="{{ route('prestasi.index') }}"

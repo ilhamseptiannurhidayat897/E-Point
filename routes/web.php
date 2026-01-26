@@ -63,6 +63,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'admin'])
             ->name('dashboard.admin');
 
+            Route::get('/dashboard/check-new-data', [DashboardController::class, 'checkNewData'])
+    ->name('dashboard.check-new-data');
+
+
         /*
         |--------------------------------------------------------------------------
         | MASTER DATA

@@ -1,7 +1,6 @@
 @extends('dashboard.wali_kelas.main')
 
 @section('content')
-
 <!-- ================= HEADER ================= -->
 <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-6">
     <div class="flex items-center justify-between">
@@ -52,6 +51,7 @@
                         </span>
                     </td>
                     <td class="px-6 py-4 text-center">
+                        <!-- Tombol Detail yang Diperbaiki -->
                         <button
                             onclick="openModal({{ $item->id }})"
                             class="inline-flex items-center gap-1.5 px-4 py-2 bg-primary/10 hover:bg-primary/20 text-primary font-semibold rounded-lg transition-all duration-200 border border-primary/20 transform hover:scale-105">
@@ -98,15 +98,56 @@
         </div>
 
         <!-- Content -->
-        <div class="p-6 max-h-[calc(90vh-80px)] overflow-y-auto" id="modalContent"></div>
+        <div class="p-6 max-h-[calc(90vh-80px)] overflow-y-auto" id="modalContent">
+            <!-- Loading indicator -->
+            <div class="flex justify-center items-center py-8">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+            </div>
+        </div>
     </div>
 </div>
 
 <!-- ================= DATA & SCRIPT ================= -->
-<!-- ================= DATA & SCRIPT ================= -->
+@php
+    // Prepare data for JavaScript
+    $siswaDataArray = [];
+    foreach($siswa as $item) {
+        $pelanggaranData = [];
+        foreach($item->pelanggaran as $p) {
+            $pelanggaranData[] = [
+                'nama' => $p->jenisPelanggaran->nama ?? '',
+                'poin' => $p->jenisPelanggaran->poin ?? 0,
+                'tanggal' => $p->tanggal ?? '',
+                'status' => $p->status ?? ''
+            ];
+        }
+        
+        $prestasiData = [];
+        foreach($item->prestasi as $p) {
+            $prestasiData[] = [
+                'nama' => $p->jenis->nama ?? '',
+                'poin' => $p->jenis->poin ?? 0,
+                'tanggal' => $p->tanggal ?? '',
+                'status' => $p->status ?? ''
+            ];
+        }
+        
+        $siswaDataArray[$item->id] = [
+            'id' => $item->id,
+            'nama' => $item->nama,
+            'nis' => $item->nis,
+            'kelas' => [
+                'nama_kelas' => $item->kelas->nama_kelas ?? ''
+            ],
+            'pelanggaran' => $pelanggaranData,
+            'prestasi' => $prestasiData
+        ];
+    }
+@endphp
+
 <script>
-    // Pastikan controller Anda melewatkan data siswa dalam format JSON
-    const siswaData = @json($siswaData);
+    // Data siswa yang akan digunakan untuk modal
+    const siswaData = @json($siswaDataArray);
     
     // Tambahkan ini untuk debugging: lihat data yang dimuat di console browser
     console.log('Data siswa yang dimuat:', siswaData);
@@ -184,7 +225,13 @@
                                             <p class="text-xs text-gray-500">${formatDate(p.tanggal)}</p>
                                         </div>
                                     </div>
-                                    <span class="text-rose-600 font-semibold flex-shrink-0">-${p.poin} poin</span>
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-rose-600 font-semibold flex-shrink-0">-${p.poin} poin</span>
+                                        ${p.status === 'diterima' 
+                                            ? '<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-100 text-emerald-700 border border-emerald-200"><i class="fas fa-check-circle text-xs"></i> Diterima</span>'
+                                            : '<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-rose-100 text-rose-700 border border-rose-200"><i class="fas fa-times-circle text-xs"></i> Ditolak</span>'
+                                        }
+                                    </div>
                                 </div>
                             `).join('') + 
                             `</div>`
@@ -215,7 +262,13 @@
                                             <p class="text-xs text-gray-500">${formatDate(p.tanggal)}</p>
                                         </div>
                                     </div>
-                                    <span class="text-emerald-600 font-semibold flex-shrink-0">+${p.poin} poin</span>
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-emerald-600 font-semibold flex-shrink-0">+${p.poin} poin</span>
+                                        ${p.status === 'diterima' 
+                                            ? '<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-100 text-emerald-700 border border-emerald-200"><i class="fas fa-check-circle text-xs"></i> Diterima</span>'
+                                            : '<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-rose-100 text-rose-700 border border-rose-200"><i class="fas fa-times-circle text-xs"></i> Ditolak</span>'
+                                        }
+                                    </div>
                                 </div>
                             `).join('') + 
                             `</div>`
@@ -272,6 +325,6 @@
             closeModal();
         }
     });
-    </script>
+</script>
 
 @endsection

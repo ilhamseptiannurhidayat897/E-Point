@@ -1,282 +1,189 @@
 @extends('dashboard.siswa.main')
 
 @section('content')
-<div class="container-fluid px-4 py-3">
-    
-    <!-- Header Section -->
-    <div class="mb-4">
-        <div class="d-flex align-items-center gap-3">
-            <div class="icon-box bg-gradient-primary">
-                <i class="fas fa-trophy text-white"></i>
-            </div>
+<div class="space-y-6">
+    <!-- Header -->
+    <div class="bg-white rounded-xl shadow p-6">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-                <h4 class="mb-0 fw-bold text-gray-800">Prestasi Saya</h4>
-                <p class="text-muted mb-0 small">Daftar prestasi yang telah diterima</p>
+                <h2 class="text-2xl font-bold text-gray-800">Prestasi Saya</h2>
+                <p class="text-gray-600">Riwayat prestasi yang telah diverifikasi</p>
             </div>
-        </div>
-    </div>
-
-    <!-- Table Card -->
-    <div class="card border-0 shadow-sm">
-        <div class="card-header bg-white border-0 py-3">
-            <div class="d-flex justify-content-between align-items-center">
-                <h6 class="mb-0 fw-semibold text-gray-700">
-                    <i class="fas fa-list-ul me-2 text-primary"></i>
-                    Daftar Prestasi
-                </h6>
-                <span class="badge bg-primary-subtle text-primary">
-                    {{ $data->count() }} Prestasi
+            <div class="flex items-center gap-4">
+                <div class="text-right">
+                    <p class="text-sm text-gray-500">Total Poin</p>
+                    <p class="text-2xl font-bold text-green-600">+{{ $totalPoinPrestasi ?? 0 }}</p>
+                </div>
+                <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">
+                    <i class="fas fa-check-circle mr-1"></i> Terverifikasi
                 </span>
             </div>
         </div>
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0">
-                    <thead class="bg-light">
-                        <tr>
-                            <th class="px-4 py-3 text-center" style="width: 60px;">
-                                <span class="text-muted small fw-semibold">No</span>
-                            </th>
-                            <th class="px-4 py-3 text-center" style="width: 100px;">
-                                <span class="text-muted small fw-semibold">Foto</span>
-                            </th>
-                            <th class="px-4 py-3">
-                                <span class="text-muted small fw-semibold">Prestasi</span>
-                            </th>
-                            <th class="px-4 py-3 text-center" style="width: 100px;">
-                                <span class="text-muted small fw-semibold">Poin</span>
-                            </th>
-                            <th class="px-4 py-3">
-                                <span class="text-muted small fw-semibold">Keterangan</span>
-                            </th>
-                            <th class="px-4 py-3 text-center" style="width: 120px;">
-                                <span class="text-muted small fw-semibold">Tanggal</span>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    @forelse($data as $item)
-                        <tr class="border-bottom">
-                            <td class="px-4 py-3 text-center">
-                                <span class="badge bg-light text-dark fw-normal">
-                                    {{ $loop->iteration }}
-                                </span>
-                            </td>
+    </div>
 
-                            <td class="px-4 py-3 text-center">
-                                @if($item->foto)
-                                    <div class="image-wrapper">
-                                        <img src="{{ asset('storage/'.$item->foto) }}"
-                                             class="img-thumbnail rounded"
-                                             alt="Foto Prestasi"
-                                             style="width: 70px; height: 70px; object-fit: cover;">
-                                    </div>
-                                @else
-                                    <div class="no-image">
-                                        <i class="fas fa-image text-muted"></i>
-                                    </div>
-                                @endif
-                            </td>
+    <!-- Statistik -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-white rounded-xl shadow p-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center">
+                    <i class="fas fa-trophy text-green-600"></i>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-500">Total Prestasi</p>
+                    <p class="text-xl font-bold text-gray-800">{{ $data->count() }}</p>
+                </div>
+            </div>
+        </div>
 
-                            <td class="px-4 py-3">
-                                <div class="d-flex align-items-center gap-2">
-                                    <div class="achievement-icon bg-primary-subtle text-primary">
-                                        <i class="fas fa-trophy"></i>
-                                    </div>
-                                    <span class="fw-medium text-gray-800">
-                                        {{ $item->jenis->nama }}
-                                    </span>
-                                </div>
-                            </td>
+        <div class="bg-white rounded-xl shadow p-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
+                    <i class="fas fa-calendar-alt text-blue-600"></i>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-500">Terakhir Update</p>
+                    <p class="text-sm font-semibold text-gray-800">
+                        @if($data->count() > 0 && $data->first()->verified_at)
+                            {{ \Carbon\Carbon::parse($data->first()->verified_at)->format('d M Y') }}
+                        @else
+                            -
+                        @endif
+                    </p>
+                </div>
+            </div>
+        </div>
 
-                            <td class="px-4 py-3 text-center">
-                                <span class="badge bg-success-subtle text-success px-3 py-2 fw-semibold">
-                                    <i class="fas fa-plus-circle me-1"></i>
-                                    {{ $item->jenis->poin }}
-                                </span>
-                            </td>
-
-                            <td class="px-4 py-3">
-                                <span class="text-gray-600">
-                                    {{ $item->keterangan ?? '-' }}
-                                </span>
-                            </td>
-
-                            <td class="px-4 py-3 text-center">
-                                <div class="date-badge">
-                                    <i class="fas fa-calendar-alt text-muted me-1"></i>
-                                    <span class="text-gray-700">
-                                        {{ $item->verified_at?->format('d/m/Y') ?? '-' }}
-                                    </span>
-                                </div>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="6" class="px-4 py-5 text-center">
-                                <div class="empty-state">
-                                    <div class="empty-icon mb-3">
-                                        <i class="fas fa-trophy"></i>
-                                    </div>
-                                    <h6 class="text-muted mb-1">Belum Ada Prestasi</h6>
-                                    <p class="text-muted small mb-0">
-                                        Prestasi yang telah diverifikasi akan muncul di sini
-                                    </p>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforelse
-                    </tbody>
-                </table>
+        <div class="bg-white rounded-xl shadow p-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center">
+                    <i class="fas fa-star text-purple-600"></i>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-500">Rata-rata Poin</p>
+                    <p class="text-xl font-bold text-purple-600">+{{ $rataRataPoin ?? 0 }}</p>
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- Tabel -->
+    <div class="bg-white rounded-xl shadow overflow-hidden">
+        <div class="px-6 py-4 border-b border-gray-100">
+            <h3 class="text-lg font-semibold text-gray-800">Daftar Prestasi</h3>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="min-w-full">
+                <thead>
+                    <tr class="bg-gray-50">
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">No</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Jenis Prestasi</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Poin</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Keterangan</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tanggal</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                    @forelse($data as $item)
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4 text-gray-600">{{ $loop->iteration }}</td>
+
+                        <td class="px-6 py-4">
+                            <div class="font-medium text-gray-800">{{ $item->jenis->nama }}</div>
+                            <div class="text-xs text-gray-500">{{ $item->jenis->kategori ?? 'Umum' }}</div>
+                        </td>
+
+                        <td class="px-6 py-4">
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-800">
+                                +{{ $item->jenis->poin }}
+                            </span>
+                        </td>
+
+                        <td class="px-6 py-4 text-gray-600 max-w-xs">
+                            {{ $item->keterangan ?? '-' }}
+                        </td>
+
+                        <td class="px-6 py-4">
+                            <div class="text-sm text-gray-800">
+                                {{ $item->verified_at ? \Carbon\Carbon::parse($item->verified_at)->format('d M Y') : '-' }}
+                            </div>
+                        </td>
+
+                        <td class="px-6 py-4">
+                            <div class="flex items-center gap-2">
+                                @if($item->foto)
+                                <button onclick="showImageModal('{{ asset('storage/'.$item->foto) }}', '{{ $item->jenis->nama }}')"
+                                        class="text-blue-600 hover:text-blue-800">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <a href="{{ asset('storage/'.$item->foto) }}" 
+                                   target="_blank"
+                                   class="text-green-600 hover:text-green-800">
+                                    <i class="fas fa-download"></i>
+                                </a>
+                                @else
+                                <span class="text-gray-400">-</span>
+                                @endif
+                            </div>
+                        </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="6" class="px-6 py-12 text-center">
+                            <div class="flex flex-col items-center">
+                                <i class="fas fa-trophy text-gray-300 text-4xl mb-3"></i>
+                                <p class="text-gray-500 font-medium">Belum ada prestasi</p>
+                                <p class="text-sm text-gray-400 mt-1">Ikuti kegiatan positif untuk mendapatkan poin</p>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+
+        @if($data->hasPages())
+        <div class="px-6 py-4 border-t border-gray-100">
+            {{ $data->links() }}
+        </div>
+        @endif
+    </div>
 </div>
 
-<style>
-/* Icon Box */
-.icon-box {
-    width: 50px;
-    height: 50px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.25rem;
+<!-- Modal -->
+<div id="imageModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4 z-50">
+    <div class="bg-white rounded-xl max-w-2xl w-full">
+        <div class="px-6 py-4 border-b flex justify-between items-center">
+            <h3 class="font-semibold text-gray-800" id="modalTitle"></h3>
+            <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="p-6">
+            <img id="modalImage" src="" class="w-full h-auto rounded-lg">
+        </div>
+    </div>
+</div>
+
+@push('scripts')
+<script>
+function showImageModal(imageSrc, title) {
+    document.getElementById('modalImage').src = imageSrc;
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('imageModal').classList.remove('hidden');
+    document.getElementById('imageModal').classList.add('flex');
 }
 
-.bg-gradient-primary {
-    background: linear-gradient(135deg, #6B21A8 0%, #7C3AED 100%);
-    box-shadow: 0 4px 12px rgba(107, 33, 168, 0.2);
+function closeModal() {
+    document.getElementById('imageModal').classList.add('hidden');
+    document.getElementById('imageModal').classList.remove('flex');
 }
 
-/* Card Styling */
-.card {
-    border-radius: 16px;
-    overflow: hidden;
-}
-
-.card-header {
-    padding: 1.25rem 1.5rem;
-}
-
-/* Table Styling */
-.table {
-    font-size: 0.9rem;
-}
-
-.table thead {
-    border-bottom: 2px solid #E5E7EB;
-}
-
-.table tbody tr {
-    transition: all 0.2s ease;
-}
-
-.table tbody tr:hover {
-    background-color: #F9FAFB;
-}
-
-.table tbody tr:last-child {
-    border-bottom: none;
-}
-
-/* Achievement Icon */
-.achievement-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.875rem;
-}
-
-/* Image Wrapper */
-.image-wrapper img {
-    border: 2px solid #F3F4F6;
-    transition: all 0.3s ease;
-}
-
-.image-wrapper img:hover {
-    transform: scale(1.05);
-    border-color: #6B21A8;
-}
-
-.no-image {
-    width: 70px;
-    height: 70px;
-    background: #F3F4F6;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-}
-
-/* Badge Styling */
-.badge {
-    font-weight: 500;
-    padding: 0.375rem 0.75rem;
-    border-radius: 8px;
-}
-
-.bg-primary-subtle {
-    background-color: #EDE9FE;
-    color: #6B21A8;
-}
-
-.bg-success-subtle {
-    background-color: #D1FAE5;
-    color: #059669;
-}
-
-/* Date Badge */
-.date-badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.5rem 0.75rem;
-    background: #F9FAFB;
-    border-radius: 8px;
-    font-size: 0.875rem;
-}
-
-/* Empty State */
-.empty-state {
-    padding: 2rem 0;
-}
-
-.empty-icon {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%);
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    color: #9CA3AF;
-}
-
-/* Text Colors */
-.text-gray-800 {
-    color: #1F2937;
-}
-
-.text-gray-700 {
-    color: #374151;
-}
-
-.text-gray-600 {
-    color: #4B5563;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .table {
-        font-size: 0.8rem;
-    }
-}
-</style>
+// Close modal on ESC
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+});
+</script>
+@endpush
 @endsection

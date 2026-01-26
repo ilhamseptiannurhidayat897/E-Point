@@ -194,31 +194,73 @@ $petugasId = Petugas::where('user_id', auth()->id())->value('id');
     }
 
     public function siswa()
-    {
-        $siswa = Auth::user()->siswa;
+{
+    $siswa = Auth::user()->siswa;
 
-        // TOTAL PRESTASI (HANYA YANG DITERIMA)
-        $totalPrestasi = Prestasi::where('siswa_id', $siswa->id)
-            ->where('status', 'diterima')
-            ->with('jenis')
-            ->get()
-            ->sum(fn ($item) => $item->jenis->poin);
+    // TOTAL PRESTASI (HANYA YANG DITERIMA)
+    $totalPrestasi = Prestasi::where('siswa_id', $siswa->id)
+        ->where('status', 'diterima')
+        ->with('jenis')
+        ->get()
+        ->sum(fn ($item) => $item->jenis->poin);
 
-        // TOTAL PELANGGARAN (HANYA YANG DITERIMA)
-        $totalPelanggaran = Pelanggaran::where('siswa_id', $siswa->id)
-            ->where('status', 'diterima')
-            ->with('jenisPelanggaran')
-            ->get()
-            ->sum(fn ($item) => $item->jenisPelanggaran->poin);
+    // TOTAL PELANGGARAN (HANYA YANG DITERIMA)
+    $totalPelanggaran = Pelanggaran::where('siswa_id', $siswa->id)
+        ->where('status', 'diterima')
+        ->with('jenisPelanggaran')
+        ->get()
+        ->sum(fn ($item) => $item->jenisPelanggaran->poin);
 
-        // TOTAL POIN AKHIR
-        $totalPoin = $totalPrestasi - $totalPelanggaran;
+    // TOTAL POIN AKHIR
+    $totalPoin = $totalPrestasi - $totalPelanggaran;
+    
+    // AMBIL DATA RIWAYAT TERBARU
+    $prestasiTerbaru = Prestasi::where('siswa_id', $siswa->id)
+        ->where('status', 'diterima')
+        ->with('jenis')
+        ->orderBy('verified_at', 'desc')
+        ->limit(3)
+        ->get()
+        ->map(function ($item) {
+            return [
+                'type' => 'prestasi',
+                'title' => $item->jenis->nama,
+                'description' => $item->keterangan ?? 'Prestasi yang telah dicapai',
+                'points' => '+' . $item->jenis->poin . ' poin',
+                'date' => $item->verified_at ? \Carbon\Carbon::parse($item->verified_at)->format('d M Y') : '',
+                'id' => $item->id
+            ];
+        });
+    
+    $pelanggaranTerbaru = Pelanggaran::where('siswa_id', $siswa->id)
+        ->where('status', 'diterima')
+        ->with('jenisPelanggaran')
+        ->orderBy('verified_at', 'desc')
+        ->limit(3)
+        ->get()
+        ->map(function ($item) {
+            return [
+                'type' => 'pelanggaran',
+                'title' => $item->jenisPelanggaran->nama,
+                'description' => $item->keterangan ?? 'Pelanggaran yang telah dilakukan',
+                'points' => '-' . $item->jenisPelanggaran->poin . ' poin',
+                'date' => $item->verified_at ? \Carbon\Carbon::parse($item->verified_at)->format('d M Y') : '',
+                'id' => $item->id
+            ];
+        });
+    
+    // Gabungkan dan urutkan riwayat berdasarkan tanggal
+    $riwayatTerbaru = $prestasiTerbaru->concat($pelanggaranTerbaru)
+    ->sortByDesc('date')
+    ->take(5)
+    ->values(); // Akan menghasilkan collection kosong []
 
-        return view('dashboard.siswa.dashboard', compact(
-            'totalPrestasi',
-            'totalPelanggaran',
-            'totalPoin'
-        ));
+    return view('dashboard.siswa.dashboard', compact(
+        'totalPrestasi',
+        'totalPelanggaran',
+        'totalPoin',
+        'riwayatTerbaru'
+    ));
 }
 
 }

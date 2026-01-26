@@ -1,337 +1,474 @@
 @extends('dashboard.admin.main')
 
 @section('content')
-<!-- Header dengan Purple Elegan -->
-<div class="mb-8 relative overflow-hidden rounded-2xl bg-purple-800 p-6 text-white shadow-xl">
-    <div class="absolute top-0 right-0 -mt-4 -mr-4 h-32 w-32 rounded-full bg-white/5"></div>
-    <div class="absolute bottom-0 left-0 -mb-4 -ml-4 h-24 w-24 rounded-full bg-white/5"></div>
-    <div class="absolute top-1/2 right-1/4 transform -translate-y-1/2 h-40 w-40 rounded-full bg-white/3 blur-xl"></div>
-    
-    <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+
+<!-- Header Card -->
+<div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 mb-8">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-            <h1 class="text-2xl md:text-3xl font-bold tracking-tight">Dashboard Admin</h1>
-            <p class="text-purple-100 mt-1 text-sm">Sistem Informasi E-Point SMKN 1 Kawali</p>
+            <h1 class="text-3xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-2">
+                Dashboard Admin
+            </h1>
+            <p class="text-gray-500 flex items-center gap-2">
+                <i class="fas fa-calendar-alt text-sm text-primary"></i>
+                <span>{{ \Carbon\Carbon::now()->translatedFormat('l, d F Y') }}</span>
+            </p>
         </div>
-        <div class="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 text-sm border border-white/10">
-            <i class="far fa-calendar-alt mr-2"></i>
-            {{ \Carbon\Carbon::now()->translatedFormat('l, d F Y') }}
+        <div class="bg-gradient-to-r from-primary/10 to-purple-600/10 px-6 py-4 rounded-xl border border-primary/20">
+            <p class="text-xs text-gray-500 mb-1">Sistem Informasi</p>
+            <p class="font-bold text-primary text-lg">E-Point SMKN 1 Kawali</p>
         </div>
     </div>
 </div>
 
-<!-- Statistik Utama dengan Efek Hover dan Animasi -->
-<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-    <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden">
-        <div class="absolute top-0 right-0 h-16 w-16 bg-blue-50 rounded-bl-full opacity-70"></div>
-        <div class="relative">
-            <div class="flex items-center justify-between mb-2">
-                <div class="text-gray-500 text-sm">Total Siswa</div>
-                <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <i class="fas fa-users text-blue-600 text-sm"></i>
-                </div>
-            </div>
-            <div class="text-2xl font-bold text-gray-900">{{ number_format($totalSiswa) }}</div>
-            <div class="text-xs text-gray-400 mt-2 flex items-center">
-                <span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
-                Aktif
+<!-- Statistics Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    
+    <!-- Total Siswa -->
+    <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
+        <div class="flex items-center justify-between mb-4">
+            <div class="bg-gradient-to-br from-primary/10 to-purple-600/10 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                <i class="fas fa-users text-primary text-xl"></i>
             </div>
         </div>
-    </div>
-    
-    <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden">
-        <div class="absolute top-0 right-0 h-16 w-16 bg-purple-50 rounded-bl-full opacity-70"></div>
-        <div class="relative">
-            <div class="flex items-center justify-between mb-2">
-                <div class="text-gray-500 text-sm">Total Kelas</div>
-                <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
-                    <i class="fas fa-school text-purple-600 text-sm"></i>
-                </div>
-            </div>
-            <div class="text-2xl font-bold text-gray-900">{{ number_format($totalKelas) }}</div>
-            <div class="text-xs text-gray-400 mt-2 flex items-center">
-                <span class="w-2 h-2 bg-purple-500 rounded-full mr-1"></span>
-                Kelas
-            </div>
+        <h3 class="text-4xl font-bold text-gray-800 mb-2">{{ number_format($totalSiswa) }}</h3>
+        <p class="text-sm text-gray-500 font-medium">Total Siswa</p>
+        <div class="mt-4 pt-4 border-t border-gray-100">
+            <p class="text-xs text-gray-400 flex items-center">
+                <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                Siswa Aktif
+            </p>
         </div>
     </div>
-    
-    <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden">
-        <div class="absolute top-0 right-0 h-16 w-16 bg-red-50 rounded-bl-full opacity-70"></div>
-        <div class="relative">
-            <div class="flex items-center justify-between mb-2">
-                <div class="text-gray-500 text-sm">Pelanggaran</div>
-                <div class="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center">
-                    <i class="fas fa-exclamation-triangle text-red-600 text-sm"></i>
-                </div>
+
+    <!-- Total Kelas -->
+    <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
+        <div class="flex items-center justify-between mb-4">
+            <div class="bg-gradient-to-br from-primary/10 to-purple-600/10 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                <i class="fas fa-school text-primary text-xl"></i>
             </div>
-            <div class="text-2xl font-bold text-gray-900">{{ number_format($totalPelanggaran) }}</div>
-            <div class="text-xs text-gray-400 mt-2 flex items-center">
-                <span class="w-2 h-2 bg-red-500 rounded-full mr-1"></span>
+        </div>
+        <h3 class="text-4xl font-bold text-gray-800 mb-2">{{ number_format($totalKelas) }}</h3>
+        <p class="text-sm text-gray-500 font-medium">Total Kelas</p>
+        <div class="mt-4 pt-4 border-t border-gray-100">
+            <p class="text-xs text-gray-400 flex items-center">
+                <span class="w-2 h-2 bg-purple-500 rounded-full mr-2"></span>
+                Kelas Aktif
+            </p>
+        </div>
+    </div>
+
+    <!-- Total Pelanggaran -->
+    <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
+        <div class="flex items-center justify-between mb-4">
+            <div class="bg-gradient-to-br from-primary/10 to-purple-600/10 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                <i class="fas fa-exclamation-triangle text-primary text-xl"></i>
+            </div>
+        </div>
+        <h3 class="text-4xl font-bold text-gray-800 mb-2">{{ number_format($totalPelanggaran) }}</h3>
+        <p class="text-sm text-gray-500 font-medium">Total Pelanggaran</p>
+        <div class="mt-4 pt-4 border-t border-gray-100">
+            <p class="text-xs text-gray-400 flex items-center">
+                <span class="w-2 h-2 bg-red-500 rounded-full mr-2"></span>
                 {{ $pelanggaranBulanIni }} bulan ini
-            </div>
+            </p>
         </div>
     </div>
-    
-    <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden">
-        <div class="absolute top-0 right-0 h-16 w-16 bg-green-50 rounded-bl-full opacity-70"></div>
-        <div class="relative">
-            <div class="flex items-center justify-between mb-2">
-                <div class="text-gray-500 text-sm">Prestasi</div>
-                <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
-                    <i class="fas fa-trophy text-green-600 text-sm"></i>
-                </div>
-            </div>
-            <div class="text-2xl font-bold text-gray-900">{{ number_format($totalPrestasi) }}</div>
-            <div class="text-xs text-gray-400 mt-2 flex items-center">
-                <span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
-                {{ $prestasiBulanIni }} bulan ini
+
+    <!-- Total Prestasi -->
+    <div class="bg-gradient-to-br from-primary to-purple-600 p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+        <div class="flex items-center justify-between mb-4">
+            <div class="bg-white/20 p-3 rounded-xl">
+                <i class="fas fa-trophy text-white text-xl"></i>
             </div>
         </div>
+        <h3 class="text-4xl font-bold text-white mb-2">{{ number_format($totalPrestasi) }}</h3>
+        <p class="text-sm text-white/90 font-medium">Total Prestasi</p>
+        <div class="mt-4 pt-4 border-t border-white/20">
+            <p class="text-xs text-white/70">{{ $prestasiBulanIni }} bulan ini</p>
+        </div>
     </div>
+
 </div>
 
-<!-- Chart & Data dengan Desain yang Ditingkatkan -->
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-    <!-- Chart dengan Efek Bayangan -->
-   <!-- Chart dengan Efek Bayangan -->
-<div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
-    <div class="flex items-center justify-between mb-4">
-        <h3 class="font-semibold text-gray-900">Tren Bulanan</h3>
-        <div class="flex space-x-2">
-            <button class="w-2 h-2 rounded-full bg-blue-500"></button>
-            <button class="w-2 h-2 rounded-full bg-green-500"></button>
-        </div>
-    </div>
-    <div class="h-64 relative chart-container">
-        <canvas id="trenChart"></canvas>
-    </div>
-</div>
+<!-- Chart & Pengguna Sistem -->
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
     
-    <!-- Peran Sistem dengan Hover Effects -->
-    <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
-        <h3 class="font-semibold text-gray-900 mb-4">Pengguna Sistem</h3>
-        <div class="space-y-3">
-            <div class="flex items-center justify-between py-3 px-4 rounded-lg hover:bg-purple-50 transition-colors duration-200 group">
-                <div class="flex items-center">
-                    <div class="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center mr-3 group-hover:bg-purple-200 transition-colors">
-                        <i class="fas fa-crown text-purple-600"></i>
-                    </div>
-                    <span class="text-gray-700 font-medium">Admin</span>
+    <!-- Chart Tren Bulanan -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+        <div class="bg-gradient-to-r from-primary/5 to-purple-600/5 px-6 py-5 border-b border-gray-200">
+            <div class="flex items-center gap-3">
+                <div class="bg-gradient-to-br from-primary/10 to-purple-600/10 p-2.5 rounded-lg">
+                    <i class="fas fa-chart-line text-primary"></i>
                 </div>
-                <span class="font-medium text-purple-600 bg-purple-50 px-3 py-1 rounded-full text-sm">1</span>
+                <div>
+                    <h2 class="text-lg font-bold text-gray-800">Tren Bulanan</h2>
+                    <p class="text-xs text-gray-500">6 Bulan Terakhir</p>
+                </div>
             </div>
-            
-            <div class="flex items-center justify-between py-3 px-4 rounded-lg hover:bg-blue-50 transition-colors duration-200 group">
-                <div class="flex items-center">
-                    <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center mr-3 group-hover:bg-blue-200 transition-colors">
-                        <i class="fas fa-user-tie text-blue-600"></i>
-                    </div>
-                    <span class="text-gray-700 font-medium">BK</span>
-                </div>
-                <span class="font-medium text-blue-600 bg-blue-50 px-3 py-1 rounded-full text-sm">{{ $totalBK }}</span>
-            </div>
-            
-            <div class="flex items-center justify-between py-3 px-4 rounded-lg hover:bg-green-50 transition-colors duration-200 group">
-                <div class="flex items-center">
-                    <div class="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center mr-3 group-hover:bg-green-200 transition-colors">
-                        <i class="fas fa-chalkboard-teacher text-green-600"></i>
-                    </div>
-                    <span class="text-gray-700 font-medium">Wali Kelas</span>
-                </div>
-                <span class="font-medium text-green-600 bg-green-50 px-3 py-1 rounded-full text-sm">{{ $totalWaliKelas }}</span>
-            </div>
-            
-            <div class="flex items-center justify-between py-3 px-4 rounded-lg hover:bg-amber-50 transition-colors duration-200 group">
-                <div class="flex items-center">
-                    <div class="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center mr-3 group-hover:bg-amber-200 transition-colors">
-                        <i class="fas fa-user-shield text-amber-600"></i>
-                    </div>
-                    <span class="text-gray-700 font-medium">Petugas</span>
-                </div>
-                <span class="font-medium text-amber-600 bg-amber-50 px-3 py-1 rounded-full text-sm">{{ $totalPetugas }}</span>
+        </div>
+        <div class="p-6">
+            <div class="h-64 relative chart-container">
+                <canvas id="trenChart"></canvas>
             </div>
         </div>
     </div>
+
+    <!-- Pengguna Sistem -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+        <div class="bg-gradient-to-r from-primary/5 to-purple-600/5 px-6 py-5 border-b border-gray-200">
+            <div class="flex items-center gap-3">
+                <div class="bg-gradient-to-br from-primary/10 to-purple-600/10 p-2.5 rounded-lg">
+                    <i class="fas fa-users-cog text-primary"></i>
+                </div>
+                <div>
+                    <h2 class="text-lg font-bold text-gray-800">Pengguna Sistem</h2>
+                    <p class="text-xs text-gray-500">Total pengguna berdasarkan peran</p>
+                </div>
+            </div>
+        </div>
+        <div class="p-6">
+            <div class="space-y-3">
+                <div class="flex items-center gap-4 p-4 bg-gray-50 hover:bg-primary/5 rounded-xl transition-all duration-200 group border border-transparent hover:border-primary/20">
+                    <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary to-purple-600 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition-transform">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-bold text-gray-800 mb-0.5">Admin</p>
+                        <p class="text-xs text-gray-500">Administrator Sistem</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm font-bold text-primary">1</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 p-4 bg-gray-50 hover:bg-primary/5 rounded-xl transition-all duration-200 group border border-transparent hover:border-primary/20">
+                    <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary to-purple-600 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition-transform">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-bold text-gray-800 mb-0.5">Bimbingan Konseling</p>
+                        <p class="text-xs text-gray-500">Verifikasi & Monitoring</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm font-bold text-primary">{{ $totalBK }}</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 p-4 bg-gray-50 hover:bg-primary/5 rounded-xl transition-all duration-200 group border border-transparent hover:border-primary/20">
+                    <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary to-purple-600 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition-transform">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-bold text-gray-800 mb-0.5">Wali Kelas</p>
+                        <p class="text-xs text-gray-500">Monitoring Kelas</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm font-bold text-primary">{{ $totalWaliKelas }}</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 p-4 bg-gray-50 hover:bg-primary/5 rounded-xl transition-all duration-200 group border border-transparent hover:border-primary/20">
+                    <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary to-purple-600 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition-transform">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-bold text-gray-800 mb-0.5">Petugas</p>
+                        <p class="text-xs text-gray-500">Pencatatan Data</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm font-bold text-primary">{{ $totalPetugas }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
-<!-- Data Terbaru dengan Desain yang Lebih Menarik -->
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+<!-- Data Terbaru -->
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
+    
     <!-- Pelanggaran Terbaru -->
-    <div class="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300">
-        <div class="px-6 py-4 border-b border-gray-100 bg-gradient-to-r from-red-50 to-transparent">
-            <h3 class="font-semibold text-gray-900 flex items-center">
-                <i class="fas fa-exclamation-circle text-red-500 mr-2"></i>
-                Pelanggaran Terbaru
-            </h3>
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+        <div class="bg-gradient-to-r from-primary/5 to-purple-600/5 px-6 py-5 flex items-center justify-between border-b border-gray-200">
+            <div class="flex items-center gap-3">
+                <div class="bg-gradient-to-br from-primary/10 to-purple-600/10 p-2.5 rounded-lg">
+                    <i class="fas fa-exclamation-triangle text-primary"></i>
+                </div>
+                <div>
+                    <h2 class="text-lg font-bold text-gray-800">Pelanggaran Terbaru</h2>
+                    <p class="text-xs text-gray-500">5 Data terbaru</p>
+                </div>
+            </div>
+            <a href="{{ route('pelanggaran.index') }}" 
+               class="text-xs font-semibold text-primary hover:text-purple-600 flex items-center gap-1.5 bg-primary/5 hover:bg-primary/10 px-4 py-2 rounded-lg transition-colors">
+                <span>Lihat Semua</span>
+                <i class="fas fa-arrow-right text-xs"></i>
+            </a>
         </div>
-        <div class="divide-y divide-gray-100">
-            @foreach($pelanggaranTerbaru as $index => $item)
-            <div class="px-6 py-4 hover:bg-gray-50 transition-colors duration-200" style="animation-delay: {{ $index * 50 }}ms">
-                <div class="flex justify-between items-start">
-                    <div class="flex items-start">
-                        <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center mr-3 flex-shrink-0">
-                            <i class="fas fa-user text-red-600 text-sm"></i>
-                        </div>
-                        <div>
-                            <div class="font-medium text-gray-900">{{ $item->siswa->nama ?? 'N/A' }}</div>
-                            <div class="text-sm text-gray-500 mt-1">
-                                {{ $item->siswa->kelas->nama_kelas ?? '-' }} • 
-                                {{ $item->jenisPelanggaran->nama ?? 'Tidak diketahui' }}
-                            </div>
+        
+        <div class="p-6">
+            @if($pelanggaranTerbaru->count() > 0)
+            <div class="space-y-3">
+                @foreach ($pelanggaranTerbaru as $item)
+                <div class="flex items-center gap-4 p-4 bg-gray-50 hover:bg-primary/5 rounded-xl transition-all duration-200 group border border-transparent hover:border-primary/20">
+                    <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary to-purple-600 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition-transform">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-bold text-gray-800 truncate mb-0.5">{{ $item->siswa->nama ?? 'N/A' }}</p>
+                        <div class="flex items-center gap-2 text-xs text-gray-500">
+                            <i class="fas fa-school text-primary"></i>
+                            <span>{{ $item->siswa->kelas->nama_kelas ?? '-' }}</span>
                         </div>
                     </div>
                     <div class="text-right">
-                        <div class="text-sm font-medium text-red-600 bg-red-50 px-2 py-1 rounded">{{ $item->jenisPelanggaran->poin ?? 0 }} poin</div>
-                        <div class="text-xs text-gray-400 mt-1">{{ $item->created_at->format('d/m') }}</div>
+                        <p class="text-sm font-bold text-primary mb-0.5">-{{ $item->jenisPelanggaran->poin ?? 0 }} Poin</p>
+                        <p class="text-xs text-gray-400">
+                            <i class="fas fa-clock mr-1"></i>
+                            {{ $item->created_at->diffForHumans() }}
+                        </p>
                     </div>
                 </div>
+                @endforeach
             </div>
-            @endforeach
+            @else
+            <div class="text-center py-12">
+                <div class="inline-block bg-gradient-to-br from-primary/10 to-purple-600/10 p-6 rounded-2xl mb-4">
+                    <i class="fas fa-inbox text-primary text-4xl"></i>
+                </div>
+                <p class="text-gray-500 font-medium">Belum ada data pelanggaran</p>
+                <p class="text-xs text-gray-400 mt-1">Data akan muncul setelah input pertama</p>
+            </div>
+            @endif
         </div>
     </div>
-    
+
     <!-- Prestasi Terbaru -->
-    <div class="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300">
-        <div class="px-6 py-4 border-b border-gray-100 bg-gradient-to-r from-green-50 to-transparent">
-            <h3 class="font-semibold text-gray-900 flex items-center">
-                <i class="fas fa-trophy text-green-500 mr-2"></i>
-                Prestasi Terbaru
-            </h3>
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+        <div class="bg-gradient-to-r from-primary/5 to-purple-600/5 px-6 py-5 flex items-center justify-between border-b border-gray-200">
+            <div class="flex items-center gap-3">
+                <div class="bg-gradient-to-br from-primary/10 to-purple-600/10 p-2.5 rounded-lg">
+                    <i class="fas fa-trophy text-primary"></i>
+                </div>
+                <div>
+                    <h2 class="text-lg font-bold text-gray-800">Prestasi Terbaru</h2>
+                    <p class="text-xs text-gray-500">5 Data terbaru</p>
+                </div>
+            </div>
+            <a href="{{ route('prestasi.index') }}" 
+               class="text-xs font-semibold text-primary hover:text-purple-600 flex items-center gap-1.5 bg-primary/5 hover:bg-primary/10 px-4 py-2 rounded-lg transition-colors">
+                <span>Lihat Semua</span>
+                <i class="fas fa-arrow-right text-xs"></i>
+            </a>
         </div>
-        <div class="divide-y divide-gray-100">
-            @foreach($prestasiTerbaru as $index => $item)
-            <div class="px-6 py-4 hover:bg-gray-50 transition-colors duration-200" style="animation-delay: {{ $index * 50 }}ms">
-                <div class="flex justify-between items-start">
-                    <div class="flex items-start">
-                        <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3 flex-shrink-0">
-                            <i class="fas fa-award text-green-600 text-sm"></i>
-                        </div>
-                        <div>
-                            <div class="font-medium text-gray-900">{{ $item->siswa->nama ?? 'N/A' }}</div>
-                            <div class="text-sm text-gray-500 mt-1">
-                                {{ $item->siswa->kelas->nama_kelas ?? '-' }} • 
-                                {{ $item->jenis->nama ?? 'Tidak diketahui' }}
-                            </div>
+        
+        <div class="p-6">
+            @if($prestasiTerbaru->count() > 0)
+            <div class="space-y-3">
+                @foreach ($prestasiTerbaru as $item)
+                <div class="flex items-center gap-4 p-4 bg-gray-50 hover:bg-primary/5 rounded-xl transition-all duration-200 group border border-transparent hover:border-primary/20">
+                    <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary to-purple-600 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition-transform">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-bold text-gray-800 truncate mb-0.5">{{ $item->siswa->nama ?? 'N/A' }}</p>
+                        <div class="flex items-center gap-2 text-xs text-gray-500">
+                            <i class="fas fa-school text-primary"></i>
+                            <span>{{ $item->siswa->kelas->nama_kelas ?? '-' }}</span>
                         </div>
                     </div>
                     <div class="text-right">
-                        <div class="text-sm font-medium text-green-600 bg-green-50 px-2 py-1 rounded">{{ $item->jenis->poin ?? 0 }} poin</div>
-                        <div class="text-xs text-gray-400 mt-1">{{ $item->created_at->format('d/m') }}</div>
+                        <p class="text-sm font-bold text-primary mb-0.5">+{{ $item->jenis->poin ?? 0 }} Poin</p>
+                        <p class="text-xs text-gray-400">
+                            <i class="fas fa-clock mr-1"></i>
+                            {{ $item->created_at->diffForHumans() }}
+                        </p>
                     </div>
                 </div>
+                @endforeach
             </div>
-            @endforeach
+            @else
+            <div class="text-center py-12">
+                <div class="inline-block bg-gradient-to-br from-primary/10 to-purple-600/10 p-6 rounded-2xl mb-4">
+                    <i class="fas fa-inbox text-primary text-4xl"></i>
+                </div>
+                <p class="text-gray-500 font-medium">Belum ada data prestasi</p>
+                <p class="text-xs text-gray-400 mt-1">Data akan muncul setelah input pertama</p>
+            </div>
+            @endif
         </div>
     </div>
+
 </div>
 
-<!-- Top Siswa dengan Desain yang Lebih Menarik -->
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+<!-- Top Siswa -->
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
+    
     <!-- Top Pelanggaran -->
-    <div class="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300">
-        <div class="px-6 py-4 border-b border-gray-100 bg-gradient-to-r from-red-50 to-transparent">
-            <h3 class="font-semibold text-gray-900 flex items-center">
-                <i class="fas fa-exclamation-triangle text-red-500 mr-2"></i>
-                Siswa dengan Pelanggaran Terbanyak
-            </h3>
-        </div>
-        <div class="divide-y divide-gray-100">
-            @foreach($topPelanggaran as $index => $siswa)
-            <div class="px-6 py-4 hover:bg-gray-50 transition-colors duration-200">
-                <div class="flex items-center">
-                    <div class="w-8 h-8 rounded-full flex items-center justify-center text-white font-medium text-sm mr-3 
-                        {{ $index == 0 ? 'bg-gradient-to-r from-yellow-400 to-yellow-600' : 
-                           ($index == 1 ? 'bg-gradient-to-r from-gray-300 to-gray-500' : 
-                           ($index == 2 ? 'bg-gradient-to-r from-orange-400 to-orange-600' : 'bg-red-500')) }}">
-                        {{ $index + 1 }}
-                    </div>
-                    <div class="flex-1">
-                        <div class="font-medium text-gray-900">{{ $siswa->nama }}</div>
-                        <div class="text-sm text-gray-500">{{ $siswa->kelas->nama_kelas ?? '-' }}</div>
-                    </div>
-                    <div class="bg-red-50 text-red-600 font-medium px-3 py-1 rounded-full text-sm">
-                        {{ $siswa->pelanggaran_count }}
-                    </div>
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+        <div class="bg-gradient-to-r from-primary/5 to-purple-600/5 px-6 py-5 border-b border-gray-200">
+            <div class="flex items-center gap-3">
+                <div class="bg-gradient-to-br from-primary/10 to-purple-600/10 p-2.5 rounded-lg">
+                    <i class="fas fa-exclamation-triangle text-primary"></i>
+                </div>
+                <div>
+                    <h2 class="text-lg font-bold text-gray-800">Siswa dengan Pelanggaran Terbanyak</h2>
+                    <p class="text-xs text-gray-500">Top 5 siswa</p>
                 </div>
             </div>
-            @endforeach
+        </div>
+        <div class="p-6">
+            @if($topPelanggaran->count() > 0)
+            <div class="space-y-3">
+                @foreach ($topPelanggaran as $index => $siswa)
+                <div class="flex items-center gap-4 p-4 bg-gray-50 hover:bg-primary/5 rounded-xl transition-all duration-200 group border border-transparent hover:border-primary/20">
+                    <div class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold shadow-lg group-hover:scale-105 transition-transform
+                        {{ $index == 0 ? 'bg-gradient-to-r from-yellow-400 to-yellow-600' : 
+                           ($index == 1 ? 'bg-gradient-to-r from-gray-300 to-gray-500' : 
+                           ($index == 2 ? 'bg-gradient-to-r from-orange-400 to-orange-600' : 'bg-gradient-to-br from-primary to-purple-600')) }}">
+                        {{ $index + 1 }}
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-bold text-gray-800 truncate mb-0.5">{{ $siswa->nama }}</p>
+                        <div class="flex items-center gap-2 text-xs text-gray-500">
+                            <i class="fas fa-school text-primary"></i>
+                            <span>{{ $siswa->kelas->nama_kelas ?? '-' }}</span>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm font-bold text-primary">{{ $siswa->pelanggaran_count }} kasus</p>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            @else
+            <div class="text-center py-12">
+                <div class="inline-block bg-gradient-to-br from-primary/10 to-purple-600/10 p-6 rounded-2xl mb-4">
+                    <i class="fas fa-smile text-primary text-4xl"></i>
+                </div>
+                <p class="text-gray-500 font-medium">Tidak ada data pelanggaran</p>
+            </div>
+            @endif
+        </div>
+    </div>
+
+    <!-- Top Prestasi -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+        <div class="bg-gradient-to-r from-primary/5 to-purple-600/5 px-6 py-5 border-b border-gray-200">
+            <div class="flex items-center gap-3">
+                <div class="bg-gradient-to-br from-primary/10 to-purple-600/10 p-2.5 rounded-lg">
+                    <i class="fas fa-trophy text-primary"></i>
+                </div>
+                <div>
+                    <h2 class="text-lg font-bold text-gray-800">Siswa dengan Prestasi Terbanyak</h2>
+                    <p class="text-xs text-gray-500">Top 5 siswa</p>
+                </div>
+            </div>
+        </div>
+        <div class="p-6">
+            @if($topPrestasi->count() > 0)
+            <div class="space-y-3">
+                @foreach ($topPrestasi as $index => $siswa)
+                <div class="flex items-center gap-4 p-4 bg-gray-50 hover:bg-primary/5 rounded-xl transition-all duration-200 group border border-transparent hover:border-primary/20">
+                    <div class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold shadow-lg group-hover:scale-105 transition-transform
+                        {{ $index == 0 ? 'bg-gradient-to-r from-yellow-400 to-yellow-600' : 
+                           ($index == 1 ? 'bg-gradient-to-r from-gray-300 to-gray-500' : 
+                           ($index == 2 ? 'bg-gradient-to-r from-orange-400 to-orange-600' : 'bg-gradient-to-br from-primary to-purple-600')) }}">
+                        {{ $index + 1 }}
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-bold text-gray-800 truncate mb-0.5">{{ $siswa->nama }}</p>
+                        <div class="flex items-center gap-2 text-xs text-gray-500">
+                            <i class="fas fa-school text-primary"></i>
+                            <span>{{ $siswa->kelas->nama_kelas ?? '-' }}</span>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm font-bold text-primary">{{ $siswa->prestasi_count }} prestasi</p>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            @else
+            <div class="text-center py-12">
+                <div class="inline-block bg-gradient-to-br from-primary/10 to-purple-600/10 p-6 rounded-2xl mb-4">
+                    <i class="fas fa-inbox text-primary text-4xl"></i>
+                </div>
+                <p class="text-gray-500 font-medium">Belum ada data prestasi</p>
+            </div>
+            @endif
+        </div>
+    </div>
+
+</div>
+
+<!-- Akses Cepat -->
+<div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+    <div class="flex items-center gap-3 mb-6">
+        <div class="bg-gradient-to-br from-primary to-purple-600 p-3 rounded-xl shadow-lg">
+            <i class="fas fa-rocket text-white text-xl"></i>
+        </div>
+        <div>
+            <h2 class="text-lg font-bold text-gray-800">Akses Cepat</h2>
+            <p class="text-xs text-gray-500">Menu utama untuk pengelolaan sistem</p>
         </div>
     </div>
     
-    <!-- Top Prestasi -->
-    <div class="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300">
-        <div class="px-6 py-4 border-b border-gray-100 bg-gradient-to-r from-green-50 to-transparent">
-            <h3 class="font-semibold text-gray-900 flex items-center">
-                <i class="fas fa-trophy text-green-500 mr-2"></i>
-                Siswa dengan Prestasi Terbanyak
-            </h3>
-        </div>
-        <div class="divide-y divide-gray-100">
-            @foreach($topPrestasi as $index => $siswa)
-            <div class="px-6 py-4 hover:bg-gray-50 transition-colors duration-200">
-                <div class="flex items-center">
-                    <div class="w-8 h-8 rounded-full flex items-center justify-center text-white font-medium text-sm mr-3 
-                        {{ $index == 0 ? 'bg-gradient-to-r from-yellow-400 to-yellow-600' : 
-                           ($index == 1 ? 'bg-gradient-to-r from-gray-300 to-gray-500' : 
-                           ($index == 2 ? 'bg-gradient-to-r from-orange-400 to-orange-600' : 'bg-green-500')) }}">
-                        {{ $index + 1 }}
-                    </div>
-                    <div class="flex-1">
-                        <div class="font-medium text-gray-900">{{ $siswa->nama }}</div>
-                        <div class="text-sm text-gray-500">{{ $siswa->kelas->nama_kelas ?? '-' }}</div>
-                    </div>
-                    <div class="bg-green-50 text-green-600 font-medium px-3 py-1 rounded-full text-sm">
-                        {{ $siswa->prestasi_count }}
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-    </div>
-</div>
-
-<!-- Akses Cepat dengan Desain yang Lebih Modern -->
-<div class="mt-8 p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl shadow-sm">
-    <h3 class="font-semibold text-gray-900 mb-4 flex items-center">
-        <i class="fas fa-rocket text-purple-500 mr-2"></i>
-        Akses Cepat
-    </h3>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <a href="{{ route('datasiswa.index') }}" 
-           class="bg-white p-5 rounded-xl border border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300 text-center group">
-            <div class="w-12 h-12 mx-auto bg-blue-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-blue-200 transition-colors">
-                <i class="fas fa-users text-blue-600 text-lg"></i>
+           class="group relative overflow-hidden bg-gray-50 hover:bg-primary/5 p-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 border border-transparent hover:border-primary/20 text-center">
+            <div class="w-14 h-14 mx-auto bg-gradient-to-br from-primary/10 to-purple-600/10 group-hover:from-primary group-hover:to-purple-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all shadow-md">
+                <i class="fas fa-users text-primary group-hover:text-white text-xl transition-colors"></i>
             </div>
-            <div class="text-sm font-medium text-gray-900">Data Siswa</div>
+            <h3 class="font-bold text-gray-800 mb-1">Data Siswa</h3>
+            <p class="text-xs text-gray-500">Kelola data siswa</p>
         </a>
         
         <a href="{{ route('walikelas.index') }}" 
-           class="bg-white p-5 rounded-xl border border-gray-200 hover:border-green-300 hover:shadow-lg transition-all duration-300 text-center group">
-            <div class="w-12 h-12 mx-auto bg-green-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-green-200 transition-colors">
-                <i class="fas fa-chalkboard-teacher text-green-600 text-lg"></i>
+           class="group relative overflow-hidden bg-gray-50 hover:bg-primary/5 p-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 border border-transparent hover:border-primary/20 text-center">
+            <div class="w-14 h-14 mx-auto bg-gradient-to-br from-primary/10 to-purple-600/10 group-hover:from-primary group-hover:to-purple-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all shadow-md">
+                <i class="fas fa-chalkboard-teacher text-primary group-hover:text-white text-xl transition-colors"></i>
             </div>
-            <div class="text-sm font-medium text-gray-900">Wali Kelas</div>
+            <h3 class="font-bold text-gray-800 mb-1">Wali Kelas</h3>
+            <p class="text-xs text-gray-500">Kelola wali kelas</p>
         </a>
         
         <a href="{{ route('datapetugas.index') }}" 
-           class="bg-white p-5 rounded-xl border border-gray-200 hover:border-amber-300 hover:shadow-lg transition-all duration-300 text-center group">
-            <div class="w-12 h-12 mx-auto bg-amber-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-amber-200 transition-colors">
-                <i class="fas fa-user-shield text-amber-600 text-lg"></i>
+           class="group relative overflow-hidden bg-gray-50 hover:bg-primary/5 p-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 border border-transparent hover:border-primary/20 text-center">
+            <div class="w-14 h-14 mx-auto bg-gradient-to-br from-primary/10 to-purple-600/10 group-hover:from-primary group-hover:to-purple-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all shadow-md">
+                <i class="fas fa-user-shield text-primary group-hover:text-white text-xl transition-colors"></i>
             </div>
-            <div class="text-sm font-medium text-gray-900">Petugas</div>
+            <h3 class="font-bold text-gray-800 mb-1">Petugas</h3>
+            <p class="text-xs text-gray-500">Kelola petugas</p>
         </a>
         
         <a href="{{ route('jenispelanggaran.index') }}" 
-           class="bg-white p-5 rounded-xl border border-gray-200 hover:border-red-300 hover:shadow-lg transition-all duration-300 text-center group">
-            <div class="w-12 h-12 mx-auto bg-red-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-red-200 transition-colors">
-                <i class="fas fa-exclamation-circle text-red-600 text-lg"></i>
+           class="group relative overflow-hidden bg-gray-50 hover:bg-primary/5 p-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 border border-transparent hover:border-primary/20 text-center">
+            <div class="w-14 h-14 mx-auto bg-gradient-to-br from-primary/10 to-purple-600/10 group-hover:from-primary group-hover:to-purple-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all shadow-md">
+                <i class="fas fa-exclamation-circle text-primary group-hover:text-white text-xl transition-colors"></i>
             </div>
-            <div class="text-sm font-medium text-gray-900">Jenis Pelanggaran</div>
+            <h3 class="font-bold text-gray-800 mb-1">Jenis Pelanggaran</h3>
+            <p class="text-xs text-gray-500">Kelola pelanggaran</p>
         </a>
     </div>
 </div>
 
 <style>
+/* Chart Container Fix */
+.chart-container {
+    position: relative;
+    height: 256px !important;
+    width: 100% !important;
+}
+
+#trenChart {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
 /* Animasi untuk elemen yang muncul */
 @keyframes fadeInUp {
     from {
@@ -355,22 +492,10 @@
 .grid > div:nth-child(2) { animation-delay: 0.2s; }
 .grid > div:nth-child(3) { animation-delay: 0.3s; }
 .grid > div:nth-child(4) { animation-delay: 0.4s; }
-
-/* Chart Container Fix */
-.chart-container {
-    position: relative;
-    height: 256px !important; /* h-64 = 256px */
-    width: 100% !important;
-}
-
-#trenChart {
-    display: block !important;
-    width: 100% !important;
-    height: 100% !important;
-}
 </style>
 
 @push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Tunggu sebentar agar DOM sepenuhnya dimuat
@@ -452,18 +577,40 @@ document.addEventListener('DOMContentLoaded', function() {
                             position: 'top',
                             labels: {
                                 usePointStyle: true,
-                                padding: 15
+                                padding: 15,
+                                font: {
+                                    size: 12,
+                                    family: "'Inter', sans-serif"
+                                }
                             }
                         },
                         tooltip: {
                             backgroundColor: 'rgba(0, 0, 0, 0.8)',
                             padding: 12,
                             titleColor: '#fff',
+                            titleFont: {
+                                size: 14,
+                                weight: 'bold'
+                            },
                             bodyColor: '#fff',
-                            borderColor: '#ddd',
+                            bodyFont: {
+                                size: 13
+                            },
+                            borderColor: '#374151',
                             borderWidth: 1,
                             displayColors: true,
-                            intersect: false
+                            intersect: false,
+                            mode: 'index',
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    label += context.parsed.y + ' kasus';
+                                    return label;
+                                }
+                            }
                         }
                     },
                     scales: {
@@ -474,7 +621,14 @@ document.addEventListener('DOMContentLoaded', function() {
                                 drawBorder: false
                             },
                             ticks: {
-                                padding: 10
+                                padding: 10,
+                                font: {
+                                    size: 12
+                                },
+                                color: '#6b7280',
+                                callback: function(value) {
+                                    return Number.isInteger(value) ? value : null;
+                                }
                             }
                         },
                         x: {
@@ -483,7 +637,11 @@ document.addEventListener('DOMContentLoaded', function() {
                                 drawBorder: false
                             },
                             ticks: {
-                                padding: 10
+                                padding: 10,
+                                font: {
+                                    size: 12
+                                },
+                                color: '#6b7280'
                             }
                         }
                     },
@@ -492,8 +650,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         mode: 'index'
                     },
                     animation: {
-                        duration: 1000,
-                        easing: 'easeOutQuart'
+                        duration: 1500,
+                        easing: 'easeInOutQuart'
                     }
                 }
             });
@@ -502,8 +660,32 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             console.error('Canvas element with ID "trenChart" NOT found!');
         }
-    }, 100); // Tunggu 100ms untuk memastikan DOM sepenuhnya dimuat
+    }, 100);
 });
+
+// Counter Animation untuk Angka Statistik
+function animateValue(element, start, end, duration) {
+    let startTimestamp = null;
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const value = Math.floor(progress * (end - start) + start);
+        element.textContent = value.toLocaleString('id-ID');
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        }
+    };
+    window.requestAnimationFrame(step);
+}
+
+// Jalankan animasi counter setelah halaman load
+setTimeout(() => {
+    document.querySelectorAll('[data-count]').forEach(el => {
+        const target = parseInt(el.getAttribute('data-count'));
+        animateValue(el, 0, target, 1000);
+    });
+}, 200);
 </script>
 @endpush
+
 @endsection
