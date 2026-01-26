@@ -38,7 +38,6 @@
             @endif
         </a>
 
-
         <!-- Divider -->
         <div class="pt-4 pb-2">
             <p class="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Monitoring</p>
@@ -105,7 +104,6 @@
         </a>
 
     </nav>
-
 
 </aside>
 

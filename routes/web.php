@@ -31,8 +31,10 @@ use App\Http\Controllers\Admin\WaliKelasImportController;
 use App\Http\Controllers\Admin\SiswaImportController;
 use App\Http\Controllers\Admin\JenisPrestasiImportController;
 use App\Http\Controllers\Admin\JenisPelanggaranImportController;
-use App\Http\Controllers\Admin\SiswaPdfController;
+use App\Http\Controllers\Admin\SiswaPdfController as AdminSiswaPdf;
 use App\Http\Controllers\Admin\SiswaExportController;
+use App\Http\Controllers\BK\SiswaPdfController as BKSiswaPdf;
+use App\Http\Controllers\WaliKelas\SiswaPdfController as WaliSiswaPdf;
 
 /*
 |--------------------------------------------------------------------------
@@ -164,7 +166,7 @@ Route::middleware('auth')->group(function () {
         |--------------------------------------------------------------------------
         */
         Route::get('/siswa/export-pdf',
-            [SiswaPdfController::class, 'export']
+            [AdminSiswaPdf::class, 'export']
         )->name('datasiswa.pdf');
 
         Route::get('/siswa/export-excel',
@@ -221,7 +223,6 @@ Route::middleware('auth')->group(function () {
     Route::prefix('bk')->name('bk.')->middleware('role:bk')->group(function () {
 
         Route::get('dashboard', [DashboardController::class, 'bk'])->name('dashboard');
-        Route::resource('siswa', BKSiswa::class)->only(['index','show']);
 
         Route::get('pelanggaran', [VerifikasiPelanggaranController::class, 'index'])
             ->name('pelanggaran');
@@ -254,6 +255,11 @@ Route::middleware('auth')->group(function () {
         Route::put('/profil', [BKProfil::class, 'update'])
             ->name('profil.update');
 
+        Route::get('/siswa/export-pdf',
+            [BkSiswaPdf::class, 'export']
+        )->name('siswa.pdf');
+    
+        Route::resource('siswa', BKSiswa::class)->only(['index','show']);
     });
 
     /*
@@ -266,8 +272,6 @@ Route::middleware('auth')->group(function () {
 
         Route::get('dashboard', [DashboardController::class, 'wali_kelas'])
             ->name('dashboard');
-
-        Route::resource('siswa', WaliSiswa::class)->only(['index','show']);
 
         Route::get('pelanggaran', [PelanggaranController::class, 'index'])
             ->name('pelanggaran.index');
@@ -283,6 +287,12 @@ Route::middleware('auth')->group(function () {
 
         Route::put('/profil', [WaliProfil::class, 'update'])
             ->name('profil.update');
+
+        Route::get('/siswa/export-pdf',
+            [WaliSiswaPdf::class, 'export']
+        )->name('siswa.pdf');
+
+        Route::resource('siswa', WaliSiswa::class)->only(['index','show']);
     });
 
     /*
