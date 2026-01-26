@@ -30,7 +30,7 @@ class SiswaController extends Controller
         }
 
         // Ambil data siswa untuk ditampilkan di tabel
-        $siswa = $waliKelas->kelas->siswa()->paginate(10);
+        $siswa = $waliKelas->kelas->siswa()->paginate(100);
 
         // Siapkan data siswa untuk modal (DENGAN pelanggaran dan prestasi)
         $siswaData = Siswa::with(['pelanggaran', 'prestasi'])

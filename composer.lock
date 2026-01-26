@@ -8101,6 +8101,7 @@
         },
         {
             "name": "phpunit/phpunit",
+<<<<<<< HEAD
             "version": "10.5.60",
             "source": {
                 "type": "git",
@@ -8111,6 +8112,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/f2e26f52f80ef77832e359205f216eeac00e320c",
                 "reference": "f2e26f52f80ef77832e359205f216eeac00e320c",
+=======
+            "version": "10.5.61",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/phpunit.git",
+                "reference": "bd265b671a63b87e85a8155f885b6fbb41ee505b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/bd265b671a63b87e85a8155f885b6fbb41ee505b",
+                "reference": "bd265b671a63b87e85a8155f885b6fbb41ee505b",
+>>>>>>> 3c35ae11ebeaaae48f320c7965f0bfcd0742666a
                 "shasum": ""
             },
             "require": {
@@ -8131,7 +8144,7 @@
                 "phpunit/php-timer": "^6.0.0",
                 "sebastian/cli-parser": "^2.0.1",
                 "sebastian/code-unit": "^2.0.0",
-                "sebastian/comparator": "^5.0.4",
+                "sebastian/comparator": "^5.0.5",
                 "sebastian/diff": "^5.1.1",
                 "sebastian/environment": "^6.1.0",
                 "sebastian/exporter": "^5.1.4",
@@ -8182,7 +8195,11 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
+<<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.60"
+=======
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.61"
+>>>>>>> 3c35ae11ebeaaae48f320c7965f0bfcd0742666a
             },
             "funding": [
                 {
@@ -8206,7 +8223,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2025-12-06T07:50:42+00:00"
+=======
+            "time": "2026-01-24T16:06:23+00:00"
+>>>>>>> 3c35ae11ebeaaae48f320c7965f0bfcd0742666a
         },
         {
             "name": "sebastian/cli-parser",
@@ -8378,16 +8399,16 @@
         },
         {
             "name": "sebastian/comparator",
-            "version": "5.0.4",
+            "version": "5.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/comparator.git",
-                "reference": "e8e53097718d2b53cfb2aa859b06a41abf58c62e"
+                "reference": "55dfef806eb7dfeb6e7a6935601fef866f8ca48d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/e8e53097718d2b53cfb2aa859b06a41abf58c62e",
-                "reference": "e8e53097718d2b53cfb2aa859b06a41abf58c62e",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/55dfef806eb7dfeb6e7a6935601fef866f8ca48d",
+                "reference": "55dfef806eb7dfeb6e7a6935601fef866f8ca48d",
                 "shasum": ""
             },
             "require": {
@@ -8443,7 +8464,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/comparator/issues",
                 "security": "https://github.com/sebastianbergmann/comparator/security/policy",
-                "source": "https://github.com/sebastianbergmann/comparator/tree/5.0.4"
+                "source": "https://github.com/sebastianbergmann/comparator/tree/5.0.5"
             },
             "funding": [
                 {
@@ -8463,7 +8484,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-09-07T05:25:07+00:00"
+            "time": "2026-01-24T09:25:16+00:00"
         },
         {
             "name": "sebastian/complexity",
