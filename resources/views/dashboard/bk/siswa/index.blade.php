@@ -13,9 +13,18 @@
                 Total {{ $siswa->total() }} siswa terdaftar
             </p>
         </div>
-        <div class="bg-gradient-to-br from-primary to-purple-600 p-4 rounded-xl shadow-lg">
-            <i class="fas fa-users text-white text-2xl"></i>
-        </div>
+            <form action="{{ route('bk.siswa.pdf') }}" method="GET">
+                <select name="kelas_id" required>
+                    <option value="">-- Pilih Kelas --</option>
+                    @foreach ($kelas as $k)
+                        <option value="{{ $k->id }}">{{ $k->nama_kelas }}</option>
+                    @endforeach
+                </select>
+
+                <button type="submit">
+                    Download PDF
+                </button>
+            </form>
     </div>
 </div>
 
