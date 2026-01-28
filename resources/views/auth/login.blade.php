@@ -122,6 +122,36 @@
             left: 100%;
         }
 
+        /* Professional Back Button Inside Card */
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: transparent;
+            border-radius: 8px;
+            color: #6b7280;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid transparent;
+        }
+
+        .btn-back:hover {
+            background: rgba(43, 27, 100, 0.05);
+            color: #2B1B64;
+            border-color: rgba(43, 27, 100, 0.1);
+        }
+
+        .btn-back .back-icon {
+            transition: transform 0.2s ease;
+        }
+
+        .btn-back:hover .back-icon {
+            transform: translateX(-2px);
+        }
+
         .logo-container {
             animation: float 3s ease-in-out infinite;
         }
@@ -190,6 +220,16 @@
         
         <!-- Login Form Section -->
         <div class="w-full md:w-1/2 p-6 md:p-8 form-section">
+            <!-- Back Button Inside Card -->
+            <div class="mb-5">
+                <a href="/" class="btn-back">
+                    <svg class="w-4 h-4 back-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                    </svg>
+                    <span>Kembali</span>
+                </a>
+            </div>
+
             <!-- Logo & Header -->
             <div class="text-center mb-6">
                 <div class="logo-container inline-block mb-3">
