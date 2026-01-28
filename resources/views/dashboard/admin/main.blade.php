@@ -138,9 +138,7 @@
                         </button>
                         
                         <!-- Page Title -->
-                        <h1 class="text-base sm:text-lg md:text-xl font-bold text-primary truncate">
-                            Dashboard Admin
-                        </h1>
+
                     </div>
 
                     <!-- Right Section -->

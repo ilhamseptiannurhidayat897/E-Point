@@ -35,9 +35,7 @@
                 <button onclick="toggleSidebar()" class="md:hidden text-primary">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
-                <h1 class="text-lg font-bold text-primary">
-                    Dashboard Wali Kelas
-                </h1>
+
             </div>
             @php
                 $namaWali = optional(auth()->user()->waliKelas)->nama ?? 'Wali Kelas';
@@ -62,6 +60,10 @@
                     <div class="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center font-bold">
                         {{ $inisial }}
                     </div>
+                    
+                    <!-- Dropdown Icon -->
+                    <i class="fas fa-chevron-down text-gray-500 text-xs transition-transform"
+                       :class="open ? 'rotate-180' : ''"></i>
                 </button>
 
                 <!-- Popup -->

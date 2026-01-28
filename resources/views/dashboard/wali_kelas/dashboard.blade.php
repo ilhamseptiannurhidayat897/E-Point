@@ -66,18 +66,19 @@
     </div>
 
     <!-- Total Poin -->
-    <div class="bg-gradient-to-br from-primary to-purple-600 p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+    <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
         <div class="flex items-center justify-between mb-4">
-            <div class="bg-white/20 p-3 rounded-xl">
-                <i class="fas fa-chart-line text-white text-xl"></i>
+            <div class="bg-gradient-to-br from-primary/10 to-purple-600/10 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                <i class="fas fa-clipboard-check text-primary text-xl"></i>
             </div>
         </div>
-        <h3 class="text-4xl font-bold text-white mb-2">{{ number_format($totalPoin ?? 0) }}</h3>
-        <p class="text-sm text-white/90 font-medium">Total Poin</p>
-        <div class="mt-4 pt-4 border-t border-white/20">
-            <p class="text-xs text-white/70">Akumulasi Kelas</p>
+        <h3 class="text-4xl font-bold text-green-500 mb-2">{{ number_format($totalPoin ?? 0) }}</h3>
+        <p class="text-sm text-gray-600 font-medium">Total Poin</p>
+        <div class="mt-4 pt-4 border-t border-gray-200">
+            <p class="text-xs text-gray-500">Akumulasi Kelas</p>
         </div>
     </div>
+
 
 </div>
 
@@ -355,37 +356,13 @@
         </div>
     </div>
     
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="flex justify-center">
         <a href="{{ route('wali_kelas.siswa.index') }}" 
-           class="bg-white p-5 rounded-xl border border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300 text-center group">
+           class="bg-white p-5 rounded-xl border border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300 text-center group max-w-xs">
             <div class="w-12 h-12 mx-auto bg-blue-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-blue-200 transition-colors">
                 <i class="fas fa-users text-blue-600 text-lg"></i>
             </div>
             <div class="text-sm font-medium text-gray-900">Data Siswa</div>
-        </a>
-        
-        <a href="#" 
-           class="bg-white p-5 rounded-xl border border-gray-200 hover:border-red-300 hover:shadow-lg transition-all duration-300 text-center group">
-            <div class="w-12 h-12 mx-auto bg-red-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-red-200 transition-colors">
-                <i class="fas fa-exclamation-circle text-red-600 text-lg"></i>
-            </div>
-            <div class="text-sm font-medium text-gray-900">Pelanggaran</div>
-        </a>
-        
-        <a href="#" 
-           class="bg-white p-5 rounded-xl border border-gray-200 hover:border-green-300 hover:shadow-lg transition-all duration-300 text-center group">
-            <div class="w-12 h-12 mx-auto bg-green-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-green-200 transition-colors">
-                <i class="fas fa-trophy text-green-600 text-lg"></i>
-            </div>
-            <div class="text-sm font-medium text-gray-900">Prestasi</div>
-        </a>
-        
-        <a href="#" 
-           class="bg-white p-5 rounded-xl border border-gray-200 hover:border-purple-300 hover:shadow-lg transition-all duration-300 text-center group">
-            <div class="w-12 h-12 mx-auto bg-purple-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-purple-200 transition-colors">
-                <i class="fas fa-file-alt text-purple-600 text-lg"></i>
-            </div>
-            <div class="text-sm font-medium text-gray-900">Laporan</div>
         </a>
     </div>
 </div>

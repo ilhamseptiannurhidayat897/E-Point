@@ -9,14 +9,16 @@
             <h1 class="text-3xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-2">
                 Dashboard Petugas
             </h1>
-            <p class="text-gray-500 flex items-center gap-2">
+            <div>
+                <p class="text-lg font-semibold text-gray-500 mb-1">Selamat datang kembali,</p>
+                <p class="font-bold text-primary text-lg">{{ Auth::user()->name }}</p>
+            </div>
+        </div>
+        <div class="text-right">
+            <p class="text-gray-500 flex items-center gap-2 justify-end">
                 <i class="fas fa-calendar-alt text-sm text-primary"></i>
                 <span>{{ now()->isoFormat('dddd, D MMMM YYYY') }}</span>
             </p>
-        </div>
-        <div class="bg-gradient-to-r from-primary/10 to-purple-600/10 px-6 py-4 rounded-xl border border-primary/20">
-            <p class="text-xs text-gray-500 mb-1">Selamat datang kembali,</p>
-            <p class="font-bold text-primary text-lg">{{ Auth::user()->name }}</p>
         </div>
     </div>
 </div>
@@ -73,16 +75,16 @@
     </div>
 
     <!-- Total Input Saya -->
-    <div class="bg-gradient-to-br from-primary to-purple-600 p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+    <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
         <div class="flex items-center justify-between mb-4">
-            <div class="bg-white/20 p-3 rounded-xl">
-                <i class="fas fa-clipboard-check text-white text-xl"></i>
+            <div class="bg-gradient-to-br from-primary/10 to-purple-600/10 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                <i class="fas fa-clipboard-check text-primary text-xl"></i>
             </div>
         </div>
-        <h3 class="text-4xl font-bold text-white mb-2">{{ $totalInputSaya }}</h3>
-        <p class="text-sm text-white/90 font-medium">Total Input Saya</p>
-        <div class="mt-4 pt-4 border-t border-white/20">
-            <p class="text-xs text-white/70">Kontribusi Anda</p>
+        <h3 class="text-4xl font-bold text-green-500 mb-2">{{ $totalInputSaya }}</h3>
+        <p class="text-sm text-gray-600 font-medium">Total Input Saya</p>
+        <div class="mt-4 pt-4 border-t border-gray-200">
+            <p class="text-xs text-gray-500">Kontribusi Anda</p>
         </div>
     </div>
 

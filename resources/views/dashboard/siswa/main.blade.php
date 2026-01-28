@@ -60,6 +60,7 @@
                 {{-- TRIGGER BUTTON --}}
                 <button @click="open = !open"
                     class="flex items-center gap-3 hover:bg-gray-100 px-3 py-2 rounded-xl transition">
+                    
 
                     <div class="text-right hidden sm:block">
                         <p class="text-sm font-semibold text-gray-800 truncate">
@@ -68,9 +69,14 @@
                         <p class="text-xs text-gray-500">Siswa</p>
                     </div>
 
+                    
                     <div class="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center font-bold">
                         {{ $inisial }}
                     </div>
+
+                                        <!-- Dropdown Icon -->
+                                        <i class="fas fa-chevron-down text-gray-500 text-xs transition-transform"
+                                        :class="open ? 'rotate-180' : ''"></i>
                 </button>
 
                 {{-- POPUP MENU --}}

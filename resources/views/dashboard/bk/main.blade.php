@@ -43,9 +43,7 @@
                         <i class="fas fa-bars text-xl"></i>
                     </button>
 
-                    <h1 class="text-lg font-bold text-primary">
-                        Dashboard BK
-                    </h1>
+                    
                 </div>
 
                 {{-- LOGIKA PHP UNTUK NAMA & INISIAL --}}
@@ -62,23 +60,26 @@
 
                 <!-- Right (Dropdown Profile) -->
                 <div x-data="{ open: false }" class="relative">
-                    
                     <!-- Trigger Button -->
                     <button @click="open = !open"
                         class="flex items-center gap-3 hover:bg-gray-100 px-3 py-2 rounded-xl transition">
-
+                
                         <div class="text-right hidden sm:block">
                             <p class="text-sm font-semibold text-gray-800 truncate">
                                 {{ $namaBK }}
                             </p>
                             <p class="text-xs text-gray-500">Bimbingan Konseling</p>
                         </div>
-
+                
                         <div class="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center font-bold shadow-sm">
                             {{ $inisial }}
                         </div>
+                        
+                        <!-- Dropdown Icon -->
+                        <i class="fas fa-chevron-down text-gray-500 text-xs transition-transform"
+                           :class="open ? 'rotate-180' : ''"></i>
                     </button>
-
+                
                     <!-- Popup Menu -->
                     <div x-show="open"
                         x-cloak
@@ -94,7 +95,7 @@
                             <i class="fas fa-user w-4"></i>
                             Profil
                         </a>
-
+                
                         <!-- Menu Logout -->
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf

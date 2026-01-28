@@ -330,23 +330,23 @@
 
                 <!-- Submit Button -->
                 <button 
-                    type="submit"
-                    class="btn-login w-full text-white py-3 rounded-xl font-semibold shadow-lg flex items-center justify-center space-x-2 text-sm"
-                >
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
-                    </svg>
-                    <span>Masuk</span>
-                </button>
+    type="submit"
+    class="btn-login w-full text-white py-3 rounded-xl font-semibold shadow-lg flex items-center justify-center space-x-2 text-sm"
+>
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16l4-4m0 0l-4-4m4 4H7m5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h3a3 3 0 013 3v1"/>
+    </svg>
+    <span>Masuk</span>
+</button>
             </form>
 
             <!-- Footer Info -->
-            <div class="mt-6 text-center">
-                <div class="w-12 h-0.5 footer-accent mx-auto mb-3 rounded-full"></div>
-                <p class="text-xs text-gray-400">
-                    © SMKN 1 Kawali 
-                </p>
-            </div>
+            <!-- Footer Info -->
+<div class="mt-6 text-center">
+    <p class="text-xs text-gray-400">
+        © SMKN 1 Kawali 
+    </p>
+</div>
         </div>
 
         <!-- Image Section -->

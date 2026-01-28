@@ -9,17 +9,20 @@
             <h1 class="text-3xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-2">
                 Dashboard Bimbingan Konseling
             </h1>
-            <p class="text-gray-500 flex items-center gap-2">
-                <i class="fas fa-calendar-alt text-sm text-primary"></i>
-                <span id="current-date"></span>
-            </p>
+            <div>
+                <p class="text-lg font-semibold text-gray-500 mb-1">Selamat datang,</p>
+                
+            </div>
         </div>
-        <div class="bg-gradient-to-r from-primary/10 to-purple-600/10 px-6 py-4 rounded-xl border border-primary/20">
-            <p class="text-xs text-gray-500 mb-1">Selamat datang kembali,</p>
-            <p class="font-bold text-primary text-lg">{{ Auth::user()->name }}</p>
+        <div class="text-right">
+            <p class="text-gray-500 flex items-center gap-2 justify-end">
+                <i class="fas fa-calendar-alt text-sm text-primary"></i>
+                <span>{{ \Carbon\Carbon::now()->translatedFormat('l, d F Y') }}</span>
+            </p>
         </div>
     </div>
 </div>
+
 
 <!-- Statistics Cards -->
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -67,16 +70,19 @@
     </div>
 
     <!-- Terverifikasi -->
-    <div class="bg-gradient-to-br from-primary to-purple-600 p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+    <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
         <div class="flex items-center justify-between mb-4">
-            <div class="bg-white/20 p-3 rounded-xl">
-                <i class="fas fa-check-circle text-white text-xl"></i>
+            <div class="bg-gradient-to-br from-primary/10 to-purple-600/10 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                <i class="fas fa-check-circle text-primary text-xl"></i>
             </div>
         </div>
-        <h3 class="text-4xl font-bold text-white mb-2">{{ number_format($verifikasi) }}</h3>
-        <p class="text-sm text-white/90 font-medium">Terverifikasi</p>
-        <div class="mt-4 pt-4 border-t border-white/20">
-            <p class="text-xs text-white/70">Data telah diverifikasi</p>
+        <h3 class="text-4xl font-bold text-green-600 mb-2">{{ number_format($verifikasi) }}</h3>
+        <p class="text-sm text-gray-500 font-medium">Terverifikasi</p>
+        <div class="mt-4 pt-4 border-t border-gray-100">
+            <p class="text-xs text-gray-400 flex items-center">
+                <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                Data telah diverifikasi
+            </p>
         </div>
     </div>
 

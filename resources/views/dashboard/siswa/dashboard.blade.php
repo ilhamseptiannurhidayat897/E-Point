@@ -31,10 +31,10 @@
     <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
         <div class="flex items-center justify-between mb-4">
             <div class="bg-gradient-to-br from-green-500/10 to-green-600/10 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
-                <i class="fas fa-trophy text-green-600 text-xl"></i>
+                <i class="fas fa-trophy text-green-500 text-xl"></i>
             </div>
         </div>
-        <h3 class="text-4xl font-bold text-green-600 mb-2">+{{ number_format($totalPrestasi ?? 0) }}</h3>
+        <h3 class="text-4xl font-bold text-green-500 mb-2">+{{ number_format($totalPrestasi ?? 0) }}</h3>
         <p class="text-sm text-gray-500 font-medium">Total Prestasi</p>
         <div class="mt-4 pt-4 border-t border-gray-100">
             <p class="text-xs text-gray-400 flex items-center">
@@ -48,10 +48,10 @@
     <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
         <div class="flex items-center justify-between mb-4">
             <div class="bg-gradient-to-br from-red-500/10 to-red-600/10 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
-                <i class="fas fa-exclamation-triangle text-red-600 text-xl"></i>
+                <i class="fas fa-exclamation-triangle text-red-500 text-xl"></i>
             </div>
         </div>
-        <h3 class="text-4xl font-bold text-red-600 mb-2">-{{ number_format($totalPelanggaran ?? 0) }}</h3>
+        <h3 class="text-4xl font-bold text-red-500 mb-2">-{{ number_format($totalPelanggaran ?? 0) }}</h3>
         <p class="text-sm text-gray-500 font-medium">Total Pelanggaran</p>
         <div class="mt-4 pt-4 border-t border-gray-100">
             <p class="text-xs text-gray-400 flex items-center">
@@ -62,29 +62,34 @@
     </div>
 
     <!-- Total Poin Akumulasi -->
-    <div class="bg-gradient-to-br from-primary to-purple-600 p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+    <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
         <div class="flex items-center justify-between mb-4">
-            <div class="bg-white/20 p-3 rounded-xl">
-                <i class="fas fa-chart-line text-white text-xl"></i>
+            <div class="bg-gradient-to-br from-purple-500/10 to-purple-600/10 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                <i class="fas fa-chart-line text-purple-600 text-xl"></i>
             </div>
         </div>
-        <h3 class="text-4xl font-bold text-white mb-2">{{ $totalPoin ?? 0 }}</h3>
-        <p class="text-sm text-white/90 font-medium">Total Poin Akumulasi</p>
-        <div class="mt-4 pt-4 border-t border-white/20">
-            <p class="text-xs text-white/70">Sisa Poin Saat Ini</p>
+        <h3 class="text-4xl font-bold text-purple-600 mb-2">{{ $totalPoin ?? 0 }}</h3>
+        <p class="text-sm text-gray-500 font-medium">Total Poin Akumulasi</p>
+        <div class="mt-4 pt-4 border-t border-gray-100">
+            <p class="text-xs text-gray-400 flex items-center">
+                <span class="w-2 h-2 bg-purple-600 rounded-full mr-2"></span>
+                Sisa Poin Saat Ini
+            </p>
         </div>
     </div>
 
 </div>
 
 <!-- Status Poin & Akses Cepat -->
+<!-- Status Poin & Akses Cepat -->
 <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
     
-    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+    <!-- Status Poin -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
         <!-- Header -->
         <div class="flex items-center gap-3 mb-6">
-            <div class="w-10 h-10 rounded-lg bg-indigo-50 flex items-center justify-center">
-                <i class="fas fa-chart-line text-indigo-500"></i>
+            <div class="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center">
+                <i class="fas fa-chart-line text-indigo-500 text-lg"></i>
             </div>
             <div>
                 <h2 class="text-lg font-semibold text-gray-800">Status Poin</h2>
@@ -94,7 +99,7 @@
     
         <!-- Current Score Display -->
         <div class="text-center mb-6">
-            <p class="text-sm text-gray-500 mb-1">Total Poin Saat Ini</p>
+            <p class="text-sm text-gray-500 mb-2">Total Poin Saat Ini</p>
             <p class="text-4xl font-bold 
                 @if(($totalPoin ?? 0) >= 0) text-emerald-600
                 @else text-rose-600
@@ -105,17 +110,17 @@
     
         <!-- Visual Progress Bar -->
         <div class="mb-6">
-            <div class="relative h-2 bg-gray-200 rounded-full">
-                <div class="absolute top-0 h-2 bg-gray-300 rounded-full transition-all duration-500" 
-                     style="width: 50%;">
+            <div class="relative h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div class="absolute top-0 h-3 bg-gradient-to-r from-rose-300 via-gray-300 to-emerald-300 rounded-full transition-all duration-500" 
+                     style="width: 100%;">
                 </div>
                 <!-- Current Position Indicator -->
-                <div class="absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-white border-2 
+                <div class="absolute top-1/2 -translate-y-1/2 w-5 h-5 bg-white border-2 
                     @if(($totalPoin ?? 0) >= 0) border-emerald-500
                     @else border-rose-500
                     @endif
-                    rounded-full shadow-sm transition-all duration-500"
-                     style="left: {{ min(max((($totalPoin ?? 0) + 100) / 2, 0), 100) }}%; margin-left: -8px;">
+                    rounded-full shadow-md transition-all duration-500 z-10"
+                     style="left: {{ min(max((($totalPoin ?? 0) + 100) / 2, 0), 100) }}%; margin-left: -10px;">
                 </div>
             </div>
             <div class="flex justify-between text-xs text-gray-400 mt-2">
@@ -127,12 +132,12 @@
     
         <!-- Point Breakdown -->
         <div class="grid grid-cols-2 gap-4 mb-6">
-            <div class="text-center p-4 bg-emerald-50 rounded-lg border border-emerald-100">
+            <div class="text-center p-4 bg-emerald-50 rounded-xl border border-emerald-100">
                 <i class="fas fa-arrow-up text-emerald-500 mb-2"></i>
                 <p class="text-xs text-emerald-600 font-medium">Poin Prestasi</p>
                 <p class="text-xl font-bold text-emerald-700">+{{ $totalPrestasi ?? 0 }}</p>
             </div>
-            <div class="text-center p-4 bg-rose-50 rounded-lg border border-rose-100">
+            <div class="text-center p-4 bg-rose-50 rounded-xl border border-rose-100">
                 <i class="fas fa-arrow-down text-rose-500 mb-2"></i>
                 <p class="text-xs text-rose-600 font-medium">Poin Pelanggaran</p>
                 <p class="text-xl font-bold text-rose-700">-{{ $totalPelanggaran ?? 0 }}</p>
@@ -140,7 +145,7 @@
         </div>
     
         <!-- Status Verdict -->
-        <div class="text-center p-4 rounded-lg border
+        <div class="text-center p-4 rounded-xl border
             @if(($totalPoin ?? 0) >= 0) border-emerald-200 bg-emerald-50/50
             @elseif(($totalPoin ?? 0) < -20 && ($totalPoin ?? 0) >= -50) border-amber-200 bg-amber-50/50
             @else border-rose-200 bg-rose-50/50
@@ -166,8 +171,8 @@
     <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
         <div class="bg-gradient-to-r from-primary/5 to-purple-600/5 px-6 py-5 border-b border-gray-200">
             <div class="flex items-center gap-3">
-                <div class="bg-gradient-to-br from-primary/10 to-purple-600/10 p-2.5 rounded-lg">
-                    <i class="fas fa-bolt text-primary"></i>
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/10 to-purple-600/10 flex items-center justify-center">
+                    <i class="fas fa-bolt text-primary text-lg"></i>
                 </div>
                 <div>
                     <h2 class="text-lg font-bold text-gray-800">Akses Cepat</h2>
@@ -204,8 +209,6 @@
                     <h3 class="font-bold text-gray-800 mb-1">Profil</h3>
                     <p class="text-xs text-gray-500">Edit data diri</p>
                 </a>
-                
-               
             </div>
         </div>
     </div>
