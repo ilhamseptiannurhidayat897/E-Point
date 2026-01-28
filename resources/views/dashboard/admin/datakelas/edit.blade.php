@@ -100,7 +100,7 @@
                         <option value="DPIB" {{ old('jurusan', $kelas->jurusan) == 'DPIB' ? 'selected' : '' }}>Desain Pemodelan dan Informasi Bangunan (DPIB)</option>
                         <option value="MPLB" {{ old('jurusan', $kelas->jurusan) == 'MPLB' ? 'selected' : '' }}>Manajemen Perkantoran dan Layanan Bisnis (MPLB)</option>
                         <option value="AKL" {{ old('jurusan', $kelas->jurusan) == 'AKL' ? 'selected' : '' }}>Akuntansi dan Keuangan Lembaga (AKL)</option>
-                        <option value="SP" {{ old('jurusan', $kelas->jurusan) == 'SP' ? 'selected' : '' }}>Bisnis Daring dan Pemasaran (SP)</option>
+                        <option value="SP" {{ old('jurusan', $kelas->jurusan) == 'SP' ? 'selected' : '' }}>Seni Pertunjukan (SP)</option>
                         <option value="RPL" {{ old('jurusan', $kelas->jurusan) == 'RPL' ? 'selected' : '' }}>Rekayasa Perangkat Lunak (RPL)</option>
                         <option value="GIM" {{ old('jurusan', $kelas->jurusan) == 'GIM' ? 'selected' : '' }}>Pengembangan Gim (GIM)</option>
                     </select>
@@ -174,12 +174,12 @@ function updatePreview() {
     if (tingkat && jurusan) {
         // Get jurusan short name for display
         let jurusanShort = jurusan;
-        if (jurusan === 'TJKT') jurusanShort = 'TKJ';
-        else if (jurusan === 'DPIB') jurusanShort = 'TGB';
-        else if (jurusan === 'MPLB') jurusanShort = 'AP';
-        else if (jurusan === 'AKL') jurusanShort = 'AK';
-        else if (jurusan === 'SP') jurusanShort = 'MM';
-        
+        if (jurusan === 'TJKT') jurusanShort = 'TJKT';
+        else if (jurusan === 'DPIB') jurusanShort = 'DPIB';
+        else if (jurusan === 'MPLB') jurusanShort = 'MPLB';
+        else if (jurusan === 'AKL') jurusanShort = 'AKL';
+        else if (jurusan === 'SP') jurusanShort = 'SP';
+
         let namaPreview = `${tingkat} ${jurusanShort}`;
         
         // Tambahkan nomor hanya jika ada nilainya

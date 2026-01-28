@@ -2,333 +2,365 @@
 
 @section('content')
 
-<!-- ================= HEADER ================= -->
-<<<<<<< HEAD
-<div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-6">
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-            <h1 class="text-2xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-1">
-                Data Siswa
-            </h1>
-            <p class="text-sm text-gray-500 flex items-center gap-2">
-                <i class="fas fa-users text-xs text-primary"></i>
-                Total {{ $siswa->total() }} siswa terdaftar
-            </p>
-        </div>
-        
-        <div class="flex items-center gap-3">
-            <form action="{{ route('bk.siswa.pdf') }}" method="GET" class="flex items-center gap-3">
-                <select name="kelas_id" required class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary">
-                    <option value="">-- Pilih Kelas --</option>
-                    @foreach ($kelas as $k)
-                        <option value="{{ $k->id }}">{{ $k->nama_kelas }}</option>
-                    @endforeach
-                </select>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
 
-                <button type="submit" class="px-4 py-2 bg-gradient-to-r from-primary to-purple-600 text-white rounded-lg font-medium hover:shadow-lg transition-all duration-300 flex items-center gap-2">
-                    <i class="fas fa-file-pdf"></i>
-                    Download PDF
-                </button>
-            </form>
-        </div>
-=======
-    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-6">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-
-            <!-- Title -->
-            <div>
+    <!-- ================= HEADER ================= -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            
+            <!-- Judul & Info -->
+            <div class="flex-1">
                 <h1 class="text-2xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-1">
                     Data Siswa
                 </h1>
-                <p class="text-sm text-gray-500">
+                <p class="text-sm text-gray-500 flex items-center gap-2">
+                    <i class="fas fa-users text-xs text-primary"></i>
                     Total {{ $siswa->total() }} siswa terdaftar
                 </p>
             </div>
+            
+            <!-- Toolbar: Search & PDF -->
+            <div class="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto">
+                
+                <!-- FORM PENCARIAN -->
+                <form action="{{ route('bk.siswa.index') }}" method="GET" class="relative w-full sm:w-64 group">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-search text-gray-400 group-focus-within:text-primary transition-colors"></i>
+                    </div>
+                    <input type="text" 
+                           name="search" 
+                           value="{{ request()->get('search') }}"
+                           placeholder="Cari nama siswa..." 
+                           class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm">
+                    @if(request()->has('search'))
+                        <a href="{{ route('bk.siswa.index') }}" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-red-500 cursor-pointer">
+                            <i class="fas fa-times"></i>
+                        </a>
+                    @endif
+                </form>
 
-            <!-- Filter & Action -->
-            <form action="{{ route('bk.siswa.pdf') }}"
-                method="GET"
-                class="flex items-center gap-3">
-
-                <!-- Filter Kelas -->
-    <div class="relative w-48">
-        <select name="kelas_id"
-                required
-                class="appearance-none w-full
-                        px-4 py-2.5 pr-10
-                        border border-gray-300 rounded-xl
-                        bg-gray-50
-                        text-sm font-medium text-gray-800
-                        shadow-inner
-                        hover:bg-white
-                        hover:border-primary
-                        focus:bg-white
-                        focus:ring-2 focus:ring-primary/30
-                        focus:border-primary
-                        transition">
-
-            <option value="" class="text-gray-400">
-                Pilih Kelas
-            </option>
-
-            @foreach ($kelas as $k)
-                <option value="{{ $k->id }}"
-                        class="text-gray-700 hover:bg-primary/10">
-                    {{ $k->nama_kelas }}
-                </option>
-            @endforeach
-        </select>
-
-        <!-- Icon dropdown -->
-        <i class="fas fa-chevron-down
-                absolute right-4 top-1/2 -translate-y-1/2
-                text-gray-400 text-xs
-                pointer-events-none">
-        </i>
+                <!-- FORM PDF -->
+                <form action="{{ route('bk.siswa.pdf') }}" method="GET" class="flex items-center gap-2 w-full sm:w-auto">
+                    <select name="kelas_id" required class="w-full sm:w-40 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary bg-white">
+                        <option value="" disabled selected>-- Pilih Kelas --</option>
+                        @foreach ($kelas as $k)
+                            <option value="{{ $k->id }}">{{ $k->nama_kelas }}</option>
+                        @endforeach
+                    </select>
+                    <button type="submit" class="flex-1 sm:flex-none px-4 py-2 bg-red-50 text-red-600 border border-red-100 rounded-lg font-medium hover:bg-red-100 hover:shadow-md transition-all duration-200 flex items-center justify-center gap-2 whitespace-nowrap">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>PDF</span>
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
 
-            <!-- Button -->
-            <button type="submit"
-                    class="inline-flex items-center gap-2
-                            px-5 py-2.5 rounded-xl
-                            bg-red-600 hover:bg-red-700
-                            text-white text-sm font-semibold
-                            shadow-sm hover:shadow-md
-                            transition transform hover:scale-105">
-                <i class="fas fa-file-pdf"></i>
-                Download PDF
-            </button>
 
-        </form>
+    <!-- ================= TABLE ================= -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-gray-50 border-b border-gray-200 text-xs uppercase tracking-wider text-gray-500">
+                        <th class="px-6 py-4 font-semibold w-12">No</th>
+                        <th class="px-6 py-4 font-semibold">Nama Siswa</th>
+                        <th class="px-6 py-4 font-semibold">NIS</th>
+                        <th class="px-6 py-4 font-semibold">Kelas</th>
+                        <th class="px-6 py-4 font-semibold">Wali Kelas</th>
+                        <th class="px-6 py-4 text-center font-semibold">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100 bg-white">
+                    @forelse ($siswa as $index => $item)
+                    <tr class="hover:bg-primary/5 transition-colors duration-150 group">
+                        <td class="px-6 py-4 text-sm text-gray-500">
+                            {{ $siswa->firstItem() + $index }}
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm ring-2 ring-primary/5 group-hover:ring-primary/20 transition-all">
+                                    {{ strtoupper(substr($item->nama, 0, 1)) }}
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-800">{{ $item->nama }}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 font-mono text-sm text-gray-600">{{ $item->nis }}</td>
+                        <td class="px-6 py-4">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                {{ $item->kelas->nama_kelas }}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-600">
+                            {{ $item->kelas->walikelas->nama ?? '-' }}
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <button onclick="openModal({{ $item->id }})"
+                                class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-primary bg-primary/10 hover:bg-primary hover:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                                <i class="fas fa-eye mr-1.5"></i> Detail
+                            </button>
+                        </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="6" class="px-6 py-12 text-center">
+                            <div class="flex flex-col items-center justify-center gap-3">
+                                <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-folder-open text-2xl text-gray-300"></i>
+                                </div>
+                                <p class="text-gray-500 font-medium">Data tidak ditemukan</p>
+                                <p class="text-xs text-gray-400">Coba ubah kata kunci pencarian Anda.</p>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
 
->>>>>>> 8a3f54ab911e4cf444dee7affce659e2980d2f76
+      <!-- PAGINATION (Custom Manual - Centered) -->
+@if($siswa->hasPages())
+<div class="px-6 py-4 border-t border-gray-100 bg-gray-50 flex flex-col items-center gap-4">
+    
+    <!-- Info Text (Saya pindahkan ke atas agar rapi di tengah) -->
+    
+
+    <div class="flex items-center gap-2">
+        {{-- LOGIC PAGINATION --}}
+        @php
+            $current = $siswa->currentPage();
+            $last = $siswa->lastPage();
+            
+            // Hitung range halaman yang ditampilkan (misal +/- 2 dari halaman aktif)
+            $start = max(1, $current - 2);
+            $end = min($last, $current + 2);
+            
+            // Parameter untuk tetap mempertahankan hasil pencarian
+            $searchParams = request()->has('search') ? '?search='.request('search') : '';
+        @endphp
+
+        <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px">
+            
+            <!-- Tombol Previous -->
+            @if (!$siswa->onFirstPage())
+                <a href="{{ $siswa->previousPageUrl() }}{{ $searchParams }}" class="relative inline-flex items-center px-3 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 hover:text-primary transition-colors">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
+            @else
+                <span class="relative inline-flex items-center px-3 py-2 rounded-l-md border border-gray-300 bg-gray-50 text-sm font-medium text-gray-300 cursor-not-allowed">
+                    <i class="fas fa-chevron-left"></i>
+                </span>
+            @endif
+
+            <!-- Halaman Awal (1) -->
+            @if($start > 1)
+                <a href="{{ $siswa->url(1) }}{{ $searchParams }}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">1</a>
+                @if($start > 2)
+                    <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">...</span>
+                @endif
+            @endif
+
+            <!-- Loop Angka Halaman Tengah -->
+            @for($i = $start; $i <= $end; $i++)
+                @if($i == $current)
+                    <!-- Halaman Aktif -->
+                    <span aria-current="page" class="z-10 bg-primary border-primary text-white relative inline-flex items-center px-4 py-2 border text-sm font-bold rounded-md">
+                        {{ $i }}
+                    </span>
+                @else
+                    <!-- Halaman Biasa -->
+                    <a href="{{ $siswa->url($i) }}{{ $searchParams }}" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium rounded-md hover:text-primary transition-colors">
+                        {{ $i }}
+                    </a>
+                @endif
+            @endfor
+
+            <!-- Halaman Akhir -->
+            @if($end < $last)
+                @if($end < $last - 1)
+                    <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">...</span>
+                @endif
+                <a href="{{ $siswa->url($last) }}{{ $searchParams }}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
+                    {{ $last }}
+                </a>
+            @endif
+
+            <!-- Tombol Next -->
+            @if ($siswa->hasMorePages())
+                <a href="{{ $siswa->nextPageUrl() }}{{ $searchParams }}" class="relative inline-flex items-center px-3 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 hover:text-primary transition-colors">
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            @else
+                <span class="relative inline-flex items-center px-3 py-2 rounded-r-md border border-gray-300 bg-gray-50 text-sm font-medium text-gray-300 cursor-not-allowed">
+                    <i class="fas fa-chevron-right"></i>
+                </span>
+            @endif
+
+        </nav>
     </div>
 </div>
-
-
-<!-- ================= TABLE ================= -->
-<div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-    <div class="overflow-x-auto">
-        <table class="w-full">
-            <thead>
-                <tr class="bg-gradient-to-r from-primary/5 to-purple-600/5 border-b border-gray-200">
-                    <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700 w-12">No</th>
-                    <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Nama</th>
-                    <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">NIS</th>
-                    <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Kelas</th>
-                    <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Wali Kelas</th>
-                    <th class="px-6 py-4 text-center text-sm font-semibold text-gray-700">Aksi</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-100">
-                @forelse ($siswa as $index => $item)
-                <tr class="hover:bg-primary/5 transition-all duration-200">
-                    <td class="px-6 py-4 text-sm text-gray-500">
-                        {{ $siswa->firstItem() + $index }}
-                    </td>
-                    <td class="px-6 py-4">
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                                <span class="text-xs font-bold text-primary">{{ substr($item->nama, 0, 1) }}</span>
-                            </div>
-                            <span class="font-semibold">{{ $item->nama }}</span>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 font-mono text-sm">{{ $item->nis }}</td>
-                    <td class="px-6 py-4">
-                        <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">
-                            {{ $item->kelas->nama_kelas }}
-                        </span>
-                    </td>
-                    <td class="px-6 py-4">{{ $item->kelas->walikelas->nama }}</td>
-                    <td class="px-6 py-4 text-center">
-                        <button
-                            onclick="openModal({{ $item->id }})"
-                            class="px-4 py-2 rounded-lg text-primary font-semibold
-                                   bg-primary/10 hover:bg-primary/20 transition-all duration-200 transform hover:scale-105 flex items-center gap-2 mx-auto">
-                            <i class="fas fa-eye"></i> 
-                            <span>Detail</span>
-                        </button>
-                    </td>
-                </tr>
-                @empty
-                <tr>
-                    <td colspan="6" class="py-10 text-center text-gray-500">
-                        <div class="flex flex-col items-center gap-3">
-                            <i class="fas fa-inbox text-4xl text-gray-300"></i>
-                            <p>Belum ada data siswa</p>
-                        </div>
-                    </td>
-                </tr>
-                @endforelse
-            </tbody>
-        </table>
-    </div>
-
-    <!-- PAGINATION -->
-    <div class="px-6 py-4 border-t bg-gray-50 flex items-center justify-between">
-        <div class="text-sm text-gray-700">
-            Menampilkan {{ $siswa->firstItem() }} hingga {{ $siswa->lastItem() }} dari {{ $siswa->total() }} data
-        </div>
-        <div class="flex items-center gap-2">
-            {{ $siswa->links() }}
-        </div>
+@endif
     </div>
 </div>
 
 <!-- ================= MODAL ================= -->
 <div id="modalDetail"
-     class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center transition-opacity duration-300 opacity-0">
+     class="fixed inset-0 z-50 hidden" 
+     aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    
+    <!-- Backdrop -->
+    <div class="fixed inset-0 bg-gray-900/50 backdrop-blur-sm transition-opacity opacity-0" id="modalBackdrop"></div>
 
-    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl overflow-hidden transform transition-all duration-300 scale-95" id="modalContainer">
+    <div class="fixed inset-0 z-10 overflow-y-auto">
+        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+            
+            <!-- Modal Panel -->
+            <div class="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-2xl opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" id="modalPanel">
+                
+                <!-- Modal Header -->
+                <div class="bg-gradient-to-r from-primary to-purple-600 px-6 py-4 flex justify-between items-center text-white">
+                    <h3 class="text-lg font-bold flex items-center gap-2" id="modal-title">
+                        <i class="fas fa-id-card"></i>
+                        Detail Siswa
+                    </h3>
+                    <button type="button" onclick="closeModal()" class="rounded-md bg-white/10 p-2 text-white hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white sm:ml-4">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
 
-        <!-- Header -->
-        <div class="bg-gradient-to-r from-primary to-purple-600 px-6 py-4 flex justify-between items-center text-white">
-            <h3 class="text-lg font-bold flex items-center gap-2">
-                <i class="fas fa-user-circle"></i>
-                Detail Siswa
-            </h3>
-            <button onclick="closeModal()" class="hover:bg-white/20 p-2 rounded-lg transition-colors duration-200">
-                <i class="fas fa-times"></i>
-            </button>
+                <!-- Modal Body -->
+                <div class="px-6 py-6" id="modalContent">
+                    <!-- Content Injected via JS -->
+                </div>
+            </div>
         </div>
-
-        <!-- Content -->
-        <div class="p-6 max-h-[70vh] overflow-y-auto" id="modalContent"></div>
     </div>
 </div>
 
 <!-- ================= DATA & SCRIPT ================= -->
 <script>
+// Pastikan data diambil dari variable yang dikirim controller
 const siswaData = @json($siswaData);
 
 function openModal(id) {
     const s = siswaData[id];
     const modal = document.getElementById('modalDetail');
-    const modalContainer = document.getElementById('modalContainer');
+    const backdrop = document.getElementById('modalBackdrop');
+    const panel = document.getElementById('modalPanel');
 
+    if (!s) return;
+
+    // Generate HTML Content
     let html = `
-        <div class="mb-6">
-            <div class="flex items-center gap-4 mb-4">
-                <div class="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center text-white text-xl font-bold">
-                    ${s.nama.charAt(0)}
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold text-gray-800">${s.nama}</h3>
-                    <p class="text-gray-500">NIS: ${s.nis}</p>
-                </div>
+        <!-- Identitas Siswa -->
+        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-8 pb-6 border-b border-gray-100">
+            <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-primary/30 flex-shrink-0">
+                ${s.nama.charAt(0).toUpperCase()}
             </div>
-            
-            <div class="grid grid-cols-2 gap-4">
-                <div class="bg-gray-50 p-4 rounded-lg">
-                    <p class="text-sm text-gray-500 mb-1 flex items-center gap-2">
-                        <i class="fas fa-school text-primary text-xs"></i>
-                        Kelas
-                    </p>
-                    <p class="font-semibold">${s.kelas}</p>
-                </div>
-                <div class="bg-gray-50 p-4 rounded-lg">
-                    <p class="text-sm text-gray-500 mb-1 flex items-center gap-2">
-                        <i class="fas fa-chalkboard-teacher text-primary text-xs"></i>
-                        Wali Kelas
-                    </p>
-                    <p class="font-semibold">${s.walikelas}</p>
+            <div class="text-center sm:text-left flex-1">
+                <h3 class="text-2xl font-bold text-gray-800 mb-1">${s.nama}</h3>
+                <p class="text-gray-500 font-mono mb-3">NIS: ${s.nis}</p>
+                <div class="flex flex-wrap justify-center sm:justify-start gap-2">
+                    <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-semibold border border-blue-100">
+                        <i class="fas fa-graduation-cap mr-1"></i> ${s.kelas}
+                    </span>
+                    <span class="px-3 py-1 bg-purple-50 text-purple-700 rounded-full text-xs font-semibold border border-purple-100">
+                        <i class="fas fa-user-tie mr-1"></i> ${s.walikelas}
+                    </span>
                 </div>
             </div>
         </div>
 
-        <div class="mb-6">
-            <h4 class="font-bold text-gray-800 mb-3 flex items-center gap-2">
-                <i class="fas fa-exclamation-triangle text-red-500"></i>
-                Pelanggaran
-            </h4>
-            <div class="bg-red-50 rounded-lg p-4">
-                ${
-                    s.pelanggaran.length
-                    ? `<div class="space-y-2">
-                        ${s.pelanggaran.map(p => `
-                            <div class="flex items-start gap-3 pb-2 border-b border-red-100 last:border-0">
-                                <div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                    <i class="fas fa-times text-red-600 text-xs"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <p class="font-medium text-gray-800">${p.nama}</p>
-                                    <div class="flex items-center gap-3 text-xs text-gray-500 mt-1">
-                                        <span class="text-red-600 font-semibold">-${p.poin} poin</span>
-                                        <span>${p.tanggal}</span>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Pelanggaran -->
+            <div class="bg-red-50/50 rounded-xl border border-red-100 overflow-hidden">
+                <div class="bg-red-100 px-4 py-2 border-b border-red-200">
+                    <h4 class="font-bold text-red-800 text-sm flex items-center gap-2">
+                        <i class="fas fa-exclamation-circle"></i> Pelanggaran (${s.pelanggaran.length})
+                    </h4>
+                </div>
+                <div class="p-4 max-h-48 overflow-y-auto">
+                    ${s.pelanggaran.length > 0 ? `
+                        <div class="space-y-3">
+                            ${s.pelanggaran.map(p => `
+                                <div class="flex items-start gap-3 bg-white p-3 rounded-lg border border-red-100 shadow-sm">
+                                    <div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <span class="font-bold text-red-600 text-xs">-${p.poin}</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-semibold text-gray-800">${p.nama}</p>
+                                        <p class="text-xs text-gray-500 mt-0.5"><i class="far fa-calendar-alt mr-1"></i> ${p.tanggal}</p>
                                     </div>
                                 </div>
-                            </div>
-                        `).join('')}
-                    </div>`
-                    : '<p class="text-gray-400 text-sm flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i> Tidak ada pelanggaran</p>'
-                }
+                            `).join('')}
+                        </div>
+                    ` : `
+                        <div class="text-center py-4 text-sm text-gray-400">
+                            <i class="fas fa-check-circle text-green-400 text-xl mb-1"></i><br>Tidak ada pelanggaran
+                        </div>
+                    `}
+                </div>
             </div>
-        </div>
 
-        <div>
-            <h4 class="font-bold text-gray-800 mb-3 flex items-center gap-2">
-                <i class="fas fa-trophy text-green-500"></i>
-                Prestasi
-            </h4>
-            <div class="bg-green-50 rounded-lg p-4">
-                ${
-                    s.prestasi.length
-                    ? `<div class="space-y-2">
-                        ${s.prestasi.map(p => `
-                            <div class="flex items-start gap-3 pb-2 border-b border-green-100 last:border-0">
-                                <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                    <i class="fas fa-medal text-green-600 text-xs"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <p class="font-medium text-gray-800">${p.nama}</p>
-                                    <div class="flex items-center gap-3 text-xs text-gray-500 mt-1">
-                                        <span class="text-green-600 font-semibold">+${p.poin} poin</span>
-                                        <span>${p.tanggal}</span>
+            <!-- Prestasi -->
+            <div class="bg-green-50/50 rounded-xl border border-green-100 overflow-hidden">
+                <div class="bg-green-100 px-4 py-2 border-b border-green-200">
+                    <h4 class="font-bold text-green-800 text-sm flex items-center gap-2">
+                        <i class="fas fa-trophy"></i> Prestasi (${s.prestasi.length})
+                    </h4>
+                </div>
+                <div class="p-4 max-h-48 overflow-y-auto">
+                    ${s.prestasi.length > 0 ? `
+                        <div class="space-y-3">
+                            ${s.prestasi.map(p => `
+                                <div class="flex items-start gap-3 bg-white p-3 rounded-lg border border-green-100 shadow-sm">
+                                    <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <span class="font-bold text-green-600 text-xs">+${p.poin}</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-semibold text-gray-800">${p.nama}</p>
+                                        <p class="text-xs text-gray-500 mt-0.5"><i class="far fa-calendar-alt mr-1"></i> ${p.tanggal}</p>
                                     </div>
                                 </div>
-                            </div>
-                        `).join('')}
-                    </div>`
-                    : '<p class="text-gray-400 text-sm flex items-center gap-2"><i class="fas fa-info-circle text-blue-500"></i> Tidak ada prestasi</p>'
-                }
+                            `).join('')}
+                        </div>
+                    ` : `
+                        <div class="text-center py-4 text-sm text-gray-400">
+                            <i class="fas fa-info-circle text-blue-400 text-xl mb-1"></i><br>Belum ada prestasi
+                        </div>
+                    `}
+                </div>
             </div>
         </div>
     `;
 
     document.getElementById('modalContent').innerHTML = html;
     
-    // Show modal with transition
+    // Show Modal
     modal.classList.remove('hidden');
+    // Small delay to allow display:block to apply before adding opacity class
     setTimeout(() => {
-        modal.classList.remove('opacity-0');
-        modal.classList.add('opacity-100');
-        modalContainer.classList.remove('scale-95');
-        modalContainer.classList.add('scale-100');
+        backdrop.classList.remove('opacity-0');
+        panel.classList.remove('opacity-0', 'translate-y-4', 'sm:translate-y-0', 'sm:scale-95');
+        panel.classList.add('opacity-100', 'translate-y-0', 'sm:scale-100');
     }, 10);
 }
 
 function closeModal() {
     const modal = document.getElementById('modalDetail');
-    const modalContainer = document.getElementById('modalContainer');
-    
-    // Hide modal with transition
-    modal.classList.remove('opacity-100');
-    modal.classList.add('opacity-0');
-    modalContainer.classList.remove('scale-100');
-    modalContainer.classList.add('scale-95');
-    
+    const backdrop = document.getElementById('modalBackdrop');
+    const panel = document.getElementById('modalPanel');
+
+    backdrop.classList.add('opacity-0');
+    panel.classList.remove('opacity-100', 'translate-y-0', 'sm:scale-100');
+    panel.classList.add('opacity-0', 'translate-y-4', 'sm:translate-y-0', 'sm:scale-95');
+
     setTimeout(() => {
         modal.classList.add('hidden');
-    }, 300);
+    }, 300); // Match transition duration
 }
-
-// Close modal when clicking outside
-document.getElementById('modalDetail').addEventListener('click', function(e) {
-    if (e.target === this) {
-        closeModal();
-    }
-});
 </script>
 
 @endsection

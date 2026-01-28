@@ -174,6 +174,9 @@ $petugasId = Petugas::where('user_id', auth()->id())->value('id');
 
         $kelasId = $waliKelas->kelas_id;
 
+        $dataKelas = Kelas::find($kelasId);
+        $kelasName = $dataKelas ? $dataKelas->nama_kelas : 'Tidak ada kelas'; 
+
         return view('dashboard.wali_kelas.dashboard', [
             // TOTAL SISWA DI KELAS
             'totalSiswa' => Siswa::where('kelas_id', $kelasId)->count(),
@@ -190,6 +193,8 @@ $petugasId = Petugas::where('user_id', auth()->id())->value('id');
 
             // TOTAL POIN KELAS
             'totalPoin' => Siswa::where('kelas_id', $kelasId)->sum('poin'),
+
+            'kelasName' => $kelasName, 
         ]);
     }
 
