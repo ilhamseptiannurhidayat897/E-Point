@@ -3,30 +3,78 @@
 @section('content')
 
 <!-- ================= HEADER ================= -->
-<div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-6">
-    <div class="flex items-center justify-between">
-        <div>
-            <h1 class="text-2xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-1">
-                Data Siswa
-            </h1>
-            <p class="text-sm text-gray-500">
-                Total {{ $siswa->total() }} siswa terdaftar
-            </p>
-        </div>
-            <form action="{{ route('bk.siswa.pdf') }}" method="GET">
-                <select name="kelas_id" required>
-                    <option value="">-- Pilih Kelas --</option>
-                    @foreach ($kelas as $k)
-                        <option value="{{ $k->id }}">{{ $k->nama_kelas }}</option>
-                    @endforeach
-                </select>
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-6">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
 
-                <button type="submit">
-                    Download PDF
-                </button>
-            </form>
+            <!-- Title -->
+            <div>
+                <h1 class="text-2xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-1">
+                    Data Siswa
+                </h1>
+                <p class="text-sm text-gray-500">
+                    Total {{ $siswa->total() }} siswa terdaftar
+                </p>
+            </div>
+
+            <!-- Filter & Action -->
+            <form action="{{ route('bk.siswa.pdf') }}"
+                method="GET"
+                class="flex items-center gap-3">
+
+                <!-- Filter Kelas -->
+    <div class="relative w-48">
+        <select name="kelas_id"
+                required
+                class="appearance-none w-full
+                        px-4 py-2.5 pr-10
+                        border border-gray-300 rounded-xl
+                        bg-gray-50
+                        text-sm font-medium text-gray-800
+                        shadow-inner
+                        hover:bg-white
+                        hover:border-primary
+                        focus:bg-white
+                        focus:ring-2 focus:ring-primary/30
+                        focus:border-primary
+                        transition">
+
+            <option value="" class="text-gray-400">
+                Pilih Kelas
+            </option>
+
+            @foreach ($kelas as $k)
+                <option value="{{ $k->id }}"
+                        class="text-gray-700 hover:bg-primary/10">
+                    {{ $k->nama_kelas }}
+                </option>
+            @endforeach
+        </select>
+
+        <!-- Icon dropdown -->
+        <i class="fas fa-chevron-down
+                absolute right-4 top-1/2 -translate-y-1/2
+                text-gray-400 text-xs
+                pointer-events-none">
+        </i>
+    </div>
+
+            <!-- Button -->
+            <button type="submit"
+                    class="inline-flex items-center gap-2
+                            px-5 py-2.5 rounded-xl
+                            bg-red-600 hover:bg-red-700
+                            text-white text-sm font-semibold
+                            shadow-sm hover:shadow-md
+                            transition transform hover:scale-105">
+                <i class="fas fa-file-pdf"></i>
+                Download PDF
+            </button>
+
+        </form>
+
     </div>
 </div>
+
 
 <!-- ================= TABLE ================= -->
 <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">

@@ -41,18 +41,42 @@
                 <span class="font-semibold text-gray-600">Kelas</span>
                 <span>{{ $walikelas->kelas->nama_kelas ?? '-' }}</span>
             </div>
-
-            <!-- Action -->
-            <div class="pt-6 flex justify-end">
-                <a href="{{ route('wali_kelas.profil.edit') }}"
-                   class="px-6 py-3 flex items-center gap-2 bg-gradient-to-r from-primary to-purple-600 text-white rounded-xl font-semibold shadow hover:opacity-90 transition">
-                    <i class="fas fa-edit"></i>
-                    Edit Profil
-                </a>
+        </div>
+        <!-- Security Section -->
+        <div class="px-6 pt-4">
+            <div class="bg-gradient-to-r from-primary/5 to-purple-600/5 
+                        border border-primary/20 rounded-xl p-5">
+                <div class="flex items-start gap-3">
+                    <i class="fas fa-shield-alt text-primary mt-1"></i>
+                    <div>
+                        <h4 class="font-semibold text-gray-800 mb-2">Keamanan Akun</h4>
+                        <p class="text-sm text-gray-600 mb-3">
+                            Pastikan password Anda aman dan tidak dibagikan kepada siapa pun.
+                        </p>
+                        <ul class="text-xs text-gray-600 space-y-1">
+                            <li class="flex items-center gap-2">
+                                <i class="fas fa-check text-primary text-xs"></i>
+                                <span>Gunakan kombinasi huruf, angka, dan simbol</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fas fa-check text-primary text-xs"></i>
+                                <span>Minimal 8 karakter untuk keamanan optimal</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-
         </div>
 
+        <!-- Action -->
+        <div class="p-6 pt-5">
+            <a href="{{ route('wali_kelas.profil.edit') }}"
+               class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 
+                      text-white px-6 py-3 rounded-xl font-semibold transition">
+                <i class="fas fa-edit"></i>
+                Edit Profil
+            </a>
+        </div>
     </div>
 </div>
 
