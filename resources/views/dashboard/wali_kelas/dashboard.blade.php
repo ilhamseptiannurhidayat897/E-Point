@@ -342,30 +342,7 @@
 
 </div>
 
-<!-- Akses Cepat -->
-<div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
-    <div class="bg-gradient-to-r from-primary/5 to-purple-600/5 px-6 py-5 flex items-center justify-between border-b border-gray-200 mb-6">
-        <div class="flex items-center gap-3">
-            <div class="bg-gradient-to-br from-primary/10 to-purple-600/10 p-2.5 rounded-lg">
-                <i class="fas fa-rocket text-primary"></i>
-            </div>
-            <div>
-                <h2 class="text-lg font-bold text-gray-800">Akses Cepat</h2>
-                <p class="text-xs text-gray-500">Menu navigasi cepat</p>
-            </div>
-        </div>
-    </div>
-    
-    <div class="flex justify-center">
-        <a href="{{ route('wali_kelas.siswa.index') }}" 
-           class="bg-white p-5 rounded-xl border border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300 text-center group max-w-xs">
-            <div class="w-12 h-12 mx-auto bg-blue-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-blue-200 transition-colors">
-                <i class="fas fa-users text-blue-600 text-lg"></i>
-            </div>
-            <div class="text-sm font-medium text-gray-900">Data Siswa</div>
-        </a>
-    </div>
-</div>
+
 
 <script>
     function updateClock() {

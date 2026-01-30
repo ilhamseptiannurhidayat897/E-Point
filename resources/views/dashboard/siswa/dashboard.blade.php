@@ -81,7 +81,6 @@
 </div>
 
 <!-- Status Poin & Akses Cepat -->
-<!-- Status Poin & Akses Cepat -->
 <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
     
     <!-- Status Poin -->
@@ -182,32 +181,44 @@
         </div>
         
         <div class="p-6">
-            <div class="grid grid-cols-2 gap-4">
+            <div class="flex flex-col gap-4">
                 <a href="{{ route('siswa.pelanggaran') }}" 
-                   class="group relative overflow-hidden bg-gray-50 hover:bg-red-50 p-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-transparent hover:border-red-200 text-center">
-                    <div class="w-14 h-14 mx-auto bg-gradient-to-br from-red-100 to-red-200 group-hover:from-red-500 group-hover:to-red-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all shadow-md">
-                        <i class="fas fa-exclamation-triangle text-red-600 group-hover:text-white text-xl transition-colors"></i>
+                   class="group relative overflow-hidden bg-gray-50 hover:bg-red-50 p-5 rounded-xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-transparent hover:border-red-200">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 flex-shrink-0 bg-gradient-to-br from-red-100 to-red-200 group-hover:from-red-500 group-hover:to-red-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-all shadow-md">
+                            <i class="fas fa-exclamation-triangle text-red-600 group-hover:text-white text-xl transition-colors"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-800 mb-0.5">Pelanggaran</h3>
+                            <p class="text-xs text-gray-500">Lihat riwayat pelanggaran Anda</p>
+                        </div>
                     </div>
-                    <h3 class="font-bold text-gray-800 mb-1">Pelanggaran</h3>
-                    <p class="text-xs text-gray-500">Lihat riwayat</p>
                 </a>
                 
                 <a href="{{ route('siswa.prestasi') }}" 
-                   class="group relative overflow-hidden bg-gray-50 hover:bg-green-50 p-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-transparent hover:border-green-200 text-center">
-                    <div class="w-14 h-14 mx-auto bg-gradient-to-br from-green-100 to-green-200 group-hover:from-green-500 group-hover:to-green-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all shadow-md">
-                        <i class="fas fa-trophy text-green-600 group-hover:text-white text-xl transition-colors"></i>
+                   class="group relative overflow-hidden bg-gray-50 hover:bg-green-50 p-5 rounded-xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-transparent hover:border-green-200">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 flex-shrink-0 bg-gradient-to-br from-green-100 to-green-200 group-hover:from-green-500 group-hover:to-green-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-all shadow-md">
+                            <i class="fas fa-trophy text-green-600 group-hover:text-white text-xl transition-colors"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-800 mb-0.5">Prestasi</h3>
+                            <p class="text-xs text-gray-500">Lihat pencapaian dan prestasi Anda</p>
+                        </div>
                     </div>
-                    <h3 class="font-bold text-gray-800 mb-1">Prestasi</h3>
-                    <p class="text-xs text-gray-500">Lihat pencapaian</p>
                 </a>
                 
                 <a href="{{ route('siswa.profil') }}" 
-                   class="group relative overflow-hidden bg-gray-50 hover:bg-blue-50 p-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-transparent hover:border-blue-200 text-center">
-                    <div class="w-14 h-14 mx-auto bg-gradient-to-br from-blue-100 to-blue-200 group-hover:from-blue-500 group-hover:to-blue-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all shadow-md">
-                        <i class="fas fa-user text-blue-600 group-hover:text-white text-xl transition-colors"></i>
+                   class="group relative overflow-hidden bg-gray-50 hover:bg-blue-50 p-5 rounded-xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-transparent hover:border-blue-200">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 flex-shrink-0 bg-gradient-to-br from-blue-100 to-blue-200 group-hover:from-blue-500 group-hover:to-blue-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-all shadow-md">
+                            <i class="fas fa-user text-blue-600 group-hover:text-white text-xl transition-colors"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-800 mb-0.5">Profil</h3>
+                            <p class="text-xs text-gray-500">Edit data diri dan informasi profil</p>
+                        </div>
                     </div>
-                    <h3 class="font-bold text-gray-800 mb-1">Profil</h3>
-                    <p class="text-xs text-gray-500">Edit data diri</p>
                 </a>
             </div>
         </div>

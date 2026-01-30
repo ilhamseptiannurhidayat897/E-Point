@@ -271,40 +271,87 @@ $petugasId = Petugas::where('user_id', auth()->id())->value('id');
     }
 
     public function wali_kelas()
-    {
-        // ambil wali kelas yang login
-        $user = Auth::user();
-        $waliKelas = $user->waliKelas;
+{
+    $user = Auth::user();
+    $waliKelas = $user->waliKelas;
 
-        if (!$waliKelas || !$waliKelas->kelas_id) {
-            abort(403, 'Anda belum memiliki kelas');
-        }
-
-        $kelasId = $waliKelas->kelas_id;
-
-        $dataKelas = Kelas::find($kelasId);
-        $kelasName = $dataKelas ? $dataKelas->nama_kelas : 'Tidak ada kelas'; 
-
-        return view('dashboard.wali_kelas.dashboard', [
-            // TOTAL SISWA DI KELAS
-            'totalSiswa' => Siswa::where('kelas_id', $kelasId)->count(),
-
-            // TOTAL PELANGGARAN SISWA DI KELAS
-            'totalPelanggaran' => Pelanggaran::whereHas('siswa', function ($q) use ($kelasId) {
-                $q->where('kelas_id', $kelasId);
-            })->count(),
-
-            // TOTAL PRESTASI SISWA DI KELAS
-            'totalPrestasi' => Prestasi::whereHas('siswa', function ($q) use ($kelasId) {
-                $q->where('kelas_id', $kelasId);
-            })->count(),
-
-            // TOTAL POIN KELAS
-            'totalPoin' => Siswa::where('kelas_id', $kelasId)->sum('poin'),
-
-            'kelasName' => $kelasName, 
-        ]);
+    if (!$waliKelas || !$waliKelas->kelas_id) {
+        abort(403, 'Anda belum memiliki kelas');
     }
+
+    $kelasId = $waliKelas->kelas_id;
+
+    $kelas = Kelas::find($kelasId);
+    $kelasName = $kelas ? $kelas->nama_kelas : '-';
+
+    /* =======================
+     * STATISTIK UTAMA
+     * ======================= */
+    $totalSiswa = Siswa::where('kelas_id', $kelasId)->count();
+
+    $totalPelanggaran = Pelanggaran::where('status', 'diterima')
+        ->whereHas('siswa', fn ($q) => $q->where('kelas_id', $kelasId))
+        ->count();
+
+    $totalPrestasi = Prestasi::where('status', 'diterima')
+        ->whereHas('siswa', fn ($q) => $q->where('kelas_id', $kelasId))
+        ->count();
+
+    $totalPoin = Siswa::where('kelas_id', $kelasId)->sum('poin');
+
+    /* =======================
+     * DATA TERBARU (LIMIT 5)
+     * ======================= */
+    $pelanggaranTerbaru = Pelanggaran::with(['siswa', 'jenisPelanggaran'])
+        ->where('status', 'diterima')
+        ->whereHas('siswa', fn ($q) => $q->where('kelas_id', $kelasId))
+        ->latest()
+        ->take(5)
+        ->get();
+
+    $prestasiTerbaru = Prestasi::with(['siswa', 'jenis'])
+        ->where('status', 'diterima')
+        ->whereHas('siswa', fn ($q) => $q->where('kelas_id', $kelasId))
+        ->latest()
+        ->take(5)
+        ->get();
+
+    /* =======================
+     * TOP SISWA
+     * ======================= */
+    $topPelanggaran = Siswa::where('kelas_id', $kelasId)
+        ->withCount([
+            'pelanggaran as pelanggaran_count' => function ($q) {
+                $q->where('status', 'diterima');
+            }
+        ])
+        ->orderByDesc('pelanggaran_count')
+        ->take(5)
+        ->get();
+
+    $topPrestasi = Siswa::where('kelas_id', $kelasId)
+        ->withCount([
+            'prestasi as prestasi_count' => function ($q) {
+                $q->where('status', 'diterima');
+            }
+        ])
+        ->orderByDesc('prestasi_count')
+        ->take(5)
+        ->get();
+
+    return view('dashboard.wali_kelas.dashboard', compact(
+        'kelasName',
+        'totalSiswa',
+        'totalPelanggaran',
+        'totalPrestasi',
+        'totalPoin',
+        'pelanggaranTerbaru',
+        'prestasiTerbaru',
+        'topPelanggaran',
+        'topPrestasi'
+    ));
+}
+
 
     public function siswa()
 {

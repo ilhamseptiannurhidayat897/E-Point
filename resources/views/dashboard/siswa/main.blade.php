@@ -37,9 +37,6 @@
                 <button onclick="toggleSidebar()" class="md:hidden text-primary">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
-                <h1 class="text-lg font-bold text-primary">
-                    Dashboard Siswa
-                </h1>
             </div>
 
             {{-- LOGIKA PHP UNTUK NAMA & INISIAL --}}
