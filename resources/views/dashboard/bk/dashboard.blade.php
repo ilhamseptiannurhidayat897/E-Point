@@ -92,7 +92,7 @@
         <div class="bg-gradient-to-r from-primary/5 to-purple-600/5 px-6 py-5 flex items-center justify-between border-b border-gray-200">
             <div class="flex items-center gap-3">
                 <div class="bg-gradient-to-br from-primary/10 to-purple-600/10 p-2.5 rounded-lg">
-                    <i class="fas fa-exclamation-circle text-primary"></i>
+                    <i class="fas fa-exclamation-triangle text-primary"></i>
                 </div>
                 <div>
                     <h2 class="text-lg font-bold text-gray-800">Pelanggaran Pending</h2>
@@ -207,7 +207,7 @@
         <div class="bg-gradient-to-r from-primary/5 to-purple-600/5 px-6 py-5 flex items-center justify-between border-b border-gray-200">
             <div class="flex items-center gap-3">
                 <div class="bg-gradient-to-br from-primary/10 to-purple-600/10 p-2.5 rounded-lg">
-                    <i class="fas fa-check-circle text-primary"></i>
+                    <i class="fas fa-exclamation-triangle text-primary"></i>
                 </div>
                 <div>
                     <h2 class="text-lg font-bold text-gray-800">Pelanggaran Terverifikasi</h2>
@@ -249,7 +249,7 @@
         <div class="bg-gradient-to-r from-primary/5 to-purple-600/5 px-6 py-5 flex items-center justify-between border-b border-gray-200">
             <div class="flex items-center gap-3">
                 <div class="bg-gradient-to-br from-primary/10 to-purple-600/10 p-2.5 rounded-lg">
-                    <i class="fas fa-trophy text-primary"></i>
+                    <i class="fas fa-star text-primary"></i>
                 </div>
                 <div>
                     <h2 class="text-lg font-bold text-gray-800">Prestasi Terverifikasi</h2>

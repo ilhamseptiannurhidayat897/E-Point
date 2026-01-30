@@ -333,7 +333,7 @@
                 <div class="inline-block bg-gradient-to-br from-primary/10 to-purple-600/10 p-6 rounded-2xl mb-4">
                     <i class="fas fa-inbox text-primary text-4xl"></i>
                 </div>
-                <p class="text-gray-500 font-medium">Tidak ada data</p>
+                <p class="text-gray-500 font-medium">Tidak ada data pepenggg</p>
                 <p class="text-xs text-gray-400 mt-1">Data akan muncul setelah input pertama</p>
             </div>
             @endif

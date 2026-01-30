@@ -74,7 +74,7 @@
                   {{ request()->routeIs('bk.prestasi') 
                       ? 'bg-gradient-to-r from-primary/10 to-purple-600/10 text-primary border-l-4 border-primary shadow-sm' 
                       : 'text-gray-700 hover:bg-gray-100 hover:text-primary hover:translate-x-1 hover:shadow-sm' }}">
-            <i class="fas fa-award w-5 text-center flex-shrink-0 {{ request()->routeIs('bk.prestasi') ? 'text-primary' : 'text-gray-500' }}"></i>
+            <i class="fas fa-star w-5 text-center flex-shrink-0 {{ request()->routeIs('bk.prestasi') ? 'text-primary' : 'text-gray-500' }}"></i>
             <span class="truncate">Verifikasi Prestasi</span>
         </a>
 
