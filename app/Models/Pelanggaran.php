@@ -58,4 +58,18 @@ class Pelanggaran extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getPelaporAttribute()
+{
+    if ($this->petugas) {
+        return $this->petugas->nama;
+    }
+
+    if ($this->admin) {
+        return $this->admin->name . ' Admin';
+    }
+
+    return '-';
+}
+
 }

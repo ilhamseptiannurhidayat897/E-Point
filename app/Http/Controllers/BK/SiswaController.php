@@ -29,9 +29,18 @@ class SiswaController extends Controller
         // 4. Eksekusi Query dengan Pagination
         $siswa = $query->with([
             'kelas.walikelas',
-            'pelanggaran.jenisPelanggaran',
-            'prestasi.jenis'
+        
+            'pelanggaran' => function ($q) {
+                $q->where('status', 'diterima')
+                  ->with('jenisPelanggaran');
+            },
+        
+            'prestasi' => function ($q) {
+                $q->where('status', 'diterima')
+                  ->with('jenis');
+            },
         ])->paginate(30);
+        
 
         // 5. Append Query String ke Link Pagination (Supaya search tidak hilang saat ganti halaman)
         $siswa->appends($request->except('page'));

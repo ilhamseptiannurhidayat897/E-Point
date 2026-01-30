@@ -83,7 +83,8 @@
                             </td>
                             
                             <td class="px-6 py-4">
-                                <span class="text-gray-700">{{ $item->petugas->nama ?? $item->admin->nama ?? '-' }}</span>
+                                <span class="text-gray-700">{{ $item->pelapor }}
+                                </span>
                             </td>
                             
                             <td class="px-6 py-4 text-center">

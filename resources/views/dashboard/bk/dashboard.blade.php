@@ -11,11 +11,10 @@
             </h1>
             <div>
                 <p class="text-lg font-semibold text-gray-500 mb-1">Selamat datang,</p>
-                
             </div>
         </div>
         <div class="text-right">
-            <p class="text-gray-500 flex items-center gap-2 justify-end">
+            <p class="text-gray-500 flex items-center gap-2 justify-end mb-2">
                 <i class="fas fa-calendar-alt text-sm text-primary"></i>
                 <span>{{ \Carbon\Carbon::now()->translatedFormat('l, d F Y') }}</span>
             </p>
@@ -37,7 +36,7 @@
         <h3 class="text-4xl font-bold text-gray-800 mb-2">{{ number_format($totalSiswa) }}</h3>
         <p class="text-sm text-gray-500 font-medium">Total Siswa</p>
         <div class="mt-4 pt-4 border-t border-gray-100">
-            <p class="text-xs text-gray-400">Data keseluruhan siswa</p>
+            <p class="text-xs text-gray-400">Seluruh data siswa terdaftar</p>
         </div>
     </div>
 
@@ -48,10 +47,24 @@
                 <i class="fas fa-exclamation-triangle text-primary text-xl"></i>
             </div>
         </div>
-        <h3 class="text-4xl font-bold text-primary mb-2">{{ number_format($totalPelanggaran) }}</h3>
+        <h3 class="text-4xl font-bold text-red-600 mb-2">{{ number_format($totalPelanggaran) }}</h3>
         <p class="text-sm text-gray-500 font-medium">Total Pelanggaran</p>
         <div class="mt-4 pt-4 border-t border-gray-100">
-            <p class="text-xs text-gray-400">Semua data pelanggaran</p>
+            <p class="text-xs text-gray-400">Data terverifikasi</p>
+        </div>
+    </div>
+
+    <!-- Total Prestasi -->
+    <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
+        <div class="flex items-center justify-between mb-4">
+            <div class="bg-gradient-to-br from-primary/10 to-purple-600/10 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                <i class="fas fa-trophy text-primary text-xl"></i>
+            </div>
+        </div>
+        <h3 class="text-4xl font-bold text-green-600 mb-2">{{ number_format($totalPrestasi) }}</h3>
+        <p class="text-sm text-gray-500 font-medium">Total Prestasi</p>
+        <div class="mt-4 pt-4 border-t border-gray-100">
+            <p class="text-xs text-gray-400">Data terverifikasi</p>
         </div>
     </div>
 
@@ -69,115 +82,51 @@
         </div>
     </div>
 
-    <!-- Terverifikasi -->
-    <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-        <div class="flex items-center justify-between mb-4">
-            <div class="bg-gradient-to-br from-primary/10 to-purple-600/10 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
-                <i class="fas fa-check-circle text-primary text-xl"></i>
-            </div>
-        </div>
-        <h3 class="text-4xl font-bold text-green-600 mb-2">{{ number_format($verifikasi) }}</h3>
-        <p class="text-sm text-gray-500 font-medium">Terverifikasi</p>
-        <div class="mt-4 pt-4 border-t border-gray-100">
-            <p class="text-xs text-gray-400 flex items-center">
-                <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
-                Data telah diverifikasi
-            </p>
-        </div>
-    </div>
-
 </div>
 
-<!-- Quick Access & Data Tables -->
-<div class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8">
+<!-- Data Verifikasi Section -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
     
-    <!-- Quick Actions -->
-    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
-        <div class="flex items-center gap-3 mb-6">
-            <div class="bg-gradient-to-br from-primary/10 to-purple-600/10 p-2.5 rounded-lg">
-                <i class="fas fa-bolt text-primary"></i>
-            </div>
-            <h2 class="text-lg font-bold text-gray-800">Akses Cepat</h2>
-        </div>
-        
-        <div class="space-y-3">
-            <a href="{{ route('pelanggaran.index') }}" 
-               class="flex items-center gap-3 p-4 bg-gradient-to-r from-primary/5 to-purple-600/5 hover:from-primary/10 hover:to-purple-600/10 rounded-xl transition-all group border border-primary/10">
-                <div class="bg-gradient-to-br from-primary to-purple-600 p-2.5 rounded-lg group-hover:scale-110 transition-transform">
-                    <i class="fas fa-list text-white text-sm"></i>
-                </div>
-                <div class="flex-1">
-                    <p class="font-semibold text-gray-800">Data Pelanggaran</p>
-                    <p class="text-xs text-gray-500">Lihat semua pelanggaran</p>
-                </div>
-                <i class="fas fa-arrow-right text-primary group-hover:translate-x-1 transition-transform"></i>
-            </a>
-
-            <a href="{{ route('prestasi.index') }}" 
-               class="flex items-center gap-3 p-4 bg-gradient-to-r from-primary/5 to-purple-600/5 hover:from-primary/10 hover:to-purple-600/10 rounded-xl transition-all group border border-primary/10">
-                <div class="bg-gradient-to-br from-primary to-purple-600 p-2.5 rounded-lg group-hover:scale-110 transition-transform">
-                    <i class="fas fa-star text-white text-sm"></i>
-                </div>
-                <div class="flex-1">
-                    <p class="font-semibold text-gray-800">Data Prestasi</p>
-                    <p class="text-xs text-gray-500">Lihat semua prestasi</p>
-                </div>
-                <i class="fas fa-arrow-right text-primary group-hover:translate-x-1 transition-transform"></i>
-            </a>
-
-            <a href="{{ route('datasiswa.index') }}" 
-               class="flex items-center gap-3 p-4 bg-gradient-to-r from-primary/5 to-purple-600/5 hover:from-primary/10 hover:to-purple-600/10 rounded-xl transition-all group border border-primary/10">
-                <div class="bg-gradient-to-br from-primary to-purple-600 p-2.5 rounded-lg group-hover:scale-110 transition-transform">
-                    <i class="fas fa-user-graduate text-white text-sm"></i>
-                </div>
-                <div class="flex-1">
-                    <p class="font-semibold text-gray-800">Data Siswa</p>
-                    <p class="text-xs text-gray-500">Lihat profil siswa</p>
-                </div>
-                <i class="fas fa-arrow-right text-primary group-hover:translate-x-1 transition-transform"></i>
-            </a>
-        </div>
-    </div>
-
-    <!-- Pelanggaran Pending -->
-    <div class="xl:col-span-2 bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+    <!-- Pelanggaran Pending Verifikasi -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
         <div class="bg-gradient-to-r from-primary/5 to-purple-600/5 px-6 py-5 flex items-center justify-between border-b border-gray-200">
             <div class="flex items-center gap-3">
                 <div class="bg-gradient-to-br from-primary/10 to-purple-600/10 p-2.5 rounded-lg">
-                    <i class="fas fa-clock text-primary"></i>
+                    <i class="fas fa-exclamation-circle text-primary"></i>
                 </div>
                 <div>
-                    <h2 class="text-lg font-bold text-gray-800">Menunggu Verifikasi</h2>
-                    <p class="text-xs text-gray-500">Pelanggaran yang perlu ditinjau</p>
+                    <h2 class="text-lg font-bold text-gray-800">Pelanggaran Pending</h2>
+                    <p class="text-xs text-gray-500">Perlu verifikasi BK</p>
                 </div>
             </div>
-            <span class="bg-amber-100 text-amber-600 px-3 py-1 rounded-full text-xs font-semibold">
-                {{ $pending }} Data
+            <span class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-xs font-semibold">
+                {{ isset($pelanggaranPending) ? $pelanggaranPending->count() : 0 }} Data
             </span>
         </div>
         
         <div class="p-6">
             @if(isset($pelanggaranPending) && $pelanggaranPending->count() > 0)
-            <div class="space-y-3">
-                @foreach($pelanggaranPending->take(5) as $item)
-                <div class="flex items-center gap-4 p-4 bg-gray-50 hover:bg-primary/5 rounded-xl transition-all duration-200 group border border-transparent hover:border-primary/20">
+            <div class="space-y-3 max-h-96 overflow-y-auto">
+                @foreach($pelanggaranPending as $item)
+                <div class="flex items-center gap-4 p-4 bg-red-50/30 hover:bg-red-50 rounded-xl transition-all duration-200 group border border-red-100">
                     <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary to-purple-600 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition-transform">
                         {{ substr($item->siswa->nama ?? '-', 0, 1) }}
                     </div>
                     <div class="flex-1 min-w-0">
                         <p class="font-bold text-gray-800 truncate mb-0.5">{{ $item->siswa->nama ?? '-' }}</p>
-                        <p class="text-xs text-gray-500">{{ $item->jenispelanggaran->nama ?? '-' }}</p>
-                    </div>
-                    <div class="text-right">
-                        <p class="text-sm font-bold text-primary mb-0.5">-{{ $item->jenispelanggaran->poin ?? 0 }} Poin</p>
-                        <p class="text-xs text-gray-400">
+                        <p class="text-xs text-gray-500 truncate">{{ $item->jenispelanggaran->nama ?? '-' }}</p>
+                        <p class="text-xs text-gray-400 mt-1">
                             <i class="fas fa-clock mr-1"></i>
                             {{ $item->created_at->diffForHumans() }}
                         </p>
                     </div>
-                    <a href="{{ route('pelanggaran.index') }}" class="p-2 hover:bg-primary/10 text-primary rounded-lg transition-colors">
-                        <i class="fas fa-eye"></i>
-                    </a>
+                    <div class="text-right">
+                        <p class="text-sm font-bold text-red-600 mb-0.5">-{{ $item->jenispelanggaran->poin ?? 0 }} Poin</p>
+                        <a href="{{ route('pelanggaran.index') }}" class="inline-flex items-center gap-1 text-xs text-primary hover:text-primary/80 transition-colors">
+                            <span>Verifikasi</span>
+                            <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
                 </div>
                 @endforeach
             </div>
@@ -188,6 +137,150 @@
                 </div>
                 <p class="text-gray-500 font-medium mb-2">Semua data telah terverifikasi</p>
                 <p class="text-xs text-gray-400">Tidak ada pelanggaran yang menunggu verifikasi</p>
+            </div>
+            @endif
+        </div>
+    </div>
+
+    <!-- Prestasi Pending Verifikasi -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+        <div class="bg-gradient-to-r from-primary/5 to-purple-600/5 px-6 py-5 flex items-center justify-between border-b border-gray-200">
+            <div class="flex items-center gap-3">
+                <div class="bg-gradient-to-br from-primary/10 to-purple-600/10 p-2.5 rounded-lg">
+                    <i class="fas fa-star text-primary"></i>
+                </div>
+                <div>
+                    <h2 class="text-lg font-bold text-gray-800">Prestasi Pending</h2>
+                    <p class="text-xs text-gray-500">Perlu verifikasi BK</p>
+                </div>
+            </div>
+            <span class="bg-amber-100 text-amber-600 px-3 py-1 rounded-full text-xs font-semibold">
+                {{ isset($prestasiPending) ? $prestasiPending->count() : 0 }} Data
+            </span>
+        </div>
+        
+        <div class="p-6">
+            @if(isset($prestasiPending) && $prestasiPending->count() > 0)
+            <div class="space-y-3 max-h-96 overflow-y-auto">
+                @foreach($prestasiPending as $item)
+                <div class="flex items-center gap-4 p-4 bg-green-50/30 hover:bg-green-50 rounded-xl transition-all duration-200 group border border-green-100">
+                    <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary to-purple-600 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition-transform">
+                        {{ substr($item->siswa->nama ?? '-', 0, 1) }}
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-bold text-gray-800 truncate mb-0.5">{{ $item->siswa->nama ?? '-' }}</p>
+                        <p class="text-xs text-gray-500 truncate">{{ $item->jenis->nama ?? '-' }}</p>
+                        <p class="text-xs text-gray-400 mt-1">
+                            <i class="fas fa-clock mr-1"></i>
+                            {{ $item->created_at->diffForHumans() }}
+                        </p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm font-bold text-green-600 mb-0.5">+{{ $item->jenis->poin ?? 0 }} Poin</p>
+                        <a href="{{ route('prestasi.index') }}" class="inline-flex items-center gap-1 text-xs text-primary hover:text-primary/80 transition-colors">
+                            <span>Verifikasi</span>
+                            <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            @else
+            <div class="text-center py-12">
+                <div class="inline-block bg-gradient-to-br from-primary/10 to-purple-600/10 p-6 rounded-2xl mb-4">
+                    <i class="fas fa-check-circle text-primary text-5xl"></i>
+                </div>
+                <p class="text-gray-500 font-medium mb-2">Semua data telah terverifikasi</p>
+                <p class="text-xs text-gray-400">Tidak ada prestasi yang menunggu verifikasi</p>
+            </div>
+            @endif
+        </div>
+    </div>
+
+</div>
+
+<!-- Riwayat Data Terverifikasi -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+    
+    <!-- Pelanggaran Terverifikasi -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+        <div class="bg-gradient-to-r from-primary/5 to-purple-600/5 px-6 py-5 flex items-center justify-between border-b border-gray-200">
+            <div class="flex items-center gap-3">
+                <div class="bg-gradient-to-br from-primary/10 to-purple-600/10 p-2.5 rounded-lg">
+                    <i class="fas fa-check-circle text-primary"></i>
+                </div>
+                <div>
+                    <h2 class="text-lg font-bold text-gray-800">Pelanggaran Terverifikasi</h2>
+                    <p class="text-xs text-gray-500">Riwayat data yang sudah disetujui</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-6">
+            @if(isset($pelanggaranTerbaru) && $pelanggaranTerbaru->count() > 0)
+            <div class="space-y-3 max-h-80 overflow-y-auto">
+                @foreach($pelanggaranTerbaru->take(5) as $item)
+                <div class="flex items-center gap-4 p-4 bg-gray-50 hover:bg-primary/5 rounded-xl transition-all duration-200 group border border-transparent hover:border-primary/20">
+                    <div class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-primary to-purple-600 rounded-lg flex items-center justify-center text-white shadow group-hover:scale-105 transition-transform">
+                        {{ substr($item->siswa->nama ?? '-', 0, 1) }}
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-semibold text-gray-800 truncate text-sm">{{ $item->siswa->nama ?? '-' }}</p>
+                        <p class="text-xs text-gray-500 truncate">{{ $item->jenispelanggaran->nama ?? '-' }}</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-xs font-bold text-red-600">-{{ $item->jenispelanggaran->poin ?? 0 }}</p>
+                        <p class="text-xs text-gray-400">{{ $item->created_at->format('d/m/Y') }}</p>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            @else
+            <div class="text-center py-8">
+                <i class="fas fa-inbox text-3xl text-gray-300 mb-2"></i>
+                <p class="text-sm text-gray-400">Belum ada data terverifikasi</p>
+            </div>
+            @endif
+        </div>
+    </div>
+
+    <!-- Prestasi Terverifikasi -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+        <div class="bg-gradient-to-r from-primary/5 to-purple-600/5 px-6 py-5 flex items-center justify-between border-b border-gray-200">
+            <div class="flex items-center gap-3">
+                <div class="bg-gradient-to-br from-primary/10 to-purple-600/10 p-2.5 rounded-lg">
+                    <i class="fas fa-trophy text-primary"></i>
+                </div>
+                <div>
+                    <h2 class="text-lg font-bold text-gray-800">Prestasi Terverifikasi</h2>
+                    <p class="text-xs text-gray-500">Riwayat data yang sudah disetujui</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-6">
+            @if(isset($prestasiTerbaru) && $prestasiTerbaru->count() > 0)
+            <div class="space-y-3 max-h-80 overflow-y-auto">
+                @foreach($prestasiTerbaru->take(5) as $item)
+                <div class="flex items-center gap-4 p-4 bg-gray-50 hover:bg-primary/5 rounded-xl transition-all duration-200 group border border-transparent hover:border-primary/20">
+                    <div class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-primary to-purple-600 rounded-lg flex items-center justify-center text-white shadow group-hover:scale-105 transition-transform">
+                        {{ substr($item->siswa->nama ?? '-', 0, 1) }}
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-semibold text-gray-800 truncate text-sm">{{ $item->siswa->nama ?? '-' }}</p>
+                        <p class="text-xs text-gray-500 truncate">{{ $item->jenis->nama ?? '-' }}</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-xs font-bold text-green-600">+{{ $item->jenis->poin ?? 0 }}</p>
+                        <p class="text-xs text-gray-400">{{ $item->created_at->format('d/m/Y') }}</p>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            @else
+            <div class="text-center py-8">
+                <i class="fas fa-inbox text-3xl text-gray-300 mb-2"></i>
+                <p class="text-sm text-gray-400">Belum ada data terverifikasi</p>
             </div>
             @endif
         </div>
@@ -206,7 +299,10 @@
             day: 'numeric' 
         };
         const dateString = now.toLocaleDateString('id-ID', options);
-        document.getElementById('current-date').textContent = dateString;
+        const dateElement = document.getElementById('current-date');
+        if (dateElement) {
+            dateElement.textContent = dateString;
+        }
     }
     
     updateDate();

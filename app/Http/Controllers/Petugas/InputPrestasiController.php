@@ -16,6 +16,8 @@ class InputPrestasiController extends Controller
      */
     public function index()
     {
+
+        
         $prestasi = Prestasi::with(['siswa', 'jenis'])
             ->where('petugas_id', Auth::user()->petugas->id)
             ->latest()
@@ -42,6 +44,7 @@ class InputPrestasiController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'siswa_id' => 'required|exists:siswa,id',
             'jenis_prestasi_id' => 'required|exists:jenis_prestasi,id',

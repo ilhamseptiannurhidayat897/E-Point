@@ -4,6 +4,7 @@
 <div class="px-4 py-3">
 
     <!-- Header -->
+    
     <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-6">
         <div class="flex items-center justify-between">
             <div>
@@ -83,7 +84,8 @@
                             </td>
                             
                             <td class="px-6 py-4">
-                                <span class="text-gray-700">{{ $item->petugas->nama ?? $item->admin->nama ?? '-' }}</span>
+                                <span class="text-gray-700">{{ $item->pelapor }}
+                                </span>
                             </td>
                             
                             <td class="px-6 py-4 text-center">
@@ -106,24 +108,23 @@
                             <td class="px-6 py-4">
                                 <form action="{{ route('bk.pelanggaran.verifikasi', $item->id) }}"
                                       method="POST"
-                                      onsubmit="return confirm('Yakin ingin memverifikasi?')"
-                                      class="flex gap-2 justify-center">
+                                      class="form-verifikasi flex gap-2 justify-center">
                                     @csrf
                                     @method('PUT')
-
+                            
                                     <button type="submit"
                                             name="status"
                                             value="diterima"
-                                            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-green-100 text-green-700 border border-green-200 hover:bg-green-200 transition-all"
+                                            class="btn-verifikasi inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-green-100 text-green-700 border border-green-200 hover:bg-green-200 transition-all"
                                             title="Terima">
                                         <i class="fas fa-check text-xs"></i>
                                         Terima
                                     </button>
-
+                            
                                     <button type="submit"
                                             name="status"
                                             value="ditolak"
-                                            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-100 text-red-700 border border-red-200 hover:bg-red-200 transition-all"
+                                            class="btn-verifikasi inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-100 text-red-700 border border-red-200 hover:bg-red-200 transition-all"
                                             title="Tolak">
                                         <i class="fas fa-times text-xs"></i>
                                         Tolak
@@ -150,4 +151,5 @@
     </div>
 
 </div>
+
 @endsection

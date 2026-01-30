@@ -20,106 +20,207 @@ use App\Models\Petugas;
 
 class DashboardController extends Controller
 {
-   
-   
-    public function admin()
-    {
-        // Statistik dasar
-        $totalSiswa = Siswa::count();
-        $totalKelas = Kelas::count();
-        $totalPelanggaran = Pelanggaran::count();
-        $totalPrestasi = Prestasi::count();
-        
-        // Data bulan ini
-        $pelanggaranBulanIni = Pelanggaran::whereMonth('created_at', Carbon::now()->month)
-                                        ->whereYear('created_at', Carbon::now()->year)
-                                        ->count();
-        $prestasiBulanIni = Prestasi::whereMonth('created_at', Carbon::now()->month)
-                                   ->whereYear('created_at', Carbon::now()->year)
-                                   ->count();
-        
-        // Data untuk chart (6 bulan terakhir)
-        $chartLabels = [];
-        $chartPelanggaran = [];
-        $chartPrestasi = [];
-        
-        for ($i = 5; $i >= 0; $i--) {
-            $month = Carbon::now()->subMonths($i);
-            $chartLabels[] = $month->translatedFormat('M Y');
-            
-            $chartPelanggaran[] = Pelanggaran::whereMonth('created_at', $month->month)
-                                           ->whereYear('created_at', $month->year)
-                                           ->count();
-            
-            $chartPrestasi[] = Prestasi::whereMonth('created_at', $month->month)
-                                      ->whereYear('created_at', $month->year)
-                                      ->count();
-        }
-        
-        // Data terbaru
-        $pelanggaranTerbaru = Pelanggaran::with(['siswa.kelas', 'jenisPelanggaran'])
-                                       ->latest()
-                                       ->take(5)
-                                       ->get();
-        
-        $prestasiTerbaru = Prestasi::with(['siswa.kelas', 'jenis'])
-                                 ->latest()
-                                 ->take(5)
-                                 ->get();
-        
-        // Top siswa pelanggaran
-        $topPelanggaran = Siswa::withCount('pelanggaran')
-                             ->orderBy('pelanggaran_count', 'desc')
-                             ->take(5)
-                             ->get();
-        
-        // Top siswa prestasi
-        $topPrestasi = Siswa::withCount('prestasi')
-                           ->orderBy('prestasi_count', 'desc')
-                           ->take(5)
-                           ->get();
-        
-        // Total pengguna
-        $totalBK = User::where('role', 'bk')->count();
-        $totalWaliKelas = User::where('role', 'wali_kelas')->count();
-        $totalPetugas = User::where('role', 'petugas')->count();
-        
-        return view('dashboard.admin.dashboard', compact(
-            'totalSiswa',
-            'totalKelas',
-            'totalPelanggaran',
-            'totalPrestasi',
-            'pelanggaranBulanIni',
-            'prestasiBulanIni',
-            'chartLabels',
-            'chartPelanggaran',
-            'chartPrestasi',
-            'pelanggaranTerbaru',
-            'prestasiTerbaru',
-            'topPelanggaran',
-            'topPrestasi',
-            'totalBK',
-            'totalWaliKelas',
-            'totalPetugas'
-        ));
-    }
-   
-    public function bk()
-    {
-        return view('dashboard.bk.dashboard', [
-            // CARD
-            'totalPelanggaran' => Pelanggaran::count(),
-            'pending' => Pelanggaran::where('status', 'pending')->count(),
-            'verifikasi' => Pelanggaran::where('status', 'verifikasi')->count(),
-            'totalSiswa' => Siswa::count(),
     
-            // TABLE
-            'pelanggaranTerbaru' => Pelanggaran::with(['siswa','jenisPelanggaran'])
-                ->latest()
-                ->limit(5)
-                ->get(),
-        ]);
+    public function admin()
+{
+    /* =======================
+     * STATISTIK UTAMA (FINAL)
+     * ======================= */
+    $totalSiswa = Siswa::count();
+    $totalKelas = Kelas::count();
+
+    // ADMIN HANYA LIHAT YANG SUDAH DISETUJUI
+    $totalPelanggaran = Pelanggaran::where('status', 'diterima')->count();
+    $totalPrestasi    = Prestasi::where('status', 'diterima')->count();
+
+
+    /* =======================
+     * DATA BULAN INI
+     * ======================= */
+    $pelanggaranBulanIni = Pelanggaran::where('status', 'diterima')
+        ->whereMonth('created_at', now()->month)
+        ->whereYear('created_at', now()->year)
+        ->count();
+
+    $prestasiBulanIni = Prestasi::where('status', 'diterima')
+        ->whereMonth('created_at', now()->month)
+        ->whereYear('created_at', now()->year)
+        ->count();
+
+
+    /* =======================
+     * DATA CHART (6 BULAN)
+     * ======================= */
+    $chartLabels = [];
+    $chartPelanggaran = [];
+    $chartPrestasi = [];
+
+    for ($i = 5; $i >= 0; $i--) {
+        $month = now()->subMonths($i);
+
+        $chartLabels[] = $month->translatedFormat('M Y');
+
+        $chartPelanggaran[] = Pelanggaran::where('status', 'diterima')
+            ->whereMonth('created_at', $month->month)
+            ->whereYear('created_at', $month->year)
+            ->count();
+
+        $chartPrestasi[] = Prestasi::where('status', 'diterima')
+            ->whereMonth('created_at', $month->month)
+            ->whereYear('created_at', $month->year)
+            ->count();
     }
+
+
+    /* =======================
+     * DATA TERBARU (FINAL)
+     * ======================= */
+    $pelanggaranTerbaru = Pelanggaran::with([
+            'siswa.kelas',
+            'jenisPelanggaran'
+        ])
+        ->where('status', 'diterima')
+        ->latest()
+        ->limit(5)
+        ->get();
+
+    $prestasiTerbaru = Prestasi::with([
+            'siswa.kelas',
+            'jenis'
+        ])
+        ->where('status', 'diterima')
+        ->latest()
+        ->limit(5)
+        ->get();
+
+
+    /* =======================
+     * TOP SISWA (HASIL AKHIR)
+     * ======================= */
+    $topPelanggaran = Siswa::withCount([
+            'pelanggaran as pelanggaran_count' => fn ($q) =>
+                $q->where('status', 'diterima')
+        ])
+        ->orderByDesc('pelanggaran_count')
+        ->limit(5)
+        ->get();
+
+    $topPrestasi = Siswa::withCount([
+            'prestasi as prestasi_count' => fn ($q) =>
+                $q->where('status', 'diterima')
+        ])
+        ->orderByDesc('prestasi_count')
+        ->limit(5)
+        ->get();
+
+
+    /* =======================
+     * TOTAL USER
+     * ======================= */
+    $totalBK        = User::where('role', 'bk')->count();
+    $totalWaliKelas = User::where('role', 'wali_kelas')->count();
+    $totalPetugas   = User::where('role', 'petugas')->count();
+
+
+    return view('dashboard.admin.dashboard', compact(
+        'totalSiswa',
+        'totalKelas',
+        'totalPelanggaran',
+        'totalPrestasi',
+        'pelanggaranBulanIni',
+        'prestasiBulanIni',
+        'chartLabels',
+        'chartPelanggaran',
+        'chartPrestasi',
+        'pelanggaranTerbaru',
+        'prestasiTerbaru',
+        'topPelanggaran',
+        'topPrestasi',
+        'totalBK',
+        'totalWaliKelas',
+        'totalPetugas'
+    ));
+}
+
+    
+   
+  
+public function bk()
+{
+    return view('dashboard.bk.dashboard', [
+
+        /*
+        |--------------------------------------------------------------------------
+        | CARD STATISTIK
+        |--------------------------------------------------------------------------
+        */
+
+        // Total siswa
+        'totalSiswa' => Siswa::count(),
+
+        // ✅ TOTAL DITERIMA (TERVERIFIKASI)
+        'totalPelanggaran' => Pelanggaran::where('status', 'diterima')->count(),
+        'totalPrestasi'    => Prestasi::where('status', 'diterima')->count(),
+
+        // ⏳ TOTAL PENDING (UNTUK CARD)
+        'pending' => 
+            Pelanggaran::where('status', 'pending')->count()
+            + Prestasi::where('status', 'pending')->count(),
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | DATA PENDING (UNTUK LIST)
+        |--------------------------------------------------------------------------
+        */
+
+        // Pelanggaran pending
+        'pelanggaranPending' => Pelanggaran::with([
+                'siswa',
+                'jenisPelanggaran'
+            ])
+            ->where('status', 'pending')
+            ->latest()
+            ->get(),
+
+        // Prestasi pending
+        'prestasiPending' => Prestasi::with([
+                'siswa',
+                'jenis'
+            ])
+            ->where('status', 'pending')
+            ->latest()
+            ->get(),
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | DATA TERVERIFIKASI (RIWAYAT)
+        |--------------------------------------------------------------------------
+        */
+
+        // Pelanggaran diterima
+        'pelanggaranTerbaru' => Pelanggaran::with([
+                'siswa',
+                'jenisPelanggaran'
+            ])
+            ->where('status', 'diterima')
+            ->latest()
+            ->limit(5)
+            ->get(),
+
+        // Prestasi diterima
+        'prestasiTerbaru' => Prestasi::with([
+                'siswa',
+                'jenis'
+            ])
+            ->where('status', 'diterima')
+            ->latest()
+            ->limit(5)
+            ->get(),
+    ]);
+}
+
     
 
     public function petugas()
@@ -134,11 +235,14 @@ $petugasId = Petugas::where('user_id', auth()->id())->value('id');
             // Statistik Umum
             'totalSiswa' => Siswa::count(),
             
-            // Pelanggaran Hari Ini (semua petugas)
-            'pelanggaranHariIni' => Pelanggaran::whereDate('created_at', Carbon::today())->count(),
-            
-            // Prestasi Hari Ini (semua petugas)
-            'prestasiHariIni' => Prestasi::whereDate('created_at', Carbon::today())->count(),
+            'pelanggaranHariIni' => Pelanggaran::where('petugas_id', $petugasId)
+            ->whereDate('created_at', Carbon::today())
+            ->count(),
+        
+        'prestasiHariIni' => Prestasi::where('petugas_id', $petugasId)
+            ->whereDate('created_at', Carbon::today())
+            ->count(),
+        
             
             // Total Input yang dibuat oleh petugas yang sedang login
             'totalInputSaya' =>
@@ -150,15 +254,19 @@ $petugasId = Petugas::where('user_id', auth()->id())->value('id');
             
             // Pelanggaran Terbaru (5 data terakhir dengan relasi siswa dan jenis pelanggaran)
             'pelanggaranTerbaru' => Pelanggaran::with(['siswa.kelas', 'jenispelanggaran'])
-                ->latest()
-                ->limit(5)
-                ->get(),
+            ->where('petugas_id', $petugasId)
+            ->latest()
+            ->limit(5)
+            ->get(),
+        
             
             // Prestasi Terbaru (5 data terakhir dengan relasi siswa dan jenis prestasi)
             'prestasiTerbaru' => Prestasi::with(['siswa.kelas', 'jenis'])
-                ->latest()
-                ->limit(5)
-                ->get(),
+    ->where('petugas_id', $petugasId)
+    ->latest()
+    ->limit(5)
+    ->get(),
+
         ]);
     }
 
