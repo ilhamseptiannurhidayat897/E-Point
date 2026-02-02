@@ -180,8 +180,8 @@
                     <div class="w-16 h-16 rounded-lg bg-purple-100 flex items-center justify-center mb-6">
                         <i class="fas fa-bell text-primary text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-primary mb-3">Notifikasi Otomatis</h3>
-                    <p class="text-gray-600">Kirim notifikasi otomatis kepada orang tua/wali siswa tentang poin yang diperoleh</p>
+                    <h3 class="text-xl font-bold text-primary mb-3">Peringatan Poin Siswa</h3>
+                    <p class="text-gray-600">Dapatkan peringatan otomatis di dashboard siswa tentang status poin</p>
                 </div>
                 
                 <!-- Feature 4 -->
@@ -189,8 +189,8 @@
                     <div class="w-16 h-16 rounded-lg bg-purple-100 flex items-center justify-center mb-6">
                         <i class="fas fa-file-alt text-primary text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-primary mb-3">Laporan Komprehensif</h3>
-                    <p class="text-gray-600">Hasilkan laporan detail tentang perkembangan poin siswa per periode waktu tertentu</p>
+                    <h3 class="text-xl font-bold text-primary mb-3">Laporan Detail</h3>
+                    <p class="text-gray-600">Hasilkan laporan tentang perkembangan poin siswa, termasuk pelanggaran dan prestasi</p>
                 </div>
                 
                 <!-- Feature 5 -->
@@ -199,7 +199,7 @@
                         <i class="fas fa-shield-alt text-primary text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold text-primary mb-3">Keamanan Terjamin</h3>
-                    <p class="text-gray-600">Sistem dilengkapi dengan enkripsi data dan kontrol akses berbasis peran</p>
+                    <p class="text-gray-600">Keamanan Terjamin Sistem dilengkapi dengan enkripsi password dan kontrol akses berbasis peran</p>
                 </div>
                 
                 <!-- Feature 6 -->
@@ -208,7 +208,7 @@
                         <i class="fas fa-users text-primary text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold text-primary mb-3">Multi-User</h3>
-                    <p class="text-gray-600">Dukungan untuk berbagai peran pengguna: admin, dan guru</p>
+                    <p class="text-gray-600">Dukungan untuk berbagai peran pengguna: admin, petugas, bk, wali kelas, dan siswa</p>
                 </div>
             </div>
         </div>
@@ -229,7 +229,7 @@
                         <span class="text-white text-2xl font-bold">1</span>
                     </div>
                     <h3 class="text-xl font-bold text-primary mb-2">Input Data</h3>
-                    <p class="text-gray-600 text-center">Guru mencatat kebaikan atau pelanggaran siswa melalui sistem</p>
+                    <p class="text-gray-600 text-center">Petugas atau Admin mencatat Prestasi atau pelanggaran siswa melalui sistem</p>
                 </div>
                 
                 <!-- Arrow -->
@@ -242,6 +242,20 @@
                     <div class="w-24 h-24 rounded-full bg-primary flex items-center justify-center mb-4">
                         <span class="text-white text-2xl font-bold">2</span>
                     </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">BK Verifikasi</h3>
+                    <p class="text-gray-600 text-center">BK Verifikasi Pelanggaran dan Prestasi yang dicatat oleh Petugas atau Admin</p>
+                </div>
+
+                <!-- Arrow -->
+                <div class="hidden md:block text-primary text-4xl mb-10 md:mb-0">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="flex flex-col items-center mb-10 md:mb-0 md:w-1/3">
+                    <div class="w-24 h-24 rounded-full bg-primary flex items-center justify-center mb-4">
+                        <span class="text-white text-2xl font-bold">3</span>
+                    </div>
                     <h3 class="text-xl font-bold text-primary mb-2">Proses Otomatis</h3>
                     <p class="text-gray-600 text-center">Sistem menghitung poin</p>
                 </div>
@@ -251,10 +265,10 @@
                     <i class="fas fa-chevron-right"></i>
                 </div>
                 
-                <!-- Step 3 -->
+                <!-- Step 4 -->
                 <div class="flex flex-col items-center md:w-1/3">
                     <div class="w-24 h-24 rounded-full bg-primary flex items-center justify-center mb-4">
-                        <span class="text-white text-2xl font-bold">3</span>
+                        <span class="text-white text-2xl font-bold">4</span>
                     </div>
                     <h3 class="text-xl font-bold text-primary mb-2">Analisis & Laporan</h3>
                     <p class="text-gray-600 text-center">Admin dapat melihat statistik dan menghasilkan laporan kapan saja</p>
@@ -286,22 +300,22 @@
                 <!-- FAQ Item 2 -->
                 <div class="mb-6">
                     <button class="w-full text-left bg-white rounded-xl shadow-lg p-6 flex justify-between items-center focus:outline-none">
-                        <h3 class="text-lg font-bold text-primary">-?</h3>
+                        <h3 class="text-lg font-bold text-primary">Bagaimana siswa tahu status poin mereka?</h3>
                         <i class="fas fa-chevron-down text-primary"></i>
                     </button>
                     <div class="hidden bg-white rounded-b-xl shadow-lg p-6 border-t border-gray-100">
-                        <p class="text-gray-600">-</p>
+                        <p class="text-gray-600">Siswa dapat melihat status poin mereka di dashboard, dengan peringatan otomatis</p>
                     </div>
                 </div>
                 
                 <!-- FAQ Item 3 -->
                 <div class="mb-6">
                     <button class="w-full text-left bg-white rounded-xl shadow-lg p-6 flex justify-between items-center focus:outline-none">
-                        <h3 class="text-lg font-bold text-primary">Apakah E-Point aman untuk data siswa?</h3>
+                        <h3 class="text-lg font-bold text-primary">Apakah orang tua dapat menerima notifikasi tentang poin siswa?</h3>
                         <i class="fas fa-chevron-down text-primary"></i>
                     </button>
                     <div class="hidden bg-white rounded-b-xl shadow-lg p-6 border-t border-gray-100">
-                        <p class="text-gray-600">Ya, E-Point dilengkapi dengan enkripsi data tingkat tinggi dan kontrol akses berbasis peran. Data siswa hanya dapat diakses oleh pihak yang berwenang sesuai dengan peran masing-masing.</p>
+                        <p class="text-gray-600">Saat ini, sistem memberikan peringatan di dashboard siswa. Notifikasi otomatis dapat dikembangkan seiring waktu untuk dikirim ke orang tua/wali siswa jika diperlukan. </p>
                     </div>
                 </div>
             </div>

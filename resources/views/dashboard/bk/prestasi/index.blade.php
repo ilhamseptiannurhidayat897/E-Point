@@ -106,31 +106,24 @@
                             </td>
                             
                             <td class="px-6 py-4">
-                                <form action="{{ route('bk.prestasi.verifikasi', $item->id) }}"
-                                      method="POST"
-                                      onsubmit="return confirm('Yakin ingin memverifikasi?')"
-                                      class="flex gap-2 justify-center">
-                                    @csrf
-                                    @method('PUT')
+                                <form class="flex gap-2 justify-center">
+    <button type="button"
+        onclick="openVerifikasiModal({{ $item->id }}, 'diterima')"
+        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold
+               bg-green-100 text-green-700 border border-green-200 hover:bg-green-200 transition-all">
+        <i class="fas fa-check text-xs"></i>
+        Terima
+    </button>
 
-                                    <button type="submit"
-                                            name="status"
-                                            value="diterima"
-                                            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-green-100 text-green-700 border border-green-200 hover:bg-green-200 transition-all"
-                                            title="Terima">
-                                        <i class="fas fa-check text-xs"></i>
-                                        Terima
-                                    </button>
+    <button type="button"
+        onclick="openVerifikasiModal({{ $item->id }}, 'ditolak')"
+        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold
+               bg-red-100 text-red-700 border border-red-200 hover:bg-red-200 transition-all">
+        <i class="fas fa-times text-xs"></i>
+        Tolak
+    </button>
+</form>
 
-                                    <button type="submit"
-                                            name="status"
-                                            value="ditolak"
-                                            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-100 text-red-700 border border-red-200 hover:bg-red-200 transition-all"
-                                            title="Tolak">
-                                        <i class="fas fa-times text-xs"></i>
-                                        Tolak
-                                    </button>
-                                </form>
                             </td>
                         </tr>
                     @empty
@@ -152,4 +145,88 @@
     </div>
 
 </div>
+
+<!--modal verifikasi-->
+<div id="verifikasiModal"
+     class="fixed inset-0 z-50 hidden items-center justify-center
+            bg-[#1f143a]/50 backdrop-blur-sm">
+
+    <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl
+                p-6 text-center border border-gray-100">
+
+        <!-- Icon -->
+        <div id="verifikasiIcon"
+             class="mx-auto mb-4 h-14 w-14 rounded-full
+                    flex items-center justify-center">
+        </div>
+
+        <!-- Text -->
+        <h3 class="text-lg font-semibold text-gray-900 mb-1">
+            Konfirmasi Verifikasi
+        </h3>
+
+        <p id="verifikasiText"
+           class="text-sm text-gray-500 mb-6">
+        </p>
+
+        <!-- Action -->
+        <div class="flex justify-center gap-3">
+            <button onclick="closeVerifikasiModal()"
+                class="px-4 py-2 rounded-lg bg-gray-100
+                       hover:bg-gray-200 text-gray-600 transition">
+                Batal
+            </button>
+
+            <form id="verifikasiForm" method="POST">
+                @csrf
+                @method('PUT')
+                <input type="hidden" name="status" id="verifikasiStatus">
+
+                <button id="verifikasiSubmit"
+                    class="px-4 py-2 rounded-lg text-white
+                           font-medium shadow-sm transition">
+                    Konfirmasi
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+function openVerifikasiModal(id, status) {
+    const modal = document.getElementById('verifikasiModal')
+    const form = document.getElementById('verifikasiForm')
+    const text = document.getElementById('verifikasiText')
+    const icon = document.getElementById('verifikasiIcon')
+    const submit = document.getElementById('verifikasiSubmit')
+    const inputStatus = document.getElementById('verifikasiStatus')
+
+    modal.classList.remove('hidden')
+    modal.classList.add('flex')
+
+    form.action = `/bk/prestasi/${id}`
+    inputStatus.value = status
+
+    if (status === 'diterima') {
+        icon.className = 'mx-auto mb-4 h-14 w-14 rounded-full bg-green-50 flex items-center justify-center'
+        icon.innerHTML = `<i class="fas fa-check text-green-600 text-xl"></i>`
+
+        text.innerHTML = `Prestasi akan <span class="text-green-600 font-medium">DITERIMA</span>
+                          dan poin akan diproses.`
+        submit.className = 'px-4 py-2 rounded-lg bg-green-500 hover:bg-green-600 text-white font-medium transition'
+    } else {
+        icon.className = 'mx-auto mb-4 h-14 w-14 rounded-full bg-red-50 flex items-center justify-center'
+        icon.innerHTML = `<i class="fas fa-times text-red-600 text-xl"></i>`
+
+        text.innerHTML = `Prestasi akan <span class="text-red-600 font-medium">DITOLAK</span>
+                          dan tidak akan diproses.`
+        submit.className = 'px-4 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white font-medium transition'
+    }
+}
+
+function closeVerifikasiModal() {
+    document.getElementById('verifikasiModal').classList.add('hidden')
+}
+</script>
+
 @endsection
