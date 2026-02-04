@@ -10,7 +10,7 @@
                 <p class="text-sm text-gray-400">Unggah file Excel untuk menambahkan data wali kelas secara massal.</p>
             </div>
             <div class="bg-gradient-to-br from-indigo-100 to-purple-100 p-4 rounded-xl shadow-sm">
-                <i class="fas fa-chalkboard-teacher text-indigo-500 text-2xl"></i>
+                <i class="fas fa-file-upload text-indigo-500 text-2xl"></i>
             </div>
         </div>
     </div>

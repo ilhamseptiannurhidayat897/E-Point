@@ -2,16 +2,20 @@
 
 @section('content')
 <!-- Page Header -->
-<div class="mb-6">
-    <div class="flex items-center mb-4">
-        <a href="{{ route('databk.index') }}" class="text-gray-500 hover:text-primary mr-3 transition-colors">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-            </svg>
-        </a>
+<div class="bg-gradient-to-r from-primary to-purple-800 rounded-xl p-8 mb-8 text-white shadow-lg">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
         <div>
-            <h1 class="text-2xl font-bold text-gray-800">Tambah Guru BK</h1>
-            <p class="text-gray-600 mt-1">Isi form berikut untuk menambahkan guru BK baru</p>
+            <h1 class="text-3xl font-bold mb-2">Tambah Guru BK</h1>
+            <p class="text-green-100">Formulir penambahan data guru bk baru</p>
+        </div>
+        <div class="mt-4 md:mt-0">
+            <a href="{{ route('databk.index') }}" 
+               class="bg-white/20 backdrop-blur text-white hover:bg-white/30 px-6 py-3 rounded-lg font-semibold inline-flex items-center transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                Kembali
+            </a>
         </div>
     </div>
 </div>

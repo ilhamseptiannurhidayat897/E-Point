@@ -300,6 +300,22 @@ $petugasId = Petugas::where('user_id', auth()->id())->value('id');
     $totalPoin = Siswa::where('kelas_id', $kelasId)->sum('poin');
 
     /* =======================
+ * KATEGORI SISWA BERDASARKAN POIN
+ * ======================= */
+$siswaBerprestasi = Siswa::where('kelas_id', $kelasId)
+->where('poin', '>=', 1)
+->count();
+
+$siswaPerhatian = Siswa::where('kelas_id', $kelasId)
+->whereBetween('poin', [-50, 0])
+->count();
+
+$siswaBermasalah = Siswa::where('kelas_id', $kelasId)
+->where('poin', '<', -100)
+->count();
+
+
+    /* =======================
      * DATA TERBARU (LIMIT 5)
      * ======================= */
     $pelanggaranTerbaru = Pelanggaran::with(['siswa', 'jenisPelanggaran'])
@@ -340,17 +356,20 @@ $petugasId = Petugas::where('user_id', auth()->id())->value('id');
         ->get();
 
     return view('dashboard.wali_kelas.dashboard', compact(
-        'kelasName',
-        'totalSiswa',
-        'totalPelanggaran',
-        'totalPrestasi',
-        'totalPoin',
-        'pelanggaranTerbaru',
-        'prestasiTerbaru',
-        'topPelanggaran',
-        'topPrestasi'
-    ));
-}
+            'kelasName',
+            'totalSiswa',
+            'totalPelanggaran',
+            'totalPrestasi',
+            'totalPoin',
+            'pelanggaranTerbaru',
+            'prestasiTerbaru',
+            'topPelanggaran',
+            'topPrestasi',
+            'siswaBerprestasi',
+            'siswaPerhatian',
+            'siswaBermasalah'
+        ));
+        }
 
 
     public function siswa()

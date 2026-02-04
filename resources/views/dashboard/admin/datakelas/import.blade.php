@@ -88,7 +88,7 @@
                 <!-- Submit Button -->
                 <div class="flex justify-end">
                     <button type="submit"
-                            class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105">
+                    class="bg-primary text-white hover:bg-black-50 px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                         <i class="fas fa-upload"></i>
                         <span>Import Data Sekarang</span>
                     </button>

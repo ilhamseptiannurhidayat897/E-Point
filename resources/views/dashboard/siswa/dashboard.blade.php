@@ -123,10 +123,11 @@
                 </div>
             </div>
             <div class="flex justify-between text-xs text-gray-400 mt-2">
-                <span>-100</span>
+                <span>-200</span>
                 <span>0</span>
-                <span>+100</span>
+                <span>+</span>
             </div>
+            
         </div>
     
         <!-- Point Breakdown -->

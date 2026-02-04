@@ -14,7 +14,7 @@
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                 </svg>
-                Kembali ke Daftar
+                Kembali
             </a>
         </div>
     </div>
@@ -109,6 +109,7 @@
                 </div>
                 <p class="mt-1 text-sm text-gray-500">Pilih jurusan untuk kelas</p>
             </div>
+        </div>
             
             <!-- Nomor Kelas -->
             <!-- ... bagian atas form tetap sama ... -->
@@ -144,23 +145,26 @@
             <div id="preview" class="text-lg font-bold text-primary">-</div>
         </div>
         
-        <!-- Buttons -->
-        <div class="mt-8 flex justify-end space-x-3">
-            <a href="{{ route('datakelas.index') }}" 
-               class="px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg transition-colors font-medium inline-flex items-center">
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                </svg>
-                Batal
-            </a>
-            <button type="submit" 
-                    class="px-6 py-3 bg-gradient-to-r from-primary to-purple-700 hover:from-primary/90 hover:to-purple-700/90 text-white rounded-lg transition-all font-medium inline-flex items-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                </svg>
-                Simpan Kelas
-            </button>
-        </div>
+<!-- Buttons -->
+<div class="mt-8 col-span-full flex justify-end gap-4">
+    <a href="{{ route('datakelas.index') }}" 
+       class="px-4 md:px-6 py-2.5 md:py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg transition-colors font-medium inline-flex items-center text-sm md:text-base">
+        <svg class="w-4 h-4 md:w-5 md:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+        Batal
+    </a>
+
+    <button type="submit" 
+            class="px-4 md:px-6 py-2.5 md:py-3 bg-primary hover:bg-purple-700 text-white rounded-lg transition-colors font-medium inline-flex items-center text-sm md:text-base">
+        <svg class="w-4 h-4 md:w-5 md:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+        </svg>
+        Simpan Data
+    </button>
+</div>
+
+
     </form>
 </div>
 

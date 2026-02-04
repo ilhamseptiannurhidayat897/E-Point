@@ -13,7 +13,7 @@
                 <p class="text-sm text-gray-500 mt-1">Unggah file Excel untuk memperbarui data siswa secara massal.</p>
             </div>
             <div class="h-12 w-12 bg-indigo-50 rounded-full flex items-center justify-center text-indigo-600">
-                <i class="fas fa-user-graduate text-xl"></i>
+                <i class="fas fa-file-upload text-indigo-500 text-2xl"></i>
             </div>
         </div>
 
@@ -66,11 +66,11 @@
                 </div>
 
                 <!-- Tombol Submit -->
-                <div class="pt-2">
-                    <button type="submit" 
-                            class="w-full sm:w-auto inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 shadow-md hover:shadow-lg transition-all duration-200">
-                        <i class="fas fa-file-import mr-2"></i>
-                        Import Data Sekarang
+                <div class="flex justify-end">
+                    <button type="submit"
+                    class="bg-primary text-white hover:bg-black-50 px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                        <i class="fas fa-upload"></i>
+                        <span>Import Data Sekarang</span>
                     </button>
                 </div>
             </form>

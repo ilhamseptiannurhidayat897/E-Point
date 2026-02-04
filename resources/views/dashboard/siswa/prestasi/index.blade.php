@@ -83,6 +83,7 @@
                 <thead>
                     <tr class="bg-gray-50">
                         <th class="px-6 py-3.5 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">No</th>
+                        <th class="px-6 py-3.5 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Bukti</th>
                         <th class="px-6 py-3.5 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Jenis Prestasi</th>
                         <th class="px-6 py-3.5 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Poin</th>
                         <th class="px-6 py-3.5 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Keterangan</th>
@@ -94,6 +95,25 @@
                     @forelse($data as $item)
                     <tr class="hover:bg-emerald-50/50 transition-colors">
                         <td class="px-6 py-4 text-gray-600 font-medium">{{ $loop->iteration }}</td>
+
+                        <!-- Kolom Bukti -->
+                        <td class="px-6 py-4">
+                            @if($item->foto)
+                            <button onclick="showImageModal('{{ asset('storage/'.$item->foto) }}', '{{ $item->jenis->nama }}')"
+                                    class="group relative focus:outline-none">
+                                <img src="{{ asset('storage/'.$item->foto) }}"
+                                     class="w-16 h-16 object-cover rounded-lg border-2 border-gray-200 shadow-sm hover:border-emerald-300 transition-all">
+                                <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 rounded-lg flex items-center justify-center transition-all duration-200">
+                                    <i class="fas fa-search-plus text-white opacity-0 group-hover:opacity-100 text-sm"></i>
+                                </div>
+                            </button>
+                            @else
+                            <span class="inline-flex items-center px-3 py-1.5 rounded-lg text-sm bg-gray-100 text-gray-600 border border-gray-200">
+                                <i class="fas fa-image mr-2 text-gray-400"></i>
+                                Tidak ada
+                            </span>
+                            @endif
+                        </td>
 
                         <td class="px-6 py-4">
                             <div class="font-medium text-gray-800">{{ $item->jenis->nama }}</div>
@@ -142,7 +162,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="6" class="px-6 py-16 text-center">
+                        <td colspan="7" class="px-6 py-16 text-center">
                             <div class="flex flex-col items-center">
                                 <i class="fas fa-trophy text-gray-300 text-5xl mb-4"></i>
                                 <p class="text-gray-500 font-medium text-lg mb-1">Belum ada prestasi</p>
@@ -182,7 +202,7 @@
 <script>
 function showImageModal(imageSrc, title) {
     document.getElementById('modalImage').src = imageSrc;
-    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalTitle').textContent = 'Bukti Prestasi: ' + title;
     document.getElementById('imageModal').classList.remove('hidden');
     document.getElementById('imageModal').classList.add('flex');
 }

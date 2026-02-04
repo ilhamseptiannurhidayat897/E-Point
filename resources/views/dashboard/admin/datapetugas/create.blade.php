@@ -2,15 +2,24 @@
 
 @section('content')
 <!-- Hero Section -->
-<div class="bg-gradient-to-r from-primary to-purple-800 rounded-xl p-4 md:p-6 lg:p-8 mb-6 md:mb-8 text-white shadow-lg">
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+<div class="bg-gradient-to-r from-primary to-purple-800 rounded-xl p-8 mb-8 text-white shadow-lg">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
         <div>
-            <h1 class="text-xl md:text-2xl lg:text-3xl font-bold mb-1 md:mb-2">Tambah Petugas Baru</h1>
-            <p class="text-sm md:text-base text-purple-200">Isi formulir untuk menambahkan data petugas</p>
+            <h1 class="text-3xl font-bold mb-2">Tambah petugas Baru</h1>
+            <p class="text-green-100">Formulir penambahan data petugas</p>
         </div>
-
+        <div class="mt-4 md:mt-0">
+            <a href="{{ route('datapetugas.index') }}" 
+               class="bg-white/20 backdrop-blur text-white hover:bg-white/30 px-6 py-3 rounded-lg font-semibold inline-flex items-center transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                Kembali
+            </a>
+        </div>
     </div>
 </div>
+
 
 <!-- Form Section -->
 <div class="bg-white rounded-xl shadow-sm p-4 md:p-6 lg:p-8 border border-gray-100">
