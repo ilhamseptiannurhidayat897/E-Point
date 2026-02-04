@@ -47,7 +47,7 @@
                     <tr>
                         <th class="px-3 md:px-6 py-3 md:py-4 text-left text-xs font-semibold text-gray-600 uppercase whitespace-nowrap">No</th>
                         <th class="px-3 md:px-6 py-3 md:py-4 text-left text-xs font-semibold text-gray-600 uppercase whitespace-nowrap">Siswa</th>
-                        <th class="px-3 md:px-6 py-3 md:py-4 text-left text-xs font-semibold text-gray-600 uppercase whitespace-nowrap">Jenis Pelanggaran</th>
+                        <th class="px-3 md:px-6 py-3 md:py-4 text-left text-xs font-semibold text-gray-600 uppercase whitespace-nowrap">Pelanggaran</th>
                         <th class="px-3 md:px-6 py-3 md:py-4 text-left text-xs font-semibold text-gray-600 uppercase whitespace-nowrap">Poin</th>
                         <th class="px-3 md:px-6 py-3 md:py-4 text-left text-xs font-semibold text-gray-600 uppercase whitespace-nowrap">Keterangan</th>
                         <th class="px-3 md:px-6 py-3 md:py-4 text-left text-xs font-semibold text-gray-600 uppercase whitespace-nowrap">Foto</th>
