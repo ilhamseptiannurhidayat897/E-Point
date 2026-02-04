@@ -163,7 +163,7 @@
                     <tr>
                         <td colspan="7" class="px-6 py-16 text-center">
                             <div class="flex flex-col items-center">
-                                <i class="fas fa-check-circle text-gray-300 text-5xl mb-4"></i>
+                                <i class="fas fa-exclamation-triangle  text-gray-300 text-5xl mb-4"></i>
                                 <p class="text-gray-500 font-medium text-lg mb-1">Tidak ada pelanggaran</p>
                                 <p class="text-sm text-gray-400">Terus jaga perilaku baik</p>
                             </div>
