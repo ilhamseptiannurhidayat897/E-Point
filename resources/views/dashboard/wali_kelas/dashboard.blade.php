@@ -82,62 +82,6 @@
 
 </div>
 
-<!-- Ringkasan Kategori Siswa -->
-<div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 mb-8">
-    <div class="bg-gradient-to-r from-primary/5 to-purple-600/5 px-6 py-5 flex items-center justify-between border-b border-gray-200 mb-6">
-        <div class="flex items-center gap-3">
-            <div class="bg-gradient-to-br from-primary/10 to-purple-600/10 p-2.5 rounded-lg">
-                <i class="fas fa-users text-primary"></i>
-            </div>
-            <div>
-                <h2 class="text-lg font-bold text-gray-800">Ringkasan Kategori Siswa</h2>
-                <p class="text-xs text-gray-500">Klasifikasi siswa berdasarkan poin</p>
-            </div>
-        </div>
-    </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="flex items-center justify-between py-3 px-4 rounded-lg bg-green-50 hover:bg-green-100 transition-colors duration-200 border border-green-200">
-            <div class="flex items-center">
-                <div class="w-10 h-10 rounded-lg bg-green-200 flex items-center justify-center mr-3">
-                    <i class="fas fa-smile text-green-700"></i>
-                </div>
-                <div>
-                    <span class="text-gray-700 font-medium">Siswa Berprestasi</span>
-                    <div class="text-xs text-gray-500">Poin Prestasi Tinggi</div>
-                </div>
-            </div>
-            <span class="font-bold text-green-700 text-xl">{{ $siswaBerprestasi ?? 0 }}</span>
-        </div>
-        
-        <div class="flex items-center justify-between py-3 px-4 rounded-lg bg-yellow-50 hover:bg-yellow-100 transition-colors duration-200 border border-yellow-200">
-            <div class="flex items-center">
-                <div class="w-10 h-10 rounded-lg bg-yellow-200 flex items-center justify-center mr-3">
-                    <i class="fas fa-meh text-yellow-700"></i>
-                </div>
-                <div>
-                    <span class="text-gray-700 font-medium">Perlu Perhatian</span>
-                    <div class="text-xs text-gray-500">Pelanggaran Sedang</div>
-                </div>
-            </div>
-            <span class="font-bold text-yellow-700 text-xl">{{ $siswaPerhatian ?? 0 }}</span>
-        </div>
-        
-        <div class="flex items-center justify-between py-3 px-4 rounded-lg bg-red-50 hover:bg-red-100 transition-colors duration-200 border border-red-200">
-            <div class="flex items-center">
-                <div class="w-10 h-10 rounded-lg bg-red-200 flex items-center justify-center mr-3">
-                    <i class="fas fa-frown text-red-700"></i>
-                </div>
-                <div>
-                    <span class="text-gray-700 font-medium">Siswa Bermasalah</span>
-                    <div class="text-xs text-gray-500">Pelanggaran Tinggi</div>
-                </div>
-            </div>
-            <span class="font-bold text-red-700 text-xl">{{ $siswaBermasalah ?? 0 }}</span>
-        </div>
-    </div>
-</div>
-
 <!-- Data Tables Section -->
 <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
     

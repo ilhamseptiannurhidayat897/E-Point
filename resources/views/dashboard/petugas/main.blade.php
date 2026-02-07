@@ -43,7 +43,7 @@
             {{-- LOGIKA PHP UNTUK NAMA & INISIAL --}}
             @php
                 // Mengambil nama user, jika tidak ada kolom 'name', gunakan 'login_id' sebagai fallback
-                $namaPetugas = auth()->user()->name ?? auth()->user()->login_id ?? 'Petugas';
+                $namaPetugas = optional(auth()->user()->petugas)->nama ?? 'Petugas';
                 
                 // Membuat inisial otomatis (ambil 2 huruf depan)
                 $inisial = collect(explode(' ', $namaPetugas))
